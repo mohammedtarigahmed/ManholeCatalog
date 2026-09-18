@@ -152,7 +152,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 // Middleware
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
