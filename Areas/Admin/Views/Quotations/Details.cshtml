@@ -1,0 +1,357 @@
+@model ManholeCatalog.Models.QuotationRequest
+
+@{
+    ViewData["Title"] = "Quotation Request Details";
+}
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+    <div>
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+            <span class="badge text-bg-light border">
+                Request #@Model.Id
+            </span>
+
+            @switch (Model.Status)
+            {
+                case ManholeCatalog.Models.QuotationStatus.Pending:
+                    <span class="badge text-bg-warning">Pending</span>
+                    break;
+
+                case ManholeCatalog.Models.QuotationStatus.Contacted:
+                    <span class="badge text-bg-info">Contacted</span>
+                    break;
+
+                case ManholeCatalog.Models.QuotationStatus.Quoted:
+                    <span class="badge text-bg-primary">Quoted</span>
+                    break;
+
+                case ManholeCatalog.Models.QuotationStatus.Closed:
+                    <span class="badge text-bg-secondary">Closed</span>
+                    break;
+            }
+        </div>
+
+        <h1 class="h3 fw-bold mb-1">
+            Quotation Request #@Model.Id
+        </h1>
+
+        <p class="text-muted mb-0">
+            Review customer information, product requirements, and request status.
+        </p>
+    </div>
+
+    <a asp-area="Admin"
+       asp-controller="Quotations"
+       asp-action="Index"
+       class="btn btn-outline-secondary">
+        ← Back to Requests
+    </a>
+</div>
+
+<div class="row g-4">
+
+    <!-- Customer Information -->
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white py-3">
+                <h2 class="h6 fw-bold mb-0">
+                    Customer Information
+                </h2>
+            </div>
+
+            <div class="card-body">
+
+                <div class="mb-4">
+                    <div class="small text-muted mb-1">
+                        Full Name
+                    </div>
+
+                    <div class="fs-5 fw-semibold">
+                        @Model.FullName
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div class="small text-muted mb-1">
+                        Company Name
+                    </div>
+
+                    @if (!string.IsNullOrWhiteSpace(Model.CompanyName))
+                    {
+                        <div class="fw-semibold">
+                            @Model.CompanyName
+                        </div>
+                    }
+                    else
+                    {
+                        <span class="text-muted">
+                            Not provided
+                        </span>
+                    }
+                </div>
+
+                <div class="mb-4">
+                    <div class="small text-muted mb-1">
+                        Email Address
+                    </div>
+
+                    <div class="d-flex flex-wrap align-items-center gap-2">
+                        <a href="mailto:@Model.Email"
+                           class="text-decoration-none">
+                            @Model.Email
+                        </a>
+
+                        <a href="mailto:@Model.Email"
+                           class="btn btn-sm btn-outline-primary">
+                            Email
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="small text-muted mb-1">
+                        Phone Number
+                    </div>
+
+                    <div class="d-flex flex-wrap align-items-center gap-2">
+                        <a href="tel:@Model.PhoneNumber"
+                           class="text-decoration-none">
+                            @Model.PhoneNumber
+                        </a>
+
+                        <a href="tel:@Model.PhoneNumber"
+                           class="btn btn-sm btn-outline-success">
+                            Call
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Request Information -->
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white py-3">
+                <h2 class="h6 fw-bold mb-0">
+                    Request Information
+                </h2>
+            </div>
+
+            <div class="card-body">
+
+                <div class="mb-4">
+                    <div class="small text-muted mb-1">
+                        Product
+                    </div>
+
+                    @if (Model.Product != null)
+                    {
+                        <div class="d-flex flex-column align-items-start gap-2">
+                            <a asp-area="Admin"
+                               asp-controller="Products"
+                               asp-action="Details"
+                               asp-route-id="@Model.Product.Id"
+                               class="fw-semibold text-decoration-none">
+                                @Model.Product.Name
+                            </a>
+
+                            @if (!string.IsNullOrWhiteSpace(Model.Product.SKU))
+                            {
+                                <span class="badge text-bg-light border">
+                                    SKU: @Model.Product.SKU
+                                </span>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <span class="text-muted">
+                            Unknown Product
+                        </span>
+                    }
+                </div>
+
+                <div class="mb-4">
+                    <div class="small text-muted mb-1">
+                        Quantity
+                    </div>
+
+                    <div class="fs-5 fw-semibold">
+                        @Model.Quantity
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div class="small text-muted mb-1">
+                        Current Status
+                    </div>
+
+                    @switch (Model.Status)
+                    {
+                        case ManholeCatalog.Models.QuotationStatus.Pending:
+                            <span class="badge text-bg-warning">Pending</span>
+                            break;
+
+                        case ManholeCatalog.Models.QuotationStatus.Contacted:
+                            <span class="badge text-bg-info">Contacted</span>
+                            break;
+
+                        case ManholeCatalog.Models.QuotationStatus.Quoted:
+                            <span class="badge text-bg-primary">Quoted</span>
+                            break;
+
+                        case ManholeCatalog.Models.QuotationStatus.Closed:
+                            <span class="badge text-bg-secondary">Closed</span>
+                            break;
+
+                        default:
+                            <span class="badge text-bg-light border">Unknown</span>
+                            break;
+                    }
+                </div>
+
+                <div class="mb-4">
+                    <div class="small text-muted mb-1">
+                        Submitted At
+                    </div>
+
+                    <div class="fw-semibold">
+                        @Model.CreatedAt.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")
+                    </div>
+                </div>
+
+                @if (Model.UpdatedAt.HasValue)
+                {
+                    <div>
+                        <div class="small text-muted mb-1">
+                            Last Updated
+                        </div>
+
+                        <div class="fw-semibold">
+                            @Model.UpdatedAt.Value.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Message -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white py-3">
+                <h2 class="h6 fw-bold mb-0">
+                    Customer Message
+                </h2>
+            </div>
+
+            <div class="card-body">
+                @if (!string.IsNullOrWhiteSpace(Model.Message))
+                {
+                    <div class="bg-light border rounded p-3"
+                         style="white-space: pre-line;">
+                        @Model.Message
+                    </div>
+                }
+                else
+                {
+                    <div class="text-muted">
+                        No message was provided by the customer.
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Status -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white py-3">
+                <h2 class="h6 fw-bold mb-1">
+                    Update Request Status
+                </h2>
+
+                <p class="text-muted small mb-0">
+                    Change the current status of this quotation request.
+                </p>
+            </div>
+
+            <div class="card-body">
+                <form asp-area="Admin"
+                      asp-controller="Quotations"
+                      asp-action="UpdateStatus"
+                      method="post">
+
+                    <input type="hidden"
+                           name="id"
+                           value="@Model.Id" />
+
+                    <div class="row g-3 align-items-end">
+
+                        <div class="col-md-8">
+                            <label for="status"
+                                   class="form-label fw-semibold">
+                                Status
+                            </label>
+
+                            <select id="status"
+                                    name="status"
+                                    class="form-select">
+
+                                @if (Model.Status == ManholeCatalog.Models.QuotationStatus.Pending)
+                                {
+                                    <option value="1" selected>Pending</option>
+                                }
+                                else
+                                {
+                                    <option value="1">Pending</option>
+                                }
+
+                                @if (Model.Status == ManholeCatalog.Models.QuotationStatus.Contacted)
+                                {
+                                    <option value="2" selected>Contacted</option>
+                                }
+                                else
+                                {
+                                    <option value="2">Contacted</option>
+                                }
+
+                                @if (Model.Status == ManholeCatalog.Models.QuotationStatus.Quoted)
+                                {
+                                    <option value="3" selected>Quoted</option>
+                                }
+                                else
+                                {
+                                    <option value="3">Quoted</option>
+                                }
+
+                                @if (Model.Status == ManholeCatalog.Models.QuotationStatus.Closed)
+                                {
+                                    <option value="4" selected>Closed</option>
+                                }
+                                else
+                                {
+                                    <option value="4">Closed</option>
+                                }
+
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <button type="submit"
+                                    class="btn btn-primary w-100">
+                                Update Status
+                            </button>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,603 @@
+@model ManholeCatalog.Models.Product
+
+@{
+    ViewData["Title"] = "Product Details";
+
+    var orderedImages = Model.Images
+        .OrderBy(i => i.DisplayOrder)
+        .ThenBy(i => i.Id)
+        .ToList();
+
+    var primaryImage = orderedImages.FirstOrDefault(i => i.IsPrimary);
+}
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+
+    <div>
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+
+            <span class="badge text-bg-light border">
+                Product #@Model.Id
+            </span>
+
+            @if (Model.IsActive)
+            {
+                <span class="badge text-bg-success">
+                    Active
+                </span>
+            }
+            else
+            {
+                <span class="badge text-bg-secondary">
+                    Inactive
+                </span>
+            }
+
+        </div>
+
+        <h1 class="h3 fw-bold mb-1">
+            @Model.Name
+        </h1>
+
+        <p class="text-muted mb-0">
+            View product information, specifications, and images.
+        </p>
+    </div>
+
+    <div class="d-flex flex-wrap gap-2">
+
+        <a asp-area="Admin"
+           asp-controller="Products"
+           asp-action="Index"
+           class="btn btn-outline-secondary">
+            ← Back to Products
+        </a>
+
+        <a asp-area="Admin"
+           asp-controller="Products"
+           asp-action="Edit"
+           asp-route-id="@Model.Id"
+           class="btn btn-primary">
+            Edit Product
+        </a>
+
+        @if (Model.IsActive)
+        {
+            <form asp-area="Admin"
+                  asp-controller="Products"
+                  asp-action="Deactivate"
+                  asp-route-id="@Model.Id"
+                  method="post"
+                  onsubmit="return confirm('Are you sure you want to deactivate this product?');">
+
+                <button type="submit"
+                        class="btn btn-outline-danger">
+                    Deactivate
+                </button>
+
+            </form>
+        }
+        else
+        {
+            <form asp-area="Admin"
+                  asp-controller="Products"
+                  asp-action="Reactivate"
+                  asp-route-id="@Model.Id"
+                  method="post"
+                  onsubmit="return confirm('Are you sure you want to reactivate this product?');">
+
+                <button type="submit"
+                        class="btn btn-outline-success">
+                    Reactivate
+                </button>
+
+            </form>
+        }
+
+    </div>
+
+</div>
+
+<div class="row g-4">
+
+    <!-- Product Overview -->
+    <div class="col-12">
+
+        <div class="card border-0 shadow-sm">
+
+            <div class="card-body">
+
+                <div class="row g-4 align-items-center">
+
+                    <div class="col-md-8">
+
+                        <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+
+                            @if (Model.IsActive)
+                            {
+                                <span class="badge text-bg-success">
+                                    Active
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge text-bg-secondary">
+                                    Inactive
+                                </span>
+                            }
+
+                            @if (Model.Category != null)
+                            {
+                                <span class="badge text-bg-light border">
+                                    @Model.Category.Name
+                                </span>
+                            }
+
+                            @if (!string.IsNullOrWhiteSpace(Model.SKU))
+                            {
+                                <span class="badge text-bg-light border">
+                                    SKU: @Model.SKU
+                                </span>
+                            }
+
+                        </div>
+
+                        <h2 class="h4 fw-bold mb-2">
+                            @Model.Name
+                        </h2>
+
+                        <div class="text-muted small">
+                            Product ID: #@Model.Id
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="text-md-end">
+
+                            <div class="text-muted small mb-1">
+                                Category
+                            </div>
+
+                            <div class="fw-semibold">
+                                @(Model.Category?.Name ?? "No Category")
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Product Image -->
+    <div class="col-lg-5">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-header bg-white py-3">
+
+                <div class="d-flex justify-content-between align-items-center gap-2">
+
+                    <h2 class="h6 fw-bold mb-0">
+                        Primary Image
+                    </h2>
+
+                    @if (primaryImage != null)
+                    {
+                        <span class="badge text-bg-primary">
+                            Primary
+                        </span>
+                    }
+
+                </div>
+
+            </div>
+
+            <div class="card-body">
+
+                @if (primaryImage != null)
+                {
+                    <div class="rounded overflow-hidden mb-3"
+                         style="background-color: #f8f9fa;">
+
+                        <img src="@primaryImage.ImagePath"
+                             alt="@primaryImage.AltText"
+                             class="img-fluid w-100"
+                             style="height: 350px; object-fit: contain;" />
+
+                    </div>
+                }
+                else
+                {
+                    <div class="d-flex align-items-center justify-content-center text-muted rounded mb-3"
+                         style="height: 350px; background-color: #f8f9fa;">
+
+                        <div class="text-center">
+
+                            <div class="display-6 mb-2">
+                                —
+                            </div>
+
+                            <div class="fw-semibold">
+                                No Image Available
+                            </div>
+
+                            <div class="small mt-1">
+                                Upload an image to showcase this product.
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+
+                <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2">
+
+                    <span class="text-muted small">
+                        @orderedImages.Count image(s) uploaded
+                    </span>
+
+                    <a asp-area="Admin"
+                       asp-controller="Products"
+                       asp-action="Images"
+                       asp-route-id="@Model.Id"
+                       class="btn btn-outline-primary btn-sm">
+                        Manage Images
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Product Information -->
+    <div class="col-lg-7">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-header bg-white py-3">
+
+                <h2 class="h6 fw-bold mb-1">
+                    Product Information
+                </h2>
+
+                <p class="text-muted small mb-0">
+                    Product description and technical specifications.
+                </p>
+
+            </div>
+
+            <div class="card-body">
+
+                @if (!string.IsNullOrWhiteSpace(Model.Description))
+                {
+                    <div class="mb-4">
+
+                        <div class="text-muted small mb-1">
+                            Description
+                        </div>
+
+                        <div style="white-space: pre-line;">
+                            @Model.Description
+                        </div>
+
+                    </div>
+                }
+
+                <div class="row g-4">
+
+                    <div class="col-sm-6">
+
+                        <div class="text-muted small mb-1">
+                            Category
+                        </div>
+
+                        <div class="fw-semibold">
+                            @(Model.Category?.Name ?? "No Category")
+                        </div>
+
+                    </div>
+
+                    @if (!string.IsNullOrWhiteSpace(Model.SKU))
+                    {
+                        <div class="col-sm-6">
+
+                            <div class="text-muted small mb-1">
+                                SKU
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.SKU
+                            </div>
+
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Material))
+                    {
+                        <div class="col-sm-6">
+
+                            <div class="text-muted small mb-1">
+                                Material
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.Material
+                            </div>
+
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.LoadClass))
+                    {
+                        <div class="col-sm-6">
+
+                            <div class="text-muted small mb-1">
+                                Load Class
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.LoadClass
+                            </div>
+
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Diameter))
+                    {
+                        <div class="col-sm-6">
+
+                            <div class="text-muted small mb-1">
+                                Diameter
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.Diameter
+                            </div>
+
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Shape))
+                    {
+                        <div class="col-sm-6">
+
+                            <div class="text-muted small mb-1">
+                                Shape
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.Shape
+                            </div>
+
+                        </div>
+                    }
+
+                    <div class="col-sm-6">
+
+                        <div class="text-muted small mb-1">
+                            Price
+                        </div>
+
+                        @if (Model.Price.HasValue)
+                        {
+                            <div class="fw-bold fs-5">
+                                @Model.Price.Value.ToString("N2") SAR
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="text-muted">
+                                Price on request
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Product Images -->
+    <div class="col-12">
+
+        <div class="card border-0 shadow-sm">
+
+            <div class="card-header bg-white py-3">
+
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
+
+                    <div>
+
+                        <h2 class="h6 fw-bold mb-1">
+                            Product Images
+                        </h2>
+
+                        <div class="small text-muted">
+                            @orderedImages.Count image(s) uploaded for this product.
+                        </div>
+
+                    </div>
+
+                    <a asp-area="Admin"
+                       asp-controller="Products"
+                       asp-action="Images"
+                       asp-route-id="@Model.Id"
+                       class="btn btn-outline-primary btn-sm">
+                        Manage Images
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="card-body">
+
+                @if (orderedImages.Any())
+                {
+                    <div class="row g-3">
+
+                        @for (var index = 0; index < orderedImages.Count; index++)
+                        {
+                            var image = orderedImages[index];
+
+                            <div class="col-6 col-md-4 col-lg-3">
+
+                                <div class="card border h-100">
+
+                                    <div class="position-relative">
+
+                                        <img src="@image.ImagePath"
+                                             alt="@image.AltText"
+                                             class="card-img-top"
+                                             style="height: 180px; object-fit: contain; background-color: #f8f9fa;" />
+
+                                        @if (image.IsPrimary)
+                                        {
+                                            <span class="badge text-bg-primary position-absolute top-0 start-0 m-2">
+                                                Primary
+                                            </span>
+                                        }
+
+                                    </div>
+
+                                    <div class="card-body p-3">
+
+                                        <div class="small text-muted">
+                                            Display Order: @(index + 1)
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        }
+
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center py-5">
+
+                        <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-light border mb-3"
+                             style="width: 64px; height: 64px;">
+
+                            <span class="text-muted fw-bold fs-5">
+                                IMG
+                            </span>
+
+                        </div>
+
+                        <h3 class="h6 fw-bold mb-2">
+                            No Images Uploaded
+                        </h3>
+
+                        <p class="text-muted mb-3">
+                            This product does not have any images yet.
+                        </p>
+
+                        <a asp-area="Admin"
+                           asp-controller="Products"
+                           asp-action="Images"
+                           asp-route-id="@Model.Id"
+                           class="btn btn-primary">
+                            Upload Image
+                        </a>
+
+                    </div>
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Product Metadata -->
+    <div class="col-12">
+
+        <div class="card border-0 shadow-sm">
+
+            <div class="card-header bg-white py-3">
+
+                <h2 class="h6 fw-bold mb-0">
+                    Product Metadata
+                </h2>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="row g-4">
+
+                    <div class="col-md-4">
+
+                        <div class="text-muted small mb-1">
+                            Product ID
+                        </div>
+
+                        <div class="fw-semibold">
+                            #@Model.Id
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="text-muted small mb-1">
+                            Created At
+                        </div>
+
+                        <div>
+                            @Model.CreatedAt.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="text-muted small mb-1">
+                            Last Updated
+                        </div>
+
+                        <div>
+
+                            @if (Model.UpdatedAt.HasValue)
+                            {
+                                @Model.UpdatedAt.Value.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")
+                            }
+                            else
+                            {
+                                <span class="text-muted">
+                                    Never
+                                </span>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

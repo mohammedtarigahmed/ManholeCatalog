@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        @ViewData["Title"] - Manhole Catalog
+    </title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ManholeCatalog.styles.css" asp-append-version="true" />
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+            <div class="container">
+
+                <a class="navbar-brand fw-bold" asp-area="" asp-controller="Home" asp-action="Index">
+                    Manhole Catalog
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#publicNavbar" aria-controls="publicNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="publicNavbar">
+
+                    <ul class="navbar-nav me-auto mb-3 mb-lg-0">
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                                Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Catalog" asp-action="Index">
+                                Catalog
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <div class="d-flex align-items-center gap-2">
+
+                        <a class="btn btn-outline-light btn-sm" asp-area="Admin" asp-controller="Home" asp-action="Index">
+                            Admin
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow-1">
+        @RenderBody()
+    </main>
+
+    <footer class="border-top bg-light text-muted mt-5">
+
+        <div class="container py-5">
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+
+                    <h5 class="fw-bold text-dark mb-3">
+                        Manhole Catalog
+                    </h5>
+
+                    <p class="mb-0">
+                        Explore our product catalog, review specifications,
+                        and request quotations for your project.
+                    </p>
+
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+
+                    <h6 class="fw-bold text-dark mb-3">
+                        Quick Links
+                    </h6>
+
+                    <ul class="list-unstyled mb-0">
+
+                        <li class="mb-2">
+                            <a class="text-decoration-none text-muted" asp-area="" asp-controller="Home" asp-action="Index">
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="text-decoration-none text-muted" asp-area="" asp-controller="Catalog" asp-action="Index">
+                                Catalog
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+
+                    <h6 class="fw-bold text-dark mb-3">
+                        Products & Services
+                    </h6>
+
+                    <p class="mb-0">
+                        Browse products, review specifications,
+                        and submit quotation requests.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <hr class="my-4" />
+
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+
+                <div class="small">
+                    &copy; @DateTime.Now.Year - Manhole Catalog
+                </div>
+
+                <div class="small">
+                    Product Catalog &amp; Quotation System
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

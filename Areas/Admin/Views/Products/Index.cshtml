@@ -1,0 +1,430 @@
+@model IEnumerable<ManholeCatalog.Models.Product>
+
+@{
+    ViewData["Title"] = "Products";
+
+    var products = Model.ToList();
+
+    var totalProducts = products.Count;
+    var activeProducts = products.Count(p => p.IsActive);
+    var inactiveProducts = products.Count(p => !p.IsActive);
+    var productsWithoutImages = products.Count(p => !p.Images.Any());
+}
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+    <div>
+        <h1 class="h3 fw-bold mb-1">
+            Products
+        </h1>
+
+        <p class="text-muted mb-0">
+            Manage your product catalog and product images.
+        </p>
+    </div>
+
+    <a asp-area="Admin"
+       asp-controller="Products"
+       asp-action="Create"
+       class="btn btn-primary">
+        + Add Product
+    </a>
+</div>
+
+<!-- Statistics -->
+<div class="row g-4 mb-4">
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="small text-muted mb-1">
+                    Total Products
+                </div>
+
+                <div class="h3 fw-bold mb-0">
+                    @totalProducts
+                </div>
+
+                <div class="small text-muted mt-2">
+                    All products
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="small text-muted mb-1">
+                    Active
+                </div>
+
+                <div class="h3 fw-bold text-success mb-0">
+                    @activeProducts
+                </div>
+
+                <div class="small text-muted mt-2">
+                    Currently available
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="small text-muted mb-1">
+                    Inactive
+                </div>
+
+                <div class="h3 fw-bold text-secondary mb-0">
+                    @inactiveProducts
+                </div>
+
+                <div class="small text-muted mt-2">
+                    Currently disabled
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="small text-muted mb-1">
+                    Without Images
+                </div>
+
+                <div class="h3 fw-bold text-warning mb-0">
+                    @productsWithoutImages
+                </div>
+
+                <div class="small text-muted mt-2">
+                    Need product images
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@if (!products.Any())
+{
+    <!-- Empty State -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-body text-center py-5">
+
+            <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-light border mb-3"
+                 style="width: 64px; height: 64px;">
+                <span class="text-muted fw-bold fs-5">
+                    P
+                </span>
+            </div>
+
+            <h2 class="h5 fw-bold mb-2">
+                No Products Yet
+            </h2>
+
+            <p class="text-muted mb-4">
+                Start building your catalog by adding your first product.
+            </p>
+
+            <a asp-area="Admin"
+               asp-controller="Products"
+               asp-action="Create"
+               class="btn btn-primary">
+                Add First Product
+            </a>
+
+        </div>
+    </div>
+}
+else
+{
+    <!-- Product List -->
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-header bg-white py-3">
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2">
+
+                <div>
+                    <h2 class="h6 fw-bold mb-1">
+                        Product List
+                    </h2>
+
+                    <p class="text-muted small mb-0">
+                        View and manage your catalog products.
+                    </p>
+                </div>
+
+                <div class="d-flex flex-wrap gap-2">
+                    <span class="badge text-bg-light border">
+                        @totalProducts product(s)
+                    </span>
+
+                    @if (productsWithoutImages > 0)
+                    {
+                        <span class="badge text-bg-warning">
+                            @productsWithoutImages without images
+                        </span>
+                    }
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card-body p-0">
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4">
+                                Product
+                            </th>
+
+                            <th>
+                                SKU
+                            </th>
+
+                            <th>
+                                Category
+                            </th>
+
+                            <th>
+                                Images
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th class="text-end pe-4">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var product in products)
+                        {
+                            <tr>
+
+                                <!-- Product -->
+                                <td class="ps-4">
+
+                                    <div class="d-flex align-items-center gap-3">
+
+                                        <div class="d-flex align-items-center justify-content-center rounded border bg-light flex-shrink-0"
+                                             style="width: 44px; height: 44px;">
+
+                                            <span class="fw-bold text-primary">
+                                                @(string.IsNullOrWhiteSpace(product.Name) ? "P" : product.Name.Substring(0, 1).ToUpper())
+                                            </span>
+
+                                        </div>
+
+                                        <div>
+                                            <div class="fw-semibold">
+                                                @product.Name
+                                            </div>
+
+                                            @if (!string.IsNullOrWhiteSpace(product.Material) || !string.IsNullOrWhiteSpace(product.LoadClass))
+                                            {
+                                                <div class="small text-muted">
+
+                                                    @if (!string.IsNullOrWhiteSpace(product.Material))
+                                                    {
+                                                        @product.Material
+                                                    }
+
+                                                    @if (!string.IsNullOrWhiteSpace(product.Material) && !string.IsNullOrWhiteSpace(product.LoadClass))
+                                                    {
+                                                        <span> · </span>
+                                                    }
+
+                                                    @if (!string.IsNullOrWhiteSpace(product.LoadClass))
+                                                    {
+                                                        @product.LoadClass
+                                                    }
+
+                                                </div>
+                                            }
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <!-- SKU -->
+                                <td>
+
+                                    @if (!string.IsNullOrWhiteSpace(product.SKU))
+                                    {
+                                        <span class="small text-muted">
+                                            @product.SKU
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted small">
+                                            —
+                                        </span>
+                                    }
+
+                                </td>
+
+                                <!-- Category -->
+                                <td>
+
+                                    @if (product.Category != null)
+                                    {
+                                        <span class="badge text-bg-light border">
+                                            @product.Category.Name
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted small">
+                                            —
+                                        </span>
+                                    }
+
+                                </td>
+
+                                <!-- Images -->
+                                <td>
+
+                                    @if (product.Images.Any())
+                                    {
+                                        <span class="badge text-bg-light border">
+                                            @product.Images.Count image(s)
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge text-bg-warning">
+                                            None
+                                        </span>
+                                    }
+
+                                </td>
+
+                                <!-- Status -->
+                                <td>
+
+                                    @if (product.IsActive)
+                                    {
+                                        <span class="badge text-bg-success">
+                                            Active
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge text-bg-secondary">
+                                            Inactive
+                                        </span>
+                                    }
+
+                                </td>
+
+                                <!-- Actions -->
+                                <td class="text-end pe-4">
+
+                                    <div class="d-inline-flex align-items-center gap-1 flex-nowrap">
+
+                                        <a asp-area="Admin"
+                                           asp-controller="Products"
+                                           asp-action="Details"
+                                           asp-route-id="@product.Id"
+                                           class="btn btn-sm btn-outline-dark"
+                                           title="View Product">
+                                            View
+                                        </a>
+
+                                        <a asp-area="Admin"
+                                           asp-controller="Products"
+                                           asp-action="Images"
+                                           asp-route-id="@product.Id"
+                                           class="btn btn-sm btn-outline-secondary"
+                                           title="Manage Images">
+                                            Images
+                                        </a>
+
+                                        <a asp-area="Admin"
+                                           asp-controller="Products"
+                                           asp-action="Edit"
+                                           asp-route-id="@product.Id"
+                                           class="btn btn-sm btn-outline-primary"
+                                           title="Edit Product">
+                                            Edit
+                                        </a>
+
+                                        <div class="dropdown">
+
+                                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                                                    type="button"
+                                                    data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                More
+                                            </button>
+
+                                            <ul class="dropdown-menu dropdown-menu-end">
+
+                                                @if (product.IsActive)
+                                                {
+                                                    <li>
+                                                        <form asp-area="Admin"
+                                                              asp-controller="Products"
+                                                              asp-action="Deactivate"
+                                                              asp-route-id="@product.Id"
+                                                              method="post"
+                                                              onsubmit="return confirm('Are you sure you want to deactivate this product?');">
+
+                                                            <button type="submit"
+                                                                    class="dropdown-item text-danger">
+                                                                Deactivate
+                                                            </button>
+
+                                                        </form>
+                                                    </li>
+                                                }
+                                                else
+                                                {
+                                                    <li>
+                                                        <form asp-area="Admin"
+                                                              asp-controller="Products"
+                                                              asp-action="Reactivate"
+                                                              asp-route-id="@product.Id"
+                                                              method="post">
+
+                                                            <button type="submit"
+                                                                    class="dropdown-item text-success">
+                                                                Reactivate
+                                                            </button>
+
+                                                        </form>
+                                                    </li>
+                                                }
+
+                                            </ul>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+}

@@ -1,0 +1,393 @@
+@model IEnumerable<ManholeCatalog.Models.Category>
+
+@{
+    ViewData["Title"] = "Categories";
+
+    var categories = Model.ToList();
+
+    var totalCategories = categories.Count;
+    var activeCategories = categories.Count(c => c.IsActive);
+    var inactiveCategories = categories.Count(c => !c.IsActive);
+    var totalProducts = categories.Sum(c => c.Products.Count);
+}
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+    <div>
+        <h1 class="h3 fw-bold mb-1">
+            Categories
+        </h1>
+
+        <p class="text-muted mb-0">
+            Manage your product categories and organization.
+        </p>
+    </div>
+
+    <a asp-area="Admin"
+       asp-controller="Categories"
+       asp-action="Create"
+       class="btn btn-primary">
+        + Add Category
+    </a>
+</div>
+
+<!-- Statistics -->
+<div class="row g-4 mb-4">
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="small text-muted mb-1">
+                    Total Categories
+                </div>
+
+                <div class="h3 fw-bold mb-0">
+                    @totalCategories
+                </div>
+
+                <div class="small text-muted mt-2">
+                    All categories
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="small text-muted mb-1">
+                    Active
+                </div>
+
+                <div class="h3 fw-bold text-success mb-0">
+                    @activeCategories
+                </div>
+
+                <div class="small text-muted mt-2">
+                    Currently available
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="small text-muted mb-1">
+                    Inactive
+                </div>
+
+                <div class="h3 fw-bold text-secondary mb-0">
+                    @inactiveCategories
+                </div>
+
+                <div class="small text-muted mt-2">
+                    Currently disabled
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="small text-muted mb-1">
+                    Products
+                </div>
+
+                <div class="h3 fw-bold mb-0">
+                    @totalProducts
+                </div>
+
+                <div class="small text-muted mt-2">
+                    Total assigned products
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@if (!categories.Any())
+{
+    <!-- Empty State -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-body text-center py-5">
+
+            <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-light border mb-3"
+                 style="width: 64px; height: 64px;">
+                <span class="text-muted fw-bold fs-5">
+                    C
+                </span>
+            </div>
+
+            <h2 class="h5 fw-bold mb-2">
+                No Categories Found
+            </h2>
+
+            <p class="text-muted mb-4">
+                Add your first category to organize your product catalog.
+            </p>
+
+            <a asp-area="Admin"
+               asp-controller="Categories"
+               asp-action="Create"
+               class="btn btn-primary">
+                Add Category
+            </a>
+
+        </div>
+    </div>
+}
+else
+{
+    <!-- Category List -->
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-header bg-white py-3">
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2">
+
+                <div>
+                    <h2 class="h6 fw-bold mb-1">
+                        Category List
+                    </h2>
+
+                    <p class="text-muted small mb-0">
+                        View and manage your product categories.
+                    </p>
+                </div>
+
+                <div class="d-flex flex-wrap gap-2">
+                    <span class="badge text-bg-light border">
+                        @totalCategories category(s)
+                    </span>
+
+                    @if (inactiveCategories > 0)
+                    {
+                        <span class="badge text-bg-secondary">
+                            @inactiveCategories inactive
+                        </span>
+                    }
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card-body p-0">
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4">
+                                Category
+                            </th>
+
+                            <th>
+                                Description
+                            </th>
+
+                            <th>
+                                Products
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Created
+                            </th>
+
+                            <th class="text-end pe-4">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var category in categories)
+                        {
+                            <tr>
+
+                                <!-- Category -->
+                                <td class="ps-4">
+
+                                    <div class="d-flex align-items-center gap-3">
+
+                                        <div class="d-flex align-items-center justify-content-center rounded border bg-light flex-shrink-0"
+                                             style="width: 44px; height: 44px;">
+
+                                            <span class="fw-bold text-primary">
+                                                @(string.IsNullOrWhiteSpace(category.Name) ? "C" : category.Name.Substring(0, 1).ToUpper())
+                                            </span>
+
+                                        </div>
+
+                                        <div>
+                                            <div class="fw-semibold">
+                                                @category.Name
+                                            </div>
+
+                                            <div class="small text-muted">
+                                                ID: @category.Id
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <!-- Description -->
+                                <td style="min-width: 260px; max-width: 400px;">
+
+                                    @if (!string.IsNullOrWhiteSpace(category.Description))
+                                    {
+                                        <div class="text-muted text-truncate"
+                                             style="max-width: 380px;"
+                                             title="@category.Description">
+                                            @category.Description
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">
+                                            —
+                                        </span>
+                                    }
+
+                                </td>
+
+                                <!-- Products -->
+                                <td>
+
+                                    @if (category.Products.Count > 0)
+                                    {
+                                        <span class="badge text-bg-light border">
+                                            @category.Products.Count
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">
+                                            0
+                                        </span>
+                                    }
+
+                                </td>
+
+                                <!-- Status -->
+                                <td>
+
+                                    @if (category.IsActive)
+                                    {
+                                        <span class="badge text-bg-success">
+                                            Active
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge text-bg-secondary">
+                                            Inactive
+                                        </span>
+                                    }
+
+                                </td>
+
+                                <!-- Created -->
+                                <td>
+
+                                    <span class="small text-muted text-nowrap">
+                                        @category.CreatedAt.ToLocalTime().ToString("dd MMM yyyy")
+                                    </span>
+
+                                </td>
+
+                                <!-- Actions -->
+                                <td class="text-end pe-4">
+
+                                    <div class="d-inline-flex align-items-center gap-1 flex-nowrap">
+
+                                        <a asp-area="Admin"
+                                           asp-controller="Categories"
+                                           asp-action="Edit"
+                                           asp-route-id="@category.Id"
+                                           class="btn btn-sm btn-outline-primary">
+                                            Edit
+                                        </a>
+
+                                        <div class="dropdown">
+
+                                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                                                    type="button"
+                                                    data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                More
+                                            </button>
+
+                                            <ul class="dropdown-menu dropdown-menu-end">
+
+                                                @if (category.IsActive)
+                                                {
+                                                    <li>
+                                                        <form asp-area="Admin"
+                                                              asp-controller="Categories"
+                                                              asp-action="Deactivate"
+                                                              method="post"
+                                                              onsubmit="return confirm('Are you sure you want to deactivate this category?');">
+
+                                                            <input type="hidden"
+                                                                   name="id"
+                                                                   value="@category.Id" />
+
+                                                            <button type="submit"
+                                                                    class="dropdown-item text-danger">
+                                                                Deactivate
+                                                            </button>
+
+                                                        </form>
+                                                    </li>
+                                                }
+                                                else
+                                                {
+                                                    <li>
+                                                        <form asp-area="Admin"
+                                                              asp-controller="Categories"
+                                                              asp-action="Reactivate"
+                                                              method="post"
+                                                              onsubmit="return confirm('Are you sure you want to reactivate this category?');">
+
+                                                            <input type="hidden"
+                                                                   name="id"
+                                                                   value="@category.Id" />
+
+                                                            <button type="submit"
+                                                                    class="dropdown-item text-success">
+                                                                Reactivate
+                                                            </button>
+
+                                                        </form>
+                                                    </li>
+                                                }
+
+                                            </ul>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+}

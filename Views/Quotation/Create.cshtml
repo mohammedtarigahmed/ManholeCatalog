@@ -1,0 +1,409 @@
+@model ManholeCatalog.Models.QuotationRequest
+
+@{
+    ViewData["Title"] = "Request a Quote";
+
+    var productImages = Model.Product?.Images
+        .OrderBy(i => i.DisplayOrder)
+        .ThenBy(i => i.Id)
+        .ToList() ?? new List<ManholeCatalog.Models.ProductImage>();
+
+    var primaryImage = productImages.FirstOrDefault(i => i.IsPrimary) ?? productImages.FirstOrDefault();
+}
+
+<div class="container py-5">
+
+    <!-- Back to Product -->
+    <div class="mb-4">
+
+        <a asp-controller="Catalog"
+           asp-action="Details"
+           asp-route-id="@Model.ProductId"
+           class="btn btn-outline-secondary">
+            ← Back to Product
+        </a>
+
+    </div>
+
+    <div class="mb-5">
+
+        <span class="badge text-bg-primary px-3 py-2 mb-3">
+            Quotation Request
+        </span>
+
+        <h1 class="display-6 fw-bold mb-2">
+            Request a Quote
+        </h1>
+
+        <p class="lead text-muted mb-0">
+            Tell us what you need and provide your contact details.
+            Our team will review your request and contact you regarding your quotation.
+        </p>
+
+    </div>
+
+    <div class="row g-4 g-lg-5">
+
+        <!-- Product Summary -->
+        <div class="col-lg-5">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-header bg-white py-3">
+
+                    <h2 class="h5 fw-bold mb-1">
+                        Product
+                    </h2>
+
+                    <p class="text-muted small mb-0">
+                        Product included in this quotation request.
+                    </p>
+
+                </div>
+
+                <div class="card-body p-4">
+
+                    <!-- Product Image -->
+                    <div class="rounded overflow-hidden mb-4"
+                         style="background-color: #f8f9fa;">
+
+                        @if (primaryImage != null)
+                        {
+                            <img src="@primaryImage.ImagePath"
+                                 alt="@Model.Product?.Name"
+                                 class="w-100"
+                                 style="height: 300px; object-fit: contain;" />
+                        }
+                        else
+                        {
+                            <div class="d-flex align-items-center justify-content-center text-muted"
+                                 style="height: 300px;">
+
+                                <div class="text-center">
+
+                                    <div class="display-5 mb-2">
+                                        —
+                                    </div>
+
+                                    <div class="small">
+                                        No Image Available
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        }
+
+                    </div>
+
+                    <!-- Product Name -->
+                    <div class="mb-4">
+
+                        <div class="small text-muted mb-1">
+                            Product
+                        </div>
+
+                        <div class="fw-bold fs-5">
+                            @Model.Product?.Name
+                        </div>
+
+                    </div>
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Product?.SKU))
+                    {
+                        <div class="mb-3">
+
+                            <div class="small text-muted mb-1">
+                                SKU
+                            </div>
+
+                            <span class="badge text-bg-light border">
+                                @Model.Product.SKU
+                            </span>
+
+                        </div>
+                    }
+
+                    @if (Model.Product?.Category != null)
+                    {
+                        <div class="mb-3">
+
+                            <div class="small text-muted mb-1">
+                                Category
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.Product.Category.Name
+                            </div>
+
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Product?.Material))
+                    {
+                        <div class="mb-3">
+
+                            <div class="small text-muted mb-1">
+                                Material
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.Product.Material
+                            </div>
+
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Product?.LoadClass))
+                    {
+                        <div class="mb-3">
+
+                            <div class="small text-muted mb-1">
+                                Load Class
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.Product.LoadClass
+                            </div>
+
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Product?.Diameter))
+                    {
+                        <div class="mb-3">
+
+                            <div class="small text-muted mb-1">
+                                Diameter
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.Product.Diameter
+                            </div>
+
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Product?.Shape))
+                    {
+                        <div>
+
+                            <div class="small text-muted mb-1">
+                                Shape
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.Product.Shape
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Quotation Form -->
+        <div class="col-lg-7">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-header bg-white py-3">
+
+                    <h2 class="h5 fw-bold mb-1">
+                        Your Information
+                    </h2>
+
+                    <p class="text-muted small mb-0">
+                        Please provide accurate contact details so we can reach you.
+                    </p>
+
+                </div>
+
+                <div class="card-body p-4 p-lg-5">
+
+                    <form asp-action="Create"
+                          method="post">
+
+                        <input type="hidden"
+                               asp-for="ProductId" />
+
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                            <div asp-validation-summary="All"
+                                class="alert alert-danger"
+                                role="alert">
+                            </div>
+                        }
+
+                        <!-- Contact Information -->
+                        <div class="mb-4">
+
+                            <h3 class="h6 fw-bold mb-3">
+                                Contact Information
+                            </h3>
+
+                            <div class="row g-3">
+
+                                <div class="col-md-6">
+
+                                    <label asp-for="FullName"
+                                           class="form-label fw-semibold">
+                                    </label>
+
+                                    <input asp-for="FullName"
+                                           class="form-control"
+                                           placeholder="Enter your full name" />
+
+                                    <span asp-validation-for="FullName"
+                                          class="text-danger small">
+                                    </span>
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <label asp-for="CompanyName"
+                                           class="form-label fw-semibold">
+                                    </label>
+
+                                    <input asp-for="CompanyName"
+                                           class="form-control"
+                                           placeholder="Company name (optional)" />
+
+                                    <span asp-validation-for="CompanyName"
+                                          class="text-danger small">
+                                    </span>
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <label asp-for="Email"
+                                           class="form-label fw-semibold">
+                                    </label>
+
+                                    <input asp-for="Email"
+                                           class="form-control"
+                                           type="email"
+                                           placeholder="name@example.com" />
+
+                                    <span asp-validation-for="Email"
+                                          class="text-danger small">
+                                    </span>
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <label asp-for="PhoneNumber"
+                                           class="form-label fw-semibold">
+                                    </label>
+
+                                    <input asp-for="PhoneNumber"
+                                           class="form-control"
+                                           type="tel"
+                                           placeholder="Enter your phone number" />
+
+                                    <span asp-validation-for="PhoneNumber"
+                                          class="text-danger small">
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Request Details -->
+                        <div class="mb-4">
+
+                            <h3 class="h6 fw-bold mb-3">
+                                Request Details
+                            </h3>
+
+                            <div class="row g-3">
+
+                                <div class="col-md-6">
+
+                                    <label asp-for="Quantity"
+                                           class="form-label fw-semibold">
+                                    </label>
+
+                                    <input asp-for="Quantity"
+                                           class="form-control"
+                                           type="number"
+                                           min="1" />
+
+                                    <span asp-validation-for="Quantity"
+                                          class="text-danger small">
+                                    </span>
+
+                                </div>
+
+                                <div class="col-12">
+
+                                    <label asp-for="Message"
+                                           class="form-label fw-semibold">
+                                    </label>
+
+                                    <textarea asp-for="Message"
+                                              class="form-control"
+                                              rows="6"
+                                              placeholder="Tell us about your requirements, specifications, delivery needs, or any other details."></textarea>
+
+                                    <span asp-validation-for="Message"
+                                          class="text-danger small">
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="border-top pt-4">
+
+                            <div class="d-flex flex-column flex-sm-row gap-2">
+
+                                <button type="submit"
+                                        class="btn btn-primary btn-lg">
+                                    Send Request
+                                </button>
+
+                                <a asp-controller="Catalog"
+                                   asp-action="Details"
+                                   asp-route-id="@Model.ProductId"
+                                   class="btn btn-outline-secondary btn-lg">
+                                    Cancel
+                                </a>
+
+                            </div>
+
+                            <p class="text-muted small mt-3 mb-0">
+                                By submitting this request, you are providing your contact
+                                details so our team can follow up regarding your quotation.
+                            </p>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}

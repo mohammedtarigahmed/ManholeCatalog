@@ -1,0 +1,711 @@
+@{
+    ViewData["Title"] = "Dashboard";
+
+    var recentQuotationRequests =
+        ViewBag.RecentQuotationRequests
+        as List<ManholeCatalog.Models.QuotationRequest>
+        ?? new List<ManholeCatalog.Models.QuotationRequest>();
+}
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+
+    <div>
+
+        <h1 class="h3 fw-bold mb-1">
+            Dashboard
+        </h1>
+
+        <p class="text-muted mb-0">
+            Overview of your catalog and quotation requests.
+        </p>
+
+    </div>
+
+    <div class="d-flex flex-wrap gap-2">
+
+        <a asp-area=""
+           asp-controller="Catalog"
+           asp-action="Index"
+           class="btn btn-outline-secondary">
+            View Catalog
+        </a>
+
+        <a asp-area="Admin"
+           asp-controller="Products"
+           asp-action="Create"
+           class="btn btn-primary">
+            + Add Product
+        </a>
+
+    </div>
+
+</div>
+
+<!-- Main Statistics -->
+<div class="row g-4 mb-4">
+
+    <!-- Total Products -->
+    <div class="col-md-6 col-xl-3">
+
+        <a asp-area="Admin"
+           asp-controller="Products"
+           asp-action="Index"
+           class="text-decoration-none">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-start">
+
+                        <div>
+
+                            <div class="small text-muted mb-1">
+                                Total Products
+                            </div>
+
+                            <div class="h2 fw-bold text-dark mb-0">
+                                @ViewBag.TotalProducts
+                            </div>
+
+                        </div>
+
+                        <span class="badge text-bg-light border">
+                            Products
+                        </span>
+
+                    </div>
+
+                    <div class="small text-muted mt-3">
+                        View and manage your products.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+    <!-- Active Products -->
+    <div class="col-md-6 col-xl-3">
+
+        <a asp-area="Admin"
+           asp-controller="Products"
+           asp-action="Index"
+           class="text-decoration-none">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-start">
+
+                        <div>
+
+                            <div class="small text-muted mb-1">
+                                Active Products
+                            </div>
+
+                            <div class="h2 fw-bold text-success mb-0">
+                                @ViewBag.ActiveProducts
+                            </div>
+
+                        </div>
+
+                        <span class="badge text-bg-success">
+                            Active
+                        </span>
+
+                    </div>
+
+                    <div class="small text-muted mt-3">
+                        Currently visible in the catalog.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+    <!-- Categories -->
+    <div class="col-md-6 col-xl-3">
+
+        <a asp-area="Admin"
+           asp-controller="Categories"
+           asp-action="Index"
+           class="text-decoration-none">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-start">
+
+                        <div>
+
+                            <div class="small text-muted mb-1">
+                                Total Categories
+                            </div>
+
+                            <div class="h2 fw-bold text-dark mb-0">
+                                @ViewBag.TotalCategories
+                            </div>
+
+                        </div>
+
+                        <span class="badge text-bg-light border">
+                            Categories
+                        </span>
+
+                    </div>
+
+                    <div class="small text-muted mt-3">
+                        Organize your product catalog.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+    <!-- Pending Quotations -->
+    <div class="col-md-6 col-xl-3">
+
+        <a asp-area="Admin"
+           asp-controller="Quotations"
+           asp-action="Index"
+           class="text-decoration-none">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-start">
+
+                        <div>
+
+                            <div class="small text-muted mb-1">
+                                Pending Quotations
+                            </div>
+
+                            <div class="h2 fw-bold text-warning mb-0">
+                                @ViewBag.PendingQuotationRequests
+                            </div>
+
+                        </div>
+
+                        <span class="badge text-bg-warning">
+                            Pending
+                        </span>
+
+                    </div>
+
+                    <div class="small text-muted mt-3">
+                        Requests waiting for action.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+</div>
+
+<!-- Secondary Statistics -->
+<div class="row g-4 mb-4">
+
+    <!-- Total Quotations -->
+    <div class="col-md-6">
+
+        <a asp-area="Admin"
+           asp-controller="Quotations"
+           asp-action="Index"
+           class="text-decoration-none">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+
+                            <div class="small text-muted mb-1">
+                                Total Quotations
+                            </div>
+
+                            <div class="h2 fw-bold text-dark mb-0">
+                                @ViewBag.TotalQuotationRequests
+                            </div>
+
+                        </div>
+
+                        <span class="badge text-bg-light border">
+                            Requests
+                        </span>
+
+                    </div>
+
+                    <div class="small text-muted mt-3">
+                        View all customer quotation requests.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+    <!-- Products Without Images -->
+    <div class="col-md-6">
+
+        <a asp-area="Admin"
+           asp-controller="Products"
+           asp-action="Index"
+           class="text-decoration-none">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+
+                            <div class="small text-muted mb-1">
+                                Products Without Images
+                            </div>
+
+                            <div class="h2 fw-bold text-warning mb-0">
+                                @ViewBag.ProductsWithoutImages
+                            </div>
+
+                        </div>
+
+                        <span class="badge text-bg-warning">
+                            Images
+                        </span>
+
+                    </div>
+
+                    <div class="small text-muted mt-3">
+                        Products that may need images.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+</div>
+
+<!-- Recent Quotations -->
+<div class="card border-0 shadow-sm mb-4">
+
+    <div class="card-header bg-white py-3">
+
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
+
+            <div>
+
+                <h2 class="h6 fw-bold mb-1">
+                    Recent Quotation Requests
+                </h2>
+
+                <p class="text-muted small mb-0">
+                    The latest quotation requests submitted by customers.
+                </p>
+
+            </div>
+
+            <a asp-area="Admin"
+               asp-controller="Quotations"
+               asp-action="Index"
+               class="btn btn-sm btn-outline-primary">
+                View All Requests
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="card-body p-0">
+
+        @if (recentQuotationRequests.Count == 0)
+        {
+            <div class="text-center py-5 px-4">
+
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-light border mb-3"
+                     style="width: 64px; height: 64px;">
+
+                    <span class="text-muted fw-bold fs-5">
+                        Q
+                    </span>
+
+                </div>
+
+                <h3 class="h6 fw-bold mb-2">
+                    No Quotation Requests Yet
+                </h3>
+
+                <p class="text-muted mb-0">
+                    Customer quotation requests will appear here once submitted.
+                </p>
+
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead class="table-light">
+
+                        <tr>
+
+                            <th class="ps-4">
+                                Request
+                            </th>
+
+                            <th>
+                                Customer
+                            </th>
+
+                            <th>
+                                Product
+                            </th>
+
+                            <th>
+                                Qty
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Submitted
+                            </th>
+
+                            <th class="text-end pe-4">
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var request in recentQuotationRequests)
+                        {
+                            <tr>
+
+                                <!-- Request -->
+                                <td class="ps-4">
+
+                                    <div class="fw-semibold">
+                                        #@request.Id
+                                    </div>
+
+                                    <div class="small text-muted">
+                                        Quotation
+                                    </div>
+
+                                </td>
+
+                                <!-- Customer -->
+                                <td>
+
+                                    <div class="fw-semibold">
+                                        @request.FullName
+                                    </div>
+
+                                    @if (!string.IsNullOrWhiteSpace(request.CompanyName))
+                                    {
+                                        <div class="small text-muted">
+                                            @request.CompanyName
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="small text-muted">
+                                            @request.Email
+                                        </div>
+                                    }
+
+                                </td>
+
+                                <!-- Product -->
+                                <td>
+
+                                    @if (request.Product != null)
+                                    {
+                                        <div class="fw-semibold">
+                                            @request.Product.Name
+                                        </div>
+
+                                        @if (!string.IsNullOrWhiteSpace(request.Product.SKU))
+                                        {
+                                            <div class="small text-muted">
+                                                SKU: @request.Product.SKU
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">
+                                            Unknown Product
+                                        </span>
+                                    }
+
+                                </td>
+
+                                <!-- Quantity -->
+                                <td>
+
+                                    <span class="badge text-bg-light border">
+                                        @request.Quantity
+                                    </span>
+
+                                </td>
+
+                                <!-- Status -->
+                                <td>
+
+                                    @switch (request.Status)
+                                    {
+                                        case ManholeCatalog.Models.QuotationStatus.Pending:
+                                            <span class="badge text-bg-warning">
+                                                Pending
+                                            </span>
+                                            break;
+
+                                        case ManholeCatalog.Models.QuotationStatus.Contacted:
+                                            <span class="badge text-bg-info">
+                                                Contacted
+                                            </span>
+                                            break;
+
+                                        case ManholeCatalog.Models.QuotationStatus.Quoted:
+                                            <span class="badge text-bg-primary">
+                                                Quoted
+                                            </span>
+                                            break;
+
+                                        case ManholeCatalog.Models.QuotationStatus.Closed:
+                                            <span class="badge text-bg-secondary">
+                                                Closed
+                                            </span>
+                                            break;
+
+                                        default:
+                                            <span class="badge text-bg-light border">
+                                                Unknown
+                                            </span>
+                                            break;
+                                    }
+
+                                </td>
+
+                                <!-- Submitted -->
+                                <td>
+
+                                    <div class="text-nowrap">
+                                        @request.CreatedAt.ToLocalTime().ToString("dd MMM yyyy")
+                                    </div>
+
+                                    <div class="small text-muted text-nowrap">
+                                        @request.CreatedAt.ToLocalTime().ToString("hh:mm tt")
+                                    </div>
+
+                                </td>
+
+                                <!-- Action -->
+                                <td class="text-end pe-4">
+
+                                    <a asp-area="Admin"
+                                       asp-controller="Quotations"
+                                       asp-action="Details"
+                                       asp-route-id="@request.Id"
+                                       class="btn btn-sm btn-outline-primary">
+                                        View
+                                    </a>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        }
+
+    </div>
+
+</div>
+
+<!-- Quick Actions -->
+<div class="mb-3">
+
+    <h2 class="h5 fw-bold mb-1">
+        Quick Actions
+    </h2>
+
+    <p class="text-muted mb-0">
+        Common management tasks.
+    </p>
+
+</div>
+
+<div class="row g-4">
+
+    <!-- Products -->
+    <div class="col-md-6 col-lg-3">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-body d-flex flex-column">
+
+                <div class="small text-primary fw-semibold mb-2">
+                    PRODUCTS
+                </div>
+
+                <h3 class="h6 fw-bold">
+                    Manage Products
+                </h3>
+
+                <p class="text-muted small flex-grow-1">
+                    Add, edit, activate, deactivate, and manage product images.
+                </p>
+
+                <a asp-area="Admin"
+                   asp-controller="Products"
+                   asp-action="Index"
+                   class="btn btn-outline-primary">
+                    Manage Products
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Categories -->
+    <div class="col-md-6 col-lg-3">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-body d-flex flex-column">
+
+                <div class="small text-primary fw-semibold mb-2">
+                    CATEGORIES
+                </div>
+
+                <h3 class="h6 fw-bold">
+                    Manage Categories
+                </h3>
+
+                <p class="text-muted small flex-grow-1">
+                    Organize your products into active catalog categories.
+                </p>
+
+                <a asp-area="Admin"
+                   asp-controller="Categories"
+                   asp-action="Index"
+                   class="btn btn-outline-primary">
+                    Manage Categories
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Quotations -->
+    <div class="col-md-6 col-lg-3">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-body d-flex flex-column">
+
+                <div class="small text-primary fw-semibold mb-2">
+                    QUOTATIONS
+                </div>
+
+                <h3 class="h6 fw-bold">
+                    Manage Quotations
+                </h3>
+
+                <p class="text-muted small flex-grow-1">
+                    Review customer requests and update their status.
+                </p>
+
+                <a asp-area="Admin"
+                   asp-controller="Quotations"
+                   asp-action="Index"
+                   class="btn btn-outline-primary">
+                    Manage Quotations
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Catalog -->
+    <div class="col-md-6 col-lg-3">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-body d-flex flex-column">
+
+                <div class="small text-primary fw-semibold mb-2">
+                    CATALOG
+                </div>
+
+                <h3 class="h6 fw-bold">
+                    View Public Catalog
+                </h3>
+
+                <p class="text-muted small flex-grow-1">
+                    Open the customer-facing catalog and review the public experience.
+                </p>
+
+                <a asp-area=""
+                   asp-controller="Catalog"
+                   asp-action="Index"
+                   class="btn btn-outline-secondary">
+                    View Catalog
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

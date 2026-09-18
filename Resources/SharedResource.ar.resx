@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="Home" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
+
+  <data name="Catalog" xml:space="preserve">
+    <value>الكتالوج</value>
+  </data>
+
+  <data name="Admin" xml:space="preserve">
+    <value>الإدارة</value>
+  </data>
+
+  <data name="LanguageArabic" xml:space="preserve">
+    <value>العربية</value>
+  </data>
+
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>English</value>
+  </data>
+
+  <data name="ProductServices" xml:space="preserve">
+    <value>خدمات المنتجات</value>
+  </data>
+
+  <data name="QuickLinks" xml:space="preserve">
+    <value>روابط سريعة</value>
+  </data>
+
+  <data name="ProductCatalogDescription" xml:space="preserve">
+    <value>كتالوج المنتجات ونظام طلبات عروض الأسعار</value>
+  </data>
+
+  <data name="FooterDescription" xml:space="preserve">
+    <value>استكشف أغطية المناهل والمنتجات ذات الصلة، وراجع المواصفات، واطلب عروض الأسعار.</value>
+  </data>
+
+  <data name="HomeHeroTitle" xml:space="preserve">
+    <value>أغطية المناهل والمنتجات ذات الصلة</value>
+  </data>
+
+  <data name="HomeHeroDescription" xml:space="preserve">
+    <value>استكشف كتالوج المنتجات، وراجع المواصفات، واطلب عروض الأسعار للمنتجات التي تحتاجها.</value>
+  </data>
+
+  <data name="BrowseCatalog" xml:space="preserve">
+    <value>تصفح الكتالوج</value>
+  </data>
+
+  <data name="ViewProducts" xml:space="preserve">
+    <value>عرض المنتجات</value>
+  </data>
+
+  <data name="WhatWeOffer" xml:space="preserve">
+    <value>ما نقدمه</value>
+  </data>
+
+  <data name="OfferCatalog" xml:space="preserve">
+    <value>كتالوج المنتجات</value>
+  </data>
+
+  <data name="OfferSpecifications" xml:space="preserve">
+    <value>مواصفات المنتجات</value>
+  </data>
+
+  <data name="OfferQuotation" xml:space="preserve">
+    <value>طلبات عروض الأسعار</value>
+  </data>
+
+  <data name="OfferWhatsApp" xml:space="preserve">
+      <value>التواصل عبر واتساب</value>
+    </data>
+
+    <data name="ManholeCoversRelatedProducts" xml:space="preserve">
+    <value>أغطية المناهل والمنتجات ذات الصلة</value>
+  </data>
+
+  <data name="FindTheRight" xml:space="preserve">
+    <value>اعثر على</value>
+  </data>
+
+  <data name="ManholeProducts" xml:space="preserve">
+    <value>منتجات المناهل المناسبة</value>
+  </data>
+
+  <data name="ForYourProject" xml:space="preserve">
+    <value>لمشروعك.</value>
+  </data>
+
+  <data name="ProductCatalog" xml:space="preserve">
+    <value>كتالوج المنتجات</value>
+  </data>
+
+  <data name="ProductCatalogHomeDescription" xml:space="preserve">
+    <value>ابحث عن المنتجات حسب الفئة، وراجع المواصفات، وأرسل طلب عرض السعر مباشرة من الكتالوج.</value>
+  </data>
+
+  <data name="Browse" xml:space="preserve">
+    <value>تصفح</value>
+  </data>
+
+  <data name="Choose" xml:space="preserve">
+    <value>اختر</value>
+  </data>
+
+  <data name="Request" xml:space="preserve">
+    <value>اطلب</value>
+  </data>
+
+  <data name="EverythingYouNeedInOnePlace" xml:space="preserve">
+    <value>كل ما تحتاجه في مكان واحد</value>
+  </data>
+
+  <data name="SimpleWayToExplore" xml:space="preserve">
+    <value>طريقة بسيطة لاستكشاف المنتجات وطلب عروض الأسعار.</value>
+  </data>
+
+  <data name="ProductSpecifications" xml:space="preserve">
+    <value>مواصفات المنتجات</value>
+  </data>
+
+  <data name="ProductCatalogFeatureDescription" xml:space="preserve">
+    <value>تصفح المنتجات المتاحة واعثر بسرعة على ما تحتاجه باستخدام البحث والتصفية حسب الفئة.</value>
+  </data>
+
+  <data name="ProductSpecificationsFeatureDescription" xml:space="preserve">
+    <value>راجع التفاصيل المهمة مثل الخامة، وفئة التحميل، والقطر، والشكل، وغيرها من المواصفات المتاحة.</value>
+  </data>
+
+  <data name="RequestAQuote" xml:space="preserve">
+    <value>اطلب عرض سعر</value>
+  </data>
+
+  <data name="RequestQuoteFeatureDescription" xml:space="preserve">
+    <value>أرسل متطلباتك من خلال طلب عرض سعر بسيط، ويمكن لفريقنا التواصل معك ومتابعة طلبك.</value>
+  </data>
+
+  <data name="HowItWorks" xml:space="preserve">
+    <value>كيف يعمل النظام</value>
+  </data>
+
+  <data name="HowItWorksDescription" xml:space="preserve">
+    <value>انتقل من اكتشاف المنتج إلى طلب عرض السعر في بضع خطوات بسيطة.</value>
+  </data>
+
+  <data name="BrowseStepDescription" xml:space="preserve">
+    <value>استكشف الكتالوج واعثر على المنتج الذي يناسب متطلباتك.</value>
+  </data>
+
+  <data name="Review" xml:space="preserve">
+    <value>راجع</value>
+  </data>
+
+  <data name="ReviewStepDescription" xml:space="preserve">
+    <value>راجع مواصفات المنتج والمعلومات المتاحة قبل إرسال طلبك.</value>
+  </data>
+
+  <data name="RequestStepDescription" xml:space="preserve">
+    <value>أرسل طلب عرض السعر مع بيانات التواصل والكمية المطلوبة.</value>
+  </data>
+
+  <data name="ReadyToFindYourProduct" xml:space="preserve">
+    <value>هل أنت مستعد للعثور على المنتج المناسب؟</value>
+  </data>
+
+  <data name="ExploreCatalogAndRequest" xml:space="preserve">
+    <value>استكشف الكتالوج واطلب عرض سعر للمنتجات التي تحتاجها.</value>
+  </data>
+
+  <data name="ExploreCatalog" xml:space="preserve">
+    <value>استكشف الكتالوج</value>
+  </data>
+
+  <data name="FindTheRightProduct" xml:space="preserve">
+    <value>اعثر على المنتج المناسب</value>
+  </data>
+
+  <data name="CatalogPageDescription" xml:space="preserve">
+    <value>تصفح المنتجات المتاحة، وراجع المواصفات، واطلب عرض سعر.</value>
+  </data>
+
+  <data name="FindAProduct" xml:space="preserve">
+    <value>ابحث عن منتج</value>
+  </data>
+
+  <data name="SearchByNameOrSku" xml:space="preserve">
+    <value>ابحث باسم المنتج أو رمز SKU، أو قم بالتصفية حسب الفئة.</value>
+  </data>
+
+  <data name="SearchProducts" xml:space="preserve">
+    <value>البحث عن المنتجات</value>
+  </data>
+
+  <data name="SearchByProductNameOrSku" xml:space="preserve">
+    <value>ابحث باسم المنتج أو رمز SKU...</value>
+  </data>
+
+  <data name="Category" xml:space="preserve">
+    <value>الفئة</value>
+  </data>
+
+  <data name="AllCategories" xml:space="preserve">
+    <value>جميع الفئات</value>
+  </data>
+
+  <data name="Search" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+
+  <data name="Clear" xml:space="preserve">
+    <value>مسح</value>
+  </data>
+
+  <data name="SearchResults" xml:space="preserve">
+    <value>نتائج البحث</value>
+  </data>
+
+  <data name="ProductsFound" xml:space="preserve">
+    <value>تم العثور على {0} منتج</value>
+  </data>
+
+  <data name="AvailableProducts" xml:space="preserve">
+    <value>المنتجات المتاحة</value>
+  </data>
+
+  <data name="ProductsAvailable" xml:space="preserve">
+    <value>{0} منتج متاح</value>
+  </data>
+
+  <data name="SearchLabel" xml:space="preserve">
+    <value>البحث</value>
+  </data>
+
+  <data name="CategoryLabel" xml:space="preserve">
+    <value>الفئة</value>
+  </data>
+
+  <data name="NoProductsFound" xml:space="preserve">
+    <value>لم يتم العثور على منتجات</value>
+  </data>
+
+  <data name="NoProductsMatch" xml:space="preserve">
+    <value>لا توجد منتجات تطابق البحث أو الفئة المحددة. حاول تغيير معايير البحث.</value>
+  </data>
+
+  <data name="ViewAllProducts" xml:space="preserve">
+    <value>عرض جميع المنتجات</value>
+  </data>
+
+  <data name="NoImageAvailable" xml:space="preserve">
+    <value>لا توجد صورة متاحة</value>
+  </data>
+
+  <data name="SKU" xml:space="preserve">
+    <value>رمز SKU</value>
+  </data>
+
+  <data name="Material" xml:space="preserve">
+    <value>الخامة</value>
+  </data>
+
+  <data name="LoadClass" xml:space="preserve">
+    <value>فئة التحميل</value>
+  </data>
+
+  <data name="Diameter" xml:space="preserve">
+    <value>القطر</value>
+  </data>
+
+  <data name="Shape" xml:space="preserve">
+    <value>الشكل</value>
+  </data>
+
+  <data name="Price" xml:space="preserve">
+    <value>السعر</value>
+  </data>
+
+  <data name="ViewDetails" xml:space="preserve">
+    <value>عرض التفاصيل</value>
+  </data>
+
+  <data name="RequestAQuote" xml:space="preserve">
+    <value>طلب عرض سعر</value>
+  </data>
+
+  <data name="BackToCatalog" xml:space="preserve">
+    <value>العودة إلى الكتالوج</value>
+  </data>
+
+  <data name="Description" xml:space="preserve">
+    <value>الوصف</value>
+  </data>
+
+  <data name="InterestedInThisProduct" xml:space="preserve">
+    <value>هل أنت مهتم بهذا المنتج؟</value>
+  </data>
+
+  <data name="RequestQuotationOrContact" xml:space="preserve">
+    <value>اطلب عرض سعر أو تواصل معنا مباشرة لمزيد من المعلومات.</value>
+  </data>
+
+  <data name="ContactUsOnWhatsApp" xml:space="preserve">
+    <value>تواصل معنا عبر واتساب</value>
+  </data>
+
+  <data name="ProductImages" xml:space="preserve">
+    <value>صور المنتج</value>
+  </data>
+
+  <data name="SelectImageAbove" xml:space="preserve">
+    <value>اختر صورة أعلاه لعرضها.</value>
+  </data>
+
+  <data name="ImageCount" xml:space="preserve">
+    <value>{0} صورة</value>
+  </data>
+
+  <data name="WhatsAppInterestMessage" xml:space="preserve">
+    <value>مرحبًا، أنا مهتم بهذا المنتج.</value>
+  </data>
+
+  <data name="ProductLabel" xml:space="preserve">
+    <value>المنتج</value>
+  </data>
+
+  <data name="SKULabel" xml:space="preserve">
+    <value>رمز SKU</value>
+  </data>
+
+  <data name="ProductPageLabel" xml:space="preserve">
+    <value>صفحة المنتج</value>
+  </data>
+
+  <data name="CurrencySAR" xml:space="preserve">
+    <value>ر.س</value>
+  </data>
+</root>

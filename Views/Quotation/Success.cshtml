@@ -1,0 +1,363 @@
+@model ManholeCatalog.Models.QuotationRequest
+
+@{
+    ViewData["Title"] = "Request Submitted";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <!-- Success Header -->
+            <div class="text-center mb-4">
+
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-success-subtle text-success mb-3"
+                     style="width: 72px; height: 72px;">
+
+                    <span class="fs-2 fw-bold">
+                        ✓
+                    </span>
+
+                </div>
+
+                <h1 class="display-6 fw-bold mb-3">
+                    Request Submitted Successfully
+                </h1>
+
+                <p class="lead text-muted mb-0">
+                    Thank you for your quotation request.
+                    We have received your request and will contact you soon.
+                </p>
+
+            </div>
+
+            <!-- Request Number -->
+            <div class="card border-0 shadow-sm mb-4">
+
+                <div class="card-body text-center p-4">
+
+                    <div class="small text-muted mb-1">
+                        Your Request Number
+                    </div>
+
+                    <div class="fs-2 fw-bold text-success">
+                        #@Model.Id
+                    </div>
+
+                    <div class="small text-muted mt-2">
+                        Please keep this number for future reference.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Request Details -->
+            <div class="card border-0 shadow-sm mb-4">
+
+                <div class="card-header bg-white py-3">
+
+                    <h2 class="h5 fw-bold mb-1">
+                        Request Details
+                    </h2>
+
+                    <p class="text-muted small mb-0">
+                        Summary of the product and quotation request.
+                    </p>
+
+                </div>
+
+                <div class="card-body p-4">
+
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+
+                            <div class="text-muted small mb-1">
+                                Product
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.Product?.Name
+                            </div>
+
+                        </div>
+
+                        @if (!string.IsNullOrWhiteSpace(Model.Product?.SKU))
+                        {
+                            <div class="col-md-6">
+
+                                <div class="text-muted small mb-1">
+                                    SKU
+                                </div>
+
+                                <div class="fw-semibold">
+                                    @Model.Product.SKU
+                                </div>
+
+                            </div>
+                        }
+
+                        <div class="col-md-6">
+
+                            <div class="text-muted small mb-1">
+                                Quantity
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.Quantity
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="text-muted small mb-1">
+                                Status
+                            </div>
+
+                            <span class="badge text-bg-warning">
+                                Pending
+                            </span>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="text-muted small mb-1">
+                                Submitted
+                            </div>
+
+                            <div>
+                                @Model.CreatedAt.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Contact Information -->
+            <div class="card border-0 shadow-sm mb-4">
+
+                <div class="card-header bg-white py-3">
+
+                    <h2 class="h5 fw-bold mb-1">
+                        Contact Information
+                    </h2>
+
+                    <p class="text-muted small mb-0">
+                        The contact details provided with your request.
+                    </p>
+
+                </div>
+
+                <div class="card-body p-4">
+
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+
+                            <div class="text-muted small mb-1">
+                                Full Name
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.FullName
+                            </div>
+
+                        </div>
+
+                        @if (!string.IsNullOrWhiteSpace(Model.CompanyName))
+                        {
+                            <div class="col-md-6">
+
+                                <div class="text-muted small mb-1">
+                                    Company
+                                </div>
+
+                                <div class="fw-semibold">
+                                    @Model.CompanyName
+                                </div>
+
+                            </div>
+                        }
+
+                        <div class="col-md-6">
+
+                            <div class="text-muted small mb-1">
+                                Email
+                            </div>
+
+                            <div>
+                                @Model.Email
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="text-muted small mb-1">
+                                Phone
+                            </div>
+
+                            <div>
+                                @Model.PhoneNumber
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Customer Message -->
+            @if (!string.IsNullOrWhiteSpace(Model.Message))
+            {
+                <div class="card border-0 shadow-sm mb-4">
+
+                    <div class="card-header bg-white py-3">
+
+                        <h2 class="h5 fw-bold mb-1">
+                            Your Message
+                        </h2>
+
+                        <p class="text-muted small mb-0">
+                            Additional requirements included with your request.
+                        </p>
+
+                    </div>
+
+                    <div class="card-body p-4">
+
+                        <div style="white-space: pre-line;">
+                            @Model.Message
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+            <!-- Next Steps -->
+            <div class="card border-0 shadow-sm mb-4">
+
+                <div class="card-body p-4">
+
+                    <h2 class="h5 fw-bold mb-3">
+                        What Happens Next?
+                    </h2>
+
+                    <div class="d-flex gap-3 mb-3">
+
+                        <div class="d-flex align-items-center justify-content-center rounded-circle bg-light flex-shrink-0"
+                             style="width: 40px; height: 40px;">
+
+                            <span class="fw-bold text-primary">
+                                1
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <div class="fw-semibold">
+                                Request Review
+                            </div>
+
+                            <div class="text-muted small">
+                                Our team will review the quotation request.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex gap-3 mb-3">
+
+                        <div class="d-flex align-items-center justify-content-center rounded-circle bg-light flex-shrink-0"
+                             style="width: 40px; height: 40px;">
+
+                            <span class="fw-bold text-primary">
+                                2
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <div class="fw-semibold">
+                                Contact
+                            </div>
+
+                            <div class="text-muted small">
+                                We will use the contact information you provided to follow up.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex gap-3">
+
+                        <div class="d-flex align-items-center justify-content-center rounded-circle bg-light flex-shrink-0"
+                             style="width: 40px; height: 40px;">
+
+                            <span class="fw-bold text-primary">
+                                3
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <div class="fw-semibold">
+                                Quotation
+                            </div>
+
+                            <div class="text-muted small">
+                                Our team will discuss the quotation details with you.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Navigation -->
+            <div class="text-center">
+
+                <div class="d-flex justify-content-center gap-2 flex-wrap">
+
+                    <a asp-controller="Catalog"
+                       asp-action="Details"
+                       asp-route-id="@Model.ProductId"
+                       class="btn btn-primary">
+                        Back to Product
+                    </a>
+
+                    <a asp-controller="Catalog"
+                       asp-action="Index"
+                       class="btn btn-outline-secondary">
+                        Browse Catalog
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

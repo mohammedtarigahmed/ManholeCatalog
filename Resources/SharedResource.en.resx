@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+
+  <data name="Catalog" xml:space="preserve">
+    <value>Catalog</value>
+  </data>
+
+  <data name="Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+
+  <data name="LanguageArabic" xml:space="preserve">
+    <value>العربية</value>
+  </data>
+
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>English</value>
+  </data>
+
+  <data name="ProductServices" xml:space="preserve">
+    <value>Product Services</value>
+  </data>
+
+  <data name="QuickLinks" xml:space="preserve">
+    <value>Quick Links</value>
+  </data>
+
+  <data name="ProductCatalogDescription" xml:space="preserve">
+    <value>Product Catalog &amp; Quotation System</value>
+  </data>
+
+  <data name="FooterDescription" xml:space="preserve">
+    <value>Explore manhole covers and related products, review specifications, and request quotations.</value>
+  </data>
+
+  <data name="HomeHeroTitle" xml:space="preserve">
+    <value>Manhole Covers and Related Products</value>
+  </data>
+
+  <data name="HomeHeroDescription" xml:space="preserve">
+    <value>Explore our product catalog, review specifications, and request quotations for the products you need.</value>
+  </data>
+
+  <data name="BrowseCatalog" xml:space="preserve">
+    <value>Browse Catalog</value>
+  </data>
+
+  <data name="ViewProducts" xml:space="preserve">
+    <value>View Products</value>
+  </data>
+
+  <data name="WhatWeOffer" xml:space="preserve">
+    <value>What We Offer</value>
+  </data>
+
+  <data name="OfferCatalog" xml:space="preserve">
+    <value>Product catalog</value>
+  </data>
+
+  <data name="OfferSpecifications" xml:space="preserve">
+    <value>Product specifications</value>
+  </data>
+
+  <data name="OfferQuotation" xml:space="preserve">
+    <value>Quotation requests</value>
+  </data>
+
+  <data name="OfferWhatsApp" xml:space="preserve">
+    <value>WhatsApp contact</value>
+  </data>
+
+  <data name="ManholeCoversRelatedProducts" xml:space="preserve">
+    <value>Manhole Covers &amp; Related Products</value>
+  </data>
+
+  <data name="FindTheRight" xml:space="preserve">
+    <value>Find the Right</value>
+  </data>
+
+  <data name="ManholeProducts" xml:space="preserve">
+    <value>Manhole Products</value>
+  </data>
+
+  <data name="ForYourProject" xml:space="preserve">
+    <value>for Your Project.</value>
+  </data>
+
+  <data name="ProductCatalog" xml:space="preserve">
+    <value>Product Catalog</value>
+  </data>
+
+  <data name="ProductCatalogHomeDescription" xml:space="preserve">
+    <value>Find products by category, review specifications, and submit your quotation request directly from the catalog.</value>
+  </data>
+
+  <data name="Browse" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+
+  <data name="Choose" xml:space="preserve">
+    <value>Choose</value>
+  </data>
+
+  <data name="Request" xml:space="preserve">
+    <value>Request</value>
+  </data>
+
+  <data name="EverythingYouNeedInOnePlace" xml:space="preserve">
+    <value>Everything You Need in One Place</value>
+  </data>
+
+  <data name="SimpleWayToExplore" xml:space="preserve">
+    <value>A simple way to explore products and request quotations.</value>
+  </data>
+
+  <data name="ProductSpecifications" xml:space="preserve">
+    <value>Product Specifications</value>
+  </data>
+
+  <data name="ProductCatalogFeatureDescription" xml:space="preserve">
+    <value>Browse available products and quickly find what you need using search and category filters.</value>
+  </data>
+
+  <data name="ProductSpecificationsFeatureDescription" xml:space="preserve">
+    <value>Review important details such as material, load class, diameter, shape, and other available specifications.</value>
+  </data>
+
+  <data name="RequestAQuote" xml:space="preserve">
+    <value>Request a Quote</value>
+  </data>
+
+  <data name="RequestQuoteFeatureDescription" xml:space="preserve">
+    <value>Send your requirements through a simple quotation request and our team can follow up with you.</value>
+  </data>
+
+  <data name="HowItWorks" xml:space="preserve">
+    <value>How It Works</value>
+  </data>
+
+  <data name="HowItWorksDescription" xml:space="preserve">
+    <value>Get from product discovery to quotation in a few simple steps.</value>
+  </data>
+
+  <data name="BrowseStepDescription" xml:space="preserve">
+    <value>Explore the catalog and find a product that matches your requirements.</value>
+  </data>
+
+  <data name="Review" xml:space="preserve">
+    <value>Review</value>
+  </data>
+
+  <data name="ReviewStepDescription" xml:space="preserve">
+    <value>Check product specifications and available information before making your request.</value>
+  </data>
+
+  <data name="RequestStepDescription" xml:space="preserve">
+    <value>Submit your quotation request with your contact details and required quantity.</value>
+  </data>
+
+  <data name="ReadyToFindYourProduct" xml:space="preserve">
+    <value>Ready to Find Your Product?</value>
+  </data>
+
+  <data name="ExploreCatalogAndRequest" xml:space="preserve">
+    <value>Explore the catalog and request a quotation for the products you need.</value>
+  </data>
+
+  <data name="ExploreCatalog" xml:space="preserve">
+    <value>Explore Catalog</value>
+  </data>
+
+  <data name="FindTheRightProduct" xml:space="preserve">
+    <value>Find the Right Product</value>
+  </data>
+
+  <data name="CatalogPageDescription" xml:space="preserve">
+    <value>Browse our available products, review specifications, and request a quotation.</value>
+  </data>
+
+  <data name="FindAProduct" xml:space="preserve">
+    <value>Find a Product</value>
+  </data>
+
+  <data name="SearchByNameOrSku" xml:space="preserve">
+    <value>Search by product name or SKU, or filter by category.</value>
+  </data>
+
+  <data name="SearchProducts" xml:space="preserve">
+    <value>Search Products</value>
+  </data>
+
+  <data name="SearchByProductNameOrSku" xml:space="preserve">
+    <value>Search by product name or SKU...</value>
+  </data>
+
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+
+  <data name="AllCategories" xml:space="preserve">
+    <value>All Categories</value>
+  </data>
+
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+
+  <data name="SearchResults" xml:space="preserve">
+    <value>Search Results</value>
+  </data>
+
+  <data name="ProductsFound" xml:space="preserve">
+    <value>{0} product(s) found</value>
+  </data>
+
+  <data name="AvailableProducts" xml:space="preserve">
+    <value>Available Products</value>
+  </data>
+
+  <data name="ProductsAvailable" xml:space="preserve">
+    <value>{0} product(s) available</value>
+  </data>
+
+  <data name="SearchLabel" xml:space="preserve">
+    <value>Search</value>
+  </data>
+
+  <data name="CategoryLabel" xml:space="preserve">
+    <value>Category</value>
+  </data>
+
+  <data name="NoProductsFound" xml:space="preserve">
+    <value>No Products Found</value>
+  </data>
+
+  <data name="NoProductsMatch" xml:space="preserve">
+    <value>No products match your current search or category filter. Try changing your search criteria.</value>
+  </data>
+
+  <data name="ViewAllProducts" xml:space="preserve">
+    <value>View All Products</value>
+  </data>
+
+  <data name="NoImageAvailable" xml:space="preserve">
+    <value>No Image Available</value>
+  </data>
+
+  <data name="SKU" xml:space="preserve">
+    <value>SKU</value>
+  </data>
+
+  <data name="Material" xml:space="preserve">
+    <value>Material</value>
+  </data>
+
+  <data name="LoadClass" xml:space="preserve">
+    <value>Load Class</value>
+  </data>
+
+  <data name="Diameter" xml:space="preserve">
+    <value>Diameter</value>
+  </data>
+
+  <data name="Shape" xml:space="preserve">
+    <value>Shape</value>
+  </data>
+
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+
+  <data name="ViewDetails" xml:space="preserve">
+    <value>View Details</value>
+  </data>
+
+  <data name="RequestAQuote" xml:space="preserve">
+    <value>Request a Quote</value>
+  </data>
+
+  <data name="BackToCatalog" xml:space="preserve">
+    <value>Back to Catalog</value>
+  </data>
+
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+
+  <data name="InterestedInThisProduct" xml:space="preserve">
+    <value>Interested in This Product?</value>
+  </data>
+
+  <data name="RequestQuotationOrContact" xml:space="preserve">
+    <value>Request a quotation or contact us directly for more information.</value>
+  </data>
+
+  <data name="ContactUsOnWhatsApp" xml:space="preserve">
+    <value>Contact us on WhatsApp</value>
+  </data>
+
+  <data name="ProductImages" xml:space="preserve">
+    <value>Product Images</value>
+  </data>
+
+  <data name="SelectImageAbove" xml:space="preserve">
+    <value>Select an image above to view it.</value>
+  </data>
+
+  <data name="ImageCount" xml:space="preserve">
+    <value>{0} image(s)</value>
+  </data>
+
+  <data name="WhatsAppInterestMessage" xml:space="preserve">
+    <value>Hello, I am interested in this product.</value>
+  </data>
+
+  <data name="ProductLabel" xml:space="preserve">
+    <value>Product</value>
+  </data>
+
+  <data name="SKULabel" xml:space="preserve">
+    <value>SKU</value>
+  </data>
+
+  <data name="ProductPageLabel" xml:space="preserve">
+    <value>Product page</value>
+  </data>
+  
+  <data name="CurrencySAR" xml:space="preserve">
+    <value>SAR</value>
+  </data>
+</root>

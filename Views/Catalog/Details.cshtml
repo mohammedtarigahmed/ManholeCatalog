@@ -1,0 +1,352 @@
+@model ManholeCatalog.Models.Product
+
+@{
+    ViewData["Title"] = Model.Name;
+
+    var primaryImage = Model.Images.FirstOrDefault(i => i.IsPrimary) ?? Model.Images.OrderBy(i => i.DisplayOrder).FirstOrDefault();
+
+    var orderedImages = Model.Images
+        .OrderBy(i => i.DisplayOrder)
+        .ThenBy(i => i.Id)
+        .ToList();
+
+    var whatsappNumber = ViewContext.HttpContext.RequestServices.GetRequiredService<IConfiguration>()["WhatsApp:PhoneNumber"];
+
+    var productUrl = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}";
+
+    var whatsappMessage = $"Hello, I am interested in this product.%0A%0AProduct: {Model.Name}";
+
+    if (!string.IsNullOrWhiteSpace(Model.SKU))
+    {
+        whatsappMessage += $"%0ASKU: {Model.SKU}";
+    }
+
+    whatsappMessage += $"%0A%0AProduct page: {productUrl}";
+
+    var whatsappUrl = $"https://wa.me/{whatsappNumber}?text={Uri.EscapeDataString(Uri.UnescapeDataString(whatsappMessage))}";
+}
+
+<div class="container py-5">
+
+    <!-- Back to Catalog -->
+    <div class="mb-4">
+
+        <a asp-controller="Catalog"
+           asp-action="Index"
+           class="btn btn-outline-secondary">
+            ← Back to Catalog
+        </a>
+
+    </div>
+
+    <div class="row g-5">
+
+        <!-- Product Gallery -->
+        <div class="col-lg-6">
+
+            <div class="card border-0 shadow-sm mb-3">
+
+                <div class="p-3">
+
+                    @if (primaryImage != null)
+                    {
+                        <div class="rounded overflow-hidden"
+                             style="background-color: #f8f9fa;">
+
+                            <img id="mainProductImage"
+                                 src="@primaryImage.ImagePath"
+                                 alt="@Model.Name"
+                                 class="img-fluid w-100"
+                                 style="height: 460px; object-fit: contain;" />
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="d-flex align-items-center justify-content-center rounded text-muted"
+                             style="height: 460px; background-color: #f8f9fa;">
+
+                            <div class="text-center">
+
+                                <div class="display-5 mb-2">
+                                    —
+                                </div>
+
+                                <div>
+                                    No Image Available
+                                </div>
+
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+            @if (orderedImages.Any())
+            {
+                <div class="d-flex flex-wrap gap-2">
+
+                    @foreach (var image in orderedImages)
+                    {
+                        var isSelected = primaryImage != null && image.Id == primaryImage.Id;
+
+                        <button type="button"
+                                class="btn p-0 product-image-button @(isSelected ? "border-primary" : "border")"
+                                onclick="changeProductImage('@image.ImagePath', this)"
+                                style="border-width: 2px;">
+
+                            <img src="@image.ImagePath"
+                                 alt="@(image.AltText ?? Model.Name)"
+                                 style="width: 88px; height: 88px; object-fit: contain; background-color: #f8f9fa;" />
+
+                        </button>
+                    }
+
+                </div>
+            }
+
+        </div>
+
+        <!-- Product Information -->
+        <div class="col-lg-6">
+
+            @if (Model.Category != null)
+            {
+                <div class="small text-primary fw-semibold mb-2">
+                    @Model.Category.Name
+                </div>
+            }
+
+            <h1 class="display-6 fw-bold mb-3">
+                @Model.Name
+            </h1>
+
+            @if (!string.IsNullOrWhiteSpace(Model.SKU))
+            {
+                <div class="mb-4">
+
+                    <span class="badge text-bg-light border">
+                        SKU: @Model.SKU
+                    </span>
+
+                </div>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(Model.Description))
+            {
+                <div class="mb-4">
+
+                    <h2 class="h5 fw-bold mb-2">
+                        Description
+                    </h2>
+
+                    <p class="text-muted mb-0"
+                       style="white-space: pre-line;">
+                        @Model.Description
+                    </p>
+
+                </div>
+            }
+
+            <!-- Specifications -->
+            @if (!string.IsNullOrWhiteSpace(Model.Material) ||
+                 !string.IsNullOrWhiteSpace(Model.LoadClass) ||
+                 !string.IsNullOrWhiteSpace(Model.Diameter) ||
+                 !string.IsNullOrWhiteSpace(Model.Shape))
+            {
+                <div class="card border-0 shadow-sm mb-4">
+
+                    <div class="card-body p-4">
+
+                        <h2 class="h5 fw-bold mb-4">
+                            Product Specifications
+                        </h2>
+
+                        <div class="row g-0">
+
+                            @if (!string.IsNullOrWhiteSpace(Model.Material))
+                            {
+                                <div class="col-sm-6 border-bottom py-3 pe-sm-3">
+
+                                    <div class="small text-muted mb-1">
+                                        Material
+                                    </div>
+
+                                    <div class="fw-semibold">
+                                        @Model.Material
+                                    </div>
+
+                                </div>
+                            }
+
+                            @if (!string.IsNullOrWhiteSpace(Model.LoadClass))
+                            {
+                                <div class="col-sm-6 border-bottom py-3 ps-sm-3">
+
+                                    <div class="small text-muted mb-1">
+                                        Load Class
+                                    </div>
+
+                                    <div class="fw-semibold">
+                                        @Model.LoadClass
+                                    </div>
+
+                                </div>
+                            }
+
+                            @if (!string.IsNullOrWhiteSpace(Model.Diameter))
+                            {
+                                <div class="col-sm-6 border-bottom py-3 pe-sm-3">
+
+                                    <div class="small text-muted mb-1">
+                                        Diameter
+                                    </div>
+
+                                    <div class="fw-semibold">
+                                        @Model.Diameter
+                                    </div>
+
+                                </div>
+                            }
+
+                            @if (!string.IsNullOrWhiteSpace(Model.Shape))
+                            {
+                                <div class="col-sm-6 border-bottom py-3 ps-sm-3">
+
+                                    <div class="small text-muted mb-1">
+                                        Shape
+                                    </div>
+
+                                    <div class="fw-semibold">
+                                        @Model.Shape
+                                    </div>
+
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+            <!-- Price -->
+            @if (Model.Price.HasValue)
+            {
+                <div class="mb-4">
+
+                    <div class="small text-muted mb-1">
+                        Price
+                    </div>
+
+                    <div class="fs-2 fw-bold">
+                        @Model.Price.Value.ToString("N2") SAR
+                    </div>
+
+                </div>
+            }
+
+            <!-- Actions -->
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body p-4">
+
+                    <h2 class="h5 fw-bold mb-2">
+                        Interested in This Product?
+                    </h2>
+
+                    <p class="text-muted small mb-4">
+                        Request a quotation or contact us directly for more information.
+                    </p>
+
+                    <div class="d-grid gap-2">
+
+                        <a asp-controller="Quotation"
+                           asp-action="Create"
+                           asp-route-productId="@Model.Id"
+                           class="btn btn-primary btn-lg">
+                            Request a Quote
+                        </a>
+
+                        @if (!string.IsNullOrWhiteSpace(whatsappNumber))
+                        {
+                            <a href="@whatsappUrl"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="btn btn-success btn-lg">
+                                Contact us on WhatsApp
+                            </a>
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Product Gallery Summary -->
+    @if (orderedImages.Count > 1)
+    {
+        <div class="mt-5 pt-4 border-top">
+
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2 mb-3">
+
+                <div>
+
+                    <h2 class="h5 fw-bold mb-1">
+                        Product Images
+                    </h2>
+
+                    <p class="text-muted small mb-0">
+                        Select an image above to view it.
+                    </p>
+
+                </div>
+
+                <span class="badge text-bg-light border">
+                    @orderedImages.Count image(s)
+                </span>
+
+            </div>
+
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+
+<script>
+
+    function changeProductImage(imagePath, selectedButton) {
+
+        const mainImage = document.getElementById("mainProductImage");
+
+        if (mainImage) {
+            mainImage.src = imagePath;
+        }
+
+        const buttons = document.querySelectorAll(".product-image-button");
+
+        buttons.forEach(function (button) {
+            button.classList.remove("border-primary");
+            button.classList.add("border");
+        });
+
+        if (selectedButton) {
+            selectedButton.classList.remove("border");
+            selectedButton.classList.add("border-primary");
+        }
+    }
+
+</script>
+
+}

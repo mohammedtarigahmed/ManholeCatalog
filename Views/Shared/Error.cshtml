@@ -1,0 +1,76 @@
+﻿@model ErrorViewModel
+
+@{
+    ViewData["Title"] = "Something Went Wrong";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-7">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body text-center p-4 p-md-5">
+
+                    <!-- Error Icon -->
+                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-danger-subtle text-danger mb-4"
+                         style="width: 72px; height: 72px;">
+
+                        <span class="fs-2 fw-bold">
+                            !
+                        </span>
+
+                    </div>
+
+                    <h1 class="h2 fw-bold mb-3">
+                        Something Went Wrong
+                    </h1>
+
+                    <p class="lead text-muted mb-4">
+                        We couldn't complete your request.
+                        Please try again or return to the catalog.
+                    </p>
+
+                    @if (Model.ShowRequestId)
+                    {
+                        <div class="alert alert-light border text-start mb-4">
+
+                            <div class="small text-muted mb-1">
+                                Request ID
+                            </div>
+
+                            <code>
+                                @Model.RequestId
+                            </code>
+
+                        </div>
+                    }
+
+                    <!-- Actions -->
+                    <div class="d-flex justify-content-center gap-2 flex-wrap">
+
+                        <a asp-controller="Home"
+                           asp-action="Index"
+                           class="btn btn-primary">
+                            Back to Home
+                        </a>
+
+                        <a asp-controller="Catalog"
+                           asp-action="Index"
+                           class="btn btn-outline-secondary">
+                            Browse Catalog
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
