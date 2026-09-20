@@ -1,7 +1,7 @@
 @model IEnumerable<ManholeCatalog.Models.Category>
 
 @{
-    ViewData["Title"] = "Categories";
+    ViewData["Title"] = "الفئات";
 
     var categories = Model.ToList();
 
@@ -12,32 +12,39 @@
 }
 
 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+
     <div>
+
         <h1 class="h3 fw-bold mb-1">
-            Categories
+            الفئات
         </h1>
 
         <p class="text-muted mb-0">
-            Manage your product categories and organization.
+            إدارة فئات المنتجات وتنظيمها.
         </p>
+
     </div>
 
     <a asp-area="Admin"
        asp-controller="Categories"
        asp-action="Create"
        class="btn btn-primary">
-        + Add Category
+        + إضافة فئة
     </a>
+
 </div>
 
-<!-- Statistics -->
+<!-- الإحصائيات -->
 <div class="row g-4 mb-4">
 
     <div class="col-sm-6 col-xl-3">
+
         <div class="card border-0 shadow-sm h-100">
+
             <div class="card-body">
+
                 <div class="small text-muted mb-1">
-                    Total Categories
+                    إجمالي الفئات
                 </div>
 
                 <div class="h3 fw-bold mb-0">
@@ -45,17 +52,23 @@
                 </div>
 
                 <div class="small text-muted mt-2">
-                    All categories
+                    جميع الفئات
                 </div>
+
             </div>
+
         </div>
+
     </div>
 
     <div class="col-sm-6 col-xl-3">
+
         <div class="card border-0 shadow-sm h-100">
+
             <div class="card-body">
+
                 <div class="small text-muted mb-1">
-                    Active
+                    نشطة
                 </div>
 
                 <div class="h3 fw-bold text-success mb-0">
@@ -63,17 +76,23 @@
                 </div>
 
                 <div class="small text-muted mt-2">
-                    Currently available
+                    متاحة حاليًا
                 </div>
+
             </div>
+
         </div>
+
     </div>
 
     <div class="col-sm-6 col-xl-3">
+
         <div class="card border-0 shadow-sm h-100">
+
             <div class="card-body">
+
                 <div class="small text-muted mb-1">
-                    Inactive
+                    غير نشطة
                 </div>
 
                 <div class="h3 fw-bold text-secondary mb-0">
@@ -81,17 +100,23 @@
                 </div>
 
                 <div class="small text-muted mt-2">
-                    Currently disabled
+                    معطلة حاليًا
                 </div>
+
             </div>
+
         </div>
+
     </div>
 
     <div class="col-sm-6 col-xl-3">
+
         <div class="card border-0 shadow-sm h-100">
+
             <div class="card-body">
+
                 <div class="small text-muted mb-1">
-                    Products
+                    المنتجات
                 </div>
 
                 <div class="h3 fw-bold mb-0">
@@ -99,110 +124,128 @@
                 </div>
 
                 <div class="small text-muted mt-2">
-                    Total assigned products
+                    إجمالي المنتجات المرتبطة
                 </div>
+
             </div>
+
         </div>
+
     </div>
 
 </div>
 
 @if (!categories.Any())
 {
-    <!-- Empty State -->
+    <!-- حالة عدم وجود فئات -->
     <div class="card border-0 shadow-sm">
+
         <div class="card-body text-center py-5">
 
             <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-light border mb-3"
                  style="width: 64px; height: 64px;">
+
                 <span class="text-muted fw-bold fs-5">
                     C
                 </span>
+
             </div>
 
             <h2 class="h5 fw-bold mb-2">
-                No Categories Found
+                لا توجد فئات
             </h2>
 
             <p class="text-muted mb-4">
-                Add your first category to organize your product catalog.
+                أضف أول فئة لتنظيم كتالوج المنتجات.
             </p>
 
             <a asp-area="Admin"
                asp-controller="Categories"
                asp-action="Create"
                class="btn btn-primary">
-                Add Category
+                إضافة فئة
             </a>
 
         </div>
+
     </div>
 }
 else
 {
-    <!-- Category List -->
+    <!-- قائمة الفئات -->
     <div class="card border-0 shadow-sm">
 
         <div class="card-header bg-white py-3">
+
             <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2">
 
                 <div>
+
                     <h2 class="h6 fw-bold mb-1">
-                        Category List
+                        قائمة الفئات
                     </h2>
 
                     <p class="text-muted small mb-0">
-                        View and manage your product categories.
+                        عرض وإدارة فئات المنتجات.
                     </p>
+
                 </div>
 
                 <div class="d-flex flex-wrap gap-2">
+
                     <span class="badge text-bg-light border">
-                        @totalCategories category(s)
+                        @totalCategories فئة
                     </span>
 
                     @if (inactiveCategories > 0)
                     {
                         <span class="badge text-bg-secondary">
-                            @inactiveCategories inactive
+                            @inactiveCategories غير نشطة
                         </span>
                     }
+
                 </div>
 
             </div>
+
         </div>
 
         <div class="card-body p-0">
 
             <div class="table-responsive">
+
                 <table class="table table-hover align-middle mb-0">
 
                     <thead class="table-light">
+
                         <tr>
+
                             <th class="ps-4">
-                                Category
+                                الفئة
                             </th>
 
                             <th>
-                                Description
+                                الوصف
                             </th>
 
                             <th>
-                                Products
+                                المنتجات
                             </th>
 
                             <th>
-                                Status
+                                الحالة
                             </th>
 
                             <th>
-                                Created
+                                تاريخ الإنشاء
                             </th>
 
                             <th class="text-end pe-4">
-                                Actions
+                                الإجراءات
                             </th>
+
                         </tr>
+
                     </thead>
 
                     <tbody>
@@ -211,7 +254,7 @@ else
                         {
                             <tr>
 
-                                <!-- Category -->
+                                <!-- الفئة -->
                                 <td class="ps-4">
 
                                     <div class="d-flex align-items-center gap-3">
@@ -226,20 +269,22 @@ else
                                         </div>
 
                                         <div>
+
                                             <div class="fw-semibold">
                                                 @category.Name
                                             </div>
 
                                             <div class="small text-muted">
-                                                ID: @category.Id
+                                                المعرّف: @category.Id
                                             </div>
+
                                         </div>
 
                                     </div>
 
                                 </td>
 
-                                <!-- Description -->
+                                <!-- الوصف -->
                                 <td style="min-width: 260px; max-width: 400px;">
 
                                     @if (!string.IsNullOrWhiteSpace(category.Description))
@@ -259,7 +304,7 @@ else
 
                                 </td>
 
-                                <!-- Products -->
+                                <!-- المنتجات -->
                                 <td>
 
                                     @if (category.Products.Count > 0)
@@ -277,25 +322,25 @@ else
 
                                 </td>
 
-                                <!-- Status -->
+                                <!-- الحالة -->
                                 <td>
 
                                     @if (category.IsActive)
                                     {
                                         <span class="badge text-bg-success">
-                                            Active
+                                            نشطة
                                         </span>
                                     }
                                     else
                                     {
                                         <span class="badge text-bg-secondary">
-                                            Inactive
+                                            غير نشطة
                                         </span>
                                     }
 
                                 </td>
 
-                                <!-- Created -->
+                                <!-- تاريخ الإنشاء -->
                                 <td>
 
                                     <span class="small text-muted text-nowrap">
@@ -304,7 +349,7 @@ else
 
                                 </td>
 
-                                <!-- Actions -->
+                                <!-- الإجراءات -->
                                 <td class="text-end pe-4">
 
                                     <div class="d-inline-flex align-items-center gap-1 flex-nowrap">
@@ -314,7 +359,7 @@ else
                                            asp-action="Edit"
                                            asp-route-id="@category.Id"
                                            class="btn btn-sm btn-outline-primary">
-                                            Edit
+                                            تعديل
                                         </a>
 
                                         <div class="dropdown">
@@ -323,7 +368,7 @@ else
                                                     type="button"
                                                     data-bs-toggle="dropdown"
                                                     aria-expanded="false">
-                                                More
+                                                المزيد
                                             </button>
 
                                             <ul class="dropdown-menu dropdown-menu-end">
@@ -331,11 +376,12 @@ else
                                                 @if (category.IsActive)
                                                 {
                                                     <li>
+
                                                         <form asp-area="Admin"
                                                               asp-controller="Categories"
                                                               asp-action="Deactivate"
                                                               method="post"
-                                                              onsubmit="return confirm('Are you sure you want to deactivate this category?');">
+                                                              onsubmit="return confirm('هل أنت متأكد من رغبتك في تعطيل هذه الفئة؟');">
 
                                                             <input type="hidden"
                                                                    name="id"
@@ -343,20 +389,22 @@ else
 
                                                             <button type="submit"
                                                                     class="dropdown-item text-danger">
-                                                                Deactivate
+                                                                تعطيل
                                                             </button>
 
                                                         </form>
+
                                                     </li>
                                                 }
                                                 else
                                                 {
                                                     <li>
+
                                                         <form asp-area="Admin"
                                                               asp-controller="Categories"
                                                               asp-action="Reactivate"
                                                               method="post"
-                                                              onsubmit="return confirm('Are you sure you want to reactivate this category?');">
+                                                              onsubmit="return confirm('هل أنت متأكد من رغبتك في إعادة تفعيل هذه الفئة؟');">
 
                                                             <input type="hidden"
                                                                    name="id"
@@ -364,10 +412,11 @@ else
 
                                                             <button type="submit"
                                                                     class="dropdown-item text-success">
-                                                                Reactivate
+                                                                إعادة التفعيل
                                                             </button>
 
                                                         </form>
+
                                                     </li>
                                                 }
 
@@ -385,6 +434,7 @@ else
                     </tbody>
 
                 </table>
+
             </div>
 
         </div>

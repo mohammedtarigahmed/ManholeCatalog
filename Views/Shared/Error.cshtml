@@ -1,7 +1,7 @@
 ﻿@model ErrorViewModel
 
 @{
-    ViewData["Title"] = "Something Went Wrong";
+    ViewData["Title"] = "حدث خطأ";
 }
 
 <div class="container py-5">
@@ -25,12 +25,12 @@
                     </div>
 
                     <h1 class="h2 fw-bold mb-3">
-                        Something Went Wrong
+                        حدث خطأ
                     </h1>
 
                     <p class="lead text-muted mb-4">
-                        We couldn't complete your request.
-                        Please try again or return to the catalog.
+                        تعذر إكمال طلبك.
+                        يرجى المحاولة مرة أخرى أو العودة إلى الكتالوج.
                     </p>
 
                     @if (Model.ShowRequestId)
@@ -38,7 +38,7 @@
                         <div class="alert alert-light border text-start mb-4">
 
                             <div class="small text-muted mb-1">
-                                Request ID
+                                رقم الطلب
                             </div>
 
                             <code>
@@ -54,13 +54,13 @@
                         <a asp-controller="Home"
                            asp-action="Index"
                            class="btn btn-primary">
-                            Back to Home
+                            العودة إلى الرئيسية
                         </a>
 
                         <a asp-controller="Catalog"
                            asp-action="Index"
                            class="btn btn-outline-secondary">
-                            Browse Catalog
+                            تصفح الكتالوج
                         </a>
 
                     </div>

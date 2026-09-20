@@ -1,5 +1,5 @@
 @{
-    ViewData["Title"] = "Dashboard";
+    ViewData["Title"] = "لوحة التحكم";
 
     var recentQuotationRequests =
         ViewBag.RecentQuotationRequests
@@ -12,11 +12,11 @@
     <div>
 
         <h1 class="h3 fw-bold mb-1">
-            Dashboard
+            لوحة التحكم
         </h1>
 
         <p class="text-muted mb-0">
-            Overview of your catalog and quotation requests.
+            نظرة عامة على الكتالوج وطلبات عروض الأسعار.
         </p>
 
     </div>
@@ -27,14 +27,14 @@
            asp-controller="Catalog"
            asp-action="Index"
            class="btn btn-outline-secondary">
-            View Catalog
+            عرض الكتالوج
         </a>
 
         <a asp-area="Admin"
            asp-controller="Products"
            asp-action="Create"
            class="btn btn-primary">
-            + Add Product
+            + إضافة منتج
         </a>
 
     </div>
@@ -61,7 +61,7 @@
                         <div>
 
                             <div class="small text-muted mb-1">
-                                Total Products
+                                إجمالي المنتجات
                             </div>
 
                             <div class="h2 fw-bold text-dark mb-0">
@@ -71,13 +71,13 @@
                         </div>
 
                         <span class="badge text-bg-light border">
-                            Products
+                            المنتجات
                         </span>
 
                     </div>
 
                     <div class="small text-muted mt-3">
-                        View and manage your products.
+                        عرض وإدارة المنتجات.
                     </div>
 
                 </div>
@@ -105,7 +105,7 @@
                         <div>
 
                             <div class="small text-muted mb-1">
-                                Active Products
+                                المنتجات النشطة
                             </div>
 
                             <div class="h2 fw-bold text-success mb-0">
@@ -115,13 +115,13 @@
                         </div>
 
                         <span class="badge text-bg-success">
-                            Active
+                            نشطة
                         </span>
 
                     </div>
 
                     <div class="small text-muted mt-3">
-                        Currently visible in the catalog.
+                        المنتجات الظاهرة حاليًا في الكتالوج.
                     </div>
 
                 </div>
@@ -149,7 +149,7 @@
                         <div>
 
                             <div class="small text-muted mb-1">
-                                Total Categories
+                                إجمالي الفئات
                             </div>
 
                             <div class="h2 fw-bold text-dark mb-0">
@@ -159,13 +159,13 @@
                         </div>
 
                         <span class="badge text-bg-light border">
-                            Categories
+                            الفئات
                         </span>
 
                     </div>
 
                     <div class="small text-muted mt-3">
-                        Organize your product catalog.
+                        تنظيم المنتجات داخل الكتالوج.
                     </div>
 
                 </div>
@@ -193,7 +193,7 @@
                         <div>
 
                             <div class="small text-muted mb-1">
-                                Pending Quotations
+                                عروض الأسعار قيد المراجعة
                             </div>
 
                             <div class="h2 fw-bold text-warning mb-0">
@@ -203,13 +203,13 @@
                         </div>
 
                         <span class="badge text-bg-warning">
-                            Pending
+                            قيد المراجعة
                         </span>
 
                     </div>
 
                     <div class="small text-muted mt-3">
-                        Requests waiting for action.
+                        الطلبات التي تنتظر اتخاذ إجراء.
                     </div>
 
                 </div>
@@ -242,7 +242,7 @@
                         <div>
 
                             <div class="small text-muted mb-1">
-                                Total Quotations
+                                إجمالي طلبات عروض الأسعار
                             </div>
 
                             <div class="h2 fw-bold text-dark mb-0">
@@ -252,13 +252,13 @@
                         </div>
 
                         <span class="badge text-bg-light border">
-                            Requests
+                            الطلبات
                         </span>
 
                     </div>
 
                     <div class="small text-muted mt-3">
-                        View all customer quotation requests.
+                        عرض جميع طلبات عروض الأسعار من العملاء.
                     </div>
 
                 </div>
@@ -286,7 +286,7 @@
                         <div>
 
                             <div class="small text-muted mb-1">
-                                Products Without Images
+                                منتجات بدون صور
                             </div>
 
                             <div class="h2 fw-bold text-warning mb-0">
@@ -296,13 +296,13 @@
                         </div>
 
                         <span class="badge text-bg-warning">
-                            Images
+                            الصور
                         </span>
 
                     </div>
 
                     <div class="small text-muted mt-3">
-                        Products that may need images.
+                        منتجات قد تحتاج إلى إضافة صور.
                     </div>
 
                 </div>
@@ -325,11 +325,11 @@
             <div>
 
                 <h2 class="h6 fw-bold mb-1">
-                    Recent Quotation Requests
+                    أحدث طلبات عروض الأسعار
                 </h2>
 
                 <p class="text-muted small mb-0">
-                    The latest quotation requests submitted by customers.
+                    أحدث طلبات عروض الأسعار التي أرسلها العملاء.
                 </p>
 
             </div>
@@ -338,7 +338,7 @@
                asp-controller="Quotations"
                asp-action="Index"
                class="btn btn-sm btn-outline-primary">
-                View All Requests
+                عرض جميع الطلبات
             </a>
 
         </div>
@@ -361,11 +361,11 @@
                 </div>
 
                 <h3 class="h6 fw-bold mb-2">
-                    No Quotation Requests Yet
+                    لا توجد طلبات عروض أسعار بعد
                 </h3>
 
                 <p class="text-muted mb-0">
-                    Customer quotation requests will appear here once submitted.
+                    ستظهر طلبات عروض الأسعار هنا عند إرسالها من العملاء.
                 </p>
 
             </div>
@@ -381,31 +381,31 @@
                         <tr>
 
                             <th class="ps-4">
-                                Request
+                                الطلب
                             </th>
 
                             <th>
-                                Customer
+                                العميل
                             </th>
 
                             <th>
-                                Product
+                                المنتج
                             </th>
 
                             <th>
-                                Qty
+                                الكمية
                             </th>
 
                             <th>
-                                Status
+                                الحالة
                             </th>
 
                             <th>
-                                Submitted
+                                تاريخ الإرسال
                             </th>
 
                             <th class="text-end pe-4">
-                                Action
+                                الإجراء
                             </th>
 
                         </tr>
@@ -426,7 +426,7 @@
                                     </div>
 
                                     <div class="small text-muted">
-                                        Quotation
+                                        عرض سعر
                                     </div>
 
                                 </td>
@@ -465,14 +465,14 @@
                                         @if (!string.IsNullOrWhiteSpace(request.Product.SKU))
                                         {
                                             <div class="small text-muted">
-                                                SKU: @request.Product.SKU
+                                                الرقم التعريفي: @request.Product.SKU
                                             </div>
                                         }
                                     }
                                     else
                                     {
                                         <span class="text-muted">
-                                            Unknown Product
+                                            منتج غير معروف
                                         </span>
                                     }
 
@@ -494,31 +494,31 @@
                                     {
                                         case ManholeCatalog.Models.QuotationStatus.Pending:
                                             <span class="badge text-bg-warning">
-                                                Pending
+                                                قيد المراجعة
                                             </span>
                                             break;
 
                                         case ManholeCatalog.Models.QuotationStatus.Contacted:
                                             <span class="badge text-bg-info">
-                                                Contacted
+                                                تم التواصل
                                             </span>
                                             break;
 
                                         case ManholeCatalog.Models.QuotationStatus.Quoted:
                                             <span class="badge text-bg-primary">
-                                                Quoted
+                                                تم تقديم العرض
                                             </span>
                                             break;
 
                                         case ManholeCatalog.Models.QuotationStatus.Closed:
                                             <span class="badge text-bg-secondary">
-                                                Closed
+                                                مغلق
                                             </span>
                                             break;
 
                                         default:
                                             <span class="badge text-bg-light border">
-                                                Unknown
+                                                غير معروف
                                             </span>
                                             break;
                                     }
@@ -546,7 +546,7 @@
                                        asp-action="Details"
                                        asp-route-id="@request.Id"
                                        class="btn btn-sm btn-outline-primary">
-                                        View
+                                        عرض
                                     </a>
 
                                 </td>
@@ -569,11 +569,11 @@
 <div class="mb-3">
 
     <h2 class="h5 fw-bold mb-1">
-        Quick Actions
+        إجراءات سريعة
     </h2>
 
     <p class="text-muted mb-0">
-        Common management tasks.
+        مهام الإدارة الشائعة.
     </p>
 
 </div>
@@ -588,22 +588,22 @@
             <div class="card-body d-flex flex-column">
 
                 <div class="small text-primary fw-semibold mb-2">
-                    PRODUCTS
+                    المنتجات
                 </div>
 
                 <h3 class="h6 fw-bold">
-                    Manage Products
+                    إدارة المنتجات
                 </h3>
 
                 <p class="text-muted small flex-grow-1">
-                    Add, edit, activate, deactivate, and manage product images.
+                    إضافة وتعديل وتفعيل وتعطيل المنتجات وإدارة صورها.
                 </p>
 
                 <a asp-area="Admin"
                    asp-controller="Products"
                    asp-action="Index"
                    class="btn btn-outline-primary">
-                    Manage Products
+                    إدارة المنتجات
                 </a>
 
             </div>
@@ -620,22 +620,22 @@
             <div class="card-body d-flex flex-column">
 
                 <div class="small text-primary fw-semibold mb-2">
-                    CATEGORIES
+                    الفئات
                 </div>
 
                 <h3 class="h6 fw-bold">
-                    Manage Categories
+                    إدارة الفئات
                 </h3>
 
                 <p class="text-muted small flex-grow-1">
-                    Organize your products into active catalog categories.
+                    تنظيم المنتجات ضمن فئات الكتالوج النشطة.
                 </p>
 
                 <a asp-area="Admin"
                    asp-controller="Categories"
                    asp-action="Index"
                    class="btn btn-outline-primary">
-                    Manage Categories
+                    إدارة الفئات
                 </a>
 
             </div>
@@ -652,22 +652,22 @@
             <div class="card-body d-flex flex-column">
 
                 <div class="small text-primary fw-semibold mb-2">
-                    QUOTATIONS
+                    عروض الأسعار
                 </div>
 
                 <h3 class="h6 fw-bold">
-                    Manage Quotations
+                    إدارة عروض الأسعار
                 </h3>
 
                 <p class="text-muted small flex-grow-1">
-                    Review customer requests and update their status.
+                    مراجعة طلبات العملاء وتحديث حالتها.
                 </p>
 
                 <a asp-area="Admin"
                    asp-controller="Quotations"
                    asp-action="Index"
                    class="btn btn-outline-primary">
-                    Manage Quotations
+                    إدارة عروض الأسعار
                 </a>
 
             </div>
@@ -684,22 +684,22 @@
             <div class="card-body d-flex flex-column">
 
                 <div class="small text-primary fw-semibold mb-2">
-                    CATALOG
+                    الكتالوج
                 </div>
 
                 <h3 class="h6 fw-bold">
-                    View Public Catalog
+                    عرض الكتالوج العام
                 </h3>
 
                 <p class="text-muted small flex-grow-1">
-                    Open the customer-facing catalog and review the public experience.
+                    فتح كتالوج العملاء ومراجعة تجربة المستخدم العامة.
                 </p>
 
                 <a asp-area=""
                    asp-controller="Catalog"
                    asp-action="Index"
                    class="btn btn-outline-secondary">
-                    View Catalog
+                    عرض الكتالوج
                 </a>
 
             </div>

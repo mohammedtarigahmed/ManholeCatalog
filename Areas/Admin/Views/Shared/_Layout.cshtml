@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 
 <head>
 
@@ -9,7 +9,7 @@
           content="width=device-width, initial-scale=1.0" />
 
     <title>
-        @ViewData["Title"] - Admin - ManholeCatalog
+        @ViewData["Title"] - الإدارة - كتالوج المناهل
     </title>
 
     <link rel="stylesheet"
@@ -39,9 +39,9 @@
                    asp-area="Admin"
                    asp-controller="Home"
                    asp-action="Index">
-                    ManholeCatalog
+                    كتالوج المناهل
                     <span class="text-white-50 fw-normal">
-                        Admin
+                        الإدارة
                     </span>
                 </a>
 
@@ -52,7 +52,7 @@
                         data-bs-target="#adminNavbar"
                         aria-controls="adminNavbar"
                         aria-expanded="false"
-                        aria-label="Toggle navigation">
+                        aria-label="فتح القائمة">
 
                     <span class="navbar-toggler-icon"></span>
 
@@ -62,7 +62,7 @@
                 <div class="collapse navbar-collapse"
                      id="adminNavbar">
 
-                    <ul class="navbar-nav me-auto mb-3 mb-lg-0">
+                    <ul class="navbar-nav mb-3 mb-lg-0">
 
                         <li class="nav-item">
 
@@ -70,7 +70,7 @@
                                asp-area="Admin"
                                asp-controller="Home"
                                asp-action="Index">
-                                Dashboard
+                                لوحة التحكم
                             </a>
 
                         </li>
@@ -81,7 +81,7 @@
                                asp-area="Admin"
                                asp-controller="Products"
                                asp-action="Index">
-                                Products
+                                المنتجات
                             </a>
 
                         </li>
@@ -92,7 +92,7 @@
                                asp-area="Admin"
                                asp-controller="Categories"
                                asp-action="Index">
-                                Categories
+                                الفئات
                             </a>
 
                         </li>
@@ -103,7 +103,7 @@
                                asp-area="Admin"
                                asp-controller="Quotations"
                                asp-action="Index">
-                                Quotations
+                                عروض الأسعار
                             </a>
 
                         </li>
@@ -111,12 +111,12 @@
                     </ul>
 
                     <!-- User Actions -->
-                    <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-2 gap-lg-3">
+                    <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-2 gap-lg-3 me-auto">
 
                         <div class="text-light small">
 
                             <span class="text-white-50">
-                                Signed in as
+                                تسجيل الدخول باسم
                             </span>
 
                             <strong>
@@ -129,7 +129,7 @@
                            asp-controller="Catalog"
                            asp-action="Index"
                            class="btn btn-outline-light btn-sm">
-                            View Catalog
+                            عرض الكتالوج
                         </a>
 
                         <form asp-area=""
@@ -140,7 +140,7 @@
 
                             <button type="submit"
                                     class="btn btn-outline-light btn-sm">
-                                Logout
+                                تسجيل الخروج
                             </button>
 
                         </form>
@@ -174,11 +174,11 @@
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
 
                 <div class="small">
-                    &copy; 2026 ManholeCatalog Admin
+                    &copy; 2026 كتالوج المناهل - الإدارة
                 </div>
 
                 <div class="small">
-                    Administration Panel
+                    لوحة الإدارة
                 </div>
 
             </div>

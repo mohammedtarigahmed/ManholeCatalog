@@ -14,14 +14,14 @@
 
     var productUrl = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}";
 
-    var whatsappMessage = $"Hello, I am interested in this product.%0A%0AProduct: {Model.Name}";
+    var whatsappMessage = $"مرحباً، أرغب في الاستفسار عن هذا المنتج.%0A%0Aالمنتج: {Model.Name}";
 
     if (!string.IsNullOrWhiteSpace(Model.SKU))
     {
-        whatsappMessage += $"%0ASKU: {Model.SKU}";
+        whatsappMessage += $"%0Aالرقم التعريفي: {Model.SKU}";
     }
 
-    whatsappMessage += $"%0A%0AProduct page: {productUrl}";
+    whatsappMessage += $"%0A%0Aصفحة المنتج: {productUrl}";
 
     var whatsappUrl = $"https://wa.me/{whatsappNumber}?text={Uri.EscapeDataString(Uri.UnescapeDataString(whatsappMessage))}";
 }
@@ -34,7 +34,7 @@
         <a asp-controller="Catalog"
            asp-action="Index"
            class="btn btn-outline-secondary">
-            ← Back to Catalog
+            ← العودة إلى الكتالوج
         </a>
 
     </div>
@@ -73,7 +73,7 @@
                                 </div>
 
                                 <div>
-                                    No Image Available
+                                    لا توجد صورة متاحة
                                 </div>
 
                             </div>
@@ -129,7 +129,7 @@
                 <div class="mb-4">
 
                     <span class="badge text-bg-light border">
-                        SKU: @Model.SKU
+                        الرقم التعريفي: @Model.SKU
                     </span>
 
                 </div>
@@ -140,7 +140,7 @@
                 <div class="mb-4">
 
                     <h2 class="h5 fw-bold mb-2">
-                        Description
+                        الوصف
                     </h2>
 
                     <p class="text-muted mb-0"
@@ -162,7 +162,7 @@
                     <div class="card-body p-4">
 
                         <h2 class="h5 fw-bold mb-4">
-                            Product Specifications
+                            مواصفات المنتج
                         </h2>
 
                         <div class="row g-0">
@@ -172,7 +172,7 @@
                                 <div class="col-sm-6 border-bottom py-3 pe-sm-3">
 
                                     <div class="small text-muted mb-1">
-                                        Material
+                                        المادة
                                     </div>
 
                                     <div class="fw-semibold">
@@ -187,7 +187,7 @@
                                 <div class="col-sm-6 border-bottom py-3 ps-sm-3">
 
                                     <div class="small text-muted mb-1">
-                                        Load Class
+                                        فئة التحميل
                                     </div>
 
                                     <div class="fw-semibold">
@@ -202,7 +202,7 @@
                                 <div class="col-sm-6 border-bottom py-3 pe-sm-3">
 
                                     <div class="small text-muted mb-1">
-                                        Diameter
+                                        القطر
                                     </div>
 
                                     <div class="fw-semibold">
@@ -217,7 +217,7 @@
                                 <div class="col-sm-6 border-bottom py-3 ps-sm-3">
 
                                     <div class="small text-muted mb-1">
-                                        Shape
+                                        الشكل
                                     </div>
 
                                     <div class="fw-semibold">
@@ -240,11 +240,11 @@
                 <div class="mb-4">
 
                     <div class="small text-muted mb-1">
-                        Price
+                        السعر
                     </div>
 
                     <div class="fs-2 fw-bold">
-                        @Model.Price.Value.ToString("N2") SAR
+                        @Model.Price.Value.ToString("N2") ر.س
                     </div>
 
                 </div>
@@ -256,11 +256,11 @@
                 <div class="card-body p-4">
 
                     <h2 class="h5 fw-bold mb-2">
-                        Interested in This Product?
+                        هل أنت مهتم بهذا المنتج؟
                     </h2>
 
                     <p class="text-muted small mb-4">
-                        Request a quotation or contact us directly for more information.
+                        اطلب عرض سعر أو تواصل معنا مباشرة للحصول على مزيد من المعلومات.
                     </p>
 
                     <div class="d-grid gap-2">
@@ -269,7 +269,7 @@
                            asp-action="Create"
                            asp-route-productId="@Model.Id"
                            class="btn btn-primary btn-lg">
-                            Request a Quote
+                            طلب عرض سعر
                         </a>
 
                         @if (!string.IsNullOrWhiteSpace(whatsappNumber))
@@ -278,7 +278,7 @@
                                target="_blank"
                                rel="noopener noreferrer"
                                class="btn btn-success btn-lg">
-                                Contact us on WhatsApp
+                                تواصل معنا عبر واتساب
                             </a>
                         }
 
@@ -302,17 +302,17 @@
                 <div>
 
                     <h2 class="h5 fw-bold mb-1">
-                        Product Images
+                        صور المنتج
                     </h2>
 
                     <p class="text-muted small mb-0">
-                        Select an image above to view it.
+                        اختر صورة من الأعلى لعرضها.
                     </p>
 
                 </div>
 
                 <span class="badge text-bg-light border">
-                    @orderedImages.Count image(s)
+                    @orderedImages.Count صورة
                 </span>
 
             </div>

@@ -8,45 +8,45 @@ public class Product
 
     [Required]
     [StringLength(200)]
-    [Display(Name = "Product Name")]
+    [Display(Name = "اسم المنتج")]
     public string Name { get; set; } = string.Empty;
 
     [StringLength(100)]
-    [Display(Name = "SKU")]
+    [Display(Name = "رمز المنتج")]
     public string? SKU { get; set; }
 
     [StringLength(2000)]
-    [Display(Name = "Description")]
+    [Display(Name = "الوصف")]
     public string? Description { get; set; }
 
     [StringLength(100)]
-    [Display(Name = "Material")]
+    [Display(Name = "المادة")]
     public string? Material { get; set; }
 
     [StringLength(50)]
-    [Display(Name = "Load Class")]
+    [Display(Name = "فئة التحميل")]
     public string? LoadClass { get; set; }
 
     [StringLength(100)]
-    [Display(Name = "Diameter")]
+    [Display(Name = "القطر")]
     public string? Diameter { get; set; }
 
     [StringLength(50)]
-    [Display(Name = "Shape")]
+    [Display(Name = "الشكل")]
     public string? Shape { get; set; }
 
-    [Display(Name = "Price")]
+    [Display(Name = "السعر")]
     public decimal? Price { get; set; }
 
-    [Display(Name = "Active")]
+    [Display(Name = "نشط")]
     public bool IsActive { get; set; } = true;
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public DateTime? UpdatedAt { get; set; }
 
-    [Range(1, int.MaxValue, ErrorMessage = "Please select a category.")]
-    [Display(Name = "Category")]
+    [Range(1, int.MaxValue, ErrorMessage = "يرجى اختيار فئة.")]
+    [Display(Name = "الفئة")]
     public int CategoryId { get; set; }
 
     public Category? Category { get; set; }

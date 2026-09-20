@@ -45,7 +45,7 @@ public class CategoriesController : Controller
         {
             ModelState.AddModelError(
                 "Name",
-                "Category name is required.");
+                "اسم الفئة مطلوب.");
         }
         else
         {
@@ -57,7 +57,7 @@ public class CategoriesController : Controller
             {
                 ModelState.AddModelError(
                     "Name",
-                    "A category with this name already exists.");
+                    "توجد فئة بهذا الاسم بالفعل.");
             }
         }
 
@@ -112,7 +112,7 @@ public class CategoriesController : Controller
         {
             ModelState.AddModelError(
                 "Name",
-                "Category name is required.");
+                "اسم الفئة مطلوب.");
         }
         else
         {
@@ -125,7 +125,7 @@ public class CategoriesController : Controller
             {
                 ModelState.AddModelError(
                     "Name",
-                    "A category with this name already exists.");
+                    "توجد فئة بهذا الاسم بالفعل.");
             }
         }
 

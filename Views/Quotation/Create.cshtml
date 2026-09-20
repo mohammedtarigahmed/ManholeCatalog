@@ -1,7 +1,7 @@
 @model ManholeCatalog.Models.QuotationRequest
 
 @{
-    ViewData["Title"] = "Request a Quote";
+    ViewData["Title"] = "طلب عرض سعر";
 
     var productImages = Model.Product?.Images
         .OrderBy(i => i.DisplayOrder)
@@ -20,7 +20,7 @@
            asp-action="Details"
            asp-route-id="@Model.ProductId"
            class="btn btn-outline-secondary">
-            ← Back to Product
+            ← العودة إلى المنتج
         </a>
 
     </div>
@@ -28,16 +28,16 @@
     <div class="mb-5">
 
         <span class="badge text-bg-primary px-3 py-2 mb-3">
-            Quotation Request
+            طلب عرض سعر
         </span>
 
         <h1 class="display-6 fw-bold mb-2">
-            Request a Quote
+            طلب عرض سعر
         </h1>
 
         <p class="lead text-muted mb-0">
-            Tell us what you need and provide your contact details.
-            Our team will review your request and contact you regarding your quotation.
+            أخبرنا بما تحتاجه وأدخل بيانات التواصل الخاصة بك.
+            سيقوم فريقنا بمراجعة طلبك والتواصل معك بخصوص عرض السعر.
         </p>
 
     </div>
@@ -52,11 +52,11 @@
                 <div class="card-header bg-white py-3">
 
                     <h2 class="h5 fw-bold mb-1">
-                        Product
+                        المنتج
                     </h2>
 
                     <p class="text-muted small mb-0">
-                        Product included in this quotation request.
+                        المنتج المطلوب ضمن طلب عرض السعر.
                     </p>
 
                 </div>
@@ -86,7 +86,7 @@
                                     </div>
 
                                     <div class="small">
-                                        No Image Available
+                                        لا توجد صورة متاحة
                                     </div>
 
                                 </div>
@@ -100,7 +100,7 @@
                     <div class="mb-4">
 
                         <div class="small text-muted mb-1">
-                            Product
+                            المنتج
                         </div>
 
                         <div class="fw-bold fs-5">
@@ -114,7 +114,7 @@
                         <div class="mb-3">
 
                             <div class="small text-muted mb-1">
-                                SKU
+                                الرقم التعريفي
                             </div>
 
                             <span class="badge text-bg-light border">
@@ -129,7 +129,7 @@
                         <div class="mb-3">
 
                             <div class="small text-muted mb-1">
-                                Category
+                                الفئة
                             </div>
 
                             <div class="fw-semibold">
@@ -144,7 +144,7 @@
                         <div class="mb-3">
 
                             <div class="small text-muted mb-1">
-                                Material
+                                المادة
                             </div>
 
                             <div class="fw-semibold">
@@ -159,7 +159,7 @@
                         <div class="mb-3">
 
                             <div class="small text-muted mb-1">
-                                Load Class
+                                فئة التحميل
                             </div>
 
                             <div class="fw-semibold">
@@ -174,7 +174,7 @@
                         <div class="mb-3">
 
                             <div class="small text-muted mb-1">
-                                Diameter
+                                القطر
                             </div>
 
                             <div class="fw-semibold">
@@ -189,7 +189,7 @@
                         <div>
 
                             <div class="small text-muted mb-1">
-                                Shape
+                                الشكل
                             </div>
 
                             <div class="fw-semibold">
@@ -213,11 +213,11 @@
                 <div class="card-header bg-white py-3">
 
                     <h2 class="h5 fw-bold mb-1">
-                        Your Information
+                        بياناتك
                     </h2>
 
                     <p class="text-muted small mb-0">
-                        Please provide accurate contact details so we can reach you.
+                        يرجى إدخال بيانات التواصل بشكل صحيح حتى نتمكن من التواصل معك.
                     </p>
 
                 </div>
@@ -233,8 +233,8 @@
                         @if (!ViewData.ModelState.IsValid)
                         {
                             <div asp-validation-summary="All"
-                                class="alert alert-danger"
-                                role="alert">
+                                 class="alert alert-danger"
+                                 role="alert">
                             </div>
                         }
 
@@ -242,7 +242,7 @@
                         <div class="mb-4">
 
                             <h3 class="h6 fw-bold mb-3">
-                                Contact Information
+                                بيانات التواصل
                             </h3>
 
                             <div class="row g-3">
@@ -251,11 +251,12 @@
 
                                     <label asp-for="FullName"
                                            class="form-label fw-semibold">
+                                        الاسم الكامل
                                     </label>
 
                                     <input asp-for="FullName"
                                            class="form-control"
-                                           placeholder="Enter your full name" />
+                                           placeholder="أدخل اسمك الكامل" />
 
                                     <span asp-validation-for="FullName"
                                           class="text-danger small">
@@ -267,11 +268,12 @@
 
                                     <label asp-for="CompanyName"
                                            class="form-label fw-semibold">
+                                        اسم الشركة
                                     </label>
 
                                     <input asp-for="CompanyName"
                                            class="form-control"
-                                           placeholder="Company name (optional)" />
+                                           placeholder="اسم الشركة (اختياري)" />
 
                                     <span asp-validation-for="CompanyName"
                                           class="text-danger small">
@@ -283,6 +285,7 @@
 
                                     <label asp-for="Email"
                                            class="form-label fw-semibold">
+                                        البريد الإلكتروني
                                     </label>
 
                                     <input asp-for="Email"
@@ -300,12 +303,13 @@
 
                                     <label asp-for="PhoneNumber"
                                            class="form-label fw-semibold">
+                                        رقم الهاتف
                                     </label>
 
                                     <input asp-for="PhoneNumber"
                                            class="form-control"
                                            type="tel"
-                                           placeholder="Enter your phone number" />
+                                           placeholder="أدخل رقم هاتفك" />
 
                                     <span asp-validation-for="PhoneNumber"
                                           class="text-danger small">
@@ -321,7 +325,7 @@
                         <div class="mb-4">
 
                             <h3 class="h6 fw-bold mb-3">
-                                Request Details
+                                تفاصيل الطلب
                             </h3>
 
                             <div class="row g-3">
@@ -330,6 +334,7 @@
 
                                     <label asp-for="Quantity"
                                            class="form-label fw-semibold">
+                                        الكمية
                                     </label>
 
                                     <input asp-for="Quantity"
@@ -347,12 +352,13 @@
 
                                     <label asp-for="Message"
                                            class="form-label fw-semibold">
+                                        الرسالة
                                     </label>
 
                                     <textarea asp-for="Message"
                                               class="form-control"
                                               rows="6"
-                                              placeholder="Tell us about your requirements, specifications, delivery needs, or any other details."></textarea>
+                                              placeholder="أخبرنا عن متطلباتك، والمواصفات، واحتياجات التوصيل، أو أي تفاصيل أخرى."></textarea>
 
                                     <span asp-validation-for="Message"
                                           class="text-danger small">
@@ -371,21 +377,21 @@
 
                                 <button type="submit"
                                         class="btn btn-primary btn-lg">
-                                    Send Request
+                                    إرسال الطلب
                                 </button>
 
                                 <a asp-controller="Catalog"
                                    asp-action="Details"
                                    asp-route-id="@Model.ProductId"
                                    class="btn btn-outline-secondary btn-lg">
-                                    Cancel
+                                    إلغاء
                                 </a>
 
                             </div>
 
                             <p class="text-muted small mt-3 mb-0">
-                                By submitting this request, you are providing your contact
-                                details so our team can follow up regarding your quotation.
+                                بإرسال هذا الطلب، فإنك تقدم بيانات التواصل الخاصة بك حتى يتمكن فريقنا من
+                                متابعتك بخصوص عرض السعر.
                             </p>
 
                         </div>

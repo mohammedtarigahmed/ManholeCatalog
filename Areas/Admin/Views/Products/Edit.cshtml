@@ -1,39 +1,42 @@
 @model ManholeCatalog.Models.Product
 
 @{
-    ViewData["Title"] = "Edit Product";
+    ViewData["Title"] = "تعديل المنتج";
 }
 
 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+
     <div>
+
         <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
 
             <span class="badge text-bg-light border">
-                Product #@Model.Id
+                المنتج #@Model.Id
             </span>
 
             @if (Model.IsActive)
             {
                 <span class="badge text-bg-success">
-                    Active
+                    نشط
                 </span>
             }
             else
             {
                 <span class="badge text-bg-secondary">
-                    Inactive
+                    غير نشط
                 </span>
             }
 
         </div>
 
         <h1 class="h3 fw-bold mb-1">
-            Edit Product
+            تعديل المنتج
         </h1>
 
         <p class="text-muted mb-0">
-            Update the product information and catalog visibility.
+            تحديث معلومات المنتج وظهوره في الكتالوج.
         </p>
+
     </div>
 
     <div class="d-flex flex-wrap gap-2">
@@ -43,17 +46,18 @@
            asp-action="Details"
            asp-route-id="@Model.Id"
            class="btn btn-outline-primary">
-            View Details
+            عرض التفاصيل
         </a>
 
         <a asp-area="Admin"
            asp-controller="Products"
            asp-action="Index"
            class="btn btn-outline-secondary">
-            ← Back to Products
+            ← العودة إلى المنتجات
         </a>
 
     </div>
+
 </div>
 
 <form asp-area="Admin"
@@ -74,18 +78,21 @@
 
     <div class="row g-4">
 
-        <!-- Basic Information -->
+        <!-- المعلومات الأساسية -->
         <div class="col-12">
+
             <div class="card border-0 shadow-sm">
 
                 <div class="card-header bg-white py-3">
+
                     <h2 class="h6 fw-bold mb-1">
-                        Basic Information
+                        المعلومات الأساسية
                     </h2>
 
                     <p class="text-muted small mb-0">
-                        Update the main information used to identify the product.
+                        تحديث المعلومات الأساسية المستخدمة للتعريف بالمنتج.
                     </p>
+
                 </div>
 
                 <div class="card-body">
@@ -93,37 +100,42 @@
                     <div class="row g-3">
 
                         <div class="col-md-8">
+
                             <label asp-for="Name"
                                    class="form-label fw-semibold">
                             </label>
 
                             <input asp-for="Name"
                                    class="form-control"
-                                   placeholder="e.g. Ductile Iron Manhole Cover" />
+                                   placeholder="مثال: غطاء منهول من حديد الدكتايل" />
 
                             <span asp-validation-for="Name"
                                   class="text-danger">
                             </span>
+
                         </div>
 
                         <div class="col-md-4">
+
                             <label asp-for="SKU"
                                    class="form-label fw-semibold">
                             </label>
 
                             <input asp-for="SKU"
                                    class="form-control"
-                                   placeholder="e.g. MH-001" />
+                                   placeholder="مثال: MH-001" />
 
                             <span asp-validation-for="SKU"
                                   class="text-danger">
                             </span>
+
                         </div>
 
                         <div class="col-md-6">
+
                             <label asp-for="CategoryId"
                                    class="form-label fw-semibold">
-                                Category
+                                الفئة
                             </label>
 
                             <select asp-for="CategoryId"
@@ -131,7 +143,7 @@
                                     class="form-select">
 
                                 <option value="">
-                                    -- Select Category --
+                                    -- اختر الفئة --
                                 </option>
 
                             </select>
@@ -141,8 +153,9 @@
                             </span>
 
                             <div class="form-text">
-                                Select the category that best matches this product.
+                                اختر الفئة التي تناسب هذا المنتج بشكل أفضل.
                             </div>
+
                         </div>
 
                     </div>
@@ -150,20 +163,24 @@
                 </div>
 
             </div>
+
         </div>
 
-        <!-- Product Specifications -->
+        <!-- مواصفات المنتج -->
         <div class="col-12">
+
             <div class="card border-0 shadow-sm">
 
                 <div class="card-header bg-white py-3">
+
                     <h2 class="h6 fw-bold mb-1">
-                        Product Specifications
+                        مواصفات المنتج
                     </h2>
 
                     <p class="text-muted small mb-0">
-                        Update the technical specifications available for this product.
+                        تحديث المواصفات الفنية المتوفرة لهذا المنتج.
                     </p>
+
                 </div>
 
                 <div class="card-body">
@@ -171,60 +188,68 @@
                     <div class="row g-3">
 
                         <div class="col-md-6">
+
                             <label asp-for="Material"
                                    class="form-label fw-semibold">
                             </label>
 
                             <input asp-for="Material"
                                    class="form-control"
-                                   placeholder="e.g. Ductile Iron" />
+                                   placeholder="مثال: حديد الدكتايل" />
 
                             <span asp-validation-for="Material"
                                   class="text-danger">
                             </span>
+
                         </div>
 
                         <div class="col-md-6">
+
                             <label asp-for="LoadClass"
                                    class="form-label fw-semibold">
-                                Load Class
+                                فئة التحميل
                             </label>
 
                             <input asp-for="LoadClass"
                                    class="form-control"
-                                   placeholder="e.g. D400" />
+                                   placeholder="مثال: D400" />
 
                             <span asp-validation-for="LoadClass"
                                   class="text-danger">
                             </span>
+
                         </div>
 
                         <div class="col-md-6">
+
                             <label asp-for="Diameter"
                                    class="form-label fw-semibold">
                             </label>
 
                             <input asp-for="Diameter"
                                    class="form-control"
-                                   placeholder="e.g. 600 mm" />
+                                   placeholder="مثال: 600 مم" />
 
                             <span asp-validation-for="Diameter"
                                   class="text-danger">
                             </span>
+
                         </div>
 
                         <div class="col-md-6">
+
                             <label asp-for="Shape"
                                    class="form-label fw-semibold">
                             </label>
 
                             <input asp-for="Shape"
                                    class="form-control"
-                                   placeholder="e.g. Circular" />
+                                   placeholder="مثال: دائري" />
 
                             <span asp-validation-for="Shape"
                                   class="text-danger">
                             </span>
+
                         </div>
 
                     </div>
@@ -232,20 +257,24 @@
                 </div>
 
             </div>
+
         </div>
 
-        <!-- Pricing and Description -->
+        <!-- السعر والوصف -->
         <div class="col-lg-8">
+
             <div class="card border-0 shadow-sm h-100">
 
                 <div class="card-header bg-white py-3">
+
                     <h2 class="h6 fw-bold mb-1">
-                        Pricing &amp; Description
+                        السعر والوصف
                     </h2>
 
                     <p class="text-muted small mb-0">
-                        Update pricing information and the customer-facing description.
+                        تحديث معلومات السعر والوصف الذي يظهر للعملاء.
                     </p>
+
                 </div>
 
                 <div class="card-body">
@@ -263,10 +292,10 @@
                                    type="number"
                                    step="0.01"
                                    min="0"
-                                   placeholder="e.g. 450.00" />
+                                   placeholder="مثال: 450.00" />
 
                             <span class="input-group-text">
-                                SAR
+                                ر.س
                             </span>
 
                         </div>
@@ -276,7 +305,7 @@
                         </span>
 
                         <div class="form-text">
-                            Leave empty if the product price is provided on request.
+                            اترك الحقل فارغًا إذا كان سعر المنتج يُحدد عند الطلب.
                         </div>
 
                     </div>
@@ -290,14 +319,14 @@
                         <textarea asp-for="Description"
                                   class="form-control"
                                   rows="6"
-                                  placeholder="Describe the product, its applications, features, or other useful information."></textarea>
+                                  placeholder="اكتب وصف المنتج واستخداماته ومميزاته أو أي معلومات مفيدة أخرى."></textarea>
 
                         <span asp-validation-for="Description"
                               class="text-danger">
                         </span>
 
                         <div class="form-text">
-                            Optional. Provide useful information that helps customers understand the product.
+                            اختياري. أضف معلومات مفيدة تساعد العملاء على فهم المنتج.
                         </div>
 
                     </div>
@@ -305,20 +334,24 @@
                 </div>
 
             </div>
+
         </div>
 
-        <!-- Catalog Visibility -->
+        <!-- ظهور المنتج في الكتالوج -->
         <div class="col-lg-4">
+
             <div class="card border-0 shadow-sm h-100">
 
                 <div class="card-header bg-white py-3">
+
                     <h2 class="h6 fw-bold mb-1">
-                        Catalog Visibility
+                        ظهور المنتج في الكتالوج
                     </h2>
 
                     <p class="text-muted small mb-0">
-                        Control whether this product appears in the public catalog.
+                        تحديد ما إذا كان هذا المنتج سيظهر في الكتالوج العام.
                     </p>
+
                 </div>
 
                 <div class="card-body">
@@ -331,29 +364,36 @@
 
                         <label asp-for="IsActive"
                                class="form-check-label fw-semibold">
-                            Active Product
+                            المنتج نشط
                         </label>
 
                     </div>
 
                     <div class="form-text mt-2">
-                        Active products are visible in the public catalog and can receive quotation requests.
+                        المنتجات النشطة تظهر في الكتالوج العام ويمكنها استقبال طلبات عروض الأسعار.
                     </div>
 
                     <div class="alert alert-light border mt-4 mb-0">
+
                         <div class="small">
-                            <strong>Note:</strong>
-                            Deactivating a product does not delete the product or its images.
+
+                            <strong>ملاحظة:</strong>
+
+                            تعطيل المنتج لا يؤدي إلى حذفه أو حذف صوره.
+
                         </div>
+
                     </div>
 
                 </div>
 
             </div>
+
         </div>
 
-        <!-- Actions -->
+        <!-- الإجراءات -->
         <div class="col-12">
+
             <div class="card border-0 shadow-sm">
 
                 <div class="card-body">
@@ -364,7 +404,7 @@
                            asp-controller="Products"
                            asp-action="Index"
                            class="btn btn-outline-secondary">
-                            Cancel
+                            إلغاء
                         </a>
 
                         <a asp-area="Admin"
@@ -372,12 +412,12 @@
                            asp-action="Details"
                            asp-route-id="@Model.Id"
                            class="btn btn-outline-primary">
-                            View Details
+                            عرض التفاصيل
                         </a>
 
                         <button type="submit"
                                 class="btn btn-primary">
-                            Save Changes
+                            حفظ التغييرات
                         </button>
 
                     </div>
@@ -385,6 +425,7 @@
                 </div>
 
             </div>
+
         </div>
 
     </div>
@@ -392,5 +433,7 @@
 </form>
 
 @section Scripts {
+
     <partial name="_ValidationScriptsPartial" />
+
 }

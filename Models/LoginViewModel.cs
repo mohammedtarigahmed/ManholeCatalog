@@ -4,16 +4,16 @@ namespace ManholeCatalog.Models;
 
 public class LoginViewModel
 {
-    [Required]
-    [EmailAddress]
-    [Display(Name = "Email Address")]
+    [Required(ErrorMessage = "البريد الإلكتروني مطلوب.")]
+    [EmailAddress(ErrorMessage = "يرجى إدخال بريد إلكتروني صالح.")]
+    [Display(Name = "البريد الإلكتروني")]
     public string Email { get; set; } = string.Empty;
 
-    [Required]
+    [Required(ErrorMessage = "كلمة المرور مطلوبة.")]
     [DataType(DataType.Password)]
-    [Display(Name = "Password")]
+    [Display(Name = "كلمة المرور")]
     public string Password { get; set; } = string.Empty;
 
-    [Display(Name = "Remember me")]
+    [Display(Name = "تذكرني")]
     public bool RememberMe { get; set; }
 }

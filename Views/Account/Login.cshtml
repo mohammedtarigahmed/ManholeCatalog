@@ -1,7 +1,7 @@
 @model ManholeCatalog.Models.LoginViewModel
 
 @{
-    ViewData["Title"] = "Admin Login";
+    ViewData["Title"] = "تسجيل دخول الإدارة";
 }
 
 <div class="container py-5">
@@ -14,15 +14,15 @@
             <div class="text-center mb-4">
 
                 <span class="badge text-bg-primary px-3 py-2 mb-3">
-                    Administration
+                    لوحة الإدارة
                 </span>
 
                 <h1 class="display-6 fw-bold mb-2">
-                    Admin Login
+                    تسجيل دخول الإدارة
                 </h1>
 
                 <p class="text-muted mb-0">
-                    Sign in to access the ManholeCatalog administration panel.
+                    سجّل الدخول للوصول إلى لوحة إدارة كتالوج المناهل.
                 </p>
 
             </div>
@@ -50,12 +50,13 @@
 
                             <label asp-for="Email"
                                    class="form-label fw-semibold">
+                                البريد الإلكتروني
                             </label>
 
                             <input asp-for="Email"
                                    class="form-control"
                                    autocomplete="username"
-                                   placeholder="Enter your email" />
+                                   placeholder="أدخل بريدك الإلكتروني" />
 
                             <span asp-validation-for="Email"
                                   class="text-danger small">
@@ -68,12 +69,13 @@
 
                             <label asp-for="Password"
                                    class="form-label fw-semibold">
+                                كلمة المرور
                             </label>
 
                             <input asp-for="Password"
                                    class="form-control"
                                    autocomplete="current-password"
-                                   placeholder="Enter your password" />
+                                   placeholder="أدخل كلمة المرور" />
 
                             <span asp-validation-for="Password"
                                   class="text-danger small">
@@ -89,6 +91,7 @@
 
                             <label asp-for="RememberMe"
                                    class="form-check-label">
+                                تذكرني
                             </label>
 
                         </div>
@@ -98,7 +101,7 @@
 
                             <button type="submit"
                                     class="btn btn-primary btn-lg">
-                                Login
+                                تسجيل الدخول
                             </button>
 
                         </div>
@@ -115,7 +118,7 @@
                 <a asp-controller="Catalog"
                    asp-action="Index"
                    class="text-decoration-none">
-                    ← Back to Catalog
+                    ← العودة إلى الكتالوج
                 </a>
 
             </div>

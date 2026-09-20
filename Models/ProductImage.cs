@@ -6,24 +6,24 @@ public class ProductImage
 {
     public int Id { get; set; }
 
-    [Required]
-    [StringLength(500)]
-    [Display(Name = "Image Path")]
+    [Required(ErrorMessage = "مسار الصورة مطلوب.")]
+    [StringLength(500, ErrorMessage = "يجب ألا يتجاوز مسار الصورة 500 حرف.")]
+    [Display(Name = "مسار الصورة")]
     public string ImagePath { get; set; } = string.Empty;
 
-    [StringLength(200)]
-    [Display(Name = "Alt Text")]
+    [StringLength(200, ErrorMessage = "يجب ألا يتجاوز النص البديل 200 حرف.")]
+    [Display(Name = "النص البديل")]
     public string? AltText { get; set; }
 
-    [Display(Name = "Display Order")]
+    [Display(Name = "ترتيب العرض")]
     public int DisplayOrder { get; set; }
 
-    [Display(Name = "Primary Image")]
+    [Display(Name = "الصورة الرئيسية")]
     public bool IsPrimary { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-    [Required]
+    [Required(ErrorMessage = "المنتج مطلوب.")]
     public int ProductId { get; set; }
 
     public Product Product { get; set; } = null!;

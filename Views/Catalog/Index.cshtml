@@ -1,7 +1,7 @@
 @model IEnumerable<ManholeCatalog.Models.Product>
 
 @{
-    ViewData["Title"] = "Product Catalog";
+    ViewData["Title"] = "كتالوج المنتجات";
 
     var search = ViewBag.Search as string;
     var selectedCategoryId = ViewBag.CategoryId as int?;
@@ -15,16 +15,16 @@
     <section class="text-center mb-5">
 
         <span class="badge text-bg-primary px-3 py-2 mb-3">
-            Product Catalog
+            كتالوج المنتجات
         </span>
 
         <h1 class="display-5 fw-bold mb-3">
-            Find the Right Product
+            اعثر على المنتج المناسب
         </h1>
 
         <p class="lead text-muted mb-0">
-            Explore our available products, review specifications,
-            and find the right solution for your project.
+            استكشف منتجاتنا المتاحة، وراجع المواصفات،
+            واعثر على الحل المناسب لمشروعك.
         </p>
 
     </section>
@@ -37,11 +37,11 @@
             <div class="mb-4">
 
                 <h2 class="h5 fw-bold mb-1">
-                    Find a Product
+                    البحث عن منتج
                 </h2>
 
                 <p class="text-muted small mb-0">
-                    Search by product name or SKU, or filter by category.
+                    ابحث باسم المنتج أو الرقم التعريفي، أو قم بالتصفية حسب الفئة.
                 </p>
 
             </div>
@@ -56,7 +56,7 @@
 
                         <label for="search"
                                class="form-label fw-semibold">
-                            Search Products
+                            البحث عن المنتجات
                         </label>
 
                         <input type="text"
@@ -64,7 +64,7 @@
                                name="search"
                                value="@search"
                                class="form-control"
-                               placeholder="Search by product name or SKU" />
+                               placeholder="ابحث باسم المنتج أو الرقم التعريفي" />
 
                     </div>
 
@@ -72,7 +72,7 @@
 
                         <label for="categoryId"
                                class="form-label fw-semibold">
-                            Category
+                            الفئة
                         </label>
 
                         <select id="categoryId"
@@ -80,7 +80,7 @@
                                 class="form-select">
 
                             <option value="">
-                                All Categories
+                                جميع الفئات
                             </option>
 
                             @if (categories != null)
@@ -112,13 +112,13 @@
 
                             <button type="submit"
                                     class="btn btn-primary flex-grow-1">
-                                Search
+                                بحث
                             </button>
 
                             <a asp-controller="Catalog"
                                asp-action="Index"
                                class="btn btn-outline-secondary">
-                                Clear
+                                مسح
                             </a>
 
                         </div>
@@ -143,21 +143,21 @@
                 @if (!string.IsNullOrWhiteSpace(search) || selectedCategoryId.HasValue)
                 {
                     <h2 class="h5 fw-bold mb-1">
-                        Search Results
+                        نتائج البحث
                     </h2>
 
                     <div class="text-muted small">
-                        @productCount product(s) found
+                        تم العثور على @productCount منتج
                     </div>
                 }
                 else
                 {
                     <h2 class="h5 fw-bold mb-1">
-                        Available Products
+                        المنتجات المتاحة
                     </h2>
 
                     <div class="text-muted small">
-                        @productCount product(s) available
+                        @productCount منتج متاح
                     </div>
                 }
 
@@ -170,7 +170,7 @@
                     @if (!string.IsNullOrWhiteSpace(search))
                     {
                         <span class="badge text-bg-light border">
-                            Search: @search
+                            البحث: @search
                         </span>
                     }
 
@@ -181,7 +181,7 @@
                         if (selectedCategory != null)
                         {
                             <span class="badge text-bg-light border">
-                                Category: @selectedCategory.Name
+                                الفئة: @selectedCategory.Name
                             </span>
                         }
                     }
@@ -210,17 +210,17 @@
                 </div>
 
                 <h2 class="h4 fw-bold mb-2">
-                    No Products Found
+                    لم يتم العثور على منتجات
                 </h2>
 
                 <p class="text-muted mb-4">
-                    No products match your current search or filter.
+                    لا توجد منتجات تطابق البحث أو التصفية الحالية.
                 </p>
 
                 <a asp-controller="Catalog"
                    asp-action="Index"
                    class="btn btn-primary">
-                    View All Products
+                    عرض جميع المنتجات
                 </a>
 
             </div>
@@ -262,7 +262,7 @@
                                         </div>
 
                                         <div class="small">
-                                            No Image Available
+                                            لا توجد صورة متاحة
                                         </div>
 
                                     </div>
@@ -310,7 +310,7 @@
                                         <div class="d-flex justify-content-between align-items-start gap-3 py-2 border-bottom">
 
                                             <span class="text-muted small">
-                                                Material
+                                                المادة
                                             </span>
 
                                             <span class="fw-semibold small text-end">
@@ -325,7 +325,7 @@
                                         <div class="d-flex justify-content-between align-items-start gap-3 py-2 border-bottom">
 
                                             <span class="text-muted small">
-                                                Load Class
+                                                فئة التحميل
                                             </span>
 
                                             <span class="fw-semibold small text-end">
@@ -340,7 +340,7 @@
                                         <div class="d-flex justify-content-between align-items-start gap-3 py-2 border-bottom">
 
                                             <span class="text-muted small">
-                                                Diameter
+                                                القطر
                                             </span>
 
                                             <span class="fw-semibold small text-end">
@@ -355,7 +355,7 @@
                                         <div class="d-flex justify-content-between align-items-start gap-3 py-2">
 
                                             <span class="text-muted small">
-                                                Shape
+                                                الشكل
                                             </span>
 
                                             <span class="fw-semibold small text-end">
@@ -376,11 +376,11 @@
                                     <div class="mb-3">
 
                                         <div class="small text-muted mb-1">
-                                            Price
+                                            السعر
                                         </div>
 
                                         <div class="fs-4 fw-bold">
-                                            @product.Price.Value.ToString("N2") SAR
+                                            @product.Price.Value.ToString("N2") ر.س
                                         </div>
 
                                     </div>
@@ -392,14 +392,14 @@
                                        asp-action="Details"
                                        asp-route-id="@product.Id"
                                        class="btn btn-outline-primary">
-                                        View Details
+                                        عرض التفاصيل
                                     </a>
 
                                     <a asp-controller="Quotation"
                                        asp-action="Create"
                                        asp-route-productId="@product.Id"
                                        class="btn btn-primary">
-                                        Request a Quote
+                                        طلب عرض سعر
                                     </a>
 
                                 </div>

@@ -1,79 +1,92 @@
 @model ManholeCatalog.Models.QuotationRequest
 
 @{
-    ViewData["Title"] = "Quotation Request Details";
+    ViewData["Title"] = "تفاصيل طلب عرض السعر";
 }
 
 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+
     <div>
+
         <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+
             <span class="badge text-bg-light border">
-                Request #@Model.Id
+                الطلب #@Model.Id
             </span>
 
             @switch (Model.Status)
             {
                 case ManholeCatalog.Models.QuotationStatus.Pending:
-                    <span class="badge text-bg-warning">Pending</span>
+                    <span class="badge text-bg-warning">قيد الانتظار</span>
                     break;
 
                 case ManholeCatalog.Models.QuotationStatus.Contacted:
-                    <span class="badge text-bg-info">Contacted</span>
+                    <span class="badge text-bg-info">تم التواصل</span>
                     break;
 
                 case ManholeCatalog.Models.QuotationStatus.Quoted:
-                    <span class="badge text-bg-primary">Quoted</span>
+                    <span class="badge text-bg-primary">تم تقديم العرض</span>
                     break;
 
                 case ManholeCatalog.Models.QuotationStatus.Closed:
-                    <span class="badge text-bg-secondary">Closed</span>
+                    <span class="badge text-bg-secondary">مغلقة</span>
                     break;
             }
+
         </div>
 
         <h1 class="h3 fw-bold mb-1">
-            Quotation Request #@Model.Id
+            طلب عرض السعر #@Model.Id
         </h1>
 
         <p class="text-muted mb-0">
-            Review customer information, product requirements, and request status.
+            مراجعة بيانات العميل ومتطلبات المنتج وحالة الطلب.
         </p>
+
     </div>
 
     <a asp-area="Admin"
        asp-controller="Quotations"
        asp-action="Index"
        class="btn btn-outline-secondary">
-        ← Back to Requests
+        ← العودة إلى الطلبات
     </a>
+
 </div>
 
 <div class="row g-4">
 
-    <!-- Customer Information -->
+    <!-- بيانات العميل -->
     <div class="col-lg-6">
+
         <div class="card border-0 shadow-sm h-100">
+
             <div class="card-header bg-white py-3">
+
                 <h2 class="h6 fw-bold mb-0">
-                    Customer Information
+                    بيانات العميل
                 </h2>
+
             </div>
 
             <div class="card-body">
 
                 <div class="mb-4">
+
                     <div class="small text-muted mb-1">
-                        Full Name
+                        الاسم الكامل
                     </div>
 
                     <div class="fs-5 fw-semibold">
                         @Model.FullName
                     </div>
+
                 </div>
 
                 <div class="mb-4">
+
                     <div class="small text-muted mb-1">
-                        Company Name
+                        اسم الشركة
                     </div>
 
                     @if (!string.IsNullOrWhiteSpace(Model.CompanyName))
@@ -85,17 +98,20 @@
                     else
                     {
                         <span class="text-muted">
-                            Not provided
+                            لم يتم إدخاله
                         </span>
                     }
+
                 </div>
 
                 <div class="mb-4">
+
                     <div class="small text-muted mb-1">
-                        Email Address
+                        البريد الإلكتروني
                     </div>
 
                     <div class="d-flex flex-wrap align-items-center gap-2">
+
                         <a href="mailto:@Model.Email"
                            class="text-decoration-none">
                             @Model.Email
@@ -103,17 +119,21 @@
 
                         <a href="mailto:@Model.Email"
                            class="btn btn-sm btn-outline-primary">
-                            Email
+                            إرسال بريد
                         </a>
+
                     </div>
+
                 </div>
 
                 <div>
+
                     <div class="small text-muted mb-1">
-                        Phone Number
+                        رقم الهاتف
                     </div>
 
                     <div class="d-flex flex-wrap align-items-center gap-2">
+
                         <a href="tel:@Model.PhoneNumber"
                            class="text-decoration-none">
                             @Model.PhoneNumber
@@ -121,34 +141,44 @@
 
                         <a href="tel:@Model.PhoneNumber"
                            class="btn btn-sm btn-outline-success">
-                            Call
+                            اتصال
                         </a>
+
                     </div>
+
                 </div>
 
             </div>
+
         </div>
+
     </div>
 
-    <!-- Request Information -->
+    <!-- بيانات الطلب -->
     <div class="col-lg-6">
+
         <div class="card border-0 shadow-sm h-100">
+
             <div class="card-header bg-white py-3">
+
                 <h2 class="h6 fw-bold mb-0">
-                    Request Information
+                    بيانات الطلب
                 </h2>
+
             </div>
 
             <div class="card-body">
 
                 <div class="mb-4">
+
                     <div class="small text-muted mb-1">
-                        Product
+                        المنتج
                     </div>
 
                     @if (Model.Product != null)
                     {
                         <div class="d-flex flex-column align-items-start gap-2">
+
                             <a asp-area="Admin"
                                asp-controller="Products"
                                asp-action="Details"
@@ -163,92 +193,109 @@
                                     SKU: @Model.Product.SKU
                                 </span>
                             }
+
                         </div>
                     }
                     else
                     {
                         <span class="text-muted">
-                            Unknown Product
+                            منتج غير معروف
                         </span>
                     }
+
                 </div>
 
                 <div class="mb-4">
+
                     <div class="small text-muted mb-1">
-                        Quantity
+                        الكمية
                     </div>
 
                     <div class="fs-5 fw-semibold">
                         @Model.Quantity
                     </div>
+
                 </div>
 
                 <div class="mb-4">
+
                     <div class="small text-muted mb-1">
-                        Current Status
+                        الحالة الحالية
                     </div>
 
                     @switch (Model.Status)
                     {
                         case ManholeCatalog.Models.QuotationStatus.Pending:
-                            <span class="badge text-bg-warning">Pending</span>
+                            <span class="badge text-bg-warning">قيد الانتظار</span>
                             break;
 
                         case ManholeCatalog.Models.QuotationStatus.Contacted:
-                            <span class="badge text-bg-info">Contacted</span>
+                            <span class="badge text-bg-info">تم التواصل</span>
                             break;
 
                         case ManholeCatalog.Models.QuotationStatus.Quoted:
-                            <span class="badge text-bg-primary">Quoted</span>
+                            <span class="badge text-bg-primary">تم تقديم العرض</span>
                             break;
 
                         case ManholeCatalog.Models.QuotationStatus.Closed:
-                            <span class="badge text-bg-secondary">Closed</span>
+                            <span class="badge text-bg-secondary">مغلقة</span>
                             break;
 
                         default:
-                            <span class="badge text-bg-light border">Unknown</span>
+                            <span class="badge text-bg-light border">غير معروفة</span>
                             break;
                     }
+
                 </div>
 
                 <div class="mb-4">
+
                     <div class="small text-muted mb-1">
-                        Submitted At
+                        تاريخ تقديم الطلب
                     </div>
 
                     <div class="fw-semibold">
                         @Model.CreatedAt.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")
                     </div>
+
                 </div>
 
                 @if (Model.UpdatedAt.HasValue)
                 {
                     <div>
+
                         <div class="small text-muted mb-1">
-                            Last Updated
+                            آخر تحديث
                         </div>
 
                         <div class="fw-semibold">
                             @Model.UpdatedAt.Value.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")
                         </div>
+
                     </div>
                 }
 
             </div>
+
         </div>
+
     </div>
 
-    <!-- Customer Message -->
+    <!-- رسالة العميل -->
     <div class="col-12">
+
         <div class="card border-0 shadow-sm">
+
             <div class="card-header bg-white py-3">
+
                 <h2 class="h6 fw-bold mb-0">
-                    Customer Message
+                    رسالة العميل
                 </h2>
+
             </div>
 
             <div class="card-body">
+
                 @if (!string.IsNullOrWhiteSpace(Model.Message))
                 {
                     <div class="bg-light border rounded p-3"
@@ -259,27 +306,35 @@
                 else
                 {
                     <div class="text-muted">
-                        No message was provided by the customer.
+                        لم يرسل العميل أي رسالة.
                     </div>
                 }
+
             </div>
+
         </div>
+
     </div>
 
-    <!-- Update Status -->
+    <!-- تحديث الحالة -->
     <div class="col-12">
+
         <div class="card border-0 shadow-sm">
+
             <div class="card-header bg-white py-3">
+
                 <h2 class="h6 fw-bold mb-1">
-                    Update Request Status
+                    تحديث حالة الطلب
                 </h2>
 
                 <p class="text-muted small mb-0">
-                    Change the current status of this quotation request.
+                    تغيير الحالة الحالية لطلب عرض السعر.
                 </p>
+
             </div>
 
             <div class="card-body">
+
                 <form asp-area="Admin"
                       asp-controller="Quotations"
                       asp-action="UpdateStatus"
@@ -292,9 +347,10 @@
                     <div class="row g-3 align-items-end">
 
                         <div class="col-md-8">
+
                             <label for="status"
                                    class="form-label fw-semibold">
-                                Status
+                                الحالة
                             </label>
 
                             <select id="status"
@@ -303,55 +359,61 @@
 
                                 @if (Model.Status == ManholeCatalog.Models.QuotationStatus.Pending)
                                 {
-                                    <option value="1" selected>Pending</option>
+                                    <option value="1" selected>قيد الانتظار</option>
                                 }
                                 else
                                 {
-                                    <option value="1">Pending</option>
+                                    <option value="1">قيد الانتظار</option>
                                 }
 
                                 @if (Model.Status == ManholeCatalog.Models.QuotationStatus.Contacted)
                                 {
-                                    <option value="2" selected>Contacted</option>
+                                    <option value="2" selected>تم التواصل</option>
                                 }
                                 else
                                 {
-                                    <option value="2">Contacted</option>
+                                    <option value="2">تم التواصل</option>
                                 }
 
                                 @if (Model.Status == ManholeCatalog.Models.QuotationStatus.Quoted)
                                 {
-                                    <option value="3" selected>Quoted</option>
+                                    <option value="3" selected>تم تقديم العرض</option>
                                 }
                                 else
                                 {
-                                    <option value="3">Quoted</option>
+                                    <option value="3">تم تقديم العرض</option>
                                 }
 
                                 @if (Model.Status == ManholeCatalog.Models.QuotationStatus.Closed)
                                 {
-                                    <option value="4" selected>Closed</option>
+                                    <option value="4" selected>مغلقة</option>
                                 }
                                 else
                                 {
-                                    <option value="4">Closed</option>
+                                    <option value="4">مغلقة</option>
                                 }
 
                             </select>
+
                         </div>
 
                         <div class="col-md-4">
+
                             <button type="submit"
                                     class="btn btn-primary w-100">
-                                Update Status
+                                تحديث الحالة
                             </button>
+
                         </div>
 
                     </div>
 
                 </form>
+
             </div>
+
         </div>
+
     </div>
 
 </div>

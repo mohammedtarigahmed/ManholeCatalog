@@ -1,12 +1,9 @@
 @model ManholeCatalog.Models.Product
 
 @{
-    ViewData["Title"] = "Product Images";
+    ViewData["Title"] = "صور المنتج";
 
-    var orderedImages = Model.Images
-        .OrderBy(i => i.DisplayOrder)
-        .ThenBy(i => i.Id)
-        .ToList();
+    var orderedImages = Model.Images.OrderBy(i => i.DisplayOrder).ThenBy(i => i.Id).ToList();
 
     var primaryImage = orderedImages.FirstOrDefault(i => i.IsPrimary);
 }
@@ -18,30 +15,30 @@
         <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
 
             <span class="badge text-bg-light border">
-                Product #@Model.Id
+                المنتج #@Model.Id
             </span>
 
             @if (Model.IsActive)
             {
                 <span class="badge text-bg-success">
-                    Active
+                    نشط
                 </span>
             }
             else
             {
                 <span class="badge text-bg-secondary">
-                    Inactive
+                    غير نشط
                 </span>
             }
 
         </div>
 
         <h1 class="h3 fw-bold mb-1">
-            Product Images
+            صور المنتج
         </h1>
 
         <p class="text-muted mb-0">
-            Manage images, display order, and the primary product image.
+            إدارة صور المنتج وترتيب عرضها وتحديد الصورة الرئيسية.
         </p>
 
     </div>
@@ -53,21 +50,21 @@
            asp-action="Details"
            asp-route-id="@Model.Id"
            class="btn btn-outline-primary">
-            View Product
+            عرض المنتج
         </a>
 
         <a asp-area="Admin"
            asp-controller="Products"
            asp-action="Index"
            class="btn btn-outline-secondary">
-            ← Back to Products
+            ← العودة إلى المنتجات
         </a>
 
     </div>
 
 </div>
 
-<!-- Product Summary -->
+<!-- ملخص المنتج -->
 <div class="card border-0 shadow-sm mb-4">
 
     <div class="card-body">
@@ -77,7 +74,7 @@
             <div class="col-md-8">
 
                 <div class="small text-muted mb-1">
-                    Product
+                    المنتج
                 </div>
 
                 <h2 class="h5 fw-bold mb-2">
@@ -89,7 +86,7 @@
                     @if (!string.IsNullOrWhiteSpace(Model.SKU))
                     {
                         <span class="badge text-bg-light border">
-                            SKU: @Model.SKU
+                            الرقم التعريفي: @Model.SKU
                         </span>
                     }
 
@@ -115,7 +112,7 @@
                         </div>
 
                         <div class="small text-muted">
-                            Images
+                            الصور
                         </div>
 
                     </div>
@@ -129,7 +126,7 @@
                         </div>
 
                         <div class="small text-muted">
-                            Primary
+                            الرئيسية
                         </div>
 
                     </div>
@@ -149,23 +146,24 @@
     <div class="alert alert-danger shadow-sm"
          role="alert">
 
-        <strong>Upload failed:</strong>
+        <strong>فشل رفع الصورة:</strong>
+
         @TempData["ImageError"]
 
     </div>
 }
 
-<!-- Upload Image -->
+<!-- رفع صورة -->
 <div class="card border-0 shadow-sm mb-4">
 
     <div class="card-header bg-white py-3">
 
         <h2 class="h6 fw-bold mb-1">
-            Upload Image
+            رفع صورة
         </h2>
 
         <p class="text-muted small mb-0">
-            Add a new image to this product.
+            إضافة صورة جديدة إلى هذا المنتج.
         </p>
 
     </div>
@@ -185,7 +183,7 @@
 
                     <label for="image"
                            class="form-label fw-semibold">
-                        Select Image
+                        اختيار الصورة
                     </label>
 
                     <input type="file"
@@ -195,7 +193,7 @@
                            accept=".jpg,.jpeg,.png,.webp,image/*" />
 
                     <div class="form-text">
-                        Allowed formats: JPG, JPEG, PNG, WebP. Maximum size: 5 MB.
+                        الصيغ المسموح بها: JPG, JPEG, PNG, WebP. الحد الأقصى للحجم: 5 ميجابايت.
                     </div>
 
                 </div>
@@ -204,7 +202,7 @@
 
                     <button type="submit"
                             class="btn btn-primary w-100">
-                        Upload Image
+                        رفع الصورة
                     </button>
 
                 </div>
@@ -217,7 +215,7 @@
 
 </div>
 
-<!-- Product Images -->
+<!-- صور المنتج -->
 <div class="card border-0 shadow-sm">
 
     <div class="card-header bg-white py-3">
@@ -227,17 +225,17 @@
             <div>
 
                 <h2 class="h6 fw-bold mb-1">
-                    Product Images
+                    صور المنتج
                 </h2>
 
                 <p class="text-muted small mb-0">
-                    Reorder images, select the primary image, or remove images.
+                    إعادة ترتيب الصور، وتحديد الصورة الرئيسية، أو حذف الصور.
                 </p>
 
             </div>
 
             <span class="badge text-bg-light border">
-                @orderedImages.Count image(s)
+                @orderedImages.Count صورة
             </span>
 
         </div>
@@ -260,15 +258,15 @@
                 </div>
 
                 <h3 class="h6 fw-bold mb-2">
-                    No Images Yet
+                    لا توجد صور بعد
                 </h3>
 
                 <p class="text-muted mb-1">
-                    No images have been uploaded for this product.
+                    لم يتم رفع أي صور لهذا المنتج.
                 </p>
 
                 <p class="small text-muted mb-0">
-                    Upload the first image using the form above.
+                    ارفع الصورة الأولى باستخدام النموذج أعلاه.
                 </p>
 
             </div>
@@ -285,7 +283,7 @@
 
                         <div class="card h-100 border shadow-sm">
 
-                            <!-- Image -->
+                            <!-- الصورة -->
                             <div class="position-relative">
 
                                 <img src="@image.ImagePath"
@@ -296,13 +294,13 @@
                                 @if (image.IsPrimary)
                                 {
                                     <span class="position-absolute top-0 end-0 m-3 badge text-bg-primary">
-                                        Primary
+                                        رئيسية
                                     </span>
                                 }
 
                             </div>
 
-                            <!-- Image Controls -->
+                            <!-- أدوات التحكم بالصورة -->
                             <div class="card-body">
 
                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -310,7 +308,7 @@
                                     <div>
 
                                         <div class="small text-muted">
-                                            Display Order
+                                            ترتيب العرض
                                         </div>
 
                                         <div class="fw-semibold">
@@ -322,13 +320,13 @@
                                     @if (image.IsPrimary)
                                     {
                                         <span class="badge text-bg-primary">
-                                            Primary Image
+                                            الصورة الرئيسية
                                         </span>
                                     }
 
                                 </div>
 
-                                <!-- Move Controls -->
+                                <!-- أزرار الترتيب -->
                                 <div class="d-flex gap-2 mb-3">
 
                                     @if (index > 0)
@@ -342,7 +340,7 @@
 
                                             <button type="submit"
                                                     class="btn btn-sm btn-outline-secondary w-100">
-                                                ↑ Move Up
+                                                ↑ نقل لأعلى
                                             </button>
 
                                         </form>
@@ -352,7 +350,7 @@
                                         <button type="button"
                                                 class="btn btn-sm btn-outline-secondary w-100"
                                                 disabled>
-                                            ↑ Move Up
+                                            ↑ نقل لأعلى
                                         </button>
                                     }
 
@@ -367,7 +365,7 @@
 
                                             <button type="submit"
                                                     class="btn btn-sm btn-outline-secondary w-100">
-                                                ↓ Move Down
+                                                ↓ نقل لأسفل
                                             </button>
 
                                         </form>
@@ -377,13 +375,13 @@
                                         <button type="button"
                                                 class="btn btn-sm btn-outline-secondary w-100"
                                                 disabled>
-                                            ↓ Move Down
+                                            ↓ نقل لأسفل
                                         </button>
                                     }
 
                                 </div>
 
-                                <!-- Primary Image -->
+                                <!-- الصورة الرئيسية -->
                                 @if (!image.IsPrimary)
                                 {
                                     <form asp-area="Admin"
@@ -395,7 +393,7 @@
 
                                         <button type="submit"
                                                 class="btn btn-sm btn-outline-primary w-100">
-                                            Set as Primary
+                                            تعيين كصورة رئيسية
                                         </button>
 
                                     </form>
@@ -405,27 +403,27 @@
                                     <div class="alert alert-primary py-2 small mb-2">
 
                                         <div class="fw-semibold">
-                                            Primary Image
+                                            الصورة الرئيسية
                                         </div>
 
                                         <div>
-                                            This image is currently used as the main product image.
+                                            هذه الصورة مستخدمة حاليًا كصورة المنتج الرئيسية.
                                         </div>
 
                                     </div>
                                 }
 
-                                <!-- Delete -->
+                                <!-- حذف الصورة -->
                                 <form asp-area="Admin"
                                       asp-controller="Products"
                                       asp-action="DeleteImage"
                                       asp-route-id="@image.Id"
                                       method="post"
-                                      onsubmit="return confirm('Are you sure you want to delete this image?');">
+                                      onsubmit="return confirm('هل أنت متأكد من رغبتك في حذف هذه الصورة؟');">
 
                                     <button type="submit"
                                             class="btn btn-sm btn-outline-danger w-100">
-                                        Delete Image
+                                        حذف الصورة
                                     </button>
 
                                 </form>
@@ -445,5 +443,7 @@
 </div>
 
 @section Scripts {
+
     <partial name="_ValidationScriptsPartial" />
+
 }

@@ -1,26 +1,30 @@
 @model ManholeCatalog.Models.Category
 
 @{
-    ViewData["Title"] = "Add Category";
+    ViewData["Title"] = "إضافة فئة";
 }
 
 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+
     <div>
+
         <h1 class="h3 fw-bold mb-1">
-            Add Category
+            إضافة فئة
         </h1>
 
         <p class="text-muted mb-0">
-            Create a new product category for your catalog.
+            إنشاء فئة جديدة لمنتجات الكتالوج.
         </p>
+
     </div>
 
     <a asp-area="Admin"
        asp-controller="Categories"
        asp-action="Index"
        class="btn btn-outline-secondary">
-        ← Back to Categories
+        ← العودة إلى الفئات
     </a>
+
 </div>
 
 <form asp-area="Admin"
@@ -38,41 +42,47 @@
 
     <div class="row g-4">
 
-        <!-- Category Information -->
+        <!-- معلومات الفئة -->
         <div class="col-lg-8">
+
             <div class="card border-0 shadow-sm h-100">
 
                 <div class="card-header bg-white py-3">
+
                     <h2 class="h6 fw-bold mb-1">
-                        Category Information
+                        معلومات الفئة
                     </h2>
 
                     <p class="text-muted small mb-0">
-                        Enter the name and description for this category.
+                        أدخل اسم الفئة ووصفها.
                     </p>
+
                 </div>
 
                 <div class="card-body">
 
                     <div class="mb-4">
+
                         <label asp-for="Name"
                                class="form-label fw-semibold">
                         </label>
 
                         <input asp-for="Name"
                                class="form-control"
-                               placeholder="e.g. Manhole Covers" />
+                               placeholder="مثال: أغطية المناهل" />
 
                         <span asp-validation-for="Name"
                               class="text-danger">
                         </span>
 
                         <div class="form-text">
-                            Use a clear name that customers can easily understand.
+                            استخدم اسمًا واضحًا يسهل على العملاء فهمه.
                         </div>
+
                     </div>
 
                     <div>
+
                         <label asp-for="Description"
                                class="form-label fw-semibold">
                         </label>
@@ -80,39 +90,45 @@
                         <textarea asp-for="Description"
                                   class="form-control"
                                   rows="6"
-                                  placeholder="Describe the products included in this category."></textarea>
+                                  placeholder="اكتب وصفًا للمنتجات التي تندرج ضمن هذه الفئة."></textarea>
 
                         <span asp-validation-for="Description"
                               class="text-danger">
                         </span>
 
                         <div class="form-text">
-                            Optional. This description can help explain the purpose of the category.
+                            اختياري. يمكن أن يساعد هذا الوصف في توضيح الغرض من الفئة.
                         </div>
+
                     </div>
 
                 </div>
 
             </div>
+
         </div>
 
-        <!-- Category Status -->
+        <!-- حالة الفئة -->
         <div class="col-lg-4">
+
             <div class="card border-0 shadow-sm h-100">
 
                 <div class="card-header bg-white py-3">
+
                     <h2 class="h6 fw-bold mb-1">
-                        Category Status
+                        حالة الفئة
                     </h2>
 
                     <p class="text-muted small mb-0">
-                        Control whether this category is available for use.
+                        تحديد ما إذا كانت هذه الفئة متاحة للاستخدام.
                     </p>
+
                 </div>
 
                 <div class="card-body">
 
                     <div class="form-check form-switch">
+
                         <input asp-for="IsActive"
                                class="form-check-input"
                                role="switch" />
@@ -120,47 +136,58 @@
                         <label asp-for="IsActive"
                                class="form-check-label fw-semibold">
                         </label>
+
                     </div>
 
                     <div class="form-text mt-2">
-                        Active categories can be used to organize products in the catalog.
+                        يمكن استخدام الفئات النشطة لتنظيم المنتجات في الكتالوج.
                     </div>
 
                     <div class="alert alert-light border mt-4 mb-0">
+
                         <div class="small">
-                            <strong>Tip:</strong>
-                            You can deactivate this category later without deleting it.
+
+                            <strong>نصيحة:</strong>
+
+                            يمكنك تعطيل هذه الفئة لاحقًا دون حذفها.
+
                         </div>
+
                     </div>
 
                 </div>
 
             </div>
+
         </div>
 
-        <!-- Actions -->
+        <!-- الإجراءات -->
         <div class="col-12">
+
             <div class="card border-0 shadow-sm">
 
                 <div class="card-body">
+
                     <div class="d-flex flex-column flex-sm-row justify-content-end gap-2">
 
                         <a asp-area="Admin"
                            asp-controller="Categories"
                            asp-action="Index"
                            class="btn btn-outline-secondary">
-                            Cancel
+                            إلغاء
                         </a>
 
                         <button type="submit"
                                 class="btn btn-primary">
-                            Create Category
+                            إنشاء الفئة
                         </button>
 
                     </div>
+
                 </div>
 
             </div>
+
         </div>
 
     </div>
@@ -168,5 +195,7 @@
 </form>
 
 @section Scripts {
+
     <partial name="_ValidationScriptsPartial" />
+
 }

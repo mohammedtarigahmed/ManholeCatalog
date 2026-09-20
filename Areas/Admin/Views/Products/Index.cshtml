@@ -1,7 +1,7 @@
 @model IEnumerable<ManholeCatalog.Models.Product>
 
 @{
-    ViewData["Title"] = "Products";
+    ViewData["Title"] = "المنتجات";
 
     var products = Model.ToList();
 
@@ -14,11 +14,11 @@
 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
     <div>
         <h1 class="h3 fw-bold mb-1">
-            Products
+            المنتجات
         </h1>
 
         <p class="text-muted mb-0">
-            Manage your product catalog and product images.
+            إدارة كتالوج المنتجات وصور المنتجات.
         </p>
     </div>
 
@@ -26,7 +26,7 @@
        asp-controller="Products"
        asp-action="Create"
        class="btn btn-primary">
-        + Add Product
+        + إضافة منتج
     </a>
 </div>
 
@@ -37,7 +37,7 @@
         <div class="card border-0 shadow-sm h-100">
             <div class="card-body">
                 <div class="small text-muted mb-1">
-                    Total Products
+                    إجمالي المنتجات
                 </div>
 
                 <div class="h3 fw-bold mb-0">
@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="small text-muted mt-2">
-                    All products
+                    جميع المنتجات
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@
         <div class="card border-0 shadow-sm h-100">
             <div class="card-body">
                 <div class="small text-muted mb-1">
-                    Active
+                    نشطة
                 </div>
 
                 <div class="h3 fw-bold text-success mb-0">
@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="small text-muted mt-2">
-                    Currently available
+                    متاحة حاليًا
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
         <div class="card border-0 shadow-sm h-100">
             <div class="card-body">
                 <div class="small text-muted mb-1">
-                    Inactive
+                    غير نشطة
                 </div>
 
                 <div class="h3 fw-bold text-secondary mb-0">
@@ -81,7 +81,7 @@
                 </div>
 
                 <div class="small text-muted mt-2">
-                    Currently disabled
+                    معطلة حاليًا
                 </div>
             </div>
         </div>
@@ -91,7 +91,7 @@
         <div class="card border-0 shadow-sm h-100">
             <div class="card-body">
                 <div class="small text-muted mb-1">
-                    Without Images
+                    بدون صور
                 </div>
 
                 <div class="h3 fw-bold text-warning mb-0">
@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="small text-muted mt-2">
-                    Need product images
+                    تحتاج إلى صور للمنتج
                 </div>
             </div>
         </div>
@@ -121,18 +121,18 @@
             </div>
 
             <h2 class="h5 fw-bold mb-2">
-                No Products Yet
+                لا توجد منتجات بعد
             </h2>
 
             <p class="text-muted mb-4">
-                Start building your catalog by adding your first product.
+                ابدأ ببناء الكتالوج من خلال إضافة أول منتج.
             </p>
 
             <a asp-area="Admin"
                asp-controller="Products"
                asp-action="Create"
                class="btn btn-primary">
-                Add First Product
+                إضافة أول منتج
             </a>
 
         </div>
@@ -148,23 +148,23 @@ else
 
                 <div>
                     <h2 class="h6 fw-bold mb-1">
-                        Product List
+                        قائمة المنتجات
                     </h2>
 
                     <p class="text-muted small mb-0">
-                        View and manage your catalog products.
+                        عرض وإدارة منتجات الكتالوج.
                     </p>
                 </div>
 
                 <div class="d-flex flex-wrap gap-2">
                     <span class="badge text-bg-light border">
-                        @totalProducts product(s)
+                        @totalProducts منتج
                     </span>
 
                     @if (productsWithoutImages > 0)
                     {
                         <span class="badge text-bg-warning">
-                            @productsWithoutImages without images
+                            @productsWithoutImages بدون صور
                         </span>
                     }
                 </div>
@@ -180,27 +180,27 @@ else
                     <thead class="table-light">
                         <tr>
                             <th class="ps-4">
-                                Product
+                                المنتج
                             </th>
 
                             <th>
-                                SKU
+                                الرقم التعريفي
                             </th>
 
                             <th>
-                                Category
+                                الفئة
                             </th>
 
                             <th>
-                                Images
+                                الصور
                             </th>
 
                             <th>
-                                Status
+                                الحالة
                             </th>
 
                             <th class="text-end pe-4">
-                                Actions
+                                الإجراءات
                             </th>
                         </tr>
                     </thead>
@@ -299,13 +299,13 @@ else
                                     @if (product.Images.Any())
                                     {
                                         <span class="badge text-bg-light border">
-                                            @product.Images.Count image(s)
+                                            @product.Images.Count صورة
                                         </span>
                                     }
                                     else
                                     {
                                         <span class="badge text-bg-warning">
-                                            None
+                                            لا توجد
                                         </span>
                                     }
 
@@ -317,13 +317,13 @@ else
                                     @if (product.IsActive)
                                     {
                                         <span class="badge text-bg-success">
-                                            Active
+                                            نشط
                                         </span>
                                     }
                                     else
                                     {
                                         <span class="badge text-bg-secondary">
-                                            Inactive
+                                            غير نشط
                                         </span>
                                     }
 
@@ -339,8 +339,8 @@ else
                                            asp-action="Details"
                                            asp-route-id="@product.Id"
                                            class="btn btn-sm btn-outline-dark"
-                                           title="View Product">
-                                            View
+                                           title="عرض المنتج">
+                                            عرض
                                         </a>
 
                                         <a asp-area="Admin"
@@ -348,8 +348,8 @@ else
                                            asp-action="Images"
                                            asp-route-id="@product.Id"
                                            class="btn btn-sm btn-outline-secondary"
-                                           title="Manage Images">
-                                            Images
+                                           title="إدارة الصور">
+                                            الصور
                                         </a>
 
                                         <a asp-area="Admin"
@@ -357,8 +357,8 @@ else
                                            asp-action="Edit"
                                            asp-route-id="@product.Id"
                                            class="btn btn-sm btn-outline-primary"
-                                           title="Edit Product">
-                                            Edit
+                                           title="تعديل المنتج">
+                                            تعديل
                                         </a>
 
                                         <div class="dropdown">
@@ -367,7 +367,7 @@ else
                                                     type="button"
                                                     data-bs-toggle="dropdown"
                                                     aria-expanded="false">
-                                                More
+                                                المزيد
                                             </button>
 
                                             <ul class="dropdown-menu dropdown-menu-end">
@@ -380,11 +380,11 @@ else
                                                               asp-action="Deactivate"
                                                               asp-route-id="@product.Id"
                                                               method="post"
-                                                              onsubmit="return confirm('Are you sure you want to deactivate this product?');">
+                                                              onsubmit="return confirm('هل أنت متأكد من رغبتك في تعطيل هذا المنتج؟');">
 
                                                             <button type="submit"
                                                                     class="dropdown-item text-danger">
-                                                                Deactivate
+                                                                تعطيل
                                                             </button>
 
                                                         </form>
@@ -401,7 +401,7 @@ else
 
                                                             <button type="submit"
                                                                     class="dropdown-item text-success">
-                                                                Reactivate
+                                                                إعادة التفعيل
                                                             </button>
 
                                                         </form>

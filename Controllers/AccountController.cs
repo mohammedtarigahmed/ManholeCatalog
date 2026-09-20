@@ -67,18 +67,24 @@ public class AccountController : Controller
         {
             ModelState.AddModelError(
                 string.Empty,
-                "Your account is temporarily locked. Please try again later.");
+                "تم قفل الحساب مؤقتًا. يرجى المحاولة مرة أخرى لاحقًا.");
         }
         else
         {
             ModelState.AddModelError(
                 string.Empty,
-                "Invalid email or password.");
+                "البريد الإلكتروني أو كلمة المرور غير صحيحة.");
         }
 
         ViewBag.ReturnUrl = returnUrl;
 
         return View(model);
+    }
+
+    [HttpGet]
+    public IActionResult AccessDenied()
+    {
+        return View();
     }
 
     [HttpPost]
