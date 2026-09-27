@@ -282,3 +282,18 @@
     }
 
 }
+
+.catalog-load-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+}
+
+.catalog-load-more-button {
+    min-width: 170px;
+}
+
+.catalog-load-more-button:disabled {
+    cursor: wait;
+    opacity: 0.75;
+}

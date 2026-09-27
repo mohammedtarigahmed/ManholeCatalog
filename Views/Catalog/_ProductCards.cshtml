@@ -1,0 +1,233 @@
+@model IEnumerable<ManholeCatalog.Models.Product>
+
+@foreach (var product in Model)
+{
+    var primaryImage = product.Images.FirstOrDefault(i => i.IsPrimary)
+        ?? product.Images.OrderBy(i => i.DisplayOrder).FirstOrDefault();
+
+    <div class="col-sm-6 col-lg-4">
+
+        <article class="public-card catalog-product-card">
+
+            <div class="catalog-product-image-wrapper">
+
+                @if (primaryImage != null)
+                {
+                    <img src="@primaryImage.ImagePath"
+                         alt="@(primaryImage.AltText ?? product.Name)"
+                         class="catalog-product-image" />
+                }
+                else
+                {
+                    <div class="catalog-no-image">
+
+                        <div class="catalog-no-image-icon">
+                            <i class="bi bi-image"></i>
+                        </div>
+
+                        <span>
+                            لا توجد صورة متاحة
+                        </span>
+
+                    </div>
+                }
+
+            </div>
+
+            <div class="public-card-body catalog-product-body">
+
+                <div class="catalog-product-heading">
+
+                    @if (product.Category != null)
+                    {
+                        <div class="catalog-product-category">
+
+                            <i class="bi bi-folder2"></i>
+
+                            <span>
+                                @product.Category.Name
+                            </span>
+
+                        </div>
+                    }
+
+                    <h3 class="catalog-product-title">
+                        @product.Name
+                    </h3>
+
+                    @if (!string.IsNullOrWhiteSpace(product.SKU))
+                    {
+                        <span class="catalog-product-sku">
+
+                            <i class="bi bi-upc-scan"></i>
+
+                            <span>
+                                SKU: @product.SKU
+                            </span>
+
+                        </span>
+                    }
+
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(product.Material) ||
+                     !string.IsNullOrWhiteSpace(product.LoadClass) ||
+                     !string.IsNullOrWhiteSpace(product.Diameter) ||
+                     !string.IsNullOrWhiteSpace(product.Shape))
+                {
+                    <div class="public-specifications catalog-specifications">
+
+                        @if (!string.IsNullOrWhiteSpace(product.Material))
+                        {
+                            <div class="public-spec-item">
+
+                                <span class="public-spec-label">
+
+                                    <i class="bi bi-layers"></i>
+
+                                    <span>
+                                        المادة
+                                    </span>
+
+                                </span>
+
+                                <span class="public-spec-value">
+                                    @product.Material
+                                </span>
+
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrWhiteSpace(product.LoadClass))
+                        {
+                            <div class="public-spec-item">
+
+                                <span class="public-spec-label">
+
+                                    <i class="bi bi-shield-check"></i>
+
+                                    <span>
+                                        فئة التحميل
+                                    </span>
+
+                                </span>
+
+                                <span class="public-spec-value">
+                                    @product.LoadClass
+                                </span>
+
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrWhiteSpace(product.Diameter))
+                        {
+                            <div class="public-spec-item">
+
+                                <span class="public-spec-label">
+
+                                    <i class="bi bi-arrows-expand"></i>
+
+                                    <span>
+                                        القطر
+                                    </span>
+
+                                </span>
+
+                                <span class="public-spec-value">
+                                    @product.Diameter
+                                </span>
+
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrWhiteSpace(product.Shape))
+                        {
+                            <div class="public-spec-item">
+
+                                <span class="public-spec-label">
+
+                                    <i class="bi bi-circle-square"></i>
+
+                                    <span>
+                                        الشكل
+                                    </span>
+
+                                </span>
+
+                                <span class="public-spec-value">
+                                    @product.Shape
+                                </span>
+
+                            </div>
+                        }
+
+                    </div>
+                }
+
+                <div class="catalog-product-footer">
+
+                    @if (product.Price.HasValue)
+                    {
+                        <div class="catalog-product-price">
+
+                            <span class="catalog-price-label">
+                                السعر
+                            </span>
+
+                            <div class="catalog-price-value">
+
+                                @product.Price.Value.ToString("N2")
+
+                                <span>
+                                    ر.س
+                                </span>
+
+                            </div>
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="catalog-price-placeholder">
+                            السعر عند الطلب
+                        </div>
+                    }
+
+                    <div class="catalog-product-actions">
+
+                        <a asp-controller="Catalog"
+                           asp-action="Details"
+                           asp-route-id="@product.Id"
+                           class="btn btn-outline-primary public-btn">
+
+                            <i class="bi bi-eye"></i>
+
+                            <span>
+                                عرض التفاصيل
+                            </span>
+
+                        </a>
+
+                        <a asp-controller="Quotation"
+                           asp-action="Create"
+                           asp-route-productId="@product.Id"
+                           class="btn btn-primary public-btn public-btn-primary">
+
+                            <i class="bi bi-chat-square-text"></i>
+
+                            <span>
+                                طلب عرض سعر
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    </div>
+}

@@ -6,12 +6,13 @@
     var search = ViewBag.Search as string;
     var selectedCategoryId = ViewBag.CategoryId as int?;
     var categories = ViewBag.Categories as IEnumerable<ManholeCatalog.Models.Category>;
-    var productCount = Model.Count();
+    var totalCount = (int)(ViewBag.TotalCount ?? 0);
+    var initialCount = Model.Count();
+    var hasMore = initialCount < totalCount;
 }
 
 <div class="public-page catalog-page">
 
-    <!-- Page Header -->
     <section class="public-page-header">
 
         <div class="container">
@@ -38,12 +39,10 @@
 
     </section>
 
-
     <section class="public-section catalog-section">
 
         <div class="container">
 
-            <!-- Search & Filters -->
             <div class="public-card catalog-filter-card">
 
                 <div class="public-card-header">
@@ -70,7 +69,6 @@
 
                 </div>
 
-
                 <div class="public-card-body">
 
                     <form asp-controller="Catalog"
@@ -85,9 +83,7 @@
 
                                     <label for="search"
                                            class="public-form-label">
-
                                         البحث عن المنتجات
-
                                     </label>
 
                                     <div class="public-input-wrapper">
@@ -107,16 +103,13 @@
 
                             </div>
 
-
                             <div class="col-lg-4">
 
                                 <div class="public-form-group mb-0">
 
                                     <label for="categoryId"
                                            class="public-form-label">
-
                                         الفئة
-
                                     </label>
 
                                     <div class="public-input-wrapper">
@@ -158,7 +151,6 @@
 
                             </div>
 
-
                             <div class="col-lg-3">
 
                                 <div class="public-form-group mb-0">
@@ -173,7 +165,10 @@
                                                 class="btn btn-primary public-btn public-btn-primary flex-grow-1">
 
                                             <i class="bi bi-search"></i>
-                                            <span>بحث</span>
+
+                                            <span>
+                                                بحث
+                                            </span>
 
                                         </button>
 
@@ -182,7 +177,10 @@
                                            class="btn btn-outline-secondary public-btn">
 
                                             <i class="bi bi-arrow-counterclockwise"></i>
-                                            <span>مسح</span>
+
+                                            <span>
+                                                مسح
+                                            </span>
 
                                         </a>
 
@@ -200,8 +198,6 @@
 
             </div>
 
-
-            <!-- Results Header -->
             <div class="catalog-results-header">
 
                 <div class="catalog-results-main">
@@ -228,7 +224,7 @@
                             </h2>
 
                             <div class="text-muted small">
-                                تم العثور على @productCount منتج
+                                تم العثور على @totalCount منتج
                             </div>
                         }
                         else
@@ -238,14 +234,13 @@
                             </h2>
 
                             <div class="text-muted small">
-                                @productCount منتج متاح
+                                @totalCount منتج متاح
                             </div>
                         }
 
                     </div>
 
                 </div>
-
 
                 @if (!string.IsNullOrWhiteSpace(search) || selectedCategoryId.HasValue)
                 {
@@ -265,7 +260,6 @@
 
                             </span>
                         }
-
 
                         @if (selectedCategoryId.HasValue && categories != null)
                         {
@@ -292,10 +286,8 @@
 
             </div>
 
-
-            @if (!Model.Any())
+            @if (totalCount == 0)
             {
-                <!-- Empty State -->
                 <div class="public-empty-state">
 
                     <div class="public-empty-icon">
@@ -315,7 +307,10 @@
                        class="btn btn-primary public-btn public-btn-primary">
 
                         <i class="bi bi-grid"></i>
-                        <span>عرض جميع المنتجات</span>
+
+                        <span>
+                            عرض جميع المنتجات
+                        </span>
 
                     </a>
 
@@ -323,241 +318,37 @@
             }
             else
             {
-                <!-- Product Grid -->
                 <div class="catalog-products">
 
-                    <div class="row g-4">
-
-                        @foreach (var product in Model)
-                        {
-                            var primaryImage = product.Images.FirstOrDefault(i => i.IsPrimary) ?? product.Images.OrderBy(i => i.DisplayOrder).FirstOrDefault();
-
-                            <div class="col-sm-6 col-lg-4">
-
-                                <article class="public-card catalog-product-card">
-
-                                    <!-- Product Image -->
-                                    <div class="catalog-product-image-wrapper">
-
-                                        @if (primaryImage != null)
-                                        {
-                                            <img src="@primaryImage.ImagePath"
-                                                 alt="@primaryImage.AltText"
-                                                 class="catalog-product-image" />
-                                        }
-                                        else
-                                        {
-                                            <div class="catalog-no-image">
-
-                                                <div class="catalog-no-image-icon">
-                                                    <i class="bi bi-image"></i>
-                                                </div>
-
-                                                <span>
-                                                    لا توجد صورة متاحة
-                                                </span>
-
-                                            </div>
-                                        }
-
-                                    </div>
-
-
-                                    <!-- Product Information -->
-                                    <div class="public-card-body catalog-product-body">
-
-                                        <div class="catalog-product-heading">
-
-                                            @if (product.Category != null)
-                                            {
-                                                <div class="catalog-product-category">
-
-                                                    <i class="bi bi-folder2"></i>
-
-                                                    <span>
-                                                        @product.Category.Name
-                                                    </span>
-
-                                                </div>
-                                            }
-
-
-                                            <h3 class="catalog-product-title">
-                                                @product.Name
-                                            </h3>
-
-
-                                            @if (!string.IsNullOrWhiteSpace(product.SKU))
-                                            {
-                                                <span class="catalog-product-sku">
-
-                                                    <i class="bi bi-upc-scan"></i>
-
-                                                    <span>
-                                                        SKU: @product.SKU
-                                                    </span>
-
-                                                </span>
-                                            }
-
-                                        </div>
-
-
-                                        <!-- Specifications -->
-                                        @if (!string.IsNullOrWhiteSpace(product.Material) ||
-                                             !string.IsNullOrWhiteSpace(product.LoadClass) ||
-                                             !string.IsNullOrWhiteSpace(product.Diameter) ||
-                                             !string.IsNullOrWhiteSpace(product.Shape))
-                                        {
-                                            <div class="public-specifications catalog-specifications">
-
-                                                @if (!string.IsNullOrWhiteSpace(product.Material))
-                                                {
-                                                    <div class="public-spec-item">
-
-                                                        <span class="public-spec-label">
-
-                                                            <i class="bi bi-layers"></i>
-                                                            <span>المادة</span>
-
-                                                        </span>
-
-                                                        <span class="public-spec-value">
-                                                            @product.Material
-                                                        </span>
-
-                                                    </div>
-                                                }
-
-
-                                                @if (!string.IsNullOrWhiteSpace(product.LoadClass))
-                                                {
-                                                    <div class="public-spec-item">
-
-                                                        <span class="public-spec-label">
-
-                                                            <i class="bi bi-shield-check"></i>
-                                                            <span>فئة التحميل</span>
-
-                                                        </span>
-
-                                                        <span class="public-spec-value">
-                                                            @product.LoadClass
-                                                        </span>
-
-                                                    </div>
-                                                }
-
-
-                                                @if (!string.IsNullOrWhiteSpace(product.Diameter))
-                                                {
-                                                    <div class="public-spec-item">
-
-                                                        <span class="public-spec-label">
-
-                                                            <i class="bi bi-arrows-expand"></i>
-                                                            <span>القطر</span>
-
-                                                        </span>
-
-                                                        <span class="public-spec-value">
-                                                            @product.Diameter
-                                                        </span>
-
-                                                    </div>
-                                                }
-
-
-                                                @if (!string.IsNullOrWhiteSpace(product.Shape))
-                                                {
-                                                    <div class="public-spec-item">
-
-                                                        <span class="public-spec-label">
-
-                                                            <i class="bi bi-circle-square"></i>
-                                                            <span>الشكل</span>
-
-                                                        </span>
-
-                                                        <span class="public-spec-value">
-                                                            @product.Shape
-                                                        </span>
-
-                                                    </div>
-                                                }
-
-                                            </div>
-                                        }
-
-
-                                        <!-- Price & Actions -->
-                                        <div class="catalog-product-footer">
-
-                                            @if (product.Price.HasValue)
-                                            {
-                                                <div class="catalog-product-price">
-
-                                                    <span class="catalog-price-label">
-                                                        السعر
-                                                    </span>
-
-                                                    <div class="catalog-price-value">
-
-                                                        @product.Price.Value.ToString("N2")
-
-                                                        <span>
-                                                            ر.س
-                                                        </span>
-
-                                                    </div>
-
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                <div class="catalog-price-placeholder">
-                                                    السعر عند الطلب
-                                                </div>
-                                            }
-
-
-                                            <div class="catalog-product-actions">
-
-                                                <a asp-controller="Catalog"
-                                                   asp-action="Details"
-                                                   asp-route-id="@product.Id"
-                                                   class="btn btn-outline-primary public-btn">
-
-                                                    <i class="bi bi-eye"></i>
-                                                    <span>عرض التفاصيل</span>
-
-                                                </a>
-
-
-                                                <a asp-controller="Quotation"
-                                                   asp-action="Create"
-                                                   asp-route-productId="@product.Id"
-                                                   class="btn btn-primary public-btn public-btn-primary">
-
-                                                    <i class="bi bi-chat-square-text"></i>
-                                                    <span>طلب عرض سعر</span>
-
-                                                </a>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </article>
-
-                            </div>
-                        }
+                    <div id="catalogProductsGrid"
+                         class="row g-4">
+
+                        <partial name="_ProductCards"
+                                 model="Model" />
 
                     </div>
 
                 </div>
+
+                @if (hasMore)
+                {
+                    <div id="catalogLoadMoreWrapper"
+                         class="catalog-load-more">
+
+                        <button type="button"
+                                id="catalogLoadMoreButton"
+                                class="btn btn-outline-primary public-btn catalog-load-more-button">
+
+                            <i class="bi bi-plus-circle"></i>
+
+                            <span>
+                                عرض المزيد
+                            </span>
+
+                        </button>
+
+                    </div>
+                }
             }
 
         </div>
@@ -570,4 +361,103 @@
     <link rel="stylesheet"
           href="~/css/catalog.css"
           asp-append-version="true" />
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const button = document.getElementById("catalogLoadMoreButton");
+            const wrapper = document.getElementById("catalogLoadMoreWrapper");
+            const grid = document.getElementById("catalogProductsGrid");
+
+            if (!button || !wrapper || !grid) {
+                return;
+            }
+
+            let skip = @initialCount;
+
+            const search = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(search));
+            const categoryId = @selectedCategoryId.GetValueOrDefault(0);
+
+            button.addEventListener("click", async function () {
+
+                button.disabled = true;
+
+                const originalHtml = button.innerHTML;
+
+                button.innerHTML = `
+                    <span class="spinner-border spinner-border-sm"
+                          role="status"
+                          aria-hidden="true"></span>
+                    <span>جاري التحميل...</span>
+                `;
+
+                try {
+
+                    const params = new URLSearchParams();
+
+                    if (search) {
+                        params.append("search", search);
+                    }
+
+                    if (categoryId > 0) {
+                        params.append("categoryId", categoryId);
+                    }
+
+                    params.append("skip", skip);
+
+                    const response = await fetch(
+                        `/Catalog/LoadMore?${params.toString()}`,
+                        {
+                            method: "GET",
+                            headers: {
+                                "X-Requested-With": "XMLHttpRequest"
+                            }
+                        }
+                    );
+
+                    if (!response.ok) {
+                        throw new Error("تعذر تحميل المنتجات.");
+                    }
+
+                    const html = await response.text();
+
+                    if (!html.trim()) {
+                        wrapper.remove();
+                        return;
+                    }
+
+                    const temporaryContainer = document.createElement("div");
+
+                    temporaryContainer.innerHTML = html;
+
+                    const newProducts = temporaryContainer.children.length;
+
+                    grid.insertAdjacentHTML("beforeend", html);
+
+                    skip += newProducts;
+
+                    if (newProducts < 9) {
+                        wrapper.remove();
+                        return;
+                    }
+
+                    button.disabled = false;
+                    button.innerHTML = originalHtml;
+
+                }
+                catch (error) {
+
+                    button.disabled = false;
+                    button.innerHTML = originalHtml;
+
+                    alert("تعذر تحميل المنتجات. يرجى المحاولة مرة أخرى.");
+
+                }
+
+            });
+
+        });
+    </script>
 }
