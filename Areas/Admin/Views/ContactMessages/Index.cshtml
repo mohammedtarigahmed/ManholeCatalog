@@ -1,0 +1,268 @@
+@model IEnumerable<ManholeCatalog.Models.ContactMessage>
+
+@{
+    ViewData["Title"] = "رسائل التواصل";
+}
+
+<div class="container-fluid py-4">
+
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+
+        <div>
+            <h1 class="h3 mb-1">
+                <i class="bi bi-envelope me-2"></i>
+                رسائل التواصل
+            </h1>
+
+            <p class="text-muted mb-0">
+                إدارة الرسائل الواردة من نموذج التواصل.
+            </p>
+        </div>
+
+        <div>
+            <span class="badge bg-primary fs-6 px-3 py-2">
+                @Model.Count() رسالة
+            </span>
+        </div>
+
+    </div>
+
+    @if (TempData["SuccessMessage"] is string successMessage)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+
+            <i class="bi bi-check-circle me-2"></i>
+
+            @successMessage
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="إغلاق"></button>
+
+        </div>
+    }
+
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-header bg-white py-3">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <h5 class="mb-0">
+                    قائمة الرسائل
+                </h5>
+
+                <span class="text-muted small">
+                    مرتبة من الأحدث إلى الأقدم
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="card-body p-0">
+
+            @if (!Model.Any())
+            {
+                <div class="text-center py-5">
+
+                    <div class="mb-3">
+                        <i class="bi bi-envelope-open display-4 text-muted"></i>
+                    </div>
+
+                    <h5 class="mb-2">
+                        لا توجد رسائل حتى الآن
+                    </h5>
+
+                    <p class="text-muted mb-0">
+                        ستظهر رسائل العملاء هنا عند إرسال نموذج التواصل.
+                    </p>
+
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle mb-0">
+
+                        <thead class="table-light">
+
+                            <tr>
+
+                                <th class="px-4">
+                                    الحالة
+                                </th>
+
+                                <th>
+                                    الاسم
+                                </th>
+
+                                <th>
+                                    الشركة
+                                </th>
+
+                                <th>
+                                    الموضوع
+                                </th>
+
+                                <th>
+                                    البريد الإلكتروني
+                                </th>
+
+                                <th>
+                                    تاريخ الإرسال
+                                </th>
+
+                                <th class="text-end px-4">
+                                    الإجراءات
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var message in Model)
+                            {
+                                <tr class="@(message.IsRead ? "" : "table-primary")">
+
+                                    <td class="px-4">
+
+                                        @if (message.IsRead)
+                                        {
+                                            <span class="badge bg-secondary">
+                                                <i class="bi bi-envelope-open me-1"></i>
+                                                مقروءة
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-primary">
+                                                <i class="bi bi-envelope-fill me-1"></i>
+                                                جديدة
+                                            </span>
+                                        }
+
+                                    </td>
+
+                                    <td>
+
+                                        <div class="fw-semibold">
+                                            @message.Name
+                                        </div>
+
+                                        @if (!string.IsNullOrWhiteSpace(message.PhoneNumber))
+                                        {
+                                            <div class="small text-muted">
+                                                @message.PhoneNumber
+                                            </div>
+                                        }
+
+                                    </td>
+
+                                    <td>
+
+                                        @if (!string.IsNullOrWhiteSpace(message.CompanyName))
+                                        {
+                                            @message.CompanyName
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">
+                                                —
+                                            </span>
+                                        }
+
+                                    </td>
+
+                                    <td>
+
+                                        <div class="fw-semibold">
+                                            @message.Subject
+                                        </div>
+
+                                        <div class="small text-muted text-truncate"
+                                             style="max-width: 260px;">
+                                            @message.Message
+                                        </div>
+
+                                    </td>
+
+                                    <td>
+                                        <a href="mailto:@message.Email"
+                                           class="text-decoration-none">
+                                            @message.Email
+                                        </a>
+                                    </td>
+
+                                    <td>
+                                        <span class="text-nowrap">
+                                            @message.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy")
+                                        </span>
+
+                                        <div class="small text-muted">
+                                            @message.CreatedAt.ToLocalTime().ToString("hh:mm tt")
+                                        </div>
+                                    </td>
+
+                                    <td class="text-end px-4">
+
+                                        <div class="d-flex justify-content-end gap-2">
+
+                                            <a asp-action="Details"
+                                               asp-route-id="@message.Id"
+                                               class="btn btn-sm btn-outline-primary"
+                                               title="عرض الرسالة">
+
+                                                <i class="bi bi-eye"></i>
+
+                                                <span class="d-none d-lg-inline ms-1">
+                                                    عرض
+                                                </span>
+
+                                            </a>
+
+                                            <form asp-action="Delete"
+                                                  asp-route-id="@message.Id"
+                                                  method="post"
+                                                  class="d-inline"
+                                                  onsubmit="return confirm('هل أنت متأكد من حذف هذه الرسالة؟');">
+
+                                                @Html.AntiForgeryToken()
+
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-outline-danger"
+                                                        title="حذف الرسالة">
+
+                                                    <i class="bi bi-trash"></i>
+
+                                                    <span class="d-none d-lg-inline ms-1">
+                                                        حذف
+                                                    </span>
+
+                                                </button>
+
+                                            </form>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>

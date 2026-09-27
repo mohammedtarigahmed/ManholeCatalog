@@ -1,0 +1,597 @@
+@model ManholeCatalog.Models.ViewModels.ContactPageViewModel
+
+@{
+    ViewData["Title"] = "تواصل معنا";
+}
+
+<div class="public-page contact-page">
+
+    <section class="public-page-header contact-header">
+
+        <div class="container">
+
+            <div class="public-page-header-content text-center">
+
+                <span class="public-page-label">
+                    <i class="bi bi-chat-square-text"></i>
+                    تواصل معنا
+                </span>
+
+                <h1 class="public-page-title">
+                    تواصل معنا
+                </h1>
+
+                <p class="public-page-description">
+                    نحن هنا لمساعدتك والإجابة عن استفساراتك وتلبية احتياجات مشاريعك.
+                    تواصل معنا وسنكون سعداء بخدمتك.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="public-section contact-section">
+
+        <div class="container">
+
+            @if (TempData["SuccessMessage"] is string successMessage)
+            {
+                <div class="contact-success-message"
+                     role="alert">
+
+                    <div class="contact-success-icon">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+
+                    <div class="contact-success-content">
+                        @successMessage
+                    </div>
+
+                    <button type="button"
+                            class="contact-success-close"
+                            data-bs-dismiss="alert"
+                            aria-label="إغلاق">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+
+                </div>
+            }
+
+            <div class="row g-4 g-xl-5">
+
+                <!-- Contact Information -->
+
+                <div class="col-lg-5">
+
+                    <div class="public-card contact-info-card h-100">
+
+                        <div class="public-card-header">
+
+                            <div class="public-card-header-content">
+
+                                <div class="public-card-icon">
+                                    <i class="bi bi-person-lines-fill"></i>
+                                </div>
+
+                                <div>
+
+                                    <h2 class="h5 fw-bold mb-1">
+                                        معلومات التواصل
+                                    </h2>
+
+                                    <p class="text-muted small mb-0">
+                                        يمكنك التواصل معنا من خلال البيانات التالية.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="public-card-body contact-info-body">
+
+                            <div class="contact-info-list">
+
+                                @if (!string.IsNullOrWhiteSpace(Model.ContactPage.CompanyName))
+                                {
+                                    <div class="contact-info-item">
+
+                                        <div class="contact-info-icon">
+                                            <i class="bi bi-building"></i>
+                                        </div>
+
+                                        <div class="contact-info-content">
+
+                                            <div class="contact-info-label">
+                                                المنشأة
+                                            </div>
+
+                                            <div class="contact-info-value">
+                                                @Model.ContactPage.CompanyName
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                }
+
+                                @if (!string.IsNullOrWhiteSpace(Model.ContactPage.Email))
+                                {
+                                    <div class="contact-info-item">
+
+                                        <div class="contact-info-icon">
+                                            <i class="bi bi-envelope"></i>
+                                        </div>
+
+                                        <div class="contact-info-content">
+
+                                            <div class="contact-info-label">
+                                                البريد الإلكتروني
+                                            </div>
+
+                                            <a href="mailto:@Model.ContactPage.Email"
+                                               class="contact-info-link">
+                                                @Model.ContactPage.Email
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+                                }
+
+                                @if (!string.IsNullOrWhiteSpace(Model.ContactPage.PhoneNumber))
+                                {
+                                    <div class="contact-info-item">
+
+                                        <div class="contact-info-icon">
+                                            <i class="bi bi-telephone"></i>
+                                        </div>
+
+                                        <div class="contact-info-content">
+
+                                            <div class="contact-info-label">
+                                                الهاتف
+                                            </div>
+
+                                            <a href="tel:@Model.ContactPage.PhoneNumber"
+                                               class="contact-info-link">
+                                                @Model.ContactPage.PhoneNumber
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+                                }
+
+                                @if (!string.IsNullOrWhiteSpace(Model.ContactPage.MobileNumber))
+                                {
+                                    <div class="contact-info-item">
+
+                                        <div class="contact-info-icon">
+                                            <i class="bi bi-phone"></i>
+                                        </div>
+
+                                        <div class="contact-info-content">
+
+                                            <div class="contact-info-label">
+                                                الجوال
+                                            </div>
+
+                                            <a href="tel:@Model.ContactPage.MobileNumber"
+                                               class="contact-info-link">
+                                                @Model.ContactPage.MobileNumber
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+                                }
+
+                                @if (!string.IsNullOrWhiteSpace(Model.ContactPage.WhatsAppNumber))
+                                {
+                                    <div class="contact-info-item">
+
+                                        <div class="contact-info-icon contact-whatsapp-icon">
+                                            <i class="bi bi-whatsapp"></i>
+                                        </div>
+
+                                        <div class="contact-info-content">
+
+                                            <div class="contact-info-label">
+                                                واتساب
+                                            </div>
+
+                                            <a href="https://wa.me/@Model.ContactPage.WhatsAppNumber.TrimStart('+')"
+                                               target="_blank"
+                                               rel="noopener noreferrer"
+                                               class="contact-info-link">
+                                                @Model.ContactPage.WhatsAppNumber
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+                                }
+
+                                @if (!string.IsNullOrWhiteSpace(Model.ContactPage.Address))
+                                {
+                                    <div class="contact-info-item">
+
+                                        <div class="contact-info-icon">
+                                            <i class="bi bi-geo-alt"></i>
+                                        </div>
+
+                                        <div class="contact-info-content">
+
+                                            <div class="contact-info-label">
+                                                العنوان
+                                            </div>
+
+                                            <div class="contact-info-value">
+                                                @Model.ContactPage.Address
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                }
+
+                                @if (!string.IsNullOrWhiteSpace(Model.ContactPage.WorkingHours))
+                                {
+                                    <div class="contact-info-item">
+
+                                        <div class="contact-info-icon">
+                                            <i class="bi bi-clock"></i>
+                                        </div>
+
+                                        <div class="contact-info-content">
+
+                                            <div class="contact-info-label">
+                                                ساعات العمل
+                                            </div>
+
+                                            <div class="contact-info-value">
+                                                @Model.ContactPage.WorkingHours
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                }
+
+                            </div>
+
+                            @if (!string.IsNullOrWhiteSpace(Model.ContactPage.GoogleMapsUrl))
+                            {
+                                <div class="contact-map-action">
+
+                                    <a href="@Model.ContactPage.GoogleMapsUrl"
+                                       target="_blank"
+                                       rel="noopener noreferrer"
+                                       class="btn btn-outline-secondary public-btn contact-map-btn">
+
+                                        <i class="bi bi-map"></i>
+
+                                        <span>
+                                            عرض الموقع على الخريطة
+                                        </span>
+
+                                    </a>
+
+                                </div>
+                            }
+
+                            @if (!string.IsNullOrWhiteSpace(Model.ContactPage.LinkedInUrl) ||
+                                 !string.IsNullOrWhiteSpace(Model.ContactPage.FacebookUrl) ||
+                                 !string.IsNullOrWhiteSpace(Model.ContactPage.InstagramUrl) ||
+                                 !string.IsNullOrWhiteSpace(Model.ContactPage.XUrl) ||
+                                 !string.IsNullOrWhiteSpace(Model.ContactPage.YouTubeUrl))
+                            {
+                                <div class="contact-social-section">
+
+                                    <div class="contact-social-heading">
+                                        تابعنا على وسائل التواصل الاجتماعي
+                                    </div>
+
+                                    <div class="contact-social-links">
+
+                                        @if (!string.IsNullOrWhiteSpace(Model.ContactPage.LinkedInUrl))
+                                        {
+                                            <a href="@Model.ContactPage.LinkedInUrl"
+                                               target="_blank"
+                                               rel="noopener noreferrer"
+                                               class="contact-social-link"
+                                               aria-label="LinkedIn">
+
+                                                <i class="bi bi-linkedin"></i>
+
+                                            </a>
+                                        }
+
+                                        @if (!string.IsNullOrWhiteSpace(Model.ContactPage.FacebookUrl))
+                                        {
+                                            <a href="@Model.ContactPage.FacebookUrl"
+                                               target="_blank"
+                                               rel="noopener noreferrer"
+                                               class="contact-social-link"
+                                               aria-label="Facebook">
+
+                                                <i class="bi bi-facebook"></i>
+
+                                            </a>
+                                        }
+
+                                        @if (!string.IsNullOrWhiteSpace(Model.ContactPage.InstagramUrl))
+                                        {
+                                            <a href="@Model.ContactPage.InstagramUrl"
+                                               target="_blank"
+                                               rel="noopener noreferrer"
+                                               class="contact-social-link"
+                                               aria-label="Instagram">
+
+                                                <i class="bi bi-instagram"></i>
+
+                                            </a>
+                                        }
+
+                                        @if (!string.IsNullOrWhiteSpace(Model.ContactPage.XUrl))
+                                        {
+                                            <a href="@Model.ContactPage.XUrl"
+                                               target="_blank"
+                                               rel="noopener noreferrer"
+                                               class="contact-social-link"
+                                               aria-label="X">
+
+                                                <i class="bi bi-twitter-x"></i>
+
+                                            </a>
+                                        }
+
+                                        @if (!string.IsNullOrWhiteSpace(Model.ContactPage.YouTubeUrl))
+                                        {
+                                            <a href="@Model.ContactPage.YouTubeUrl"
+                                               target="_blank"
+                                               rel="noopener noreferrer"
+                                               class="contact-social-link"
+                                               aria-label="YouTube">
+
+                                                <i class="bi bi-youtube"></i>
+
+                                            </a>
+                                        }
+
+                                    </div>
+
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Contact Form -->
+
+                <div class="col-lg-7">
+
+                    <div class="public-card contact-form-card">
+
+                        <div class="public-card-header">
+
+                            <div class="public-card-header-content">
+
+                                <div class="public-card-icon">
+                                    <i class="bi bi-send"></i>
+                                </div>
+
+                                <div>
+
+                                    <h2 class="h5 fw-bold mb-1">
+                                        أرسل لنا رسالة
+                                    </h2>
+
+                                    <p class="text-muted small mb-0">
+                                        لديك استفسار أو طلب؟ أرسل رسالتك وسنتواصل معك.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="public-card-body contact-form-body">
+
+                            <form asp-action="Index"
+                                  method="post">
+
+                                @Html.AntiForgeryToken()
+
+                                <div asp-validation-summary="ModelOnly"
+                                     class="alert alert-danger contact-validation-summary"
+                                     role="alert">
+                                </div>
+
+                                <div class="row g-3">
+
+                                    <div class="col-md-6">
+
+                                        <label asp-for="Message.Name"
+                                               class="form-label public-form-label">
+                                        </label>
+
+                                        <div class="public-input-wrapper">
+
+                                            <i class="bi bi-person public-input-icon"></i>
+
+                                            <input asp-for="Message.Name"
+                                                   class="form-control public-input"
+                                                   placeholder="الاسم" />
+
+                                        </div>
+
+                                        <span asp-validation-for="Message.Name"
+                                              class="text-danger small">
+                                        </span>
+
+                                    </div>
+
+                                    <div class="col-md-6">
+
+                                        <label asp-for="Message.CompanyName"
+                                               class="form-label public-form-label">
+                                        </label>
+
+                                        <div class="public-input-wrapper">
+
+                                            <i class="bi bi-building public-input-icon"></i>
+
+                                            <input asp-for="Message.CompanyName"
+                                                   class="form-control public-input"
+                                                   placeholder="اسم الشركة (اختياري)" />
+
+                                        </div>
+
+                                        <span asp-validation-for="Message.CompanyName"
+                                              class="text-danger small">
+                                        </span>
+
+                                    </div>
+
+                                    <div class="col-md-6">
+
+                                        <label asp-for="Message.Email"
+                                               class="form-label public-form-label">
+                                        </label>
+
+                                        <div class="public-input-wrapper">
+
+                                            <i class="bi bi-envelope public-input-icon"></i>
+
+                                            <input asp-for="Message.Email"
+                                                   type="email"
+                                                   class="form-control public-input"
+                                                   placeholder="example@company.com" />
+
+                                        </div>
+
+                                        <span asp-validation-for="Message.Email"
+                                              class="text-danger small">
+                                        </span>
+
+                                    </div>
+
+                                    <div class="col-md-6">
+
+                                        <label asp-for="Message.PhoneNumber"
+                                               class="form-label public-form-label">
+                                        </label>
+
+                                        <div class="public-input-wrapper">
+
+                                            <i class="bi bi-telephone public-input-icon"></i>
+
+                                            <input asp-for="Message.PhoneNumber"
+                                                   type="tel"
+                                                   class="form-control public-input"
+                                                   placeholder="رقم الهاتف (اختياري)" />
+
+                                        </div>
+
+                                        <span asp-validation-for="Message.PhoneNumber"
+                                              class="text-danger small">
+                                        </span>
+
+                                    </div>
+
+                                    <div class="col-12">
+
+                                        <label asp-for="Message.Subject"
+                                               class="form-label public-form-label">
+                                        </label>
+
+                                        <div class="public-input-wrapper">
+
+                                            <i class="bi bi-chat-square-text public-input-icon"></i>
+
+                                            <input asp-for="Message.Subject"
+                                                   class="form-control public-input"
+                                                   placeholder="موضوع الرسالة" />
+
+                                        </div>
+
+                                        <span asp-validation-for="Message.Subject"
+                                              class="text-danger small">
+                                        </span>
+
+                                    </div>
+
+                                    <div class="col-12">
+
+                                        <label asp-for="Message.Message"
+                                               class="form-label public-form-label">
+                                        </label>
+
+                                        <div class="public-input-wrapper contact-textarea-wrapper">
+
+                                            <i class="bi bi-chat-left-text public-input-icon contact-textarea-icon"></i>
+
+                                            <textarea asp-for="Message.Message"
+                                                      class="form-control public-input contact-textarea"
+                                                      rows="7"
+                                                      placeholder="اكتب رسالتك هنا..."></textarea>
+
+                                        </div>
+
+                                        <span asp-validation-for="Message.Message"
+                                              class="text-danger small">
+                                        </span>
+
+                                    </div>
+
+                                    <div class="col-12 pt-2">
+
+                                        <button type="submit"
+                                                class="btn btn-primary public-btn public-btn-primary public-btn-lg contact-submit-btn">
+
+                                            <i class="bi bi-send"></i>
+
+                                            <span>
+                                                إرسال الرسالة
+                                            </span>
+
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/contact.css"
+          asp-append-version="true" />
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

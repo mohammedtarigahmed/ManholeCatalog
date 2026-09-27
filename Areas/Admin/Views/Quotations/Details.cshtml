@@ -4,74 +4,130 @@
     ViewData["Title"] = "تفاصيل طلب عرض السعر";
 }
 
-<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+<!-- Page Header -->
+<div class="quotation-details-header mb-4">
 
-    <div>
+    <div class="d-flex flex-column flex-xl-row justify-content-between align-items-xl-center gap-3">
 
-        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+        <div>
 
-            <span class="badge text-bg-light border">
-                الطلب #@Model.Id
-            </span>
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
 
-            @switch (Model.Status)
-            {
-                case ManholeCatalog.Models.QuotationStatus.Pending:
-                    <span class="badge text-bg-warning">قيد الانتظار</span>
-                    break;
+                <span class="badge rounded-pill text-bg-light border px-3 py-2">
+                    <i class="bi bi-receipt me-1"></i>
+                    الطلب #@Model.Id
+                </span>
 
-                case ManholeCatalog.Models.QuotationStatus.Contacted:
-                    <span class="badge text-bg-info">تم التواصل</span>
-                    break;
+                @switch (Model.Status)
+                {
+                    case ManholeCatalog.Models.QuotationStatus.Pending:
 
-                case ManholeCatalog.Models.QuotationStatus.Quoted:
-                    <span class="badge text-bg-primary">تم تقديم العرض</span>
-                    break;
+                        <span class="badge rounded-pill text-bg-warning px-3 py-2">
+                            <i class="bi bi-clock me-1"></i>
+                            قيد الانتظار
+                        </span>
 
-                case ManholeCatalog.Models.QuotationStatus.Closed:
-                    <span class="badge text-bg-secondary">مغلقة</span>
-                    break;
-            }
+                        break;
 
-        </div>
+                    case ManholeCatalog.Models.QuotationStatus.Contacted:
 
-        <h1 class="h3 fw-bold mb-1">
-            طلب عرض السعر #@Model.Id
-        </h1>
+                        <span class="badge rounded-pill text-bg-info px-3 py-2">
+                            <i class="bi bi-chat-dots me-1"></i>
+                            تم التواصل
+                        </span>
 
-        <p class="text-muted mb-0">
-            مراجعة بيانات العميل ومتطلبات المنتج وحالة الطلب.
-        </p>
+                        break;
 
-    </div>
+                    case ManholeCatalog.Models.QuotationStatus.Quoted:
 
-    <a asp-area="Admin"
-       asp-controller="Quotations"
-       asp-action="Index"
-       class="btn btn-outline-secondary">
-        ← العودة إلى الطلبات
-    </a>
+                        <span class="badge rounded-pill text-bg-primary px-3 py-2">
+                            <i class="bi bi-file-earmark-check me-1"></i>
+                            تم تقديم العرض
+                        </span>
 
-</div>
+                        break;
 
-<div class="row g-4">
+                    case ManholeCatalog.Models.QuotationStatus.Closed:
 
-    <!-- بيانات العميل -->
-    <div class="col-lg-6">
+                        <span class="badge rounded-pill text-bg-secondary px-3 py-2">
+                            <i class="bi bi-check-circle me-1"></i>
+                            مغلقة
+                        </span>
 
-        <div class="card border-0 shadow-sm h-100">
-
-            <div class="card-header bg-white py-3">
-
-                <h2 class="h6 fw-bold mb-0">
-                    بيانات العميل
-                </h2>
+                        break;
+                }
 
             </div>
 
-            <div class="card-body">
+            <h1 class="h3 fw-bold mb-1">
+                طلب عرض السعر #@Model.Id
+            </h1>
 
-                <div class="mb-4">
+            <p class="text-muted mb-0">
+                مراجعة بيانات العميل ومتطلبات المنتج وحالة الطلب.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <a asp-area="Admin"
+               asp-controller="Quotations"
+               asp-action="Index"
+               class="btn btn-outline-secondary quotation-back-button">
+
+                <i class="bi bi-arrow-right me-1"></i>
+
+                العودة إلى الطلبات
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="row g-4">
+
+    <!-- Customer Information -->
+
+    <div class="col-lg-6">
+
+        <div class="card border-0 shadow-sm quotation-details-card h-100">
+
+            <div class="card-header bg-white border-0 p-4">
+
+                <div class="d-flex align-items-center gap-3">
+
+                    <div class="quotation-section-icon bg-primary-subtle text-primary">
+
+                        <i class="bi bi-person"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h2 class="h6 fw-bold mb-1">
+                            بيانات العميل
+                        </h2>
+
+                        <p class="text-muted small mb-0">
+                            معلومات العميل ووسائل التواصل.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card-body px-4 pb-4">
+
+                <div class="quotation-info-item mb-4">
 
                     <div class="small text-muted mb-1">
                         الاسم الكامل
@@ -83,7 +139,8 @@
 
                 </div>
 
-                <div class="mb-4">
+
+                <div class="quotation-info-item mb-4">
 
                     <div class="small text-muted mb-1">
                         اسم الشركة
@@ -104,44 +161,62 @@
 
                 </div>
 
-                <div class="mb-4">
 
-                    <div class="small text-muted mb-1">
+                <div class="quotation-info-item mb-4">
+
+                    <div class="small text-muted mb-2">
                         البريد الإلكتروني
                     </div>
 
                     <div class="d-flex flex-wrap align-items-center gap-2">
 
                         <a href="mailto:@Model.Email"
-                           class="text-decoration-none">
+                           class="quotation-contact-value">
+
+                            <i class="bi bi-envelope me-1"></i>
+
                             @Model.Email
+
                         </a>
 
                         <a href="mailto:@Model.Email"
-                           class="btn btn-sm btn-outline-primary">
+                           class="btn btn-sm btn-outline-primary quotation-action-button">
+
+                            <i class="bi bi-send me-1"></i>
+
                             إرسال بريد
+
                         </a>
 
                     </div>
 
                 </div>
 
-                <div>
 
-                    <div class="small text-muted mb-1">
+                <div class="quotation-info-item">
+
+                    <div class="small text-muted mb-2">
                         رقم الهاتف
                     </div>
 
                     <div class="d-flex flex-wrap align-items-center gap-2">
 
                         <a href="tel:@Model.PhoneNumber"
-                           class="text-decoration-none">
+                           class="quotation-contact-value">
+
+                            <i class="bi bi-telephone me-1"></i>
+
                             @Model.PhoneNumber
+
                         </a>
 
                         <a href="tel:@Model.PhoneNumber"
-                           class="btn btn-sm btn-outline-success">
+                           class="btn btn-sm btn-outline-success quotation-action-button">
+
+                            <i class="bi bi-telephone-outbound me-1"></i>
+
                             اتصال
+
                         </a>
 
                     </div>
@@ -154,43 +229,70 @@
 
     </div>
 
-    <!-- بيانات الطلب -->
+
+    <!-- Request Information -->
+
     <div class="col-lg-6">
 
-        <div class="card border-0 shadow-sm h-100">
+        <div class="card border-0 shadow-sm quotation-details-card h-100">
 
-            <div class="card-header bg-white py-3">
+            <div class="card-header bg-white border-0 p-4">
 
-                <h2 class="h6 fw-bold mb-0">
-                    بيانات الطلب
-                </h2>
+                <div class="d-flex align-items-center gap-3">
+
+                    <div class="quotation-section-icon bg-info-subtle text-info">
+
+                        <i class="bi bi-file-earmark-text"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h2 class="h6 fw-bold mb-1">
+                            بيانات الطلب
+                        </h2>
+
+                        <p class="text-muted small mb-0">
+                            تفاصيل المنتج والطلب والتواريخ.
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
 
-            <div class="card-body">
 
-                <div class="mb-4">
+            <div class="card-body px-4 pb-4">
 
-                    <div class="small text-muted mb-1">
+                <div class="quotation-info-item mb-4">
+
+                    <div class="small text-muted mb-2">
                         المنتج
                     </div>
 
                     @if (Model.Product != null)
                     {
-                        <div class="d-flex flex-column align-items-start gap-2">
+                        <div class="d-flex flex-wrap align-items-center gap-2">
 
                             <a asp-area="Admin"
                                asp-controller="Products"
                                asp-action="Details"
                                asp-route-id="@Model.Product.Id"
-                               class="fw-semibold text-decoration-none">
+                               class="fw-semibold text-decoration-none quotation-product-link">
+
+                                <i class="bi bi-box-seam me-1"></i>
+
                                 @Model.Product.Name
+
                             </a>
 
                             @if (!string.IsNullOrWhiteSpace(Model.Product.SKU))
                             {
-                                <span class="badge text-bg-light border">
+                                <span class="badge rounded-pill text-bg-light border">
+
                                     SKU: @Model.Product.SKU
+
                                 </span>
                             }
 
@@ -205,71 +307,131 @@
 
                 </div>
 
-                <div class="mb-4">
+
+                <div class="quotation-info-item mb-4">
 
                     <div class="small text-muted mb-1">
                         الكمية
                     </div>
 
-                    <div class="fs-5 fw-semibold">
-                        @Model.Quantity
+                    <div class="d-flex align-items-center gap-2">
+
+                        <span class="quotation-quantity-icon">
+
+                            <i class="bi bi-box-seam"></i>
+
+                        </span>
+
+                        <span class="fs-5 fw-semibold">
+                            @Model.Quantity
+                        </span>
+
                     </div>
 
                 </div>
 
-                <div class="mb-4">
 
-                    <div class="small text-muted mb-1">
+                <div class="quotation-info-item mb-4">
+
+                    <div class="small text-muted mb-2">
                         الحالة الحالية
                     </div>
 
                     @switch (Model.Status)
                     {
                         case ManholeCatalog.Models.QuotationStatus.Pending:
-                            <span class="badge text-bg-warning">قيد الانتظار</span>
+
+                            <span class="badge rounded-pill text-bg-warning px-3 py-2">
+
+                                <i class="bi bi-clock me-1"></i>
+
+                                قيد الانتظار
+
+                            </span>
+
                             break;
 
                         case ManholeCatalog.Models.QuotationStatus.Contacted:
-                            <span class="badge text-bg-info">تم التواصل</span>
+
+                            <span class="badge rounded-pill text-bg-info px-3 py-2">
+
+                                <i class="bi bi-chat-dots me-1"></i>
+
+                                تم التواصل
+
+                            </span>
+
                             break;
 
                         case ManholeCatalog.Models.QuotationStatus.Quoted:
-                            <span class="badge text-bg-primary">تم تقديم العرض</span>
+
+                            <span class="badge rounded-pill text-bg-primary px-3 py-2">
+
+                                <i class="bi bi-file-earmark-check me-1"></i>
+
+                                تم تقديم العرض
+
+                            </span>
+
                             break;
 
                         case ManholeCatalog.Models.QuotationStatus.Closed:
-                            <span class="badge text-bg-secondary">مغلقة</span>
+
+                            <span class="badge rounded-pill text-bg-secondary px-3 py-2">
+
+                                <i class="bi bi-check-circle me-1"></i>
+
+                                مغلقة
+
+                            </span>
+
                             break;
 
                         default:
-                            <span class="badge text-bg-light border">غير معروفة</span>
+
+                            <span class="badge rounded-pill text-bg-light border">
+
+                                غير معروفة
+
+                            </span>
+
                             break;
                     }
 
                 </div>
 
-                <div class="mb-4">
+
+                <div class="quotation-info-item mb-4">
 
                     <div class="small text-muted mb-1">
                         تاريخ تقديم الطلب
                     </div>
 
                     <div class="fw-semibold">
-                        @Model.CreatedAt.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")
+
+                        <i class="bi bi-calendar3 me-1 text-muted"></i>
+
+                        @Model.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy - hh:mm tt")
+
                     </div>
 
                 </div>
 
+
                 @if (Model.UpdatedAt.HasValue)
                 {
-                    <div>
+                    <div class="quotation-info-item">
 
                         <div class="small text-muted mb-1">
                             آخر تحديث
                         </div>
 
                         <div class="fw-semibold">
-                            @Model.UpdatedAt.Value.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")
+
+                            <i class="bi bi-arrow-repeat me-1 text-muted"></i>
+
+                            @Model.UpdatedAt.Value.ToLocalTime().ToString("dd/MM/yyyy - hh:mm tt")
+
                         </div>
 
                     </div>
@@ -281,32 +443,58 @@
 
     </div>
 
-    <!-- رسالة العميل -->
+
+    <!-- Customer Message -->
+
     <div class="col-12">
 
-        <div class="card border-0 shadow-sm">
+        <div class="card border-0 shadow-sm quotation-details-card">
 
-            <div class="card-header bg-white py-3">
+            <div class="card-header bg-white border-0 p-4">
 
-                <h2 class="h6 fw-bold mb-0">
-                    رسالة العميل
-                </h2>
+                <div class="d-flex align-items-center gap-3">
+
+                    <div class="quotation-section-icon bg-secondary-subtle text-secondary">
+
+                        <i class="bi bi-chat-left-text"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h2 class="h6 fw-bold mb-1">
+                            رسالة العميل
+                        </h2>
+
+                        <p class="text-muted small mb-0">
+                            الرسالة المرفقة مع طلب عرض السعر.
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
 
-            <div class="card-body">
+
+            <div class="card-body px-4 pb-4">
 
                 @if (!string.IsNullOrWhiteSpace(Model.Message))
                 {
-                    <div class="bg-light border rounded p-3"
-                         style="white-space: pre-line;">
+                    <div class="quotation-message-box">
                         @Model.Message
                     </div>
                 }
                 else
                 {
-                    <div class="text-muted">
-                        لم يرسل العميل أي رسالة.
+                    <div class="quotation-empty-message">
+
+                        <i class="bi bi-chat-square-text"></i>
+
+                        <span>
+                            لم يرسل العميل أي رسالة.
+                        </span>
+
                     </div>
                 }
 
@@ -316,24 +504,41 @@
 
     </div>
 
-    <!-- تحديث الحالة -->
+
+    <!-- Update Status -->
+
     <div class="col-12">
 
-        <div class="card border-0 shadow-sm">
+        <div class="card border-0 shadow-sm quotation-details-card">
 
-            <div class="card-header bg-white py-3">
+            <div class="card-header bg-white border-0 p-4">
 
-                <h2 class="h6 fw-bold mb-1">
-                    تحديث حالة الطلب
-                </h2>
+                <div class="d-flex align-items-center gap-3">
 
-                <p class="text-muted small mb-0">
-                    تغيير الحالة الحالية لطلب عرض السعر.
-                </p>
+                    <div class="quotation-section-icon bg-warning-subtle text-warning">
+
+                        <i class="bi bi-arrow-repeat"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h2 class="h6 fw-bold mb-1">
+                            تحديث حالة الطلب
+                        </h2>
+
+                        <p class="text-muted small mb-0">
+                            تغيير الحالة الحالية لطلب عرض السعر.
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
 
-            <div class="card-body">
+
+            <div class="card-body px-4 pb-4">
 
                 <form asp-area="Admin"
                       asp-controller="Quotations"
@@ -344,64 +549,92 @@
                            name="id"
                            value="@Model.Id" />
 
-                    <div class="row g-3 align-items-end">
+
+                    <div class="row g-3">
 
                         <div class="col-md-8">
 
                             <label for="status"
                                    class="form-label fw-semibold">
+
                                 الحالة
+
                             </label>
 
                             <select id="status"
                                     name="status"
-                                    class="form-select">
+                                    class="form-select quotation-form-control">
 
                                 @if (Model.Status == ManholeCatalog.Models.QuotationStatus.Pending)
                                 {
-                                    <option value="1" selected>قيد الانتظار</option>
+                                    <option value="1" selected>
+                                        قيد الانتظار
+                                    </option>
                                 }
                                 else
                                 {
-                                    <option value="1">قيد الانتظار</option>
+                                    <option value="1">
+                                        قيد الانتظار
+                                    </option>
                                 }
 
                                 @if (Model.Status == ManholeCatalog.Models.QuotationStatus.Contacted)
                                 {
-                                    <option value="2" selected>تم التواصل</option>
+                                    <option value="2" selected>
+                                        تم التواصل
+                                    </option>
                                 }
                                 else
                                 {
-                                    <option value="2">تم التواصل</option>
+                                    <option value="2">
+                                        تم التواصل
+                                    </option>
                                 }
 
                                 @if (Model.Status == ManholeCatalog.Models.QuotationStatus.Quoted)
                                 {
-                                    <option value="3" selected>تم تقديم العرض</option>
+                                    <option value="3" selected>
+                                        تم تقديم العرض
+                                    </option>
                                 }
                                 else
                                 {
-                                    <option value="3">تم تقديم العرض</option>
+                                    <option value="3">
+                                        تم تقديم العرض
+                                    </option>
                                 }
 
                                 @if (Model.Status == ManholeCatalog.Models.QuotationStatus.Closed)
                                 {
-                                    <option value="4" selected>مغلقة</option>
+                                    <option value="4" selected>
+                                        مغلقة
+                                    </option>
                                 }
                                 else
                                 {
-                                    <option value="4">مغلقة</option>
+                                    <option value="4">
+                                        مغلقة
+                                    </option>
                                 }
 
                             </select>
 
                         </div>
 
+
                         <div class="col-md-4">
 
+                            <label class="form-label fw-semibold">
+                                الإجراءات
+                            </label>
+
                             <button type="submit"
-                                    class="btn btn-primary w-100">
+                                    class="btn btn-primary w-100 quotation-update-button">
+
+                                <i class="bi bi-check2-circle me-1"></i>
+
                                 تحديث الحالة
+
                             </button>
 
                         </div>
@@ -417,3 +650,121 @@
     </div>
 
 </div>
+
+
+<style>
+
+    .quotation-details-header {
+        position: relative;
+    }
+
+    .quotation-details-card {
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .quotation-back-button {
+        min-height: 42px;
+        border-radius: 10px;
+    }
+
+    .quotation-section-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 11px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 1rem;
+    }
+
+    .quotation-info-item {
+        position: relative;
+    }
+
+    .quotation-info-item:not(:last-child) {
+        padding-bottom: 18px;
+        border-bottom: 1px solid #f1f3f5;
+    }
+
+    .quotation-contact-value {
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .quotation-action-button {
+        border-radius: 8px;
+    }
+
+    .quotation-product-link {
+        color: inherit;
+    }
+
+    .quotation-product-link:hover {
+        color: var(--bs-primary);
+    }
+
+    .quotation-quantity-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+        background: #f1f5f9;
+        color: #64748b;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+    }
+
+    .quotation-form-control {
+        min-height: 44px;
+        border-radius: 10px;
+        border-color: #dfe3e8;
+    }
+
+    .quotation-form-control:focus {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.1);
+    }
+
+    .quotation-update-button {
+        min-height: 44px;
+        border-radius: 10px;
+    }
+
+    .quotation-message-box {
+        background: #f8fafc;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 18px;
+        white-space: pre-line;
+        line-height: 1.8;
+        color: #374151;
+    }
+
+    .quotation-empty-message {
+        min-height: 90px;
+        background: #f8fafc;
+        border: 1px dashed #d9dee5;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: #9ca3af;
+    }
+
+    .quotation-empty-message i {
+        font-size: 1.1rem;
+    }
+
+    @@media (max-width: 767.98px) {
+
+        .quotation-back-button {
+            width: 100%;
+        }
+
+    }
+
+</style>

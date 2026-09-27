@@ -11,309 +11,79 @@
     var primaryImage = productImages.FirstOrDefault(i => i.IsPrimary) ?? productImages.FirstOrDefault();
 }
 
-<div class="container py-5">
+<div class="public-page quotation-page">
 
-    <!-- Back to Product -->
-    <div class="mb-4">
+    <!-- Page Header -->
+    <section class="public-page-header quotation-header">
 
-        <a asp-controller="Catalog"
-           asp-action="Details"
-           asp-route-id="@Model.ProductId"
-           class="btn btn-outline-secondary">
-            ← العودة إلى المنتج
-        </a>
+        <div class="container">
 
-    </div>
+            <div class="public-page-header-content quotation-header-content">
 
-    <div class="mb-5">
+                <span class="public-page-label quotation-header-badge">
+                    <span>
+                        <i class="bi bi-file-earmark-text"></i>
+                    </span>
+                    طلب عرض سعر
+                </span>
 
-        <span class="badge text-bg-primary px-3 py-2 mb-3">
-            طلب عرض سعر
-        </span>
+                <h1 class="public-page-title quotation-title">
+                    طلب عرض سعر
+                </h1>
 
-        <h1 class="display-6 fw-bold mb-2">
-            طلب عرض سعر
-        </h1>
+                <p class="public-page-description quotation-description">
+                    أخبرنا بما تحتاجه وأدخل بيانات التواصل الخاصة بك.
+                    سيقوم فريقنا بمراجعة طلبك والتواصل معك بخصوص عرض السعر.
+                </p>
 
-        <p class="lead text-muted mb-0">
-            أخبرنا بما تحتاجه وأدخل بيانات التواصل الخاصة بك.
-            سيقوم فريقنا بمراجعة طلبك والتواصل معك بخصوص عرض السعر.
-        </p>
+                <a asp-controller="Catalog"
+                   asp-action="Details"
+                   asp-route-id="@Model.ProductId"
+                   class="btn btn-outline-secondary public-btn quotation-back-link">
 
-    </div>
+                    <i class="bi bi-arrow-right"></i>
 
-    <div class="row g-4 g-lg-5">
+                    <span>
+                        العودة إلى المنتج
+                    </span>
 
-        <!-- Product Summary -->
-        <div class="col-lg-5">
-
-            <div class="card border-0 shadow-sm h-100">
-
-                <div class="card-header bg-white py-3">
-
-                    <h2 class="h5 fw-bold mb-1">
-                        المنتج
-                    </h2>
-
-                    <p class="text-muted small mb-0">
-                        المنتج المطلوب ضمن طلب عرض السعر.
-                    </p>
-
-                </div>
-
-                <div class="card-body p-4">
-
-                    <!-- Product Image -->
-                    <div class="rounded overflow-hidden mb-4"
-                         style="background-color: #f8f9fa;">
-
-                        @if (primaryImage != null)
-                        {
-                            <img src="@primaryImage.ImagePath"
-                                 alt="@Model.Product?.Name"
-                                 class="w-100"
-                                 style="height: 300px; object-fit: contain;" />
-                        }
-                        else
-                        {
-                            <div class="d-flex align-items-center justify-content-center text-muted"
-                                 style="height: 300px;">
-
-                                <div class="text-center">
-
-                                    <div class="display-5 mb-2">
-                                        —
-                                    </div>
-
-                                    <div class="small">
-                                        لا توجد صورة متاحة
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        }
-
-                    </div>
-
-                    <!-- Product Name -->
-                    <div class="mb-4">
-
-                        <div class="small text-muted mb-1">
-                            المنتج
-                        </div>
-
-                        <div class="fw-bold fs-5">
-                            @Model.Product?.Name
-                        </div>
-
-                    </div>
-
-                    @if (!string.IsNullOrWhiteSpace(Model.Product?.SKU))
-                    {
-                        <div class="mb-3">
-
-                            <div class="small text-muted mb-1">
-                                الرقم التعريفي
-                            </div>
-
-                            <span class="badge text-bg-light border">
-                                @Model.Product.SKU
-                            </span>
-
-                        </div>
-                    }
-
-                    @if (Model.Product?.Category != null)
-                    {
-                        <div class="mb-3">
-
-                            <div class="small text-muted mb-1">
-                                الفئة
-                            </div>
-
-                            <div class="fw-semibold">
-                                @Model.Product.Category.Name
-                            </div>
-
-                        </div>
-                    }
-
-                    @if (!string.IsNullOrWhiteSpace(Model.Product?.Material))
-                    {
-                        <div class="mb-3">
-
-                            <div class="small text-muted mb-1">
-                                المادة
-                            </div>
-
-                            <div class="fw-semibold">
-                                @Model.Product.Material
-                            </div>
-
-                        </div>
-                    }
-
-                    @if (!string.IsNullOrWhiteSpace(Model.Product?.LoadClass))
-                    {
-                        <div class="mb-3">
-
-                            <div class="small text-muted mb-1">
-                                فئة التحميل
-                            </div>
-
-                            <div class="fw-semibold">
-                                @Model.Product.LoadClass
-                            </div>
-
-                        </div>
-                    }
-
-                    @if (!string.IsNullOrWhiteSpace(Model.Product?.Diameter))
-                    {
-                        <div class="mb-3">
-
-                            <div class="small text-muted mb-1">
-                                القطر
-                            </div>
-
-                            <div class="fw-semibold">
-                                @Model.Product.Diameter
-                            </div>
-
-                        </div>
-                    }
-
-                    @if (!string.IsNullOrWhiteSpace(Model.Product?.Shape))
-                    {
-                        <div>
-
-                            <div class="small text-muted mb-1">
-                                الشكل
-                            </div>
-
-                            <div class="fw-semibold">
-                                @Model.Product.Shape
-                            </div>
-
-                        </div>
-                    }
-
-                </div>
+                </a>
 
             </div>
 
         </div>
 
-        <!-- Quotation Form -->
-        <div class="col-lg-7">
+    </section>
 
-            <div class="card border-0 shadow-sm">
 
-                <div class="card-header bg-white py-3">
+    <section class="public-section quotation-content">
 
-                    <h2 class="h5 fw-bold mb-1">
-                        بياناتك
-                    </h2>
+        <div class="container">
 
-                    <p class="text-muted small mb-0">
-                        يرجى إدخال بيانات التواصل بشكل صحيح حتى نتمكن من التواصل معك.
-                    </p>
+            <div class="row g-4 g-xl-5">
 
-                </div>
+                <!-- Product Summary -->
+                <div class="col-lg-5">
 
-                <div class="card-body p-4 p-lg-5">
+                    <div class="public-card quotation-product-card">
 
-                    <form asp-action="Create"
-                          method="post">
+                        <div class="public-card-header quotation-card-header">
 
-                        <input type="hidden"
-                               asp-for="ProductId" />
+                            <div class="public-card-header-content">
 
-                        @if (!ViewData.ModelState.IsValid)
-                        {
-                            <div asp-validation-summary="All"
-                                 class="alert alert-danger"
-                                 role="alert">
-                            </div>
-                        }
-
-                        <!-- Contact Information -->
-                        <div class="mb-4">
-
-                            <h3 class="h6 fw-bold mb-3">
-                                بيانات التواصل
-                            </h3>
-
-                            <div class="row g-3">
-
-                                <div class="col-md-6">
-
-                                    <label asp-for="FullName"
-                                           class="form-label fw-semibold">
-                                        الاسم الكامل
-                                    </label>
-
-                                    <input asp-for="FullName"
-                                           class="form-control"
-                                           placeholder="أدخل اسمك الكامل" />
-
-                                    <span asp-validation-for="FullName"
-                                          class="text-danger small">
-                                    </span>
-
+                                <div class="public-card-icon quotation-card-icon">
+                                    <i class="bi bi-box-seam"></i>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div>
 
-                                    <label asp-for="CompanyName"
-                                           class="form-label fw-semibold">
-                                        اسم الشركة
-                                    </label>
+                                    <h2 class="h5 fw-bold mb-1">
+                                        المنتج
+                                    </h2>
 
-                                    <input asp-for="CompanyName"
-                                           class="form-control"
-                                           placeholder="اسم الشركة (اختياري)" />
-
-                                    <span asp-validation-for="CompanyName"
-                                          class="text-danger small">
-                                    </span>
-
-                                </div>
-
-                                <div class="col-md-6">
-
-                                    <label asp-for="Email"
-                                           class="form-label fw-semibold">
-                                        البريد الإلكتروني
-                                    </label>
-
-                                    <input asp-for="Email"
-                                           class="form-control"
-                                           type="email"
-                                           placeholder="name@example.com" />
-
-                                    <span asp-validation-for="Email"
-                                          class="text-danger small">
-                                    </span>
-
-                                </div>
-
-                                <div class="col-md-6">
-
-                                    <label asp-for="PhoneNumber"
-                                           class="form-label fw-semibold">
-                                        رقم الهاتف
-                                    </label>
-
-                                    <input asp-for="PhoneNumber"
-                                           class="form-control"
-                                           type="tel"
-                                           placeholder="أدخل رقم هاتفك" />
-
-                                    <span asp-validation-for="PhoneNumber"
-                                          class="text-danger small">
-                                    </span>
+                                    <p class="text-muted small mb-0">
+                                        المنتج المطلوب ضمن طلب عرض السعر.
+                                    </p>
 
                                 </div>
 
@@ -321,82 +91,528 @@
 
                         </div>
 
-                        <!-- Request Details -->
-                        <div class="mb-4">
 
-                            <h3 class="h6 fw-bold mb-3">
-                                تفاصيل الطلب
-                            </h3>
+                        <div class="public-card-body quotation-product-body">
 
-                            <div class="row g-3">
+                            <!-- Product Image -->
+                            <div class="quotation-product-image-wrapper">
 
-                                <div class="col-md-6">
+                                @if (primaryImage != null)
+                                {
+                                    <img src="@primaryImage.ImagePath"
+                                         alt="@Model.Product?.Name"
+                                         class="quotation-product-image" />
+                                }
+                                else
+                                {
+                                    <div class="quotation-product-no-image">
 
-                                    <label asp-for="Quantity"
-                                           class="form-label fw-semibold">
-                                        الكمية
-                                    </label>
+                                        <div class="quotation-no-image-icon">
+                                            <i class="bi bi-image"></i>
+                                        </div>
 
-                                    <input asp-for="Quantity"
-                                           class="form-control"
-                                           type="number"
-                                           min="1" />
+                                        <span>
+                                            لا توجد صورة متاحة
+                                        </span>
 
-                                    <span asp-validation-for="Quantity"
-                                          class="text-danger small">
-                                    </span>
+                                    </div>
+                                }
 
+                            </div>
+
+
+                            <!-- Product Name -->
+                            <div class="quotation-product-title-section">
+
+                                <div class="quotation-product-label">
+                                    المنتج
                                 </div>
 
-                                <div class="col-12">
+                                <h3 class="quotation-product-name">
+                                    @Model.Product?.Name
+                                </h3>
 
-                                    <label asp-for="Message"
-                                           class="form-label fw-semibold">
-                                        الرسالة
-                                    </label>
+                            </div>
 
-                                    <textarea asp-for="Message"
-                                              class="form-control"
-                                              rows="6"
-                                              placeholder="أخبرنا عن متطلباتك، والمواصفات، واحتياجات التوصيل، أو أي تفاصيل أخرى."></textarea>
 
-                                    <span asp-validation-for="Message"
-                                          class="text-danger small">
-                                    </span>
+                            <!-- Product Information -->
+                            <div class="quotation-product-details">
 
-                                </div>
+                                @if (!string.IsNullOrWhiteSpace(Model.Product?.SKU))
+                                {
+                                    <div class="quotation-product-detail">
+
+                                        <div class="quotation-detail-icon">
+                                            <i class="bi bi-upc-scan"></i>
+                                        </div>
+
+                                        <div>
+
+                                            <div class="quotation-detail-label">
+                                                الرقم التعريفي
+                                            </div>
+
+                                            <div class="quotation-detail-value">
+                                                @Model.Product.SKU
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                }
+
+
+                                @if (Model.Product?.Category != null)
+                                {
+                                    <div class="quotation-product-detail">
+
+                                        <div class="quotation-detail-icon">
+                                            <i class="bi bi-folder2"></i>
+                                        </div>
+
+                                        <div>
+
+                                            <div class="quotation-detail-label">
+                                                الفئة
+                                            </div>
+
+                                            <div class="quotation-detail-value">
+                                                @Model.Product.Category.Name
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                }
+
+
+                                @if (!string.IsNullOrWhiteSpace(Model.Product?.Material))
+                                {
+                                    <div class="quotation-product-detail">
+
+                                        <div class="quotation-detail-icon">
+                                            <i class="bi bi-layers"></i>
+                                        </div>
+
+                                        <div>
+
+                                            <div class="quotation-detail-label">
+                                                المادة
+                                            </div>
+
+                                            <div class="quotation-detail-value">
+                                                @Model.Product.Material
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                }
+
+
+                                @if (!string.IsNullOrWhiteSpace(Model.Product?.LoadClass))
+                                {
+                                    <div class="quotation-product-detail">
+
+                                        <div class="quotation-detail-icon">
+                                            <i class="bi bi-shield-check"></i>
+                                        </div>
+
+                                        <div>
+
+                                            <div class="quotation-detail-label">
+                                                فئة التحميل
+                                            </div>
+
+                                            <div class="quotation-detail-value">
+                                                @Model.Product.LoadClass
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                }
+
+
+                                @if (!string.IsNullOrWhiteSpace(Model.Product?.Diameter))
+                                {
+                                    <div class="quotation-product-detail">
+
+                                        <div class="quotation-detail-icon">
+                                            <i class="bi bi-arrows-expand"></i>
+                                        </div>
+
+                                        <div>
+
+                                            <div class="quotation-detail-label">
+                                                القطر
+                                            </div>
+
+                                            <div class="quotation-detail-value">
+                                                @Model.Product.Diameter
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                }
+
+
+                                @if (!string.IsNullOrWhiteSpace(Model.Product?.Shape))
+                                {
+                                    <div class="quotation-product-detail">
+
+                                        <div class="quotation-detail-icon">
+                                            <i class="bi bi-circle-square"></i>
+                                        </div>
+
+                                        <div>
+
+                                            <div class="quotation-detail-label">
+                                                الشكل
+                                            </div>
+
+                                            <div class="quotation-detail-value">
+                                                @Model.Product.Shape
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                }
 
                             </div>
 
                         </div>
 
-                        <!-- Actions -->
-                        <div class="border-top pt-4">
+                    </div>
 
-                            <div class="d-flex flex-column flex-sm-row gap-2">
 
-                                <button type="submit"
-                                        class="btn btn-primary btn-lg">
-                                    إرسال الطلب
-                                </button>
+                    <!-- Process Note -->
+                    <div class="quotation-info-note">
 
-                                <a asp-controller="Catalog"
-                                   asp-action="Details"
-                                   asp-route-id="@Model.ProductId"
-                                   class="btn btn-outline-secondary btn-lg">
-                                    إلغاء
-                                </a>
+                        <div class="quotation-info-note-icon">
+                            <i class="bi bi-info-circle"></i>
+                        </div>
 
+                        <div>
+
+                            <div class="quotation-info-note-title">
+                                ماذا يحدث بعد إرسال الطلب؟
                             </div>
 
-                            <p class="text-muted small mt-3 mb-0">
-                                بإرسال هذا الطلب، فإنك تقدم بيانات التواصل الخاصة بك حتى يتمكن فريقنا من
-                                متابعتك بخصوص عرض السعر.
+                            <p class="mb-0">
+                                سيقوم فريقنا بمراجعة بياناتك والتواصل معك لمناقشة احتياجاتك وتفاصيل عرض السعر.
                             </p>
 
                         </div>
 
-                    </form>
+                    </div>
+
+                </div>
+
+
+                <!-- Quotation Form -->
+                <div class="col-lg-7">
+
+                    <div class="public-card quotation-form-card">
+
+                        <div class="public-card-header quotation-card-header">
+
+                            <div class="public-card-header-content">
+
+                                <div class="public-card-icon quotation-card-icon">
+                                    <i class="bi bi-person-lines-fill"></i>
+                                </div>
+
+                                <div>
+
+                                    <h2 class="h5 fw-bold mb-1">
+                                        بياناتك
+                                    </h2>
+
+                                    <p class="text-muted small mb-0">
+                                        يرجى إدخال بيانات التواصل بشكل صحيح حتى نتمكن من التواصل معك.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="public-card-body quotation-form-body">
+
+                            <form asp-action="Create" method="post">
+
+                                <input type="hidden" asp-for="ProductId" />
+
+                                @if (!ViewData.ModelState.IsValid)
+                                {
+                                    <div asp-validation-summary="All"
+                                         class="alert alert-danger quotation-validation-summary"
+                                         role="alert">
+                                    </div>
+                                }
+
+
+                                <!-- Contact Information -->
+                                <section class="quotation-form-section">
+
+                                    <div class="quotation-form-section-header">
+
+                                        <div class="quotation-form-section-number">
+                                            01
+                                        </div>
+
+                                        <div>
+
+                                            <h3 class="quotation-form-section-title">
+                                                بيانات التواصل
+                                            </h3>
+
+                                            <p class="quotation-form-section-description">
+                                                أدخل بياناتك الأساسية للتواصل معك.
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row g-3">
+
+                                        <div class="col-md-6">
+
+                                            <label asp-for="FullName"
+                                                   class="form-label public-form-label">
+                                                الاسم الكامل
+                                            </label>
+
+                                            <div class="public-input-wrapper quotation-input-wrapper">
+
+                                                <i class="bi bi-person public-input-icon quotation-input-icon"></i>
+
+                                                <input asp-for="FullName"
+                                                       class="form-control public-input quotation-input"
+                                                       placeholder="أدخل اسمك الكامل" />
+
+                                            </div>
+
+                                            <span asp-validation-for="FullName"
+                                                  class="text-danger small">
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="col-md-6">
+
+                                            <label asp-for="CompanyName"
+                                                   class="form-label public-form-label">
+                                                اسم الشركة
+                                            </label>
+
+                                            <div class="public-input-wrapper quotation-input-wrapper">
+
+                                                <i class="bi bi-building public-input-icon quotation-input-icon"></i>
+
+                                                <input asp-for="CompanyName"
+                                                       class="form-control public-input quotation-input"
+                                                       placeholder="اسم الشركة (اختياري)" />
+
+                                            </div>
+
+                                            <span asp-validation-for="CompanyName"
+                                                  class="text-danger small">
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="col-md-6">
+
+                                            <label asp-for="Email"
+                                                   class="form-label public-form-label">
+                                                البريد الإلكتروني
+                                            </label>
+
+                                            <div class="public-input-wrapper quotation-input-wrapper">
+
+                                                <i class="bi bi-envelope public-input-icon quotation-input-icon"></i>
+
+                                                <input asp-for="Email"
+                                                       class="form-control public-input quotation-input"
+                                                       type="email"
+                                                       placeholder="name@example.com" />
+
+                                            </div>
+
+                                            <span asp-validation-for="Email"
+                                                  class="text-danger small">
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="col-md-6">
+
+                                            <label asp-for="PhoneNumber"
+                                                   class="form-label public-form-label">
+                                                رقم الهاتف
+                                            </label>
+
+                                            <div class="public-input-wrapper quotation-input-wrapper">
+
+                                                <i class="bi bi-telephone public-input-icon quotation-input-icon"></i>
+
+                                                <input asp-for="PhoneNumber"
+                                                       class="form-control public-input quotation-input"
+                                                       type="tel"
+                                                       placeholder="أدخل رقم هاتفك" />
+
+                                            </div>
+
+                                            <span asp-validation-for="PhoneNumber"
+                                                  class="text-danger small">
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </section>
+
+
+                                <!-- Request Details -->
+                                <section class="quotation-form-section">
+
+                                    <div class="quotation-form-section-header">
+
+                                        <div class="quotation-form-section-number">
+                                            02
+                                        </div>
+
+                                        <div>
+
+                                            <h3 class="quotation-form-section-title">
+                                                تفاصيل الطلب
+                                            </h3>
+
+                                            <p class="quotation-form-section-description">
+                                                حدد الكمية وأضف أي معلومات تساعدنا على فهم احتياجاتك.
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row g-3">
+
+                                        <div class="col-md-6">
+
+                                            <label asp-for="Quantity"
+                                                   class="form-label public-form-label">
+                                                الكمية
+                                            </label>
+
+                                            <div class="public-input-wrapper quotation-input-wrapper">
+
+                                                <i class="bi bi-boxes public-input-icon quotation-input-icon"></i>
+
+                                                <input asp-for="Quantity"
+                                                       class="form-control public-input quotation-input"
+                                                       type="number"
+                                                       min="1" />
+
+                                            </div>
+
+                                            <span asp-validation-for="Quantity"
+                                                  class="text-danger small">
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="col-12">
+
+                                            <label asp-for="Message"
+                                                   class="form-label public-form-label">
+                                                الرسالة
+                                            </label>
+
+                                            <div class="public-input-wrapper quotation-textarea-wrapper">
+
+                                                <i class="bi bi-chat-left-text public-input-icon quotation-textarea-icon"></i>
+
+                                                <textarea asp-for="Message"
+                                                          class="form-control public-input quotation-textarea"
+                                                          rows="6"
+                                                          placeholder="أخبرنا عن متطلباتك، والمواصفات، واحتياجات التوصيل، أو أي تفاصيل أخرى."></textarea>
+
+                                            </div>
+
+                                            <span asp-validation-for="Message"
+                                                  class="text-danger small">
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </section>
+
+
+                                <!-- Actions -->
+                                <section class="quotation-submit-section">
+
+                                    <div class="quotation-submit-actions">
+
+                                        <button type="submit"
+                                                class="btn btn-primary public-btn public-btn-primary public-btn-lg quotation-submit-btn">
+
+                                            <i class="bi bi-send"></i>
+
+                                            <span>
+                                                إرسال الطلب
+                                            </span>
+
+                                        </button>
+
+
+                                        <a asp-controller="Catalog"
+                                           asp-action="Details"
+                                           asp-route-id="@Model.ProductId"
+                                           class="btn btn-outline-secondary public-btn public-btn-lg quotation-cancel-btn">
+
+                                            <span>
+                                                إلغاء
+                                            </span>
+
+                                        </a>
+
+                                    </div>
+
+
+                                    <div class="quotation-submit-note">
+
+                                        <i class="bi bi-shield-check"></i>
+
+                                        <span>
+                                            بإرسال هذا الطلب، فإنك تقدم بيانات التواصل الخاصة بك حتى يتمكن فريقنا من متابعتك بخصوص عرض السعر.
+                                        </span>
+
+                                    </div>
+
+                                </section>
+
+                            </form>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -404,12 +620,16 @@
 
         </div>
 
-    </div>
+    </section>
 
 </div>
 
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/quotation.css"
+          asp-append-version="true" />
+}
+
 @section Scripts {
-
     <partial name="_ValidationScriptsPartial" />
-
 }

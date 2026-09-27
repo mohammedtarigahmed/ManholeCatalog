@@ -2,39 +2,58 @@
     ViewData["Title"] = "غير مصرح بالوصول";
 }
 
-<div class="container py-5">
+<div class="public-page access-denied-page">
 
-    <div class="row justify-content-center">
+    <section class="public-section access-denied-section">
 
-        <div class="col-md-7 col-lg-6">
+        <div class="container">
 
-            <div class="text-center">
+            <div class="row justify-content-center">
 
-                <span class="badge text-bg-danger px-3 py-2 mb-3">
-                    غير مصرح
-                </span>
+                <div class="col-lg-8">
 
-                <h1 class="display-5 fw-bold mb-3">
-                    ليس لديك صلاحية للوصول
-                </h1>
+                    <div class="public-card access-denied-card">
 
-                <p class="text-muted mb-4">
-                    عذرًا، لا تملك الصلاحيات المطلوبة للوصول إلى هذه الصفحة.
-                </p>
+                        <div class="public-card-body access-denied-card-body">
 
-                <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
+                            <div class="access-denied-icon">
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
 
-                    <a asp-controller="Home"
-                       asp-action="Index"
-                       class="btn btn-primary">
-                        العودة إلى الرئيسية
-                    </a>
+                            <span class="public-page-label access-denied-label">
+                                <i class="bi bi-exclamation-circle"></i>
+                                غير مصرح
+                            </span>
 
-                    <a asp-controller="Catalog"
-                       asp-action="Index"
-                       class="btn btn-outline-secondary">
-                        عرض الكتالوج
-                    </a>
+                            <h1 class="public-page-title access-denied-title">
+                                ليس لديك صلاحية للوصول
+                            </h1>
+
+                            <p class="public-page-description access-denied-description">
+                                عذرًا، لا تملك الصلاحيات المطلوبة للوصول إلى هذه الصفحة.
+                            </p>
+
+                            <div class="access-denied-actions">
+
+                                <a asp-controller="Home"
+                                   asp-action="Index"
+                                   class="btn btn-primary public-btn public-btn-primary public-btn-lg">
+                                    <i class="bi bi-house"></i>
+                                    <span>العودة إلى الرئيسية</span>
+                                </a>
+
+                                <a asp-controller="Catalog"
+                                   asp-action="Index"
+                                   class="btn btn-outline-secondary public-btn public-btn-lg">
+                                    <i class="bi bi-grid"></i>
+                                    <span>عرض الكتالوج</span>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -42,6 +61,12 @@
 
         </div>
 
-    </div>
+    </section>
 
 </div>
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/access-denied.css"
+          asp-append-version="true" />
+}

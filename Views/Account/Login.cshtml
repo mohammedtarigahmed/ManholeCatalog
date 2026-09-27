@@ -4,133 +4,173 @@
     ViewData["Title"] = "تسجيل دخول الإدارة";
 }
 
-<div class="container py-5">
+<div class="public-page admin-login-page">
 
-    <div class="row justify-content-center">
+    <section class="public-section admin-login-section">
 
-        <div class="col-md-6 col-lg-5">
+        <div class="container">
 
-            <!-- Login Header -->
-            <div class="text-center mb-4">
+            <div class="row justify-content-center">
 
-                <span class="badge text-bg-primary px-3 py-2 mb-3">
-                    لوحة الإدارة
-                </span>
+                <div class="col-lg-5 col-md-7">
 
-                <h1 class="display-6 fw-bold mb-2">
-                    تسجيل دخول الإدارة
-                </h1>
+                    <div class="admin-login-header">
 
-                <p class="text-muted mb-0">
-                    سجّل الدخول للوصول إلى لوحة إدارة كتالوج المناهل.
-                </p>
-
-            </div>
-
-            <!-- Login Card -->
-            <div class="card border-0 shadow-sm">
-
-                <div class="card-body p-4 p-md-5">
-
-                    <form asp-controller="Account"
-                          asp-action="Login"
-                          method="post">
-
-                        <input type="hidden"
-                               name="returnUrl"
-                               value="@ViewBag.ReturnUrl" />
-
-                        <div asp-validation-summary="ModelOnly"
-                             class="alert alert-danger"
-                             role="alert">
+                        <div class="admin-login-icon">
+                            <i class="bi bi-shield-lock"></i>
                         </div>
 
-                        <!-- Email -->
-                        <div class="mb-4">
+                        <span class="public-page-label admin-login-label">
+                            <i class="bi bi-person-badge"></i>
+                            لوحة الإدارة
+                        </span>
 
-                            <label asp-for="Email"
-                                   class="form-label fw-semibold">
-                                البريد الإلكتروني
-                            </label>
+                        <h1 class="public-page-title admin-login-title">
+                            تسجيل دخول الإدارة
+                        </h1>
 
-                            <input asp-for="Email"
-                                   class="form-control"
-                                   autocomplete="username"
-                                   placeholder="أدخل بريدك الإلكتروني" />
+                        <p class="public-page-description admin-login-description">
+                            سجّل الدخول للوصول إلى لوحة إدارة كتالوج المناهل.
+                        </p>
 
-                            <span asp-validation-for="Email"
-                                  class="text-danger small">
-                            </span>
+                    </div>
+
+                    <div class="public-card admin-login-card">
+
+                        <div class="public-card-header">
+
+                            <div class="public-card-header-content">
+
+                                <div class="public-card-icon">
+                                    <i class="bi bi-person-check"></i>
+                                </div>
+
+                                <div>
+                                    <h2 class="h5 fw-bold mb-1">
+                                        مرحبًا بك
+                                    </h2>
+
+                                    <p class="text-muted small mb-0">
+                                        أدخل بيانات الدخول للمتابعة.
+                                    </p>
+                                </div>
+
+                            </div>
 
                         </div>
 
-                        <!-- Password -->
-                        <div class="mb-4">
+                        <div class="public-card-body admin-login-card-body">
 
-                            <label asp-for="Password"
-                                   class="form-label fw-semibold">
-                                كلمة المرور
-                            </label>
+                            <form asp-controller="Account"
+                                  asp-action="Login"
+                                  method="post">
 
-                            <input asp-for="Password"
-                                   class="form-control"
-                                   autocomplete="current-password"
-                                   placeholder="أدخل كلمة المرور" />
+                                <input type="hidden"
+                                       name="returnUrl"
+                                       value="@ViewBag.ReturnUrl" />
 
-                            <span asp-validation-for="Password"
-                                  class="text-danger small">
-                            </span>
+                                <div asp-validation-summary="ModelOnly"
+                                     class="admin-login-validation"
+                                     role="alert">
+                                </div>
+
+                                <div class="mb-3">
+
+                                    <label asp-for="Email"
+                                           class="form-label public-form-label">
+                                        البريد الإلكتروني
+                                    </label>
+
+                                    <div class="public-input-wrapper">
+                                        <i class="bi bi-envelope public-input-icon"></i>
+
+                                        <input asp-for="Email"
+                                               class="form-control public-input"
+                                               autocomplete="username"
+                                               placeholder="أدخل بريدك الإلكتروني" />
+                                    </div>
+
+                                    <span asp-validation-for="Email"
+                                          class="text-danger small">
+                                    </span>
+
+                                </div>
+
+                                <div class="mb-3">
+
+                                    <label asp-for="Password"
+                                           class="form-label public-form-label">
+                                        كلمة المرور
+                                    </label>
+
+                                    <div class="public-input-wrapper">
+                                        <i class="bi bi-lock public-input-icon"></i>
+
+                                        <input asp-for="Password"
+                                               class="form-control public-input"
+                                               autocomplete="current-password"
+                                               placeholder="أدخل كلمة المرور" />
+                                    </div>
+
+                                    <span asp-validation-for="Password"
+                                          class="text-danger small">
+                                    </span>
+
+                                </div>
+
+                                <div class="admin-login-options">
+
+                                    <div class="form-check">
+                                        <input asp-for="RememberMe"
+                                               class="form-check-input" />
+
+                                        <label asp-for="RememberMe"
+                                               class="form-check-label">
+                                            تذكرني
+                                        </label>
+                                    </div>
+
+                                </div>
+
+                                <button type="submit"
+                                        class="btn btn-primary public-btn public-btn-primary public-btn-lg admin-login-button">
+                                    <i class="bi bi-box-arrow-in-left"></i>
+                                    <span>تسجيل الدخول</span>
+                                </button>
+
+                            </form>
 
                         </div>
 
-                        <!-- Remember Me -->
-                        <div class="form-check mb-4">
+                    </div>
 
-                            <input asp-for="RememberMe"
-                                   class="form-check-input" />
+                    <div class="admin-login-back">
 
-                            <label asp-for="RememberMe"
-                                   class="form-check-label">
-                                تذكرني
-                            </label>
+                        <a asp-controller="Catalog"
+                           asp-action="Index"
+                           class="text-decoration-none">
+                            <i class="bi bi-arrow-right"></i>
+                            <span>العودة إلى الكتالوج</span>
+                        </a>
 
-                        </div>
-
-                        <!-- Login -->
-                        <div class="d-grid">
-
-                            <button type="submit"
-                                    class="btn btn-primary btn-lg">
-                                تسجيل الدخول
-                            </button>
-
-                        </div>
-
-                    </form>
+                    </div>
 
                 </div>
 
             </div>
 
-            <!-- Back to Catalog -->
-            <div class="text-center mt-4">
-
-                <a asp-controller="Catalog"
-                   asp-action="Index"
-                   class="text-decoration-none">
-                    ← العودة إلى الكتالوج
-                </a>
-
-            </div>
-
         </div>
 
-    </div>
+    </section>
 
 </div>
 
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/admin-login.css"
+          asp-append-version="true" />
+}
+
 @section Scripts {
-
     <partial name="_ValidationScriptsPartial" />
-
 }

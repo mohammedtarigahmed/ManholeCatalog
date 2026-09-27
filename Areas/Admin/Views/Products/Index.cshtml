@@ -11,113 +11,224 @@
     var productsWithoutImages = products.Count(p => !p.Images.Any());
 }
 
-<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
-    <div>
-        <h1 class="h3 fw-bold mb-1">
-            المنتجات
-        </h1>
+<!-- Page Header -->
+<div class="products-page-header mb-4">
 
-        <p class="text-muted mb-0">
-            إدارة كتالوج المنتجات وصور المنتجات.
-        </p>
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
+
+        <div>
+
+            <div class="d-flex align-items-center gap-2 mb-2">
+
+                <span class="badge rounded-pill text-bg-primary px-3 py-2">
+                    إدارة الكتالوج
+                </span>
+
+            </div>
+
+            <h1 class="h3 fw-bold mb-1">
+                المنتجات
+            </h1>
+
+            <p class="text-muted mb-0">
+                إدارة منتجات الكتالوج وصور المنتجات وحالاتها.
+            </p>
+
+        </div>
+
+        <a asp-area="Admin"
+           asp-controller="Products"
+           asp-action="Create"
+           class="btn btn-primary">
+
+            <i class="bi bi-plus-lg me-1"></i>
+
+            إضافة منتج
+
+        </a>
+
     </div>
 
-    <a asp-area="Admin"
-       asp-controller="Products"
-       asp-action="Create"
-       class="btn btn-primary">
-        + إضافة منتج
-    </a>
 </div>
+
 
 <!-- Statistics -->
 <div class="row g-4 mb-4">
 
+    <!-- Total -->
     <div class="col-sm-6 col-xl-3">
-        <div class="card border-0 shadow-sm h-100">
-            <div class="card-body">
-                <div class="small text-muted mb-1">
-                    إجمالي المنتجات
+
+        <div class="card border-0 shadow-sm products-stat-card h-100">
+
+            <div class="card-body p-4">
+
+                <div class="d-flex justify-content-between align-items-start">
+
+                    <div>
+
+                        <div class="small text-muted mb-2">
+                            إجمالي المنتجات
+                        </div>
+
+                        <div class="products-stat-number text-dark">
+                            @totalProducts
+                        </div>
+
+                    </div>
+
+                    <div class="products-stat-icon bg-primary-subtle text-primary">
+
+                        <i class="bi bi-box-seam"></i>
+
+                    </div>
+
                 </div>
 
-                <div class="h3 fw-bold mb-0">
-                    @totalProducts
+                <div class="small text-muted mt-3">
+                    جميع المنتجات في الكتالوج.
                 </div>
 
-                <div class="small text-muted mt-2">
-                    جميع المنتجات
-                </div>
             </div>
+
         </div>
+
     </div>
 
+
+    <!-- Active -->
     <div class="col-sm-6 col-xl-3">
-        <div class="card border-0 shadow-sm h-100">
-            <div class="card-body">
-                <div class="small text-muted mb-1">
-                    نشطة
+
+        <div class="card border-0 shadow-sm products-stat-card h-100">
+
+            <div class="card-body p-4">
+
+                <div class="d-flex justify-content-between align-items-start">
+
+                    <div>
+
+                        <div class="small text-muted mb-2">
+                            المنتجات النشطة
+                        </div>
+
+                        <div class="products-stat-number text-success">
+                            @activeProducts
+                        </div>
+
+                    </div>
+
+                    <div class="products-stat-icon bg-success-subtle text-success">
+
+                        <i class="bi bi-check-circle"></i>
+
+                    </div>
+
                 </div>
 
-                <div class="h3 fw-bold text-success mb-0">
-                    @activeProducts
+                <div class="small text-muted mt-3">
+                    متاحة حاليًا للعملاء.
                 </div>
 
-                <div class="small text-muted mt-2">
-                    متاحة حاليًا
-                </div>
             </div>
+
         </div>
+
     </div>
 
+
+    <!-- Inactive -->
     <div class="col-sm-6 col-xl-3">
-        <div class="card border-0 shadow-sm h-100">
-            <div class="card-body">
-                <div class="small text-muted mb-1">
-                    غير نشطة
+
+        <div class="card border-0 shadow-sm products-stat-card h-100">
+
+            <div class="card-body p-4">
+
+                <div class="d-flex justify-content-between align-items-start">
+
+                    <div>
+
+                        <div class="small text-muted mb-2">
+                            المنتجات غير النشطة
+                        </div>
+
+                        <div class="products-stat-number text-secondary">
+                            @inactiveProducts
+                        </div>
+
+                    </div>
+
+                    <div class="products-stat-icon bg-secondary-subtle text-secondary">
+
+                        <i class="bi bi-pause-circle"></i>
+
+                    </div>
+
                 </div>
 
-                <div class="h3 fw-bold text-secondary mb-0">
-                    @inactiveProducts
+                <div class="small text-muted mt-3">
+                    غير ظاهرة حاليًا في الكتالوج.
                 </div>
 
-                <div class="small text-muted mt-2">
-                    معطلة حاليًا
-                </div>
             </div>
+
         </div>
+
     </div>
 
+
+    <!-- Without Images -->
     <div class="col-sm-6 col-xl-3">
-        <div class="card border-0 shadow-sm h-100">
-            <div class="card-body">
-                <div class="small text-muted mb-1">
-                    بدون صور
+
+        <div class="card border-0 shadow-sm products-stat-card h-100">
+
+            <div class="card-body p-4">
+
+                <div class="d-flex justify-content-between align-items-start">
+
+                    <div>
+
+                        <div class="small text-muted mb-2">
+                            بدون صور
+                        </div>
+
+                        <div class="products-stat-number text-warning">
+                            @productsWithoutImages
+                        </div>
+
+                    </div>
+
+                    <div class="products-stat-icon bg-warning-subtle text-warning">
+
+                        <i class="bi bi-images"></i>
+
+                    </div>
+
                 </div>
 
-                <div class="h3 fw-bold text-warning mb-0">
-                    @productsWithoutImages
+                <div class="small text-muted mt-3">
+                    منتجات قد تحتاج إلى إضافة صور.
                 </div>
 
-                <div class="small text-muted mt-2">
-                    تحتاج إلى صور للمنتج
-                </div>
             </div>
+
         </div>
+
     </div>
 
 </div>
 
+
 @if (!products.Any())
 {
     <!-- Empty State -->
-    <div class="card border-0 shadow-sm">
-        <div class="card-body text-center py-5">
 
-            <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-light border mb-3"
-                 style="width: 64px; height: 64px;">
-                <span class="text-muted fw-bold fs-5">
-                    P
-                </span>
+    <div class="card border-0 shadow-sm products-section-card">
+
+        <div class="card-body text-center py-5 px-4">
+
+            <div class="products-empty-icon mb-3">
+
+                <i class="bi bi-box-seam"></i>
+
             </div>
 
             <h2 class="h5 fw-bold mb-2">
@@ -132,53 +243,88 @@
                asp-controller="Products"
                asp-action="Create"
                class="btn btn-primary">
+
+                <i class="bi bi-plus-lg me-1"></i>
+
                 إضافة أول منتج
+
             </a>
 
         </div>
+
     </div>
 }
 else
 {
     <!-- Product List -->
-    <div class="card border-0 shadow-sm">
 
-        <div class="card-header bg-white py-3">
-            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2">
+    <div class="card border-0 shadow-sm products-section-card">
+
+        <!-- Card Header -->
+        <div class="card-header bg-white border-0 p-4">
+
+            <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
 
                 <div>
-                    <h2 class="h6 fw-bold mb-1">
-                        قائمة المنتجات
-                    </h2>
+
+                    <div class="d-flex align-items-center gap-2 mb-1">
+
+                        <div class="products-section-icon bg-primary-subtle text-primary">
+
+                            <i class="bi bi-list-ul"></i>
+
+                        </div>
+
+                        <h2 class="h6 fw-bold mb-0">
+                            قائمة المنتجات
+                        </h2>
+
+                    </div>
 
                     <p class="text-muted small mb-0">
-                        عرض وإدارة منتجات الكتالوج.
+                        عرض وإدارة جميع منتجات الكتالوج.
                     </p>
+
                 </div>
 
                 <div class="d-flex flex-wrap gap-2">
-                    <span class="badge text-bg-light border">
+
+                    <span class="badge rounded-pill text-bg-light border px-3 py-2">
                         @totalProducts منتج
                     </span>
 
+                    @if (activeProducts > 0)
+                    {
+                        <span class="badge rounded-pill text-bg-success px-3 py-2">
+                            @activeProducts نشط
+                        </span>
+                    }
+
                     @if (productsWithoutImages > 0)
                     {
-                        <span class="badge text-bg-warning">
+                        <span class="badge rounded-pill text-bg-warning px-3 py-2">
                             @productsWithoutImages بدون صور
                         </span>
                     }
+
                 </div>
 
             </div>
+
         </div>
 
+
+        <!-- Table -->
         <div class="card-body p-0">
 
             <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
 
-                    <thead class="table-light">
+                <table class="table products-table table-hover align-middle mb-0">
+
+                    <thead>
+
                         <tr>
+
                             <th class="ps-4">
                                 المنتج
                             </th>
@@ -202,13 +348,18 @@ else
                             <th class="text-end pe-4">
                                 الإجراءات
                             </th>
+
                         </tr>
+
                     </thead>
 
                     <tbody>
 
                         @foreach (var product in products)
                         {
+                            var primaryImage = product.Images.FirstOrDefault(i => i.IsPrimary)
+                                ?? product.Images.OrderBy(i => i.DisplayOrder).FirstOrDefault();
+
                             <tr>
 
                                 <!-- Product -->
@@ -216,16 +367,23 @@ else
 
                                     <div class="d-flex align-items-center gap-3">
 
-                                        <div class="d-flex align-items-center justify-content-center rounded border bg-light flex-shrink-0"
-                                             style="width: 44px; height: 44px;">
+                                        <div class="products-avatar">
 
-                                            <span class="fw-bold text-primary">
-                                                @(string.IsNullOrWhiteSpace(product.Name) ? "P" : product.Name.Substring(0, 1).ToUpper())
-                                            </span>
+                                            @if (primaryImage != null)
+                                            {
+                                                <img src="@primaryImage.ImagePath"
+                                                     alt="@primaryImage.AltText"
+                                                     class="products-avatar-image" />
+                                            }
+                                            else
+                                            {
+                                                <i class="bi bi-box-seam"></i>
+                                            }
 
                                         </div>
 
-                                        <div>
+                                        <div class="product-info">
+
                                             <div class="fw-semibold">
                                                 @product.Name
                                             </div>
@@ -251,18 +409,20 @@ else
 
                                                 </div>
                                             }
+
                                         </div>
 
                                     </div>
 
                                 </td>
 
+
                                 <!-- SKU -->
                                 <td>
 
                                     @if (!string.IsNullOrWhiteSpace(product.SKU))
                                     {
-                                        <span class="small text-muted">
+                                        <span class="product-sku">
                                             @product.SKU
                                         </span>
                                     }
@@ -275,12 +435,13 @@ else
 
                                 </td>
 
+
                                 <!-- Category -->
                                 <td>
 
                                     @if (product.Category != null)
                                     {
-                                        <span class="badge text-bg-light border">
+                                        <span class="badge rounded-pill text-bg-light border px-3 py-2">
                                             @product.Category.Name
                                         </span>
                                     }
@@ -293,124 +454,182 @@ else
 
                                 </td>
 
+
                                 <!-- Images -->
                                 <td>
 
                                     @if (product.Images.Any())
                                     {
-                                        <span class="badge text-bg-light border">
-                                            @product.Images.Count صورة
+                                        <span class="badge rounded-pill text-bg-light border px-3 py-2">
+
+                                            <i class="bi bi-image me-1"></i>
+
+                                            @product.Images.Count
+
                                         </span>
                                     }
                                     else
                                     {
-                                        <span class="badge text-bg-warning">
+                                        <span class="badge rounded-pill text-bg-warning px-3 py-2">
+
+                                            <i class="bi bi-image me-1"></i>
+
                                             لا توجد
+
                                         </span>
                                     }
 
                                 </td>
+
 
                                 <!-- Status -->
                                 <td>
 
                                     @if (product.IsActive)
                                     {
-                                        <span class="badge text-bg-success">
+                                        <span class="badge rounded-pill text-bg-success px-3 py-2">
+
+                                            <i class="bi bi-check-circle me-1"></i>
+
                                             نشط
+
                                         </span>
                                     }
                                     else
                                     {
-                                        <span class="badge text-bg-secondary">
+                                        <span class="badge rounded-pill text-bg-secondary px-3 py-2">
+
+                                            <i class="bi bi-pause-circle me-1"></i>
+
                                             غير نشط
+
                                         </span>
                                     }
 
                                 </td>
 
+
                                 <!-- Actions -->
                                 <td class="text-end pe-4">
 
-                                    <div class="d-inline-flex align-items-center gap-1 flex-nowrap">
+                                    <div class="dropdown">
 
-                                        <a asp-area="Admin"
-                                           asp-controller="Products"
-                                           asp-action="Details"
-                                           asp-route-id="@product.Id"
-                                           class="btn btn-sm btn-outline-dark"
-                                           title="عرض المنتج">
-                                            عرض
-                                        </a>
+                                        <button class="btn btn-sm btn-light border dropdown-toggle"
+                                                type="button"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false">
 
-                                        <a asp-area="Admin"
-                                           asp-controller="Products"
-                                           asp-action="Images"
-                                           asp-route-id="@product.Id"
-                                           class="btn btn-sm btn-outline-secondary"
-                                           title="إدارة الصور">
-                                            الصور
-                                        </a>
+                                            <i class="bi bi-three-dots"></i>
 
-                                        <a asp-area="Admin"
-                                           asp-controller="Products"
-                                           asp-action="Edit"
-                                           asp-route-id="@product.Id"
-                                           class="btn btn-sm btn-outline-primary"
-                                           title="تعديل المنتج">
-                                            تعديل
-                                        </a>
+                                            <span class="ms-1">
+                                                إجراءات
+                                            </span>
 
-                                        <div class="dropdown">
+                                        </button>
 
-                                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle"
-                                                    type="button"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-expanded="false">
-                                                المزيد
-                                            </button>
+                                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
 
-                                            <ul class="dropdown-menu dropdown-menu-end">
+                                            <li>
 
-                                                @if (product.IsActive)
-                                                {
-                                                    <li>
-                                                        <form asp-area="Admin"
-                                                              asp-controller="Products"
-                                                              asp-action="Deactivate"
-                                                              asp-route-id="@product.Id"
-                                                              method="post"
-                                                              onsubmit="return confirm('هل أنت متأكد من رغبتك في تعطيل هذا المنتج؟');">
+                                                <a asp-area="Admin"
+                                                   asp-controller="Products"
+                                                   asp-action="Details"
+                                                   asp-route-id="@product.Id"
+                                                   class="dropdown-item">
 
-                                                            <button type="submit"
-                                                                    class="dropdown-item text-danger">
-                                                                تعطيل
-                                                            </button>
+                                                    <i class="bi bi-eye me-2"></i>
 
-                                                        </form>
-                                                    </li>
-                                                }
-                                                else
-                                                {
-                                                    <li>
-                                                        <form asp-area="Admin"
-                                                              asp-controller="Products"
-                                                              asp-action="Reactivate"
-                                                              asp-route-id="@product.Id"
-                                                              method="post">
+                                                    عرض المنتج
 
-                                                            <button type="submit"
-                                                                    class="dropdown-item text-success">
-                                                                إعادة التفعيل
-                                                            </button>
+                                                </a>
 
-                                                        </form>
-                                                    </li>
-                                                }
+                                            </li>
 
-                                            </ul>
+                                            <li>
 
-                                        </div>
+                                                <a asp-area="Admin"
+                                                   asp-controller="Products"
+                                                   asp-action="Images"
+                                                   asp-route-id="@product.Id"
+                                                   class="dropdown-item">
+
+                                                    <i class="bi bi-images me-2"></i>
+
+                                                    إدارة الصور
+
+                                                </a>
+
+                                            </li>
+
+                                            <li>
+
+                                                <a asp-area="Admin"
+                                                   asp-controller="Products"
+                                                   asp-action="Edit"
+                                                   asp-route-id="@product.Id"
+                                                   class="dropdown-item">
+
+                                                    <i class="bi bi-pencil me-2"></i>
+
+                                                    تعديل المنتج
+
+                                                </a>
+
+                                            </li>
+
+                                            <li>
+                                                <hr class="dropdown-divider" />
+                                            </li>
+
+                                            @if (product.IsActive)
+                                            {
+                                                <li>
+
+                                                    <form asp-area="Admin"
+                                                          asp-controller="Products"
+                                                          asp-action="Deactivate"
+                                                          asp-route-id="@product.Id"
+                                                          method="post"
+                                                          onsubmit="return confirm('هل أنت متأكد من رغبتك في تعطيل هذا المنتج؟');">
+
+                                                        <button type="submit"
+                                                                class="dropdown-item text-danger">
+
+                                                            <i class="bi bi-pause-circle me-2"></i>
+
+                                                            تعطيل المنتج
+
+                                                        </button>
+
+                                                    </form>
+
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+
+                                                    <form asp-area="Admin"
+                                                          asp-controller="Products"
+                                                          asp-action="Reactivate"
+                                                          asp-route-id="@product.Id"
+                                                          method="post">
+
+                                                        <button type="submit"
+                                                                class="dropdown-item text-success">
+
+                                                            <i class="bi bi-play-circle me-2"></i>
+
+                                                            إعادة تفعيل المنتج
+
+                                                        </button>
+
+                                                    </form>
+
+                                                </li>
+                                            }
+
+                                        </ul>
 
                                     </div>
 
@@ -422,9 +641,163 @@ else
                     </tbody>
 
                 </table>
+
             </div>
 
         </div>
 
     </div>
 }
+
+
+<style>
+
+    .products-stat-card,
+    .products-section-card {
+        border-radius: 16px;
+    }
+
+    .products-stat-card {
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .products-stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 28px rgba(17, 24, 39, 0.09) !important;
+    }
+
+    .products-stat-number {
+        font-size: 2rem;
+        line-height: 1;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+    }
+
+    .products-stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+    }
+
+    .products-section-card {
+        overflow: hidden;
+    }
+
+    .products-section-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+    }
+
+    .products-table thead th {
+        background: #f8fafc;
+        border-bottom: 1px solid #e5e7eb;
+        color: #6b7280;
+        font-size: 0.75rem;
+        font-weight: 600;
+        white-space: nowrap;
+        padding-top: 14px;
+        padding-bottom: 14px;
+    }
+
+    .products-table tbody td {
+        border-color: #f1f3f5;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        font-size: 0.85rem;
+    }
+
+    .products-table tbody tr {
+        transition: background-color 0.15s ease;
+    }
+
+    .products-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: #f3f4f6;
+        border: 1px solid #e5e7eb;
+        color: #6b7280;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        overflow: hidden;
+        font-size: 1.1rem;
+    }
+
+    .products-avatar-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .product-info {
+        min-width: 150px;
+    }
+
+    .product-sku {
+        font-size: 0.8rem;
+        color: #6b7280;
+        font-family: monospace;
+        background: #f8fafc;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        padding: 4px 7px;
+    }
+
+    .products-empty-icon {
+        width: 68px;
+        height: 68px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 50%;
+        background: #f3f4f6;
+        color: #9ca3af;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .products-table .btn {
+        border-radius: 8px;
+    }
+
+    .products-table .dropdown-menu {
+        min-width: 190px;
+        border-radius: 10px;
+        padding: 6px;
+    }
+
+    .products-table .dropdown-item {
+        border-radius: 7px;
+        font-size: 0.84rem;
+        padding: 8px 10px;
+    }
+
+    .products-table .dropdown-item:hover {
+        background: #f3f4f6;
+    }
+
+    @@media (max-width: 767.98px) {
+
+        .products-stat-number {
+            font-size: 1.75rem;
+        }
+
+        .products-table {
+            min-width: 900px;
+        }
+
+    }
+
+</style>

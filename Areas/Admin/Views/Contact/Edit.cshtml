@@ -1,0 +1,328 @@
+@model ManholeCatalog.Models.ContactPage
+
+@{
+ViewData["Title"] = "تواصل معنا";
+}
+
+<div class="container-fluid py-4">
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+        <h1 class="h3 mb-1">تواصل معنا</h1>
+
+        <p class="text-muted mb-0">
+            إدارة بيانات التواصل ووسائل التواصل الاجتماعي.
+        </p>
+    </div>
+
+</div>
+
+@if (TempData["SuccessMessage"] is string successMessage)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+
+        <i class="bi bi-check-circle me-2"></i>
+
+        @successMessage
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="إغلاق"></button>
+
+    </div>
+}
+
+<form asp-action="Edit"
+      method="post">
+
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="ModelOnly"
+         class="alert alert-danger"
+         role="alert"></div>
+
+    <div class="row g-4">
+
+        <!-- Contact Information -->
+
+        <div class="col-12">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-header bg-white py-3">
+
+                    <h5 class="mb-0">
+
+                        <i class="bi bi-telephone me-2"></i>
+
+                        بيانات التواصل
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+
+                            <label asp-for="CompanyName"
+                                   class="form-label fw-semibold"></label>
+
+                            <input asp-for="CompanyName"
+                                   class="form-control"
+                                   placeholder="اسم المنشأة" />
+
+                            <span asp-validation-for="CompanyName"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label asp-for="Email"
+                                   class="form-label fw-semibold"></label>
+
+                            <input asp-for="Email"
+                                   type="email"
+                                   class="form-control"
+                                   placeholder="example@company.com" />
+
+                            <span asp-validation-for="Email"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <label asp-for="PhoneNumber"
+                                   class="form-label fw-semibold"></label>
+
+                            <input asp-for="PhoneNumber"
+                                   type="tel"
+                                   class="form-control"
+                                   placeholder="+966..." />
+
+                            <span asp-validation-for="PhoneNumber"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <label asp-for="MobileNumber"
+                                   class="form-label fw-semibold"></label>
+
+                            <input asp-for="MobileNumber"
+                                   type="tel"
+                                   class="form-control"
+                                   placeholder="+966..." />
+
+                            <span asp-validation-for="MobileNumber"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <label asp-for="WhatsAppNumber"
+                                   class="form-label fw-semibold"></label>
+
+                            <input asp-for="WhatsAppNumber"
+                                   type="tel"
+                                   class="form-control"
+                                   placeholder="+966..." />
+
+                            <span asp-validation-for="WhatsAppNumber"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <div class="col-12">
+
+                            <label asp-for="Address"
+                                   class="form-label fw-semibold"></label>
+
+                            <textarea asp-for="Address"
+                                      class="form-control"
+                                      rows="2"
+                                      placeholder="عنوان المنشأة"></textarea>
+
+                            <span asp-validation-for="Address"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <div class="col-md-8">
+
+                            <label asp-for="GoogleMapsUrl"
+                                   class="form-label fw-semibold"></label>
+
+                            <input asp-for="GoogleMapsUrl"
+                                   type="url"
+                                   class="form-control"
+                                   placeholder="https://maps.google.com/..." />
+
+                            <span asp-validation-for="GoogleMapsUrl"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <label asp-for="WorkingHours"
+                                   class="form-label fw-semibold"></label>
+
+                            <input asp-for="WorkingHours"
+                                   class="form-control"
+                                   placeholder="الأحد - الخميس: 8 ص - 5 م" />
+
+                            <span asp-validation-for="WorkingHours"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Social Media -->
+
+        <div class="col-12">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-header bg-white py-3">
+
+                    <h5 class="mb-0">
+
+                        <i class="bi bi-share me-2"></i>
+
+                        وسائل التواصل الاجتماعي
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+
+                            <label asp-for="LinkedInUrl"
+                                   class="form-label fw-semibold"></label>
+
+                            <input asp-for="LinkedInUrl"
+                                   type="url"
+                                   class="form-control"
+                                   placeholder="https://www.linkedin.com/..." />
+
+                            <span asp-validation-for="LinkedInUrl"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label asp-for="FacebookUrl"
+                                   class="form-label fw-semibold"></label>
+
+                            <input asp-for="FacebookUrl"
+                                   type="url"
+                                   class="form-control"
+                                   placeholder="https://www.facebook.com/..." />
+
+                            <span asp-validation-for="FacebookUrl"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label asp-for="InstagramUrl"
+                                   class="form-label fw-semibold"></label>
+
+                            <input asp-for="InstagramUrl"
+                                   type="url"
+                                   class="form-control"
+                                   placeholder="https://www.instagram.com/..." />
+
+                            <span asp-validation-for="InstagramUrl"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label asp-for="XUrl"
+                                   class="form-label fw-semibold"></label>
+
+                            <input asp-for="XUrl"
+                                   type="url"
+                                   class="form-control"
+                                   placeholder="https://x.com/..." />
+
+                            <span asp-validation-for="XUrl"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label asp-for="YouTubeUrl"
+                                   class="form-label fw-semibold"></label>
+
+                            <input asp-for="YouTubeUrl"
+                                   type="url"
+                                   class="form-control"
+                                   placeholder="https://www.youtube.com/..." />
+
+                            <span asp-validation-for="YouTubeUrl"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Save -->
+
+        <div class="col-12">
+
+            <div class="d-flex justify-content-end">
+
+                <button type="submit"
+                        class="btn btn-primary px-4">
+
+                    <i class="bi bi-check-lg me-2"></i>
+
+                    حفظ التغييرات
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</form>
+
+</div>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

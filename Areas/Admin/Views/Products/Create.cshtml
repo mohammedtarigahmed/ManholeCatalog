@@ -4,28 +4,46 @@
     ViewData["Title"] = "إضافة منتج";
 }
 
-<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+<!-- Page Header -->
+<div class="product-create-header mb-4">
 
-    <div>
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
 
-        <h1 class="h3 fw-bold mb-1">
-            إضافة منتج
-        </h1>
+        <div>
 
-        <p class="text-muted mb-0">
-            إضافة منتج جديد إلى الكتالوج.
-        </p>
+            <div class="d-flex align-items-center gap-2 mb-2">
+
+                <span class="badge rounded-pill text-bg-primary px-3 py-2">
+                    إدارة المنتجات
+                </span>
+
+            </div>
+
+            <h1 class="h3 fw-bold mb-1">
+                إضافة منتج
+            </h1>
+
+            <p class="text-muted mb-0">
+                إضافة منتج جديد إلى الكتالوج.
+            </p>
+
+        </div>
+
+        <a asp-area="Admin"
+           asp-controller="Products"
+           asp-action="Index"
+           class="btn btn-outline-secondary">
+
+            <i class="bi bi-arrow-right me-1"></i>
+
+            العودة إلى المنتجات
+
+        </a>
 
     </div>
 
-    <a asp-area="Admin"
-       asp-controller="Products"
-       asp-action="Index"
-       class="btn btn-outline-secondary">
-        ← العودة إلى المنتجات
-    </a>
-
 </div>
+
 
 <form asp-area="Admin"
       asp-controller="Products"
@@ -35,31 +53,59 @@
     @if (!ViewData.ModelState.IsValid)
     {
         <div asp-validation-summary="All"
-             class="alert alert-danger"
+             class="alert alert-danger border-0 shadow-sm mb-4"
              role="alert">
+
+            <div class="d-flex align-items-start gap-2">
+
+                <i class="bi bi-exclamation-triangle-fill mt-1"></i>
+
+                <div>
+                    يرجى مراجعة الأخطاء التالية.
+                </div>
+
+            </div>
+
         </div>
     }
 
+
     <div class="row g-4">
+
 
         <!-- Basic Information -->
         <div class="col-12">
 
-            <div class="card border-0 shadow-sm">
+            <div class="card border-0 shadow-sm product-form-card">
 
-                <div class="card-header bg-white py-3">
+                <div class="card-header bg-white border-0 p-4">
 
-                    <h2 class="h6 fw-bold mb-1">
-                        المعلومات الأساسية
-                    </h2>
+                    <div class="d-flex align-items-start gap-3">
 
-                    <p class="text-muted small mb-0">
-                        أدخل المعلومات الرئيسية المستخدمة للتعرف على المنتج.
-                    </p>
+                        <div class="product-form-icon bg-primary-subtle text-primary">
+
+                            <i class="bi bi-info-circle"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h2 class="h6 fw-bold mb-1">
+                                المعلومات الأساسية
+                            </h2>
+
+                            <p class="text-muted small mb-0">
+                                أدخل المعلومات الرئيسية المستخدمة للتعرف على المنتج.
+                            </p>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <div class="card-body">
+
+                <div class="card-body px-4 pb-4 pt-0">
 
                     <div class="row g-3">
 
@@ -67,7 +113,9 @@
 
                             <label asp-for="Name"
                                    class="form-label fw-semibold">
+
                                 اسم المنتج
+
                             </label>
 
                             <input asp-for="Name"
@@ -75,16 +123,19 @@
                                    placeholder="مثال: غطاء منهول من الحديد الزهر المرن" />
 
                             <span asp-validation-for="Name"
-                                  class="text-danger">
+                                  class="text-danger small">
                             </span>
 
                         </div>
+
 
                         <div class="col-md-4">
 
                             <label asp-for="SKU"
                                    class="form-label fw-semibold">
+
                                 الرقم التعريفي
+
                             </label>
 
                             <input asp-for="SKU"
@@ -92,16 +143,19 @@
                                    placeholder="مثال: MH-001" />
 
                             <span asp-validation-for="SKU"
-                                  class="text-danger">
+                                  class="text-danger small">
                             </span>
 
                         </div>
+
 
                         <div class="col-md-6">
 
                             <label asp-for="CategoryId"
                                    class="form-label fw-semibold">
+
                                 الفئة
+
                             </label>
 
                             <select asp-for="CategoryId"
@@ -115,7 +169,7 @@
                             </select>
 
                             <span asp-validation-for="CategoryId"
-                                  class="text-danger">
+                                  class="text-danger small">
                             </span>
 
                             <div class="form-text">
@@ -132,24 +186,40 @@
 
         </div>
 
+
         <!-- Product Specifications -->
         <div class="col-12">
 
-            <div class="card border-0 shadow-sm">
+            <div class="card border-0 shadow-sm product-form-card">
 
-                <div class="card-header bg-white py-3">
+                <div class="card-header bg-white border-0 p-4">
 
-                    <h2 class="h6 fw-bold mb-1">
-                        مواصفات المنتج
-                    </h2>
+                    <div class="d-flex align-items-start gap-3">
 
-                    <p class="text-muted small mb-0">
-                        أضف المواصفات الفنية المتوفرة لهذا المنتج.
-                    </p>
+                        <div class="product-form-icon bg-info-subtle text-info">
+
+                            <i class="bi bi-sliders"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h2 class="h6 fw-bold mb-1">
+                                مواصفات المنتج
+                            </h2>
+
+                            <p class="text-muted small mb-0">
+                                أضف المواصفات الفنية المتوفرة لهذا المنتج.
+                            </p>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <div class="card-body">
+
+                <div class="card-body px-4 pb-4 pt-0">
 
                     <div class="row g-3">
 
@@ -157,7 +227,9 @@
 
                             <label asp-for="Material"
                                    class="form-label fw-semibold">
+
                                 المادة
+
                             </label>
 
                             <input asp-for="Material"
@@ -165,16 +237,19 @@
                                    placeholder="مثال: حديد زهر مرن" />
 
                             <span asp-validation-for="Material"
-                                  class="text-danger">
+                                  class="text-danger small">
                             </span>
 
                         </div>
+
 
                         <div class="col-md-6">
 
                             <label asp-for="LoadClass"
                                    class="form-label fw-semibold">
+
                                 فئة التحميل
+
                             </label>
 
                             <input asp-for="LoadClass"
@@ -182,16 +257,19 @@
                                    placeholder="مثال: D400" />
 
                             <span asp-validation-for="LoadClass"
-                                  class="text-danger">
+                                  class="text-danger small">
                             </span>
 
                         </div>
+
 
                         <div class="col-md-6">
 
                             <label asp-for="Diameter"
                                    class="form-label fw-semibold">
+
                                 القطر
+
                             </label>
 
                             <input asp-for="Diameter"
@@ -199,16 +277,19 @@
                                    placeholder="مثال: 600 مم" />
 
                             <span asp-validation-for="Diameter"
-                                  class="text-danger">
+                                  class="text-danger small">
                             </span>
 
                         </div>
+
 
                         <div class="col-md-6">
 
                             <label asp-for="Shape"
                                    class="form-label fw-semibold">
+
                                 الشكل
+
                             </label>
 
                             <input asp-for="Shape"
@@ -216,7 +297,7 @@
                                    placeholder="مثال: دائري" />
 
                             <span asp-validation-for="Shape"
-                                  class="text-danger">
+                                  class="text-danger small">
                             </span>
 
                         </div>
@@ -229,30 +310,48 @@
 
         </div>
 
+
         <!-- Pricing and Description -->
         <div class="col-lg-8">
 
-            <div class="card border-0 shadow-sm h-100">
+            <div class="card border-0 shadow-sm product-form-card h-100">
 
-                <div class="card-header bg-white py-3">
+                <div class="card-header bg-white border-0 p-4">
 
-                    <h2 class="h6 fw-bold mb-1">
-                        السعر والوصف
-                    </h2>
+                    <div class="d-flex align-items-start gap-3">
 
-                    <p class="text-muted small mb-0">
-                        أضف معلومات السعر ووصفًا يساعد العملاء على فهم المنتج.
-                    </p>
+                        <div class="product-form-icon bg-success-subtle text-success">
+
+                            <i class="bi bi-tag"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h2 class="h6 fw-bold mb-1">
+                                السعر والوصف
+                            </h2>
+
+                            <p class="text-muted small mb-0">
+                                أضف معلومات السعر ووصفًا يساعد العملاء على فهم المنتج.
+                            </p>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <div class="card-body">
+
+                <div class="card-body px-4 pb-4 pt-0">
 
                     <div class="mb-4">
 
                         <label asp-for="Price"
                                class="form-label fw-semibold">
+
                             السعر
+
                         </label>
 
                         <div class="input-group">
@@ -271,7 +370,7 @@
                         </div>
 
                         <span asp-validation-for="Price"
-                              class="text-danger">
+                              class="text-danger small">
                         </span>
 
                         <div class="form-text">
@@ -280,11 +379,14 @@
 
                     </div>
 
+
                     <div>
 
                         <label asp-for="Description"
                                class="form-label fw-semibold">
+
                             الوصف
+
                         </label>
 
                         <textarea asp-for="Description"
@@ -293,7 +395,7 @@
                                   placeholder="اكتب وصفًا للمنتج أو استخداماته أو مميزاته أو أي معلومات مفيدة أخرى."></textarea>
 
                         <span asp-validation-for="Description"
-                              class="text-danger">
+                              class="text-danger small">
                         </span>
 
                         <div class="form-text">
@@ -308,24 +410,40 @@
 
         </div>
 
+
         <!-- Catalog Visibility -->
         <div class="col-lg-4">
 
-            <div class="card border-0 shadow-sm h-100">
+            <div class="card border-0 shadow-sm product-form-card h-100">
 
-                <div class="card-header bg-white py-3">
+                <div class="card-header bg-white border-0 p-4">
 
-                    <h2 class="h6 fw-bold mb-1">
-                        ظهور المنتج في الكتالوج
-                    </h2>
+                    <div class="d-flex align-items-start gap-3">
 
-                    <p class="text-muted small mb-0">
-                        تحكم في ظهور هذا المنتج في الكتالوج العام.
-                    </p>
+                        <div class="product-form-icon bg-warning-subtle text-warning">
+
+                            <i class="bi bi-eye"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h2 class="h6 fw-bold mb-1">
+                                ظهور المنتج في الكتالوج
+                            </h2>
+
+                            <p class="text-muted small mb-0">
+                                تحكم في ظهور هذا المنتج في الكتالوج العام.
+                            </p>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <div class="card-body">
+
+                <div class="card-body px-4 pb-4 pt-0">
 
                     <div class="form-check form-switch">
 
@@ -335,21 +453,34 @@
 
                         <label asp-for="IsActive"
                                class="form-check-label fw-semibold">
+
                             المنتج نشط
+
                         </label>
 
                     </div>
 
+
                     <div class="form-text mt-2">
+
                         المنتجات النشطة تظهر في الكتالوج العام ويمكن للعملاء إرسال طلبات عروض أسعار بشأنها.
+
                     </div>
+
 
                     <div class="alert alert-light border mt-4 mb-0">
 
-                        <div class="small">
+                        <div class="d-flex align-items-start gap-2 small">
 
-                            <strong>نصيحة:</strong>
-                            يمكنك تعطيل المنتج لاحقًا دون حذفه.
+                            <i class="bi bi-lightbulb text-warning mt-1"></i>
+
+                            <div>
+
+                                <strong>نصيحة:</strong>
+
+                                يمكنك تعطيل المنتج لاحقًا دون حذفه.
+
+                            </div>
 
                         </div>
 
@@ -361,12 +492,13 @@
 
         </div>
 
+
         <!-- Actions -->
         <div class="col-12">
 
-            <div class="card border-0 shadow-sm">
+            <div class="card border-0 shadow-sm product-form-card">
 
-                <div class="card-body">
+                <div class="card-body p-4">
 
                     <div class="d-flex flex-column flex-sm-row justify-content-end gap-2">
 
@@ -374,12 +506,20 @@
                            asp-controller="Products"
                            asp-action="Index"
                            class="btn btn-outline-secondary">
+
+                            <i class="bi bi-x-lg me-1"></i>
+
                             إلغاء
+
                         </a>
 
                         <button type="submit"
                                 class="btn btn-primary">
+
+                            <i class="bi bi-check-lg me-1"></i>
+
                             إنشاء المنتج
+
                         </button>
 
                     </div>
@@ -393,6 +533,82 @@
     </div>
 
 </form>
+
+
+<style>
+
+    .product-form-card {
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .product-form-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 1.05rem;
+    }
+
+    .product-form-card .card-header {
+        border-bottom: 1px solid #f1f3f5 !important;
+    }
+
+    .product-form-card .form-control,
+    .product-form-card .form-select,
+    .product-form-card .input-group-text {
+        border-radius: 10px;
+    }
+
+    .product-form-card .form-control,
+    .product-form-card .form-select {
+        min-height: 44px;
+    }
+
+    .product-form-card textarea.form-control {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .product-form-card .form-check-input {
+        width: 2.5em;
+        height: 1.35em;
+        margin-left: 0.5rem;
+        cursor: pointer;
+    }
+
+    .product-form-card .form-check-label {
+        cursor: pointer;
+    }
+
+    .product-form-card .btn {
+        min-height: 42px;
+        border-radius: 10px;
+    }
+
+    .product-create-header .btn {
+        border-radius: 10px;
+    }
+
+    @@media (max-width: 767.98px) {
+
+        .product-form-card .card-body,
+        .product-form-card .card-header {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+
+        .product-create-header .btn {
+            width: 100%;
+        }
+
+    }
+
+</style>
+
 
 @section Scripts {
 

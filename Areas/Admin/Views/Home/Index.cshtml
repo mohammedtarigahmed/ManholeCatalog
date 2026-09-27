@@ -7,39 +7,61 @@
         ?? new List<ManholeCatalog.Models.QuotationRequest>();
 }
 
-<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+<!-- Page Header -->
+<div class="admin-dashboard-header mb-4">
 
-    <div>
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
 
-        <h1 class="h3 fw-bold mb-1">
-            لوحة التحكم
-        </h1>
+        <div>
 
-        <p class="text-muted mb-0">
-            نظرة عامة على الكتالوج وطلبات عروض الأسعار.
-        </p>
+            <div class="d-flex align-items-center gap-2 mb-2">
 
-    </div>
+                <span class="badge rounded-pill text-bg-primary px-3 py-2">
+                    لوحة الإدارة
+                </span>
 
-    <div class="d-flex flex-wrap gap-2">
+            </div>
 
-        <a asp-area=""
-           asp-controller="Catalog"
-           asp-action="Index"
-           class="btn btn-outline-secondary">
-            عرض الكتالوج
-        </a>
+            <h1 class="h3 fw-bold mb-1">
+                لوحة التحكم
+            </h1>
 
-        <a asp-area="Admin"
-           asp-controller="Products"
-           asp-action="Create"
-           class="btn btn-primary">
-            + إضافة منتج
-        </a>
+            <p class="text-muted mb-0">
+                نظرة عامة على الكتالوج وطلبات عروض الأسعار.
+            </p>
+
+        </div>
+
+        <div class="d-flex flex-wrap gap-2">
+
+            <a asp-area=""
+               asp-controller="Catalog"
+               asp-action="Index"
+               class="btn btn-outline-secondary">
+
+                <i class="bi bi-shop me-1"></i>
+
+                عرض الكتالوج
+
+            </a>
+
+            <a asp-area="Admin"
+               asp-controller="Products"
+               asp-action="Create"
+               class="btn btn-primary">
+
+                <i class="bi bi-plus-lg me-1"></i>
+
+                إضافة منتج
+
+            </a>
+
+        </div>
 
     </div>
 
 </div>
+
 
 <!-- Main Statistics -->
 <div class="row g-4 mb-4">
@@ -50,34 +72,40 @@
         <a asp-area="Admin"
            asp-controller="Products"
            asp-action="Index"
-           class="text-decoration-none">
+           class="text-decoration-none dashboard-stat-link">
 
-            <div class="card border-0 shadow-sm h-100">
+            <div class="card border-0 shadow-sm dashboard-stat-card h-100">
 
-                <div class="card-body">
+                <div class="card-body p-4">
 
                     <div class="d-flex justify-content-between align-items-start">
 
                         <div>
 
-                            <div class="small text-muted mb-1">
+                            <div class="small text-muted mb-2">
                                 إجمالي المنتجات
                             </div>
 
-                            <div class="h2 fw-bold text-dark mb-0">
+                            <div class="dashboard-stat-number text-dark">
                                 @ViewBag.TotalProducts
                             </div>
 
                         </div>
 
-                        <span class="badge text-bg-light border">
-                            المنتجات
-                        </span>
+                        <div class="dashboard-stat-icon bg-primary-subtle text-primary">
+
+                            <i class="bi bi-box-seam"></i>
+
+                        </div>
 
                     </div>
 
                     <div class="small text-muted mt-3">
-                        عرض وإدارة المنتجات.
+
+                        <i class="bi bi-arrow-left-short"></i>
+
+                        عرض وإدارة المنتجات
+
                     </div>
 
                 </div>
@@ -87,6 +115,7 @@
         </a>
 
     </div>
+
 
     <!-- Active Products -->
     <div class="col-md-6 col-xl-3">
@@ -94,34 +123,40 @@
         <a asp-area="Admin"
            asp-controller="Products"
            asp-action="Index"
-           class="text-decoration-none">
+           class="text-decoration-none dashboard-stat-link">
 
-            <div class="card border-0 shadow-sm h-100">
+            <div class="card border-0 shadow-sm dashboard-stat-card h-100">
 
-                <div class="card-body">
+                <div class="card-body p-4">
 
                     <div class="d-flex justify-content-between align-items-start">
 
                         <div>
 
-                            <div class="small text-muted mb-1">
+                            <div class="small text-muted mb-2">
                                 المنتجات النشطة
                             </div>
 
-                            <div class="h2 fw-bold text-success mb-0">
+                            <div class="dashboard-stat-number text-success">
                                 @ViewBag.ActiveProducts
                             </div>
 
                         </div>
 
-                        <span class="badge text-bg-success">
-                            نشطة
-                        </span>
+                        <div class="dashboard-stat-icon bg-success-subtle text-success">
+
+                            <i class="bi bi-check-circle"></i>
+
+                        </div>
 
                     </div>
 
                     <div class="small text-muted mt-3">
-                        المنتجات الظاهرة حاليًا في الكتالوج.
+
+                        <i class="bi bi-eye"></i>
+
+                        الظاهرة حاليًا في الكتالوج
+
                     </div>
 
                 </div>
@@ -131,6 +166,7 @@
         </a>
 
     </div>
+
 
     <!-- Categories -->
     <div class="col-md-6 col-xl-3">
@@ -138,34 +174,40 @@
         <a asp-area="Admin"
            asp-controller="Categories"
            asp-action="Index"
-           class="text-decoration-none">
+           class="text-decoration-none dashboard-stat-link">
 
-            <div class="card border-0 shadow-sm h-100">
+            <div class="card border-0 shadow-sm dashboard-stat-card h-100">
 
-                <div class="card-body">
+                <div class="card-body p-4">
 
                     <div class="d-flex justify-content-between align-items-start">
 
                         <div>
 
-                            <div class="small text-muted mb-1">
+                            <div class="small text-muted mb-2">
                                 إجمالي الفئات
                             </div>
 
-                            <div class="h2 fw-bold text-dark mb-0">
+                            <div class="dashboard-stat-number text-dark">
                                 @ViewBag.TotalCategories
                             </div>
 
                         </div>
 
-                        <span class="badge text-bg-light border">
-                            الفئات
-                        </span>
+                        <div class="dashboard-stat-icon bg-secondary-subtle text-secondary">
+
+                            <i class="bi bi-tags"></i>
+
+                        </div>
 
                     </div>
 
                     <div class="small text-muted mt-3">
-                        تنظيم المنتجات داخل الكتالوج.
+
+                        <i class="bi bi-folder2"></i>
+
+                        تنظيم المنتجات داخل الكتالوج
+
                     </div>
 
                 </div>
@@ -176,40 +218,47 @@
 
     </div>
 
+
     <!-- Pending Quotations -->
     <div class="col-md-6 col-xl-3">
 
         <a asp-area="Admin"
            asp-controller="Quotations"
            asp-action="Index"
-           class="text-decoration-none">
+           class="text-decoration-none dashboard-stat-link">
 
-            <div class="card border-0 shadow-sm h-100">
+            <div class="card border-0 shadow-sm dashboard-stat-card h-100">
 
-                <div class="card-body">
+                <div class="card-body p-4">
 
                     <div class="d-flex justify-content-between align-items-start">
 
                         <div>
 
-                            <div class="small text-muted mb-1">
+                            <div class="small text-muted mb-2">
                                 عروض الأسعار قيد المراجعة
                             </div>
 
-                            <div class="h2 fw-bold text-warning mb-0">
+                            <div class="dashboard-stat-number text-warning">
                                 @ViewBag.PendingQuotationRequests
                             </div>
 
                         </div>
 
-                        <span class="badge text-bg-warning">
-                            قيد المراجعة
-                        </span>
+                        <div class="dashboard-stat-icon bg-warning-subtle text-warning">
+
+                            <i class="bi bi-hourglass-split"></i>
+
+                        </div>
 
                     </div>
 
                     <div class="small text-muted mt-3">
-                        الطلبات التي تنتظر اتخاذ إجراء.
+
+                        <i class="bi bi-arrow-left-short"></i>
+
+                        طلبات تنتظر اتخاذ إجراء
+
                     </div>
 
                 </div>
@@ -222,6 +271,7 @@
 
 </div>
 
+
 <!-- Secondary Statistics -->
 <div class="row g-4 mb-4">
 
@@ -231,29 +281,37 @@
         <a asp-area="Admin"
            asp-controller="Quotations"
            asp-action="Index"
-           class="text-decoration-none">
+           class="text-decoration-none dashboard-stat-link">
 
-            <div class="card border-0 shadow-sm h-100">
+            <div class="card border-0 shadow-sm dashboard-secondary-card h-100">
 
-                <div class="card-body">
+                <div class="card-body p-4">
 
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center justify-content-between">
 
-                        <div>
+                        <div class="d-flex align-items-center gap-3">
 
-                            <div class="small text-muted mb-1">
-                                إجمالي طلبات عروض الأسعار
+                            <div class="dashboard-secondary-icon bg-primary-subtle text-primary">
+
+                                <i class="bi bi-file-earmark-text"></i>
+
                             </div>
 
-                            <div class="h2 fw-bold text-dark mb-0">
-                                @ViewBag.TotalQuotationRequests
+                            <div>
+
+                                <div class="small text-muted mb-1">
+                                    إجمالي طلبات عروض الأسعار
+                                </div>
+
+                                <div class="h3 fw-bold text-dark mb-0">
+                                    @ViewBag.TotalQuotationRequests
+                                </div>
+
                             </div>
 
                         </div>
 
-                        <span class="badge text-bg-light border">
-                            الطلبات
-                        </span>
+                        <i class="bi bi-chevron-left text-muted"></i>
 
                     </div>
 
@@ -269,35 +327,44 @@
 
     </div>
 
+
     <!-- Products Without Images -->
     <div class="col-md-6">
 
         <a asp-area="Admin"
            asp-controller="Products"
            asp-action="Index"
-           class="text-decoration-none">
+           class="text-decoration-none dashboard-stat-link">
 
-            <div class="card border-0 shadow-sm h-100">
+            <div class="card border-0 shadow-sm dashboard-secondary-card h-100">
 
-                <div class="card-body">
+                <div class="card-body p-4">
 
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center justify-content-between">
 
-                        <div>
+                        <div class="d-flex align-items-center gap-3">
 
-                            <div class="small text-muted mb-1">
-                                منتجات بدون صور
+                            <div class="dashboard-secondary-icon bg-warning-subtle text-warning">
+
+                                <i class="bi bi-images"></i>
+
                             </div>
 
-                            <div class="h2 fw-bold text-warning mb-0">
-                                @ViewBag.ProductsWithoutImages
+                            <div>
+
+                                <div class="small text-muted mb-1">
+                                    منتجات بدون صور
+                                </div>
+
+                                <div class="h3 fw-bold text-warning mb-0">
+                                    @ViewBag.ProductsWithoutImages
+                                </div>
+
                             </div>
 
                         </div>
 
-                        <span class="badge text-bg-warning">
-                            الصور
-                        </span>
+                        <i class="bi bi-chevron-left text-muted"></i>
 
                     </div>
 
@@ -315,18 +382,29 @@
 
 </div>
 
+
 <!-- Recent Quotations -->
-<div class="card border-0 shadow-sm mb-4">
+<div class="card border-0 shadow-sm dashboard-section-card mb-4">
 
-    <div class="card-header bg-white py-3">
+    <div class="card-header bg-white border-0 p-4">
 
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
 
             <div>
 
-                <h2 class="h6 fw-bold mb-1">
-                    أحدث طلبات عروض الأسعار
-                </h2>
+                <div class="d-flex align-items-center gap-2 mb-1">
+
+                    <div class="dashboard-section-icon bg-primary-subtle text-primary">
+
+                        <i class="bi bi-clock-history"></i>
+
+                    </div>
+
+                    <h2 class="h6 fw-bold mb-0">
+                        أحدث طلبات عروض الأسعار
+                    </h2>
+
+                </div>
 
                 <p class="text-muted small mb-0">
                     أحدث طلبات عروض الأسعار التي أرسلها العملاء.
@@ -338,25 +416,27 @@
                asp-controller="Quotations"
                asp-action="Index"
                class="btn btn-sm btn-outline-primary">
+
                 عرض جميع الطلبات
+
+                <i class="bi bi-arrow-left ms-1"></i>
+
             </a>
 
         </div>
 
     </div>
 
+
     <div class="card-body p-0">
 
         @if (recentQuotationRequests.Count == 0)
         {
-            <div class="text-center py-5 px-4">
+            <div class="dashboard-empty-state text-center py-5 px-4">
 
-                <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-light border mb-3"
-                     style="width: 64px; height: 64px;">
+                <div class="dashboard-empty-icon mb-3">
 
-                    <span class="text-muted fw-bold fs-5">
-                        Q
-                    </span>
+                    <i class="bi bi-inbox"></i>
 
                 </div>
 
@@ -374,9 +454,9 @@
         {
             <div class="table-responsive">
 
-                <table class="table table-hover align-middle mb-0">
+                <table class="table dashboard-table table-hover align-middle mb-0">
 
-                    <thead class="table-light">
+                    <thead>
 
                         <tr>
 
@@ -421,15 +501,30 @@
                                 <!-- Request -->
                                 <td class="ps-4">
 
-                                    <div class="fw-semibold">
-                                        #@request.Id
-                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
 
-                                    <div class="small text-muted">
-                                        عرض سعر
+                                        <div class="dashboard-request-icon">
+
+                                            <i class="bi bi-file-earmark-text"></i>
+
+                                        </div>
+
+                                        <div>
+
+                                            <div class="fw-semibold">
+                                                #@request.Id
+                                            </div>
+
+                                            <div class="small text-muted">
+                                                عرض سعر
+                                            </div>
+
+                                        </div>
+
                                     </div>
 
                                 </td>
+
 
                                 <!-- Customer -->
                                 <td>
@@ -452,6 +547,7 @@
                                     }
 
                                 </td>
+
 
                                 <!-- Product -->
                                 <td>
@@ -478,14 +574,16 @@
 
                                 </td>
 
+
                                 <!-- Quantity -->
                                 <td>
 
-                                    <span class="badge text-bg-light border">
+                                    <span class="badge rounded-pill text-bg-light border px-3">
                                         @request.Quantity
                                     </span>
 
                                 </td>
+
 
                                 <!-- Status -->
                                 <td>
@@ -493,43 +591,54 @@
                                     @switch (request.Status)
                                     {
                                         case ManholeCatalog.Models.QuotationStatus.Pending:
-                                            <span class="badge text-bg-warning">
+
+                                            <span class="badge rounded-pill text-bg-warning">
                                                 قيد المراجعة
                                             </span>
+
                                             break;
 
                                         case ManholeCatalog.Models.QuotationStatus.Contacted:
-                                            <span class="badge text-bg-info">
+
+                                            <span class="badge rounded-pill text-bg-info">
                                                 تم التواصل
                                             </span>
+
                                             break;
 
                                         case ManholeCatalog.Models.QuotationStatus.Quoted:
-                                            <span class="badge text-bg-primary">
+
+                                            <span class="badge rounded-pill text-bg-primary">
                                                 تم تقديم العرض
                                             </span>
+
                                             break;
 
                                         case ManholeCatalog.Models.QuotationStatus.Closed:
-                                            <span class="badge text-bg-secondary">
+
+                                            <span class="badge rounded-pill text-bg-secondary">
                                                 مغلق
                                             </span>
+
                                             break;
 
                                         default:
-                                            <span class="badge text-bg-light border">
+
+                                            <span class="badge rounded-pill text-bg-light border">
                                                 غير معروف
                                             </span>
+
                                             break;
                                     }
 
                                 </td>
 
+
                                 <!-- Submitted -->
                                 <td>
 
                                     <div class="text-nowrap">
-                                        @request.CreatedAt.ToLocalTime().ToString("dd MMM yyyy")
+                                        @request.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy")
                                     </div>
 
                                     <div class="small text-muted text-nowrap">
@@ -538,6 +647,7 @@
 
                                 </td>
 
+
                                 <!-- Action -->
                                 <td class="text-end pe-4">
 
@@ -545,8 +655,12 @@
                                        asp-controller="Quotations"
                                        asp-action="Details"
                                        asp-route-id="@request.Id"
-                                       class="btn btn-sm btn-outline-primary">
+                                       class="btn btn-sm btn-light border">
+
                                         عرض
+
+                                        <i class="bi bi-chevron-left ms-1"></i>
+
                                     </a>
 
                                 </td>
@@ -565,27 +679,46 @@
 
 </div>
 
-<!-- Quick Actions -->
+
+<!-- Quick Actions Header -->
 <div class="mb-3">
 
-    <h2 class="h5 fw-bold mb-1">
-        إجراءات سريعة
-    </h2>
+    <div class="d-flex align-items-center gap-2 mb-1">
+
+        <div class="dashboard-section-icon bg-primary-subtle text-primary">
+
+            <i class="bi bi-lightning-charge"></i>
+
+        </div>
+
+        <h2 class="h5 fw-bold mb-0">
+            إجراءات سريعة
+        </h2>
+
+    </div>
 
     <p class="text-muted mb-0">
-        مهام الإدارة الشائعة.
+        المهام الإدارية الشائعة.
     </p>
 
 </div>
 
+
+<!-- Quick Actions -->
 <div class="row g-4">
 
     <!-- Products -->
     <div class="col-md-6 col-lg-3">
 
-        <div class="card border-0 shadow-sm h-100">
+        <div class="card border-0 shadow-sm dashboard-action-card h-100">
 
-            <div class="card-body d-flex flex-column">
+            <div class="card-body p-4 d-flex flex-column">
+
+                <div class="dashboard-action-icon bg-primary-subtle text-primary mb-3">
+
+                    <i class="bi bi-box-seam"></i>
+
+                </div>
 
                 <div class="small text-primary fw-semibold mb-2">
                     المنتجات
@@ -603,7 +736,11 @@
                    asp-controller="Products"
                    asp-action="Index"
                    class="btn btn-outline-primary">
+
                     إدارة المنتجات
+
+                    <i class="bi bi-arrow-left ms-1"></i>
+
                 </a>
 
             </div>
@@ -612,12 +749,19 @@
 
     </div>
 
+
     <!-- Categories -->
     <div class="col-md-6 col-lg-3">
 
-        <div class="card border-0 shadow-sm h-100">
+        <div class="card border-0 shadow-sm dashboard-action-card h-100">
 
-            <div class="card-body d-flex flex-column">
+            <div class="card-body p-4 d-flex flex-column">
+
+                <div class="dashboard-action-icon bg-secondary-subtle text-secondary mb-3">
+
+                    <i class="bi bi-tags"></i>
+
+                </div>
 
                 <div class="small text-primary fw-semibold mb-2">
                     الفئات
@@ -635,7 +779,11 @@
                    asp-controller="Categories"
                    asp-action="Index"
                    class="btn btn-outline-primary">
+
                     إدارة الفئات
+
+                    <i class="bi bi-arrow-left ms-1"></i>
+
                 </a>
 
             </div>
@@ -644,12 +792,19 @@
 
     </div>
 
+
     <!-- Quotations -->
     <div class="col-md-6 col-lg-3">
 
-        <div class="card border-0 shadow-sm h-100">
+        <div class="card border-0 shadow-sm dashboard-action-card h-100">
 
-            <div class="card-body d-flex flex-column">
+            <div class="card-body p-4 d-flex flex-column">
+
+                <div class="dashboard-action-icon bg-warning-subtle text-warning mb-3">
+
+                    <i class="bi bi-file-earmark-text"></i>
+
+                </div>
 
                 <div class="small text-primary fw-semibold mb-2">
                     عروض الأسعار
@@ -667,7 +822,11 @@
                    asp-controller="Quotations"
                    asp-action="Index"
                    class="btn btn-outline-primary">
+
                     إدارة عروض الأسعار
+
+                    <i class="bi bi-arrow-left ms-1"></i>
+
                 </a>
 
             </div>
@@ -676,12 +835,19 @@
 
     </div>
 
+
     <!-- Catalog -->
     <div class="col-md-6 col-lg-3">
 
-        <div class="card border-0 shadow-sm h-100">
+        <div class="card border-0 shadow-sm dashboard-action-card h-100">
 
-            <div class="card-body d-flex flex-column">
+            <div class="card-body p-4 d-flex flex-column">
+
+                <div class="dashboard-action-icon bg-success-subtle text-success mb-3">
+
+                    <i class="bi bi-shop"></i>
+
+                </div>
 
                 <div class="small text-primary fw-semibold mb-2">
                     الكتالوج
@@ -699,7 +865,11 @@
                    asp-controller="Catalog"
                    asp-action="Index"
                    class="btn btn-outline-secondary">
+
                     عرض الكتالوج
+
+                    <i class="bi bi-arrow-left ms-1"></i>
+
                 </a>
 
             </div>
@@ -709,3 +879,143 @@
     </div>
 
 </div>
+
+
+<style>
+
+    .dashboard-stat-link {
+        color: inherit;
+    }
+
+    .dashboard-stat-card,
+    .dashboard-secondary-card,
+    .dashboard-section-card,
+    .dashboard-action-card {
+        border-radius: 16px;
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .dashboard-stat-card:hover,
+    .dashboard-secondary-card:hover,
+    .dashboard-action-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 28px rgba(17, 24, 39, 0.09) !important;
+    }
+
+    .dashboard-stat-number {
+        font-size: 2rem;
+        line-height: 1;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+    }
+
+    .dashboard-stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+    }
+
+    .dashboard-secondary-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+
+    .dashboard-section-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+    }
+
+    .dashboard-action-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 13px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.15rem;
+    }
+
+    .dashboard-section-card {
+        overflow: hidden;
+    }
+
+    .dashboard-table thead th {
+        background: #f8fafc;
+        border-bottom: 1px solid #e5e7eb;
+        color: #6b7280;
+        font-size: 0.75rem;
+        font-weight: 600;
+        white-space: nowrap;
+        padding-top: 14px;
+        padding-bottom: 14px;
+    }
+
+    .dashboard-table tbody td {
+        border-color: #f1f3f5;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        font-size: 0.85rem;
+    }
+
+    .dashboard-request-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: #eef2ff;
+        color: #4f46e5;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .dashboard-empty-state {
+        background: #fcfcfd;
+    }
+
+    .dashboard-empty-icon {
+        width: 68px;
+        height: 68px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 50%;
+        background: #f3f4f6;
+        color: #9ca3af;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .dashboard-action-card .btn {
+        border-radius: 9px;
+    }
+
+    @@media (max-width: 767.98px) {
+
+        .dashboard-stat-number {
+            font-size: 1.75rem;
+        }
+
+        .dashboard-table {
+            min-width: 900px;
+        }
+
+    }
+
+</style>

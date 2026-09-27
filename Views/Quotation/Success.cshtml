@@ -2,51 +2,70 @@
 
 @{
     ViewData["Title"] = "تم إرسال الطلب";
+
+    var productImage = Model.Product?.Images?
+        .OrderBy(i => i.DisplayOrder)
+        .ThenBy(i => i.Id)
+        .FirstOrDefault(i => i.IsPrimary)
+        ?? Model.Product?.Images?
+            .OrderBy(i => i.DisplayOrder)
+            .ThenBy(i => i.Id)
+            .FirstOrDefault();
 }
 
-<div class="container py-5">
+<div class="public-page quotation-success-page">
 
-    <div class="row justify-content-center">
+    <section class="public-page-header quotation-success-header">
 
-        <div class="col-lg-8">
+        <div class="container">
 
-            <!-- Success Header -->
-            <div class="text-center mb-4">
+            <div class="public-page-header-content quotation-success-header-content">
 
-                <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-success-subtle text-success mb-3"
-                     style="width: 72px; height: 72px;">
-
-                    <span class="fs-2 fw-bold">
-                        ✓
-                    </span>
-
+                <div class="quotation-success-icon">
+                    <i class="bi bi-check-lg"></i>
                 </div>
 
-                <h1 class="display-6 fw-bold mb-3">
+                <span class="public-page-label quotation-success-eyebrow">
+                    <i class="bi bi-check-circle"></i>
+                    تم استلام الطلب
+                </span>
+
+                <h1 class="public-page-title quotation-success-title">
                     تم إرسال طلبك بنجاح
                 </h1>
 
-                <p class="lead text-muted mb-0">
+                <p class="public-page-description quotation-success-description">
                     شكرًا لك على طلب عرض السعر.
                     لقد استلمنا طلبك وسنتواصل معك قريبًا.
                 </p>
 
             </div>
 
-            <!-- Request Number -->
-            <div class="card border-0 shadow-sm mb-4">
+        </div>
 
-                <div class="card-body text-center p-4">
+    </section>
 
-                    <div class="small text-muted mb-1">
+    <section class="public-section quotation-success-section">
+
+        <div class="container">
+
+            <div class="quotation-success-number-card">
+
+                <div class="public-card-icon quotation-success-number-icon">
+                    <i class="bi bi-receipt"></i>
+                </div>
+
+                <div class="quotation-success-number-content">
+
+                    <div class="quotation-success-number-label">
                         رقم الطلب
                     </div>
 
-                    <div class="fs-2 fw-bold text-success">
+                    <div class="quotation-success-number">
                         #@Model.Id
                     </div>
 
-                    <div class="small text-muted mt-2">
+                    <div class="quotation-success-number-note">
                         يرجى الاحتفاظ بهذا الرقم للرجوع إليه مستقبلًا.
                     </div>
 
@@ -54,84 +73,384 @@
 
             </div>
 
-            <!-- Request Details -->
-            <div class="card border-0 shadow-sm mb-4">
+            <div class="row g-4">
 
-                <div class="card-header bg-white py-3">
+                <div class="col-lg-7">
 
-                    <h2 class="h5 fw-bold mb-1">
-                        تفاصيل الطلب
-                    </h2>
+                    <div class="public-card quotation-success-card">
 
-                    <p class="text-muted small mb-0">
-                        ملخص المنتج وطلب عرض السعر.
-                    </p>
+                        <div class="public-card-header">
+
+                            <div class="public-card-header-content">
+
+                                <div class="public-card-icon">
+                                    <i class="bi bi-file-earmark-text"></i>
+                                </div>
+
+                                <div>
+
+                                    <h2 class="h5 fw-bold mb-1">
+                                        تفاصيل الطلب
+                                    </h2>
+
+                                    <p class="text-muted small mb-0">
+                                        ملخص المنتج وطلب عرض السعر.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="public-card-body quotation-success-card-body">
+
+                            @if (productImage != null || Model.Product != null)
+                            {
+                                <div class="quotation-success-product">
+
+                                    <div class="quotation-success-product-image">
+
+                                        @if (productImage != null)
+                                        {
+                                            <img src="@productImage.ImagePath"
+                                                 alt="@Model.Product?.Name" />
+                                        }
+                                        else
+                                        {
+                                            <div class="quotation-success-no-image">
+                                                <i class="bi bi-image"></i>
+                                            </div>
+                                        }
+
+                                    </div>
+
+                                    <div class="quotation-success-product-info">
+
+                                        <span>
+                                            المنتج
+                                        </span>
+
+                                        <strong>
+                                            @Model.Product?.Name
+                                        </strong>
+
+                                        @if (!string.IsNullOrWhiteSpace(Model.Product?.SKU))
+                                        {
+                                            <small>
+                                                <i class="bi bi-upc-scan"></i>
+                                                @Model.Product.SKU
+                                            </small>
+                                        }
+
+                                    </div>
+
+                                </div>
+                            }
+
+                            <div class="quotation-success-details-grid">
+
+                                <div class="quotation-success-detail">
+
+                                    <span>
+                                        الكمية
+                                    </span>
+
+                                    <strong>
+                                        @Model.Quantity
+                                    </strong>
+
+                                </div>
+
+                                <div class="quotation-success-detail">
+
+                                    <span>
+                                        الحالة
+                                    </span>
+
+                                    <strong>
+                                        <span class="quotation-status-badge">
+                                            <i class="bi bi-clock"></i>
+                                            قيد المراجعة
+                                        </span>
+                                    </strong>
+
+                                </div>
+
+                                <div class="quotation-success-detail quotation-success-detail-wide">
+
+                                    <span>
+                                        تاريخ الإرسال
+                                    </span>
+
+                                    <strong>
+                                        @Model.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy, hh:mm tt")
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <div class="card-body p-4">
+                <div class="col-lg-5">
 
-                    <div class="row g-4">
+                    <div class="public-card quotation-success-card h-100">
 
-                        <div class="col-md-6">
+                        <div class="public-card-header">
 
-                            <div class="text-muted small mb-1">
-                                المنتج
-                            </div>
+                            <div class="public-card-header-content">
 
-                            <div class="fw-semibold">
-                                @Model.Product?.Name
-                            </div>
-
-                        </div>
-
-                        @if (!string.IsNullOrWhiteSpace(Model.Product?.SKU))
-                        {
-                            <div class="col-md-6">
-
-                                <div class="text-muted small mb-1">
-                                    الرقم التعريفي
+                                <div class="public-card-icon">
+                                    <i class="bi bi-person-lines-fill"></i>
                                 </div>
 
-                                <div class="fw-semibold">
-                                    @Model.Product.SKU
+                                <div>
+
+                                    <h2 class="h5 fw-bold mb-1">
+                                        بيانات التواصل
+                                    </h2>
+
+                                    <p class="text-muted small mb-0">
+                                        البيانات التي تم إدخالها مع الطلب.
+                                    </p>
+
                                 </div>
 
                             </div>
-                        }
 
-                        <div class="col-md-6">
+                        </div>
 
-                            <div class="text-muted small mb-1">
-                                الكمية
-                            </div>
+                        <div class="public-card-body quotation-success-card-body">
 
-                            <div class="fw-semibold">
-                                @Model.Quantity
+                            <div class="quotation-contact-list">
+
+                                <div class="quotation-contact-item">
+
+                                    <div class="quotation-contact-icon">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+
+                                    <div>
+
+                                        <span>
+                                            الاسم الكامل
+                                        </span>
+
+                                        <strong>
+                                            @Model.FullName
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                                @if (!string.IsNullOrWhiteSpace(Model.CompanyName))
+                                {
+                                    <div class="quotation-contact-item">
+
+                                        <div class="quotation-contact-icon">
+                                            <i class="bi bi-building"></i>
+                                        </div>
+
+                                        <div>
+
+                                            <span>
+                                                الشركة
+                                            </span>
+
+                                            <strong>
+                                                @Model.CompanyName
+                                            </strong>
+
+                                        </div>
+
+                                    </div>
+                                }
+
+                                <div class="quotation-contact-item">
+
+                                    <div class="quotation-contact-icon">
+                                        <i class="bi bi-envelope"></i>
+                                    </div>
+
+                                    <div>
+
+                                        <span>
+                                            البريد الإلكتروني
+                                        </span>
+
+                                        <strong>
+                                            @Model.Email
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="quotation-contact-item">
+
+                                    <div class="quotation-contact-icon">
+                                        <i class="bi bi-telephone"></i>
+                                    </div>
+
+                                    <div>
+
+                                        <span>
+                                            رقم الهاتف
+                                        </span>
+
+                                        <strong>
+                                            @Model.PhoneNumber
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
                             </div>
 
                         </div>
 
-                        <div class="col-md-6">
+                    </div>
 
-                            <div class="text-muted small mb-1">
-                                الحالة
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(Model.Message))
+                {
+                    <div class="col-12">
+
+                        <div class="public-card quotation-success-card">
+
+                            <div class="public-card-header">
+
+                                <div class="public-card-header-content">
+
+                                    <div class="public-card-icon">
+                                        <i class="bi bi-chat-left-text"></i>
+                                    </div>
+
+                                    <div>
+
+                                        <h2 class="h5 fw-bold mb-1">
+                                            رسالتك
+                                        </h2>
+
+                                        <p class="text-muted small mb-0">
+                                            المتطلبات الإضافية التي أرسلتها مع الطلب.
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
                             </div>
 
-                            <span class="badge text-bg-warning">
-                                قيد المراجعة
-                            </span>
+                            <div class="public-card-body quotation-message-body">
+                                @Model.Message
+                            </div>
 
                         </div>
 
-                        <div class="col-md-6">
+                    </div>
+                }
 
-                            <div class="text-muted small mb-1">
-                                تاريخ الإرسال
+                <div class="col-12">
+
+                    <div class="public-card quotation-next-steps">
+
+                        <div class="public-card-header">
+
+                            <div class="public-card-header-content">
+
+                                <div class="public-card-icon">
+                                    <i class="bi bi-list-check"></i>
+                                </div>
+
+                                <div>
+
+                                    <h2 class="h5 fw-bold mb-1">
+                                        ماذا سيحدث بعد ذلك؟
+                                    </h2>
+
+                                    <p class="text-muted small mb-0">
+                                        الخطوات التالية بعد إرسال طلب عرض السعر.
+                                    </p>
+
+                                </div>
+
                             </div>
 
-                            <div>
-                                @Model.CreatedAt.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")
+                        </div>
+
+                        <div class="public-card-body">
+
+                            <div class="quotation-steps">
+
+                                <div class="quotation-step">
+
+                                    <div class="quotation-step-number">
+                                        1
+                                    </div>
+
+                                    <div class="quotation-step-content">
+
+                                        <strong>
+                                            مراجعة الطلب
+                                        </strong>
+
+                                        <span>
+                                            سيقوم فريقنا بمراجعة طلب عرض السعر.
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="quotation-step">
+
+                                    <div class="quotation-step-number">
+                                        2
+                                    </div>
+
+                                    <div class="quotation-step-content">
+
+                                        <strong>
+                                            التواصل معك
+                                        </strong>
+
+                                        <span>
+                                            سنتواصل معك باستخدام بيانات التواصل التي قدمتها.
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="quotation-step">
+
+                                    <div class="quotation-step-number">
+                                        3
+                                    </div>
+
+                                    <div class="quotation-step-content">
+
+                                        <strong>
+                                            عرض السعر
+                                        </strong>
+
+                                        <span>
+                                            سيناقش فريقنا معك تفاصيل عرض السعر.
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
                             </div>
 
                         </div>
@@ -142,222 +461,43 @@
 
             </div>
 
-            <!-- Contact Information -->
-            <div class="card border-0 shadow-sm mb-4">
+            <div class="quotation-success-actions">
 
-                <div class="card-header bg-white py-3">
+                <a asp-controller="Catalog"
+                   asp-action="Details"
+                   asp-route-id="@Model.ProductId"
+                   class="btn btn-primary public-btn public-btn-primary public-btn-lg">
 
-                    <h2 class="h5 fw-bold mb-1">
-                        بيانات التواصل
-                    </h2>
+                    <i class="bi bi-arrow-right"></i>
 
-                    <p class="text-muted small mb-0">
-                        بيانات التواصل التي تم إدخالها مع الطلب.
-                    </p>
-
-                </div>
-
-                <div class="card-body p-4">
-
-                    <div class="row g-4">
-
-                        <div class="col-md-6">
-
-                            <div class="text-muted small mb-1">
-                                الاسم الكامل
-                            </div>
-
-                            <div class="fw-semibold">
-                                @Model.FullName
-                            </div>
-
-                        </div>
-
-                        @if (!string.IsNullOrWhiteSpace(Model.CompanyName))
-                        {
-                            <div class="col-md-6">
-
-                                <div class="text-muted small mb-1">
-                                    الشركة
-                                </div>
-
-                                <div class="fw-semibold">
-                                    @Model.CompanyName
-                                </div>
-
-                            </div>
-                        }
-
-                        <div class="col-md-6">
-
-                            <div class="text-muted small mb-1">
-                                البريد الإلكتروني
-                            </div>
-
-                            <div>
-                                @Model.Email
-                            </div>
-
-                        </div>
-
-                        <div class="col-md-6">
-
-                            <div class="text-muted small mb-1">
-                                رقم الهاتف
-                            </div>
-
-                            <div>
-                                @Model.PhoneNumber
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- Customer Message -->
-            @if (!string.IsNullOrWhiteSpace(Model.Message))
-            {
-                <div class="card border-0 shadow-sm mb-4">
-
-                    <div class="card-header bg-white py-3">
-
-                        <h2 class="h5 fw-bold mb-1">
-                            رسالتك
-                        </h2>
-
-                        <p class="text-muted small mb-0">
-                            المتطلبات الإضافية التي أرسلتها مع الطلب.
-                        </p>
-
-                    </div>
-
-                    <div class="card-body p-4">
-
-                        <div style="white-space: pre-line;">
-                            @Model.Message
-                        </div>
-
-                    </div>
-
-                </div>
-            }
-
-            <!-- Next Steps -->
-            <div class="card border-0 shadow-sm mb-4">
-
-                <div class="card-body p-4">
-
-                    <h2 class="h5 fw-bold mb-3">
-                        ماذا سيحدث بعد ذلك؟
-                    </h2>
-
-                    <div class="d-flex gap-3 mb-3">
-
-                        <div class="d-flex align-items-center justify-content-center rounded-circle bg-light flex-shrink-0"
-                             style="width: 40px; height: 40px;">
-
-                            <span class="fw-bold text-primary">
-                                1
-                            </span>
-
-                        </div>
-
-                        <div>
-
-                            <div class="fw-semibold">
-                                مراجعة الطلب
-                            </div>
-
-                            <div class="text-muted small">
-                                سيقوم فريقنا بمراجعة طلب عرض السعر.
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="d-flex gap-3 mb-3">
-
-                        <div class="d-flex align-items-center justify-content-center rounded-circle bg-light flex-shrink-0"
-                             style="width: 40px; height: 40px;">
-
-                            <span class="fw-bold text-primary">
-                                2
-                            </span>
-
-                        </div>
-
-                        <div>
-
-                            <div class="fw-semibold">
-                                التواصل معك
-                            </div>
-
-                            <div class="text-muted small">
-                                سنتواصل معك باستخدام بيانات التواصل التي قدمتها.
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="d-flex gap-3">
-
-                        <div class="d-flex align-items-center justify-content-center rounded-circle bg-light flex-shrink-0"
-                             style="width: 40px; height: 40px;">
-
-                            <span class="fw-bold text-primary">
-                                3
-                            </span>
-
-                        </div>
-
-                        <div>
-
-                            <div class="fw-semibold">
-                                عرض السعر
-                            </div>
-
-                            <div class="text-muted small">
-                                سيناقش فريقنا معك تفاصيل عرض السعر.
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- Navigation -->
-            <div class="text-center">
-
-                <div class="d-flex justify-content-center gap-2 flex-wrap">
-
-                    <a asp-controller="Catalog"
-                       asp-action="Details"
-                       asp-route-id="@Model.ProductId"
-                       class="btn btn-primary">
+                    <span>
                         العودة إلى المنتج
-                    </a>
+                    </span>
 
-                    <a asp-controller="Catalog"
-                       asp-action="Index"
-                       class="btn btn-outline-secondary">
+                </a>
+
+                <a asp-controller="Catalog"
+                   asp-action="Index"
+                   class="btn btn-outline-secondary public-btn public-btn-lg">
+
+                    <i class="bi bi-grid"></i>
+
+                    <span>
                         تصفح الكتالوج
-                    </a>
+                    </span>
 
-                </div>
+                </a>
 
             </div>
 
         </div>
 
-    </div>
+    </section>
 
 </div>
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/quotation-success.css"
+          asp-append-version="true" />
+}

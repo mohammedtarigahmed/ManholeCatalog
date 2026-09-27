@@ -20,7 +20,12 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<QuotationRequest> QuotationRequests { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    public DbSet<ContactPage> ContactPages { get; set; }
+
+    public DbSet<ContactMessage> ContactMessages { get; set; }
+
+    protected override void OnModelCreating(
+        ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 

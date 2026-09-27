@@ -4,61 +4,84 @@
     ViewData["Title"] = "تعديل المنتج";
 }
 
-<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+<!-- Page Header -->
+<div class="product-edit-header mb-4">
 
-    <div>
+    <div class="d-flex flex-column flex-xl-row justify-content-between align-items-xl-center gap-3">
 
-        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+        <div>
 
-            <span class="badge text-bg-light border">
-                المنتج #@Model.Id
-            </span>
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
 
-            @if (Model.IsActive)
-            {
-                <span class="badge text-bg-success">
-                    نشط
+                <span class="badge rounded-pill text-bg-primary px-3 py-2">
+                    <i class="bi bi-pencil-square me-1"></i>
+                    إدارة المنتجات
                 </span>
-            }
-            else
-            {
-                <span class="badge text-bg-secondary">
-                    غير نشط
+
+                <span class="badge rounded-pill text-bg-light border px-3 py-2">
+                    المنتج #@Model.Id
                 </span>
-            }
+
+                @if (Model.IsActive)
+                {
+                    <span class="badge rounded-pill text-bg-success px-3 py-2">
+                        <i class="bi bi-check-circle me-1"></i>
+                        نشط
+                    </span>
+                }
+                else
+                {
+                    <span class="badge rounded-pill text-bg-secondary px-3 py-2">
+                        <i class="bi bi-pause-circle me-1"></i>
+                        غير نشط
+                    </span>
+                }
+
+            </div>
+
+            <h1 class="h3 fw-bold mb-1">
+                تعديل المنتج
+            </h1>
+
+            <p class="text-muted mb-0">
+                تحديث معلومات المنتج ومواصفاته وظهوره في الكتالوج.
+            </p>
 
         </div>
 
-        <h1 class="h3 fw-bold mb-1">
-            تعديل المنتج
-        </h1>
 
-        <p class="text-muted mb-0">
-            تحديث معلومات المنتج وظهوره في الكتالوج.
-        </p>
+        <!-- Header Actions -->
+        <div class="d-flex flex-wrap gap-2">
 
-    </div>
+            <a asp-area="Admin"
+               asp-controller="Products"
+               asp-action="Details"
+               asp-route-id="@Model.Id"
+               class="btn btn-outline-primary">
 
-    <div class="d-flex flex-wrap gap-2">
+                <i class="bi bi-eye me-1"></i>
 
-        <a asp-area="Admin"
-           asp-controller="Products"
-           asp-action="Details"
-           asp-route-id="@Model.Id"
-           class="btn btn-outline-primary">
-            عرض التفاصيل
-        </a>
+                عرض التفاصيل
 
-        <a asp-area="Admin"
-           asp-controller="Products"
-           asp-action="Index"
-           class="btn btn-outline-secondary">
-            ← العودة إلى المنتجات
-        </a>
+            </a>
+
+            <a asp-area="Admin"
+               asp-controller="Products"
+               asp-action="Index"
+               class="btn btn-outline-secondary">
+
+                <i class="bi bi-arrow-right me-1"></i>
+
+                العودة إلى المنتجات
+
+            </a>
+
+        </div>
 
     </div>
 
 </div>
+
 
 <form asp-area="Admin"
       asp-controller="Products"
@@ -68,45 +91,87 @@
     <input type="hidden"
            asp-for="Id" />
 
+
+    <!-- Validation -->
     @if (!ViewData.ModelState.IsValid)
     {
         <div asp-validation-summary="All"
-             class="alert alert-danger"
+             class="alert alert-danger border-0 shadow-sm mb-4"
              role="alert">
-        </div>
-    }
 
-    <div class="row g-4">
+            <div class="d-flex align-items-start gap-3">
 
-        <!-- المعلومات الأساسية -->
-        <div class="col-12">
+                <div class="product-edit-alert-icon bg-danger-subtle text-danger">
 
-            <div class="card border-0 shadow-sm">
-
-                <div class="card-header bg-white py-3">
-
-                    <h2 class="h6 fw-bold mb-1">
-                        المعلومات الأساسية
-                    </h2>
-
-                    <p class="text-muted small mb-0">
-                        تحديث المعلومات الأساسية المستخدمة للتعريف بالمنتج.
-                    </p>
+                    <i class="bi bi-exclamation-triangle"></i>
 
                 </div>
 
-                <div class="card-body">
+                <div>
 
-                    <div class="row g-3">
+                    <div class="fw-semibold mb-1">
+                        تعذر حفظ التغييرات
+                    </div>
 
-                        <div class="col-md-8">
+                    <div class="small">
+                        يرجى مراجعة الأخطاء التالية ثم المحاولة مرة أخرى.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+
+    <div class="row g-4">
+
+
+        <!-- Basic Information -->
+        <div class="col-12">
+
+            <div class="card border-0 shadow-sm product-edit-card">
+
+                <div class="card-header bg-white border-0 p-4">
+
+                    <div class="d-flex align-items-center gap-3">
+
+                        <div class="product-edit-section-icon bg-primary-subtle text-primary">
+
+                            <i class="bi bi-info-circle"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h2 class="h6 fw-bold mb-1">
+                                المعلومات الأساسية
+                            </h2>
+
+                            <p class="text-muted small mb-0">
+                                تحديث المعلومات الأساسية المستخدمة للتعريف بالمنتج.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-body p-4">
+
+                    <div class="row g-4">
+
+                        <div class="col-lg-8">
 
                             <label asp-for="Name"
                                    class="form-label fw-semibold">
                             </label>
 
                             <input asp-for="Name"
-                                   class="form-control"
+                                   class="form-control product-edit-control"
                                    placeholder="مثال: غطاء منهول من حديد الدكتايل" />
 
                             <span asp-validation-for="Name"
@@ -115,14 +180,15 @@
 
                         </div>
 
-                        <div class="col-md-4">
+
+                        <div class="col-lg-4">
 
                             <label asp-for="SKU"
                                    class="form-label fw-semibold">
                             </label>
 
                             <input asp-for="SKU"
-                                   class="form-control"
+                                   class="form-control product-edit-control"
                                    placeholder="مثال: MH-001" />
 
                             <span asp-validation-for="SKU"
@@ -131,16 +197,19 @@
 
                         </div>
 
-                        <div class="col-md-6">
+
+                        <div class="col-lg-6">
 
                             <label asp-for="CategoryId"
                                    class="form-label fw-semibold">
+
                                 الفئة
+
                             </label>
 
                             <select asp-for="CategoryId"
                                     asp-items="ViewBag.CategoryId"
-                                    class="form-select">
+                                    class="form-select product-edit-control">
 
                                 <option value="">
                                     -- اختر الفئة --
@@ -166,35 +235,51 @@
 
         </div>
 
-        <!-- مواصفات المنتج -->
+
+        <!-- Specifications -->
         <div class="col-12">
 
-            <div class="card border-0 shadow-sm">
+            <div class="card border-0 shadow-sm product-edit-card">
 
-                <div class="card-header bg-white py-3">
+                <div class="card-header bg-white border-0 p-4">
 
-                    <h2 class="h6 fw-bold mb-1">
-                        مواصفات المنتج
-                    </h2>
+                    <div class="d-flex align-items-center gap-3">
 
-                    <p class="text-muted small mb-0">
-                        تحديث المواصفات الفنية المتوفرة لهذا المنتج.
-                    </p>
+                        <div class="product-edit-section-icon bg-info-subtle text-info">
+
+                            <i class="bi bi-rulers"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h2 class="h6 fw-bold mb-1">
+                                مواصفات المنتج
+                            </h2>
+
+                            <p class="text-muted small mb-0">
+                                تحديث المواصفات الفنية المتوفرة لهذا المنتج.
+                            </p>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <div class="card-body">
 
-                    <div class="row g-3">
+                <div class="card-body p-4">
 
-                        <div class="col-md-6">
+                    <div class="row g-4">
+
+                        <div class="col-lg-6">
 
                             <label asp-for="Material"
                                    class="form-label fw-semibold">
                             </label>
 
                             <input asp-for="Material"
-                                   class="form-control"
+                                   class="form-control product-edit-control"
                                    placeholder="مثال: حديد الدكتايل" />
 
                             <span asp-validation-for="Material"
@@ -203,15 +288,18 @@
 
                         </div>
 
-                        <div class="col-md-6">
+
+                        <div class="col-lg-6">
 
                             <label asp-for="LoadClass"
                                    class="form-label fw-semibold">
+
                                 فئة التحميل
+
                             </label>
 
                             <input asp-for="LoadClass"
-                                   class="form-control"
+                                   class="form-control product-edit-control"
                                    placeholder="مثال: D400" />
 
                             <span asp-validation-for="LoadClass"
@@ -220,14 +308,15 @@
 
                         </div>
 
-                        <div class="col-md-6">
+
+                        <div class="col-lg-6">
 
                             <label asp-for="Diameter"
                                    class="form-label fw-semibold">
                             </label>
 
                             <input asp-for="Diameter"
-                                   class="form-control"
+                                   class="form-control product-edit-control"
                                    placeholder="مثال: 600 مم" />
 
                             <span asp-validation-for="Diameter"
@@ -236,14 +325,15 @@
 
                         </div>
 
-                        <div class="col-md-6">
+
+                        <div class="col-lg-6">
 
                             <label asp-for="Shape"
                                    class="form-label fw-semibold">
                             </label>
 
                             <input asp-for="Shape"
-                                   class="form-control"
+                                   class="form-control product-edit-control"
                                    placeholder="مثال: دائري" />
 
                             <span asp-validation-for="Shape"
@@ -260,24 +350,40 @@
 
         </div>
 
-        <!-- السعر والوصف -->
+
+        <!-- Price and Description -->
         <div class="col-lg-8">
 
-            <div class="card border-0 shadow-sm h-100">
+            <div class="card border-0 shadow-sm product-edit-card h-100">
 
-                <div class="card-header bg-white py-3">
+                <div class="card-header bg-white border-0 p-4">
 
-                    <h2 class="h6 fw-bold mb-1">
-                        السعر والوصف
-                    </h2>
+                    <div class="d-flex align-items-center gap-3">
 
-                    <p class="text-muted small mb-0">
-                        تحديث معلومات السعر والوصف الذي يظهر للعملاء.
-                    </p>
+                        <div class="product-edit-section-icon bg-success-subtle text-success">
+
+                            <i class="bi bi-card-text"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h2 class="h6 fw-bold mb-1">
+                                السعر والوصف
+                            </h2>
+
+                            <p class="text-muted small mb-0">
+                                تحديث معلومات السعر والوصف الذي يظهر للعملاء.
+                            </p>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <div class="card-body">
+
+                <div class="card-body p-4">
 
                     <div class="mb-4">
 
@@ -288,13 +394,13 @@
                         <div class="input-group">
 
                             <input asp-for="Price"
-                                   class="form-control"
+                                   class="form-control product-edit-control"
                                    type="number"
                                    step="0.01"
                                    min="0"
                                    placeholder="مثال: 450.00" />
 
-                            <span class="input-group-text">
+                            <span class="input-group-text product-currency">
                                 ر.س
                             </span>
 
@@ -310,6 +416,7 @@
 
                     </div>
 
+
                     <div>
 
                         <label asp-for="Description"
@@ -317,8 +424,8 @@
                         </label>
 
                         <textarea asp-for="Description"
-                                  class="form-control"
-                                  rows="6"
+                                  class="form-control product-edit-control"
+                                  rows="7"
                                   placeholder="اكتب وصف المنتج واستخداماته ومميزاته أو أي معلومات مفيدة أخرى."></textarea>
 
                         <span asp-validation-for="Description"
@@ -337,49 +444,88 @@
 
         </div>
 
-        <!-- ظهور المنتج في الكتالوج -->
+
+        <!-- Catalog Visibility -->
         <div class="col-lg-4">
 
-            <div class="card border-0 shadow-sm h-100">
+            <div class="card border-0 shadow-sm product-edit-card h-100">
 
-                <div class="card-header bg-white py-3">
+                <div class="card-header bg-white border-0 p-4">
 
-                    <h2 class="h6 fw-bold mb-1">
-                        ظهور المنتج في الكتالوج
-                    </h2>
+                    <div class="d-flex align-items-center gap-3">
 
-                    <p class="text-muted small mb-0">
-                        تحديد ما إذا كان هذا المنتج سيظهر في الكتالوج العام.
-                    </p>
+                        <div class="product-edit-section-icon bg-warning-subtle text-warning">
+
+                            <i class="bi bi-eye"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h2 class="h6 fw-bold mb-1">
+                                ظهور المنتج
+                            </h2>
+
+                            <p class="text-muted small mb-0">
+                                تحديد حالة ظهور المنتج في الكتالوج.
+                            </p>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <div class="card-body">
 
-                    <div class="form-check form-switch">
+                <div class="card-body p-4">
 
-                        <input asp-for="IsActive"
-                               class="form-check-input"
-                               role="switch" />
+                    <div class="product-edit-status-box">
 
-                        <label asp-for="IsActive"
-                               class="form-check-label fw-semibold">
-                            المنتج نشط
-                        </label>
+                        <div class="d-flex align-items-center justify-content-between gap-3">
+
+                            <div>
+
+                                <div class="fw-semibold mb-1">
+                                    المنتج نشط
+                                </div>
+
+                                <div class="small text-muted">
+                                    يظهر في الكتالوج العام.
+                                </div>
+
+                            </div>
+
+                            <div class="form-check form-switch product-edit-switch mb-0">
+
+                                <input asp-for="IsActive"
+                                       class="form-check-input"
+                                       role="switch" />
+
+                            </div>
+
+                        </div>
 
                     </div>
 
-                    <div class="form-text mt-2">
+
+                    <div class="form-text mt-3">
                         المنتجات النشطة تظهر في الكتالوج العام ويمكنها استقبال طلبات عروض الأسعار.
                     </div>
 
+
                     <div class="alert alert-light border mt-4 mb-0">
 
-                        <div class="small">
+                        <div class="d-flex align-items-start gap-2">
 
-                            <strong>ملاحظة:</strong>
+                            <i class="bi bi-info-circle text-primary mt-1"></i>
 
-                            تعطيل المنتج لا يؤدي إلى حذفه أو حذف صوره.
+                            <div class="small">
+
+                                <strong>ملاحظة:</strong>
+
+                                تعطيل المنتج لا يؤدي إلى حذفه أو حذف صوره.
+
+                            </div>
 
                         </div>
 
@@ -391,12 +537,62 @@
 
         </div>
 
-        <!-- الإجراءات -->
+
+        <!-- Product Images Shortcut -->
         <div class="col-12">
 
-            <div class="card border-0 shadow-sm">
+            <div class="product-edit-images-banner">
 
-                <div class="card-body">
+                <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+
+                    <div class="d-flex align-items-start gap-3">
+
+                        <div class="product-edit-section-icon bg-purple-subtle text-purple">
+
+                            <i class="bi bi-images"></i>
+
+                        </div>
+
+                        <div>
+
+                            <div class="fw-semibold mb-1">
+                                صور المنتج
+                            </div>
+
+                            <div class="small text-muted">
+                                لإدارة صور المنتج أو تغيير الصورة الرئيسية، انتقل إلى إدارة الصور.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <a asp-area="Admin"
+                       asp-controller="Products"
+                       asp-action="Images"
+                       asp-route-id="@Model.Id"
+                       class="btn btn-outline-primary flex-shrink-0">
+
+                        <i class="bi bi-images me-1"></i>
+
+                        إدارة الصور
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Actions -->
+        <div class="col-12">
+
+            <div class="card border-0 shadow-sm product-edit-card">
+
+                <div class="card-body p-4">
 
                     <div class="d-flex flex-column flex-sm-row justify-content-end gap-2">
 
@@ -404,7 +600,11 @@
                            asp-controller="Products"
                            asp-action="Index"
                            class="btn btn-outline-secondary">
+
+                            <i class="bi bi-x-lg me-1"></i>
+
                             إلغاء
+
                         </a>
 
                         <a asp-area="Admin"
@@ -412,12 +612,20 @@
                            asp-action="Details"
                            asp-route-id="@Model.Id"
                            class="btn btn-outline-primary">
+
+                            <i class="bi bi-eye me-1"></i>
+
                             عرض التفاصيل
+
                         </a>
 
                         <button type="submit"
                                 class="btn btn-primary">
+
+                            <i class="bi bi-check2 me-1"></i>
+
                             حفظ التغييرات
+
                         </button>
 
                     </div>
@@ -431,6 +639,110 @@
     </div>
 
 </form>
+
+
+<style>
+
+    .product-edit-card {
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .product-edit-header .btn {
+        border-radius: 10px;
+    }
+
+    .product-edit-section-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 1.05rem;
+    }
+
+    .product-edit-alert-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .product-edit-control {
+        border-radius: 10px;
+        min-height: 44px;
+    }
+
+    textarea.product-edit-control {
+        min-height: auto;
+        line-height: 1.7;
+    }
+
+    .product-currency {
+        border-radius: 0 10px 10px 0;
+        font-weight: 600;
+        background: #f8fafc;
+    }
+
+    .product-edit-status-box {
+        padding: 16px;
+        border-radius: 14px;
+        background: #f8fafc;
+        border: 1px solid #eef0f2;
+    }
+
+    .product-edit-switch {
+        padding-left: 0;
+        min-width: 48px;
+    }
+
+    .product-edit-switch .form-check-input {
+        float: none;
+        margin: 0;
+        width: 2.8em;
+        height: 1.5em;
+        cursor: pointer;
+    }
+
+    .product-edit-images-banner {
+        padding: 20px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #f8fafc, #ffffff);
+        border: 1px solid #e5e7eb;
+    }
+
+    .bg-purple-subtle {
+        background-color: #f3e8ff;
+    }
+
+    .text-purple {
+        color: #7e22ce;
+    }
+
+    .product-edit-card .btn,
+    .product-edit-images-banner .btn {
+        border-radius: 9px;
+    }
+
+    @@media (max-width: 767.98px) {
+
+        .product-edit-header .btn {
+            width: 100%;
+        }
+
+        .product-edit-images-banner .btn {
+            width: 100%;
+        }
+
+    }
+
+</style>
+
 
 @section Scripts {
 

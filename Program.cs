@@ -72,7 +72,7 @@ using (var scope = app.Services.CreateScope())
         .GetRequiredService<RoleManager<IdentityRole>>();
 
     const string adminRole = "Admin";
-    const string adminEmail = "admin@manholecatalog.com";
+    const string adminEmail = "admin@catalog.com";
 
     if (!await roleManager.RoleExistsAsync(adminRole))
     {

@@ -26,327 +26,432 @@
     var whatsappUrl = $"https://wa.me/{whatsappNumber}?text={Uri.EscapeDataString(Uri.UnescapeDataString(whatsappMessage))}";
 }
 
-<div class="container py-5">
+<div class="public-page product-details-page">
 
-    <!-- Back to Catalog -->
-    <div class="mb-4">
+    <!-- Product Header -->
+    <section class="public-page-header product-details-header">
 
-        <a asp-controller="Catalog"
-           asp-action="Index"
-           class="btn btn-outline-secondary">
-            ← العودة إلى الكتالوج
-        </a>
+        <div class="container">
 
-    </div>
+            <div class="product-details-header-content">
 
-    <div class="row g-5">
+                <div class="product-details-heading">
 
-        <!-- Product Gallery -->
-        <div class="col-lg-6">
-
-            <div class="card border-0 shadow-sm mb-3">
-
-                <div class="p-3">
-
-                    @if (primaryImage != null)
+                    @if (Model.Category != null)
                     {
-                        <div class="rounded overflow-hidden"
-                             style="background-color: #f8f9fa;">
-
-                            <img id="mainProductImage"
-                                 src="@primaryImage.ImagePath"
-                                 alt="@Model.Name"
-                                 class="img-fluid w-100"
-                                 style="height: 460px; object-fit: contain;" />
-
-                        </div>
+                        <span class="public-page-label">
+                            <i class="bi bi-folder2"></i>
+                            @Model.Category.Name
+                        </span>
                     }
-                    else
-                    {
-                        <div class="d-flex align-items-center justify-content-center rounded text-muted"
-                             style="height: 460px; background-color: #f8f9fa;">
 
-                            <div class="text-center">
-
-                                <div class="display-5 mb-2">
-                                    —
-                                </div>
-
-                                <div>
-                                    لا توجد صورة متاحة
-                                </div>
-
-                            </div>
-
-                        </div>
-                    }
+                    <h1 class="public-page-title">
+                        @Model.Name
+                    </h1>
 
                 </div>
+
+                <a asp-controller="Catalog"
+                   asp-action="Index"
+                   class="btn btn-outline-secondary public-btn">
+
+                    <i class="bi bi-arrow-right"></i>
+                    <span>العودة إلى الكتالوج</span>
+
+                </a>
 
             </div>
 
-            @if (orderedImages.Any())
-            {
-                <div class="d-flex flex-wrap gap-2">
-
-                    @foreach (var image in orderedImages)
-                    {
-                        var isSelected = primaryImage != null && image.Id == primaryImage.Id;
-
-                        <button type="button"
-                                class="btn p-0 product-image-button @(isSelected ? "border-primary" : "border")"
-                                onclick="changeProductImage('@image.ImagePath', this)"
-                                style="border-width: 2px;">
-
-                            <img src="@image.ImagePath"
-                                 alt="@(image.AltText ?? Model.Name)"
-                                 style="width: 88px; height: 88px; object-fit: contain; background-color: #f8f9fa;" />
-
-                        </button>
-                    }
-
-                </div>
-            }
-
         </div>
 
-        <!-- Product Information -->
-        <div class="col-lg-6">
+    </section>
 
-            @if (Model.Category != null)
-            {
-                <div class="small text-primary fw-semibold mb-2">
-                    @Model.Category.Name
-                </div>
-            }
 
-            <h1 class="display-6 fw-bold mb-3">
-                @Model.Name
-            </h1>
+    <section class="public-section product-details-section">
 
-            @if (!string.IsNullOrWhiteSpace(Model.SKU))
-            {
-                <div class="mb-4">
+        <div class="container">
 
-                    <span class="badge text-bg-light border">
-                        الرقم التعريفي: @Model.SKU
-                    </span>
+            <div class="row g-4 g-xl-5">
 
-                </div>
-            }
+                <!-- Product Gallery -->
+                <div class="col-lg-7">
 
-            @if (!string.IsNullOrWhiteSpace(Model.Description))
-            {
-                <div class="mb-4">
+                    <div class="public-card product-gallery-card">
 
-                    <h2 class="h5 fw-bold mb-2">
-                        الوصف
-                    </h2>
+                        <div class="product-main-image-wrapper">
 
-                    <p class="text-muted mb-0"
-                       style="white-space: pre-line;">
-                        @Model.Description
-                    </p>
-
-                </div>
-            }
-
-            <!-- Specifications -->
-            @if (!string.IsNullOrWhiteSpace(Model.Material) ||
-                 !string.IsNullOrWhiteSpace(Model.LoadClass) ||
-                 !string.IsNullOrWhiteSpace(Model.Diameter) ||
-                 !string.IsNullOrWhiteSpace(Model.Shape))
-            {
-                <div class="card border-0 shadow-sm mb-4">
-
-                    <div class="card-body p-4">
-
-                        <h2 class="h5 fw-bold mb-4">
-                            مواصفات المنتج
-                        </h2>
-
-                        <div class="row g-0">
-
-                            @if (!string.IsNullOrWhiteSpace(Model.Material))
+                            @if (primaryImage != null)
                             {
-                                <div class="col-sm-6 border-bottom py-3 pe-sm-3">
-
-                                    <div class="small text-muted mb-1">
-                                        المادة
-                                    </div>
-
-                                    <div class="fw-semibold">
-                                        @Model.Material
-                                    </div>
-
-                                </div>
+                                <img id="mainProductImage"
+                                     src="@primaryImage.ImagePath"
+                                     alt="@(primaryImage.AltText ?? Model.Name)"
+                                     class="product-main-image" />
                             }
-
-                            @if (!string.IsNullOrWhiteSpace(Model.LoadClass))
+                            else
                             {
-                                <div class="col-sm-6 border-bottom py-3 ps-sm-3">
+                                <div class="product-main-no-image">
 
-                                    <div class="small text-muted mb-1">
-                                        فئة التحميل
+                                    <div class="product-no-image-icon">
+                                        <i class="bi bi-image"></i>
                                     </div>
 
-                                    <div class="fw-semibold">
-                                        @Model.LoadClass
-                                    </div>
-
-                                </div>
-                            }
-
-                            @if (!string.IsNullOrWhiteSpace(Model.Diameter))
-                            {
-                                <div class="col-sm-6 border-bottom py-3 pe-sm-3">
-
-                                    <div class="small text-muted mb-1">
-                                        القطر
-                                    </div>
-
-                                    <div class="fw-semibold">
-                                        @Model.Diameter
-                                    </div>
-
-                                </div>
-                            }
-
-                            @if (!string.IsNullOrWhiteSpace(Model.Shape))
-                            {
-                                <div class="col-sm-6 border-bottom py-3 ps-sm-3">
-
-                                    <div class="small text-muted mb-1">
-                                        الشكل
-                                    </div>
-
-                                    <div class="fw-semibold">
-                                        @Model.Shape
-                                    </div>
+                                    <span>
+                                        لا توجد صورة متاحة
+                                    </span>
 
                                 </div>
                             }
 
                         </div>
 
-                    </div>
 
-                </div>
-            }
-
-            <!-- Price -->
-            @if (Model.Price.HasValue)
-            {
-                <div class="mb-4">
-
-                    <div class="small text-muted mb-1">
-                        السعر
-                    </div>
-
-                    <div class="fs-2 fw-bold">
-                        @Model.Price.Value.ToString("N2") ر.س
-                    </div>
-
-                </div>
-            }
-
-            <!-- Actions -->
-            <div class="card border-0 shadow-sm">
-
-                <div class="card-body p-4">
-
-                    <h2 class="h5 fw-bold mb-2">
-                        هل أنت مهتم بهذا المنتج؟
-                    </h2>
-
-                    <p class="text-muted small mb-4">
-                        اطلب عرض سعر أو تواصل معنا مباشرة للحصول على مزيد من المعلومات.
-                    </p>
-
-                    <div class="d-grid gap-2">
-
-                        <a asp-controller="Quotation"
-                           asp-action="Create"
-                           asp-route-productId="@Model.Id"
-                           class="btn btn-primary btn-lg">
-                            طلب عرض سعر
-                        </a>
-
-                        @if (!string.IsNullOrWhiteSpace(whatsappNumber))
+                        @if (orderedImages.Any())
                         {
-                            <a href="@whatsappUrl"
-                               target="_blank"
-                               rel="noopener noreferrer"
-                               class="btn btn-success btn-lg">
-                                تواصل معنا عبر واتساب
-                            </a>
+                            <div class="product-thumbnails">
+
+                                @foreach (var image in orderedImages)
+                                {
+                                    var isSelected = primaryImage != null && image.Id == primaryImage.Id;
+
+                                    <button type="button"
+                                            class="product-thumbnail-button @(isSelected ? "selected" : "")"
+                                            onclick="changeProductImage('@image.ImagePath', this)"
+                                            aria-label="عرض صورة المنتج">
+
+                                        <img src="@image.ImagePath"
+                                             alt="@(image.AltText ?? Model.Name)"
+                                             class="product-thumbnail-image" />
+
+                                    </button>
+                                }
+
+                            </div>
                         }
 
                     </div>
 
+
+                    @if (orderedImages.Count > 1)
+                    {
+                        <div class="product-gallery-note">
+
+                            <i class="bi bi-images"></i>
+
+                            <span>
+                                يحتوي هذا المنتج على @orderedImages.Count صور. اختر صورة من الأعلى لعرضها.
+                            </span>
+
+                        </div>
+                    }
+
+                </div>
+
+
+                <!-- Product Information -->
+                <div class="col-lg-5">
+
+                    <div class="public-card product-info-card">
+
+                        <div class="public-card-header">
+
+                            <div class="product-info-header">
+
+                                @if (!string.IsNullOrWhiteSpace(Model.SKU))
+                                {
+                                    <span class="public-badge">
+
+                                        <i class="bi bi-upc-scan"></i>
+
+                                        <span class="public-badge-label">
+                                            الرقم التعريفي:
+                                        </span>
+
+                                        @Model.SKU
+
+                                    </span>
+                                }
+
+                                <h2 class="h4 fw-bold mb-0">
+                                    @Model.Name
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="public-card-body">
+
+                            @if (!string.IsNullOrWhiteSpace(Model.Description))
+                            {
+                                <section class="product-info-section">
+
+                                    <div class="public-card-header-content product-info-section-heading">
+
+                                        <div class="public-card-icon">
+                                            <i class="bi bi-file-text"></i>
+                                        </div>
+
+                                        <div>
+                                            <h3 class="h6 fw-bold mb-0">
+                                                الوصف
+                                            </h3>
+                                        </div>
+
+                                    </div>
+
+                                    <p class="product-description mb-0">
+                                        @Model.Description
+                                    </p>
+
+                                </section>
+                            }
+
+
+                            <!-- Specifications -->
+                            @if (!string.IsNullOrWhiteSpace(Model.Material) ||
+                                 !string.IsNullOrWhiteSpace(Model.LoadClass) ||
+                                 !string.IsNullOrWhiteSpace(Model.Diameter) ||
+                                 !string.IsNullOrWhiteSpace(Model.Shape))
+                            {
+                                <section class="product-info-section">
+
+                                    <div class="public-card-header-content product-info-section-heading">
+
+                                        <div class="public-card-icon">
+                                            <i class="bi bi-sliders"></i>
+                                        </div>
+
+                                        <div>
+                                            <h3 class="h6 fw-bold mb-0">
+                                                مواصفات المنتج
+                                            </h3>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="product-spec-grid">
+
+                                        @if (!string.IsNullOrWhiteSpace(Model.Material))
+                                        {
+                                            <div class="product-spec-card">
+
+                                                <div class="product-spec-icon">
+                                                    <i class="bi bi-layers"></i>
+                                                </div>
+
+                                                <div>
+
+                                                    <div class="product-spec-label">
+                                                        المادة
+                                                    </div>
+
+                                                    <div class="product-spec-value">
+                                                        @Model.Material
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        }
+
+
+                                        @if (!string.IsNullOrWhiteSpace(Model.LoadClass))
+                                        {
+                                            <div class="product-spec-card">
+
+                                                <div class="product-spec-icon">
+                                                    <i class="bi bi-shield-check"></i>
+                                                </div>
+
+                                                <div>
+
+                                                    <div class="product-spec-label">
+                                                        فئة التحميل
+                                                    </div>
+
+                                                    <div class="product-spec-value">
+                                                        @Model.LoadClass
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        }
+
+
+                                        @if (!string.IsNullOrWhiteSpace(Model.Diameter))
+                                        {
+                                            <div class="product-spec-card">
+
+                                                <div class="product-spec-icon">
+                                                    <i class="bi bi-arrows-expand"></i>
+                                                </div>
+
+                                                <div>
+
+                                                    <div class="product-spec-label">
+                                                        القطر
+                                                    </div>
+
+                                                    <div class="product-spec-value">
+                                                        @Model.Diameter
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        }
+
+
+                                        @if (!string.IsNullOrWhiteSpace(Model.Shape))
+                                        {
+                                            <div class="product-spec-card">
+
+                                                <div class="product-spec-icon">
+                                                    <i class="bi bi-circle-square"></i>
+                                                </div>
+
+                                                <div>
+
+                                                    <div class="product-spec-label">
+                                                        الشكل
+                                                    </div>
+
+                                                    <div class="product-spec-value">
+                                                        @Model.Shape
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        }
+
+                                    </div>
+
+                                </section>
+                            }
+
+
+                            <!-- Price -->
+                            @if (Model.Price.HasValue)
+                            {
+                                <section class="product-info-section product-price-section">
+
+                                    <span class="product-price-label">
+                                        السعر
+                                    </span>
+
+                                    <div class="product-price">
+
+                                        @Model.Price.Value.ToString("N2")
+
+                                        <span>
+                                            ر.س
+                                        </span>
+
+                                    </div>
+
+                                </section>
+                            }
+
+
+                            <!-- Actions -->
+                            <section class="product-info-section product-action-section">
+
+                                <div class="public-card-header-content product-info-section-heading">
+
+                                    <div class="public-card-icon">
+                                        <i class="bi bi-chat-square-text"></i>
+                                    </div>
+
+                                    <div>
+                                        <h3 class="h6 fw-bold mb-0">
+                                            هل أنت مهتم بهذا المنتج؟
+                                        </h3>
+                                    </div>
+
+                                </div>
+
+                                <p class="product-action-description">
+                                    اطلب عرض سعر أو تواصل معنا مباشرة للحصول على مزيد من المعلومات.
+                                </p>
+
+
+                                <div class="product-action-buttons">
+
+                                    <a asp-controller="Quotation"
+                                       asp-action="Create"
+                                       asp-route-productId="@Model.Id"
+                                       class="btn btn-primary public-btn public-btn-primary public-btn-lg">
+
+                                        <i class="bi bi-file-earmark-text"></i>
+                                        <span>طلب عرض سعر</span>
+
+                                    </a>
+
+
+                                    @if (!string.IsNullOrWhiteSpace(whatsappNumber))
+                                    {
+                                        <a href="@whatsappUrl"
+                                           target="_blank"
+                                           rel="noopener noreferrer"
+                                           class="btn btn-success public-btn public-btn-lg product-whatsapp-btn">
+
+                                            <i class="bi bi-whatsapp"></i>
+                                            <span>تواصل معنا عبر واتساب</span>
+
+                                        </a>
+                                    }
+
+                                </div>
+
+                            </section>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
 
         </div>
 
-    </div>
-
-    <!-- Product Gallery Summary -->
-    @if (orderedImages.Count > 1)
-    {
-        <div class="mt-5 pt-4 border-top">
-
-            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2 mb-3">
-
-                <div>
-
-                    <h2 class="h5 fw-bold mb-1">
-                        صور المنتج
-                    </h2>
-
-                    <p class="text-muted small mb-0">
-                        اختر صورة من الأعلى لعرضها.
-                    </p>
-
-                </div>
-
-                <span class="badge text-bg-light border">
-                    @orderedImages.Count صورة
-                </span>
-
-            </div>
-
-        </div>
-    }
+    </section>
 
 </div>
 
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/details.css"
+          asp-append-version="true" />
+}
+
 @section Scripts {
 
-<script>
+    <script>
 
-    function changeProductImage(imagePath, selectedButton) {
+        function changeProductImage(imagePath, selectedButton) {
 
-        const mainImage = document.getElementById("mainProductImage");
+            const mainImage = document.getElementById("mainProductImage");
 
-        if (mainImage) {
-            mainImage.src = imagePath;
+            if (mainImage) {
+                mainImage.src = imagePath;
+            }
+
+            const buttons = document.querySelectorAll(".product-thumbnail-button");
+
+            buttons.forEach(function (button) {
+                button.classList.remove("selected");
+            });
+
+            if (selectedButton) {
+                selectedButton.classList.add("selected");
+            }
         }
 
-        const buttons = document.querySelectorAll(".product-image-button");
-
-        buttons.forEach(function (button) {
-            button.classList.remove("border-primary");
-            button.classList.add("border");
-        });
-
-        if (selectedButton) {
-            selectedButton.classList.remove("border");
-            selectedButton.classList.add("border-primary");
-        }
-    }
-
-</script>
+    </script>
 
 }

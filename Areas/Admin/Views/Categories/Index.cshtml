@@ -6,165 +6,281 @@
     var categories = Model.ToList();
 
     var totalCategories = categories.Count;
+
     var activeCategories = categories.Count(c => c.IsActive);
+
     var inactiveCategories = categories.Count(c => !c.IsActive);
+
     var totalProducts = categories.Sum(c => c.Products.Count);
 }
 
-<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+<!-- Page Header -->
+<div class="categories-page-header mb-4">
 
-    <div>
+    <div class="d-flex flex-column flex-xl-row justify-content-between align-items-xl-center gap-3">
 
-        <h1 class="h3 fw-bold mb-1">
-            الفئات
-        </h1>
+        <div>
 
-        <p class="text-muted mb-0">
-            إدارة فئات المنتجات وتنظيمها.
-        </p>
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
 
-    </div>
+                <span class="badge rounded-pill text-bg-primary px-3 py-2">
+                    <i class="bi bi-tags me-1"></i>
+                    إدارة الفئات
+                </span>
 
-    <a asp-area="Admin"
-       asp-controller="Categories"
-       asp-action="Create"
-       class="btn btn-primary">
-        + إضافة فئة
-    </a>
-
-</div>
-
-<!-- الإحصائيات -->
-<div class="row g-4 mb-4">
-
-    <div class="col-sm-6 col-xl-3">
-
-        <div class="card border-0 shadow-sm h-100">
-
-            <div class="card-body">
-
-                <div class="small text-muted mb-1">
-                    إجمالي الفئات
-                </div>
-
-                <div class="h3 fw-bold mb-0">
-                    @totalCategories
-                </div>
-
-                <div class="small text-muted mt-2">
-                    جميع الفئات
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="col-sm-6 col-xl-3">
-
-        <div class="card border-0 shadow-sm h-100">
-
-            <div class="card-body">
-
-                <div class="small text-muted mb-1">
-                    نشطة
-                </div>
-
-                <div class="h3 fw-bold text-success mb-0">
-                    @activeCategories
-                </div>
-
-                <div class="small text-muted mt-2">
-                    متاحة حاليًا
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="col-sm-6 col-xl-3">
-
-        <div class="card border-0 shadow-sm h-100">
-
-            <div class="card-body">
-
-                <div class="small text-muted mb-1">
-                    غير نشطة
-                </div>
-
-                <div class="h3 fw-bold text-secondary mb-0">
-                    @inactiveCategories
-                </div>
-
-                <div class="small text-muted mt-2">
-                    معطلة حاليًا
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="col-sm-6 col-xl-3">
-
-        <div class="card border-0 shadow-sm h-100">
-
-            <div class="card-body">
-
-                <div class="small text-muted mb-1">
-                    المنتجات
-                </div>
-
-                <div class="h3 fw-bold mb-0">
-                    @totalProducts
-                </div>
-
-                <div class="small text-muted mt-2">
-                    إجمالي المنتجات المرتبطة
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-@if (!categories.Any())
-{
-    <!-- حالة عدم وجود فئات -->
-    <div class="card border-0 shadow-sm">
-
-        <div class="card-body text-center py-5">
-
-            <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-light border mb-3"
-                 style="width: 64px; height: 64px;">
-
-                <span class="text-muted fw-bold fs-5">
-                    C
+                <span class="badge rounded-pill text-bg-light border px-3 py-2">
+                    @totalCategories فئة
                 </span>
 
             </div>
 
-            <h2 class="h5 fw-bold mb-2">
-                لا توجد فئات
-            </h2>
+            <h1 class="h3 fw-bold mb-1">
+                الفئات
+            </h1>
 
-            <p class="text-muted mb-4">
-                أضف أول فئة لتنظيم كتالوج المنتجات.
+            <p class="text-muted mb-0">
+                إدارة فئات المنتجات وتنظيمها داخل الكتالوج.
             </p>
+
+        </div>
+
+        <div class="d-flex flex-wrap gap-2">
 
             <a asp-area="Admin"
                asp-controller="Categories"
                asp-action="Create"
-               class="btn btn-primary">
+               class="btn btn-primary categories-header-button">
+
+                <i class="bi bi-plus-lg me-1"></i>
+
                 إضافة فئة
+
             </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Statistics -->
+<div class="row g-4 mb-4">
+
+    <!-- Total Categories -->
+    <div class="col-md-6 col-xl-3">
+
+        <div class="card border-0 shadow-sm categories-stat-card h-100">
+
+            <div class="card-body p-4">
+
+                <div class="d-flex justify-content-between align-items-start">
+
+                    <div>
+
+                        <div class="small text-muted mb-2">
+                            إجمالي الفئات
+                        </div>
+
+                        <div class="categories-stat-number text-dark">
+                            @totalCategories
+                        </div>
+
+                    </div>
+
+                    <div class="categories-stat-icon bg-primary-subtle text-primary">
+
+                        <i class="bi bi-tags"></i>
+
+                    </div>
+
+                </div>
+
+                <div class="small text-muted mt-3">
+
+                    <i class="bi bi-collection me-1"></i>
+
+                    جميع الفئات
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Active Categories -->
+    <div class="col-md-6 col-xl-3">
+
+        <div class="card border-0 shadow-sm categories-stat-card h-100">
+
+            <div class="card-body p-4">
+
+                <div class="d-flex justify-content-between align-items-start">
+
+                    <div>
+
+                        <div class="small text-muted mb-2">
+                            الفئات النشطة
+                        </div>
+
+                        <div class="categories-stat-number text-success">
+                            @activeCategories
+                        </div>
+
+                    </div>
+
+                    <div class="categories-stat-icon bg-success-subtle text-success">
+
+                        <i class="bi bi-check-circle"></i>
+
+                    </div>
+
+                </div>
+
+                <div class="small text-muted mt-3">
+
+                    <i class="bi bi-eye me-1"></i>
+
+                    متاحة حاليًا
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Inactive Categories -->
+    <div class="col-md-6 col-xl-3">
+
+        <div class="card border-0 shadow-sm categories-stat-card h-100">
+
+            <div class="card-body p-4">
+
+                <div class="d-flex justify-content-between align-items-start">
+
+                    <div>
+
+                        <div class="small text-muted mb-2">
+                            الفئات غير النشطة
+                        </div>
+
+                        <div class="categories-stat-number text-secondary">
+                            @inactiveCategories
+                        </div>
+
+                    </div>
+
+                    <div class="categories-stat-icon bg-secondary-subtle text-secondary">
+
+                        <i class="bi bi-pause-circle"></i>
+
+                    </div>
+
+                </div>
+
+                <div class="small text-muted mt-3">
+
+                    <i class="bi bi-eye-slash me-1"></i>
+
+                    معطلة حاليًا
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Products -->
+    <div class="col-md-6 col-xl-3">
+
+        <div class="card border-0 shadow-sm categories-stat-card h-100">
+
+            <div class="card-body p-4">
+
+                <div class="d-flex justify-content-between align-items-start">
+
+                    <div>
+
+                        <div class="small text-muted mb-2">
+                            المنتجات
+                        </div>
+
+                        <div class="categories-stat-number text-dark">
+                            @totalProducts
+                        </div>
+
+                    </div>
+
+                    <div class="categories-stat-icon bg-warning-subtle text-warning">
+
+                        <i class="bi bi-box-seam"></i>
+
+                    </div>
+
+                </div>
+
+                <div class="small text-muted mt-3">
+
+                    <i class="bi bi-link-45deg me-1"></i>
+
+                    المنتجات المرتبطة بالفئات
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@if (!categories.Any())
+{
+    <!-- Empty State -->
+
+    <div class="card border-0 shadow-sm categories-section-card">
+
+        <div class="card-body">
+
+            <div class="categories-empty-state">
+
+                <div class="categories-empty-icon">
+
+                    <i class="bi bi-tags"></i>
+
+                </div>
+
+                <h2 class="h5 fw-bold mb-2">
+                    لا توجد فئات بعد
+                </h2>
+
+                <p class="text-muted mb-4">
+                    أضف أول فئة لتنظيم منتجات الكتالوج.
+                </p>
+
+                <a asp-area="Admin"
+                   asp-controller="Categories"
+                   asp-action="Create"
+                   class="btn btn-primary">
+
+                    <i class="bi bi-plus-lg me-1"></i>
+
+                    إضافة فئة
+
+                </a>
+
+            </div>
 
         </div>
 
@@ -172,35 +288,54 @@
 }
 else
 {
-    <!-- قائمة الفئات -->
-    <div class="card border-0 shadow-sm">
+    <!-- Categories List -->
 
-        <div class="card-header bg-white py-3">
+    <div class="card border-0 shadow-sm categories-section-card">
 
-            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2">
+        <div class="card-header bg-white border-0 p-4">
+
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
 
                 <div>
 
-                    <h2 class="h6 fw-bold mb-1">
-                        قائمة الفئات
-                    </h2>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+
+                        <div class="categories-section-icon bg-primary-subtle text-primary">
+
+                            <i class="bi bi-list-ul"></i>
+
+                        </div>
+
+                        <h2 class="h6 fw-bold mb-0">
+                            قائمة الفئات
+                        </h2>
+
+                    </div>
 
                     <p class="text-muted small mb-0">
-                        عرض وإدارة فئات المنتجات.
+                        عرض وإدارة فئات المنتجات وحالتها.
                     </p>
 
                 </div>
 
                 <div class="d-flex flex-wrap gap-2">
 
-                    <span class="badge text-bg-light border">
+                    <span class="badge rounded-pill text-bg-light border px-3 py-2">
+
+                        <i class="bi bi-tags me-1"></i>
+
                         @totalCategories فئة
+
                     </span>
 
                     @if (inactiveCategories > 0)
                     {
-                        <span class="badge text-bg-secondary">
+                        <span class="badge rounded-pill text-bg-secondary px-3 py-2">
+
+                            <i class="bi bi-pause-circle me-1"></i>
+
                             @inactiveCategories غير نشطة
+
                         </span>
                     }
 
@@ -210,13 +345,14 @@ else
 
         </div>
 
+
         <div class="card-body p-0">
 
             <div class="table-responsive">
 
-                <table class="table table-hover align-middle mb-0">
+                <table class="table categories-table table-hover align-middle mb-0">
 
-                    <thead class="table-light">
+                    <thead>
 
                         <tr>
 
@@ -248,23 +384,22 @@ else
 
                     </thead>
 
+
                     <tbody>
 
                         @foreach (var category in categories)
                         {
                             <tr>
 
-                                <!-- الفئة -->
+                                <!-- Category -->
+
                                 <td class="ps-4">
 
                                     <div class="d-flex align-items-center gap-3">
 
-                                        <div class="d-flex align-items-center justify-content-center rounded border bg-light flex-shrink-0"
-                                             style="width: 44px; height: 44px;">
+                                        <div class="category-avatar">
 
-                                            <span class="fw-bold text-primary">
-                                                @(string.IsNullOrWhiteSpace(category.Name) ? "C" : category.Name.Substring(0, 1).ToUpper())
-                                            </span>
+                                            <i class="bi bi-tag"></i>
 
                                         </div>
 
@@ -275,7 +410,7 @@ else
                                             </div>
 
                                             <div class="small text-muted">
-                                                المعرّف: @category.Id
+                                                المعرّف: #@category.Id
                                             </div>
 
                                         </div>
@@ -284,145 +419,205 @@ else
 
                                 </td>
 
-                                <!-- الوصف -->
-                                <td style="min-width: 260px; max-width: 400px;">
+
+                                <!-- Description -->
+
+                                <td class="category-description-cell">
 
                                     @if (!string.IsNullOrWhiteSpace(category.Description))
                                     {
-                                        <div class="text-muted text-truncate"
-                                             style="max-width: 380px;"
+                                        <div class="category-description"
                                              title="@category.Description">
+
                                             @category.Description
+
                                         </div>
                                     }
                                     else
                                     {
                                         <span class="text-muted">
-                                            —
+                                            لا يوجد وصف
                                         </span>
                                     }
 
                                 </td>
 
-                                <!-- المنتجات -->
+
+                                <!-- Products -->
+
                                 <td>
 
                                     @if (category.Products.Count > 0)
                                     {
-                                        <span class="badge text-bg-light border">
+                                        <span class="badge rounded-pill text-bg-light border category-product-count">
+
+                                            <i class="bi bi-box-seam me-1"></i>
+
                                             @category.Products.Count
+
                                         </span>
                                     }
                                     else
                                     {
-                                        <span class="text-muted">
+                                        <span class="badge rounded-pill text-bg-light border text-muted category-product-count">
+
+                                            <i class="bi bi-box me-1"></i>
+
                                             0
+
                                         </span>
                                     }
 
                                 </td>
 
-                                <!-- الحالة -->
+
+                                <!-- Status -->
+
                                 <td>
 
                                     @if (category.IsActive)
                                     {
-                                        <span class="badge text-bg-success">
+                                        <span class="badge rounded-pill text-bg-success px-3 py-2">
+
+                                            <i class="bi bi-check-circle me-1"></i>
+
                                             نشطة
+
                                         </span>
                                     }
                                     else
                                     {
-                                        <span class="badge text-bg-secondary">
+                                        <span class="badge rounded-pill text-bg-secondary px-3 py-2">
+
+                                            <i class="bi bi-pause-circle me-1"></i>
+
                                             غير نشطة
+
                                         </span>
                                     }
 
                                 </td>
 
-                                <!-- تاريخ الإنشاء -->
+
+                                <!-- Created -->
+
                                 <td>
 
-                                    <span class="small text-muted text-nowrap">
-                                        @category.CreatedAt.ToLocalTime().ToString("dd MMM yyyy")
-                                    </span>
+                                    <div class="category-date">
+
+                                        <div class="text-nowrap">
+                                            @category.CreatedAt.ToLocalTime().ToString("dd MMM yyyy")
+                                        </div>
+
+                                        <div class="small text-muted text-nowrap">
+                                            @category.CreatedAt.ToLocalTime().ToString("hh:mm tt")
+                                        </div>
+
+                                    </div>
 
                                 </td>
 
-                                <!-- الإجراءات -->
+
+                                <!-- Actions -->
+
                                 <td class="text-end pe-4">
 
-                                    <div class="d-inline-flex align-items-center gap-1 flex-nowrap">
+                                    <div class="dropdown">
 
-                                        <a asp-area="Admin"
-                                           asp-controller="Categories"
-                                           asp-action="Edit"
-                                           asp-route-id="@category.Id"
-                                           class="btn btn-sm btn-outline-primary">
-                                            تعديل
-                                        </a>
+                                        <button class="btn btn-sm btn-light border category-actions-button"
+                                                type="button"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false">
 
-                                        <div class="dropdown">
+                                            <i class="bi bi-three-dots-vertical"></i>
 
-                                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle"
-                                                    type="button"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-expanded="false">
-                                                المزيد
-                                            </button>
+                                            <span class="d-none d-sm-inline ms-1">
+                                                إجراءات
+                                            </span>
 
-                                            <ul class="dropdown-menu dropdown-menu-end">
+                                        </button>
 
-                                                @if (category.IsActive)
-                                                {
-                                                    <li>
 
-                                                        <form asp-area="Admin"
-                                                              asp-controller="Categories"
-                                                              asp-action="Deactivate"
-                                                              method="post"
-                                                              onsubmit="return confirm('هل أنت متأكد من رغبتك في تعطيل هذه الفئة؟');">
+                                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 category-actions-menu">
 
-                                                            <input type="hidden"
-                                                                   name="id"
-                                                                   value="@category.Id" />
+                                            <li>
 
-                                                            <button type="submit"
-                                                                    class="dropdown-item text-danger">
-                                                                تعطيل
-                                                            </button>
+                                                <a asp-area="Admin"
+                                                   asp-controller="Categories"
+                                                   asp-action="Edit"
+                                                   asp-route-id="@category.Id"
+                                                   class="dropdown-item">
 
-                                                        </form>
+                                                    <i class="bi bi-pencil me-2 text-primary"></i>
 
-                                                    </li>
-                                                }
-                                                else
-                                                {
-                                                    <li>
+                                                    تعديل الفئة
 
-                                                        <form asp-area="Admin"
-                                                              asp-controller="Categories"
-                                                              asp-action="Reactivate"
-                                                              method="post"
-                                                              onsubmit="return confirm('هل أنت متأكد من رغبتك في إعادة تفعيل هذه الفئة؟');">
+                                                </a>
 
-                                                            <input type="hidden"
-                                                                   name="id"
-                                                                   value="@category.Id" />
+                                            </li>
 
-                                                            <button type="submit"
-                                                                    class="dropdown-item text-success">
-                                                                إعادة التفعيل
-                                                            </button>
 
-                                                        </form>
+                                            <li>
+                                                <hr class="dropdown-divider" />
+                                            </li>
 
-                                                    </li>
-                                                }
 
-                                            </ul>
+                                            @if (category.IsActive)
+                                            {
+                                                <li>
 
-                                        </div>
+                                                    <form asp-area="Admin"
+                                                          asp-controller="Categories"
+                                                          asp-action="Deactivate"
+                                                          method="post"
+                                                          onsubmit="return confirm('هل أنت متأكد من رغبتك في تعطيل هذه الفئة؟');">
+
+                                                        <input type="hidden"
+                                                               name="id"
+                                                               value="@category.Id" />
+
+                                                        <button type="submit"
+                                                                class="dropdown-item text-danger">
+
+                                                            <i class="bi bi-pause-circle me-2"></i>
+
+                                                            تعطيل الفئة
+
+                                                        </button>
+
+                                                    </form>
+
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+
+                                                    <form asp-area="Admin"
+                                                          asp-controller="Categories"
+                                                          asp-action="Reactivate"
+                                                          method="post"
+                                                          onsubmit="return confirm('هل أنت متأكد من رغبتك في إعادة تفعيل هذه الفئة؟');">
+
+                                                        <input type="hidden"
+                                                               name="id"
+                                                               value="@category.Id" />
+
+                                                        <button type="submit"
+                                                                class="dropdown-item text-success">
+
+                                                            <i class="bi bi-check-circle me-2"></i>
+
+                                                            إعادة تفعيل الفئة
+
+                                                        </button>
+
+                                                    </form>
+
+                                                </li>
+                                            }
+
+                                        </ul>
 
                                     </div>
 
@@ -441,3 +636,185 @@ else
 
     </div>
 }
+
+
+<style>
+
+    .categories-stat-card,
+    .categories-section-card {
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .categories-stat-card {
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .categories-stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 28px rgba(17, 24, 39, 0.09) !important;
+    }
+
+    .categories-stat-number {
+        font-size: 2rem;
+        line-height: 1;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+    }
+
+    .categories-stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 1.2rem;
+    }
+
+    .categories-header-button {
+        min-height: 42px;
+        border-radius: 10px;
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .categories-section-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 0.95rem;
+    }
+
+    .categories-table thead th {
+        background: #f8fafc;
+        border-bottom: 1px solid #e5e7eb;
+        color: #6b7280;
+        font-size: 0.75rem;
+        font-weight: 600;
+        white-space: nowrap;
+        padding-top: 14px;
+        padding-bottom: 14px;
+    }
+
+    .categories-table tbody td {
+        border-color: #f1f3f5;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        font-size: 0.85rem;
+    }
+
+    .category-avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: #eef2ff;
+        color: #4f46e5;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 1.05rem;
+    }
+
+    .category-description-cell {
+        min-width: 260px;
+        max-width: 400px;
+    }
+
+    .category-description {
+        max-width: 380px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #6b7280;
+    }
+
+    .category-product-count {
+        min-width: 48px;
+        text-align: center;
+    }
+
+    .category-date {
+        line-height: 1.45;
+        color: #374151;
+    }
+
+    .category-actions-button {
+        min-width: 42px;
+        min-height: 34px;
+        border-radius: 9px;
+    }
+
+    .category-actions-menu {
+        min-width: 190px;
+        border-radius: 12px;
+        padding: 6px;
+    }
+
+    .category-actions-menu .dropdown-item {
+        border-radius: 8px;
+        padding: 9px 10px;
+        font-size: 0.85rem;
+    }
+
+    .category-actions-menu .dropdown-item:hover {
+        background: #f8fafc;
+    }
+
+    .categories-empty-state {
+        text-align: center;
+        padding: 56px 20px;
+    }
+
+    .categories-empty-icon {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: #f3f4f6;
+        color: #9ca3af;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+        font-size: 1.6rem;
+    }
+
+    .categories-section-card .btn {
+        border-radius: 9px;
+    }
+
+    @@media (max-width: 991.98px) {
+
+        .category-description-cell {
+            min-width: 220px;
+        }
+
+    }
+
+    @@media (max-width: 767.98px) {
+
+        .categories-stat-number {
+            font-size: 1.75rem;
+        }
+
+        .categories-table {
+            min-width: 950px;
+        }
+
+    }
+
+    @@media (max-width: 575.98px) {
+
+        .categories-header-button {
+            width: 100%;
+        }
+
+    }
+
+</style>

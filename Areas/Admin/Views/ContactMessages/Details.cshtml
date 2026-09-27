@@ -1,0 +1,240 @@
+@model ManholeCatalog.Models.ContactMessage
+
+@{
+    ViewData["Title"] = "تفاصيل الرسالة";
+}
+
+<div class="container-fluid py-4">
+
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+
+        <div>
+            <h1 class="h3 mb-1">
+                <i class="bi bi-envelope-open me-2"></i>
+                تفاصيل الرسالة
+            </h1>
+
+            <p class="text-muted mb-0">
+                عرض تفاصيل الرسالة الواردة من العميل.
+            </p>
+        </div>
+
+        <a asp-action="Index"
+           class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-right me-2"></i>
+            العودة للرسائل
+        </a>
+
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-lg-8">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-header bg-white py-3">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+                            <h5 class="mb-1">
+                                @Model.Subject
+                            </h5>
+
+                            <small class="text-muted">
+                                تم الإرسال في
+                                @Model.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy - hh:mm tt")
+                            </small>
+                        </div>
+
+                        @if (Model.IsRead)
+                        {
+                            <span class="badge bg-secondary">
+                                <i class="bi bi-envelope-open me-1"></i>
+                                مقروءة
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-primary">
+                                <i class="bi bi-envelope-fill me-1"></i>
+                                جديدة
+                            </span>
+                        }
+
+                    </div>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="mb-4">
+
+                        <h6 class="fw-semibold mb-2">
+                            نص الرسالة
+                        </h6>
+
+                        <div class="bg-light rounded p-4"
+                             style="white-space: pre-line; min-height: 180px;">
+                            @Model.Message
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4">
+
+            <div class="card border-0 shadow-sm mb-4">
+
+                <div class="card-header bg-white py-3">
+                    <h5 class="mb-0">
+                        <i class="bi bi-person me-2"></i>
+                        بيانات المرسل
+                    </h5>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="mb-3">
+
+                        <div class="small text-muted mb-1">
+                            الاسم
+                        </div>
+
+                        <div class="fw-semibold">
+                            @Model.Name
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <div class="small text-muted mb-1">
+                            الشركة
+                        </div>
+
+                        @if (!string.IsNullOrWhiteSpace(Model.CompanyName))
+                        {
+                            <div>
+                                @Model.CompanyName
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="text-muted">
+                                غير محدد
+                            </div>
+                        }
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <div class="small text-muted mb-1">
+                            البريد الإلكتروني
+                        </div>
+
+                        <a href="mailto:@Model.Email"
+                           class="text-decoration-none">
+                            @Model.Email
+                        </a>
+
+                    </div>
+
+                    <div class="mb-0">
+
+                        <div class="small text-muted mb-1">
+                            رقم الهاتف
+                        </div>
+
+                        @if (!string.IsNullOrWhiteSpace(Model.PhoneNumber))
+                        {
+                            <a href="tel:@Model.PhoneNumber"
+                               class="text-decoration-none">
+                                @Model.PhoneNumber
+                            </a>
+                        }
+                        else
+                        {
+                            <div class="text-muted">
+                                غير محدد
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-header bg-white py-3">
+                    <h5 class="mb-0">
+                        <i class="bi bi-gear me-2"></i>
+                        إجراءات الرسالة
+                    </h5>
+                </div>
+
+                <div class="card-body">
+
+                    @if (Model.IsRead)
+                    {
+                        <form asp-action="MarkAsUnread"
+                              asp-route-id="@Model.Id"
+                              method="post"
+                              class="mb-3">
+
+                            @Html.AntiForgeryToken()
+
+                            <button type="submit"
+                                    class="btn btn-outline-primary w-100">
+
+                                <i class="bi bi-envelope me-2"></i>
+                                تحديد كغير مقروءة
+
+                            </button>
+
+                        </form>
+                    }
+
+                    <a href="mailto:@Model.Email?subject=رد: @Uri.EscapeDataString(Model.Subject)"
+                       class="btn btn-outline-secondary w-100 mb-3">
+
+                        <i class="bi bi-reply me-2"></i>
+                        الرد عبر البريد
+
+                    </a>
+
+                    <form asp-action="Delete"
+                          asp-route-id="@Model.Id"
+                          method="post"
+                          onsubmit="return confirm('هل أنت متأكد من حذف هذه الرسالة؟');">
+
+                        @Html.AntiForgeryToken()
+
+                        <button type="submit"
+                                class="btn btn-outline-danger w-100">
+
+                            <i class="bi bi-trash me-2"></i>
+                            حذف الرسالة
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

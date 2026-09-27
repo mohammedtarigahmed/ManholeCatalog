@@ -4,64 +4,78 @@
     ViewData["Title"] = "حدث خطأ";
 }
 
-<div class="container py-5">
+<div class="public-page error-page">
 
-    <div class="row justify-content-center">
+    <section class="public-section error-section">
 
-        <div class="col-lg-7">
+        <div class="container">
 
-            <div class="card border-0 shadow-sm">
+            <div class="row justify-content-center">
 
-                <div class="card-body text-center p-4 p-md-5">
+                <div class="col-lg-8">
 
-                    <!-- Error Icon -->
-                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-danger-subtle text-danger mb-4"
-                         style="width: 72px; height: 72px;">
+                    <div class="public-card error-card">
 
-                        <span class="fs-2 fw-bold">
-                            !
-                        </span>
+                        <div class="public-card-body error-card-body">
 
-                    </div>
-
-                    <h1 class="h2 fw-bold mb-3">
-                        حدث خطأ
-                    </h1>
-
-                    <p class="lead text-muted mb-4">
-                        تعذر إكمال طلبك.
-                        يرجى المحاولة مرة أخرى أو العودة إلى الكتالوج.
-                    </p>
-
-                    @if (Model.ShowRequestId)
-                    {
-                        <div class="alert alert-light border text-start mb-4">
-
-                            <div class="small text-muted mb-1">
-                                رقم الطلب
+                            <div class="error-icon">
+                                <i class="bi bi-exclamation-lg"></i>
                             </div>
 
-                            <code>
-                                @Model.RequestId
-                            </code>
+                            <span class="public-page-label error-label">
+                                <i class="bi bi-info-circle"></i>
+                                تعذر إكمال العملية
+                            </span>
+
+                            <h1 class="public-page-title error-title">
+                                حدث خطأ
+                            </h1>
+
+                            <p class="public-page-description error-description">
+                                تعذر إكمال طلبك.
+                                يرجى المحاولة مرة أخرى أو العودة إلى الكتالوج.
+                            </p>
+
+                            @if (Model.ShowRequestId)
+                            {
+                                <div class="error-request-card">
+
+                                    <div class="error-request-icon">
+                                        <i class="bi bi-fingerprint"></i>
+                                    </div>
+
+                                    <div class="error-request-content">
+                                        <span>رقم الطلب</span>
+
+                                        <code>@Model.RequestId</code>
+
+                                        <small>
+                                            يمكنك استخدام هذا الرقم عند التواصل مع الدعم.
+                                        </small>
+                                    </div>
+
+                                </div>
+                            }
+
+                            <div class="error-actions">
+
+                                <a asp-controller="Home"
+                                   asp-action="Index"
+                                   class="btn btn-primary public-btn public-btn-primary public-btn-lg">
+                                    <i class="bi bi-house"></i>
+                                    <span>العودة إلى الرئيسية</span>
+                                </a>
+
+                                <a asp-controller="Catalog"
+                                   asp-action="Index"
+                                   class="btn btn-outline-secondary public-btn public-btn-lg">
+                                    <i class="bi bi-grid"></i>
+                                    <span>تصفح الكتالوج</span>
+                                </a>
+
+                            </div>
 
                         </div>
-                    }
-
-                    <!-- Actions -->
-                    <div class="d-flex justify-content-center gap-2 flex-wrap">
-
-                        <a asp-controller="Home"
-                           asp-action="Index"
-                           class="btn btn-primary">
-                            العودة إلى الرئيسية
-                        </a>
-
-                        <a asp-controller="Catalog"
-                           asp-action="Index"
-                           class="btn btn-outline-secondary">
-                            تصفح الكتالوج
-                        </a>
 
                     </div>
 
@@ -71,6 +85,12 @@
 
         </div>
 
-    </div>
+    </section>
 
 </div>
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/error.css"
+          asp-append-version="true" />
+}

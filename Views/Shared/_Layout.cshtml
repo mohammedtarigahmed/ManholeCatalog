@@ -1,135 +1,295 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+}
+
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>
-        @ViewData["Title"] - كتالوج المناهل
-    </title>
+    <title>@ViewData["Title"] - NexaCatalog</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ManholeCatalog.styles.css" asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 
 <body class="d-flex flex-column min-vh-100">
 
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+
+        <nav class="navbar navbar-expand-lg public-navbar">
+
             <div class="container">
 
-                <a class="navbar-brand fw-bold" asp-area="" asp-controller="Home" asp-action="Index">
-                    كتالوج المناهل
+                <!-- Brand -->
+                <a class="navbar-brand public-brand"
+                   asp-area=""
+                   asp-controller="Home"
+                   asp-action="Index">
+
+                    <span class="public-brand-icon">
+                        <i class="bi bi-grid-3x3-gap-fill"></i>
+                    </span>
+
+                    <span class="public-brand-text">
+                        NexaCatalog
+                    </span>
+
                 </a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#publicNavbar" aria-controls="publicNavbar" aria-expanded="false" aria-label="فتح القائمة">
+
+                <!-- Mobile Toggle -->
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#publicNavbar"
+                        aria-controls="publicNavbar"
+                        aria-expanded="false"
+                        aria-label="فتح القائمة">
+
                     <span class="navbar-toggler-icon"></span>
+
                 </button>
 
+
+                <!-- Navigation -->
                 <div class="collapse navbar-collapse" id="publicNavbar">
 
-                    <ul class="navbar-nav mb-3 mb-lg-0">
+                    <ul class="navbar-nav mx-auto mb-3 mb-lg-0">
 
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
-                                الرئيسية
+
+                            <a class="nav-link @(currentController == "Home" ? "active" : "")"
+                               asp-area=""
+                               asp-controller="Home"
+                               asp-action="Index">
+
+                                <span>الرئيسية</span>
+
                             </a>
+
                         </li>
 
+
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Catalog" asp-action="Index">
-                                الكتالوج
+
+                            <a class="nav-link @(currentController == "Catalog" ? "active" : "")"
+                               asp-area=""
+                               asp-controller="Catalog"
+                               asp-action="Index">
+
+                                <span>الكتالوج</span>
+
                             </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a class="nav-link @(currentController == "About" ? "active" : "")"
+                               asp-area=""
+                               asp-controller="About"
+                               asp-action="Index">
+
+                                <span>من نحن</span>
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a class="nav-link @(currentController == "Contact" ? "active" : "")"
+                               asp-area=""
+                               asp-controller="Contact"
+                               asp-action="Index">
+
+                                <span>تواصل معنا</span>
+
+                            </a>
+
                         </li>
 
                     </ul>
 
-                    <div class="d-flex align-items-center gap-2 me-auto">
 
-                        <a class="btn btn-outline-light btn-sm" asp-area="Admin" asp-controller="Home" asp-action="Index">
-                            الإدارة
+                    <!-- Primary CTA -->
+                    <div class="public-navbar-action">
+
+                        <a class="btn public-btn public-btn-primary public-navbar-cta"
+                           asp-area=""
+                           asp-controller="Catalog"
+                           asp-action="Index">
+
+                            <span>استكشف الكتالوج</span>
+
+                            <i class="bi bi-arrow-left"></i>
+
                         </a>
 
                     </div>
 
                 </div>
+
             </div>
+
         </nav>
+
     </header>
 
-    <main class="flex-grow-1">
+
+    <main class="flex-grow-1 public-main">
+
         @RenderBody()
+
     </main>
 
-    <footer class="border-top bg-light text-muted mt-5">
 
-        <div class="container py-5">
+    <footer class="public-footer">
 
-            <div class="row g-4">
+        <div class="container public-footer-main">
 
-                <div class="col-md-6">
+            <div class="row g-4 g-lg-5">
 
-                    <h5 class="fw-bold text-dark mb-3">
-                        كتالوج المناهل
-                    </h5>
+                <div class="col-lg-6">
 
-                    <p class="mb-0">
-                        استكشف كتالوج المنتجات، وراجع المواصفات،
-                        واطلب عروض الأسعار لمشروعك.
+                    <div class="public-footer-brand">
+
+                        <span class="public-footer-brand-icon">
+                            <i class="bi bi-grid-3x3-gap-fill"></i>
+                        </span>
+
+                        <h5 class="public-footer-title">
+                            NexaCatalog
+                        </h5>
+
+                    </div>
+
+                    <p class="public-footer-text mb-0">
+                        منصة كتالوج منتجات تساعد الشركات على عرض منتجاتها
+                        ومواصفاتها وتنظيم طلبات عروض الأسعار بسهولة.
                     </p>
 
                 </div>
 
-                <div class="col-sm-6 col-md-3">
 
-                    <h6 class="fw-bold text-dark mb-3">
+                <div class="col-sm-6 col-lg-3">
+
+                    <h6 class="public-footer-heading">
                         روابط سريعة
                     </h6>
 
-                    <ul class="list-unstyled mb-0">
+                    <nav class="public-footer-links">
 
-                        <li class="mb-2">
-                            <a class="text-decoration-none text-muted" asp-area="" asp-controller="Home" asp-action="Index">
-                                الرئيسية
-                            </a>
-                        </li>
+                        <a asp-area=""
+                           asp-controller="Home"
+                           asp-action="Index">
 
-                        <li>
-                            <a class="text-decoration-none text-muted" asp-area="" asp-controller="Catalog" asp-action="Index">
-                                الكتالوج
-                            </a>
-                        </li>
+                            <span>الرئيسية</span>
 
-                    </ul>
+                        </a>
+
+                        <a asp-area=""
+                           asp-controller="Catalog"
+                           asp-action="Index">
+
+                            <span>الكتالوج</span>
+
+                        </a>
+
+                        <a asp-area=""
+                           asp-controller="About"
+                           asp-action="Index">
+
+                            <span>من نحن</span>
+
+                        </a>
+
+                        <a asp-area=""
+                           asp-controller="Contact"
+                           asp-action="Index">
+
+                            <span>تواصل معنا</span>
+
+                        </a>
+
+                        <a asp-area=""
+                           asp-controller="Privacy"
+                           asp-action="Index">
+
+                            <span>سياسة الخصوصية</span>
+
+                        </a>
+
+                        <a asp-area=""
+                           asp-controller="Terms"
+                           asp-action="Index">
+
+                            <span>الشروط والأحكام</span>
+
+                        </a>
+
+                    </nav>
 
                 </div>
 
-                <div class="col-sm-6 col-md-3">
 
-                    <h6 class="fw-bold text-dark mb-3">
-                        المنتجات والخدمات
+                <div class="col-sm-6 col-lg-3">
+
+                    <h6 class="public-footer-heading">
+                        المنصة
                     </h6>
 
-                    <p class="mb-0">
-                        تصفح المنتجات، وراجع المواصفات،
-                        وأرسل طلبات عروض الأسعار.
-                    </p>
+                    <div class="public-footer-service">
+
+                        <i class="bi bi-check2-circle public-footer-service-icon"></i>
+
+                        <span>
+                            عرض المنتجات والمواصفات.
+                        </span>
+
+                    </div>
+
+                    <div class="public-footer-service">
+
+                        <i class="bi bi-check2-circle public-footer-service-icon"></i>
+
+                        <span>
+                            تنظيم طلبات عروض الأسعار.
+                        </span>
+
+                    </div>
 
                 </div>
 
             </div>
 
-            <hr class="my-4" />
+        </div>
 
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
 
-                <div class="small">
-                    &copy; @DateTime.Now.Year - كتالوج المناهل
-                </div>
+        <div class="public-footer-bottom">
 
-                <div class="small">
-                    كتالوج المنتجات ونظام طلبات عروض الأسعار
+            <div class="container py-3">
+
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+
+                    <div>
+                        &copy; @DateTime.Now.Year - NexaCatalog
+                    </div>
+
+                    <div>
+                        منصة كتالوج المنتجات
+                    </div>
+
                 </div>
 
             </div>
@@ -137,6 +297,7 @@
         </div>
 
     </footer>
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

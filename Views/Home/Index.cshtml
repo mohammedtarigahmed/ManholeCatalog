@@ -1,293 +1,444 @@
-﻿@{
+﻿@model ManholeCatalog.Models.ViewModels.HomeViewModel
+
+@{
     ViewData["Title"] = "الرئيسية";
+
+    var heroProduct = Model.FeaturedProducts.FirstOrDefault();
+
+    var heroImage = heroProduct?.Images.FirstOrDefault(i => i.IsPrimary)
+        ?? heroProduct?.Images.OrderBy(i => i.DisplayOrder).FirstOrDefault();
 }
 
-<div class="container">
+<div class="public-page home-page">
 
-    <!-- Hero Section -->
-    <section class="py-5">
+    <!-- Hero -->
+    <section class="home-hero">
+        <div class="container">
+            <div class="row align-items-center g-5">
 
-        <div class="row align-items-center g-5 py-lg-5">
+                <div class="col-lg-6">
 
-            <div class="col-lg-7">
+                    <div class="home-hero-content">
 
-                <div class="mb-3">
-                    <span class="badge text-bg-primary px-3 py-2">
-                        أغطية المناهل والمنتجات ذات الصلة
-                    </span>
+                        <span class="public-page-label">
+                            <i class="bi bi-grid"></i>
+                            منصة كتالوج المنتجات
+                        </span>
+
+                        <h1 class="home-hero-title">
+                            اعرض منتجاتك
+                            <span>بشكل احترافي</span>
+                        </h1>
+
+                        <p class="home-hero-description">
+                            منصة تساعد الشركات على عرض منتجاتها ومواصفاتها
+                            وتنظيم طلبات عروض الأسعار من مكان واحد.
+                        </p>
+
+                        <div class="home-hero-actions">
+
+                            <a class="btn btn-primary public-btn public-btn-primary public-btn-lg"
+                               asp-controller="Catalog"
+                               asp-action="Index">
+
+                                <span>استكشف الكتالوج</span>
+                                <i class="bi bi-arrow-left"></i>
+
+                            </a>
+
+                            <a class="btn btn-outline-secondary public-btn public-btn-lg"
+                               asp-controller="About"
+                               asp-action="Index">
+
+                                <span>تعرف علينا</span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <h1 class="display-4 fw-bold lh-sm mb-4">
-                    اعثر على
-                    <span class="text-primary">منتجات المناهل</span>
-                    المناسبة لمشروعك.
-                </h1>
 
-                <p class="lead text-muted mb-4">
-                    استكشف كتالوج منتجاتنا، وقارن المواصفات،
-                    واطلب عرض سعر للمنتجات التي تحتاجها.
-                </p>
+                <div class="col-lg-6">
 
-                <div class="d-flex flex-wrap gap-2">
+                    @if (heroProduct != null)
+                    {
+                        <div class="home-hero-product public-card">
 
-                    <a asp-controller="Catalog"
-                       asp-action="Index"
-                       class="btn btn-primary btn-lg px-4">
-                        تصفح الكتالوج
-                    </a>
+                            <div class="home-hero-product-image">
 
-                    <a asp-controller="Catalog"
-                       asp-action="Index"
-                       class="btn btn-outline-secondary btn-lg px-4">
-                        عرض المنتجات
-                    </a>
+                                @if (heroImage != null)
+                                {
+                                    <img src="@heroImage.ImagePath"
+                                         alt="@heroImage.AltText"
+                                         class="home-hero-product-image-content" />
+                                }
+                                else
+                                {
+                                    <div class="home-hero-product-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                }
+
+                            </div>
+
+                            <div class="public-card-body">
+
+                                <div class="home-product-meta">
+
+                                    @if (heroProduct.Category != null)
+                                    {
+                                        <span class="public-badge">
+                                            <i class="bi bi-grid"></i>
+                                            <span>@heroProduct.Category.Name</span>
+                                        </span>
+                                    }
+
+                                    @if (!string.IsNullOrWhiteSpace(heroProduct.SKU))
+                                    {
+                                        <span class="home-product-sku">
+                                            @heroProduct.SKU
+                                        </span>
+                                    }
+
+                                </div>
+
+                                <h2 class="home-hero-product-title">
+                                    @heroProduct.Name
+                                </h2>
+
+                                @if (!string.IsNullOrWhiteSpace(heroProduct.Description))
+                                {
+                                    <p class="home-hero-product-description">
+                                        @heroProduct.Description
+                                    </p>
+                                }
+
+                                <a class="home-product-link"
+                                   asp-controller="Catalog"
+                                   asp-action="Details"
+                                   asp-route-id="@heroProduct.Id">
+
+                                    <span>عرض المنتج</span>
+                                    <i class="bi bi-arrow-left"></i>
+
+                                </a>
+
+                            </div>
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="public-empty-state">
+
+                            <div class="public-empty-icon">
+                                <i class="bi bi-box-seam"></i>
+                            </div>
+
+                            <h2 class="h4 fw-bold mb-2">
+                                المنتجات قيد الإعداد
+                            </h2>
+
+                            <p class="text-muted mb-0">
+                                سيتم عرض المنتجات هنا عند إضافتها إلى الكتالوج.
+                            </p>
+
+                        </div>
+                    }
 
                 </div>
 
             </div>
+        </div>
+    </section>
 
-            <div class="col-lg-5">
 
-                <div class="card border-0 shadow-sm h-100">
+    <!-- Featured Products -->
+    @if (Model.FeaturedProducts.Any())
+    {
+        <section class="public-section home-featured-section">
 
-                    <div class="card-body p-5 text-center">
+            <div class="container">
 
-                        <div class="display-1 mb-4">
-                            🕳️
-                        </div>
+                <div class="home-section-heading">
 
-                        <h2 class="h3 fw-bold mb-3">
-                            كتالوج المنتجات
+                    <div>
+
+                        <span class="public-page-label mb-2">
+                            <i class="bi bi-stars"></i>
+                            منتجات مختارة
+                        </span>
+
+                        <h2 class="home-section-title">
+                            استكشف منتجاتنا
                         </h2>
 
-                        <p class="text-muted mb-4">
-                            ابحث عن المنتجات حسب الفئة، وراجع
-                            المواصفات، وأرسل طلب عرض السعر
-                            مباشرة من الكتالوج.
+                        <p class="home-section-description">
+                            مجموعة من المنتجات المتاحة حاليًا في الكتالوج.
                         </p>
 
-                        <div class="d-flex justify-content-center gap-4">
+                    </div>
 
-                            <div>
-                                <div class="fs-3 fw-bold text-primary">
-                                    01
-                                </div>
-                                <div class="small text-muted">
-                                    تصفح
-                                </div>
-                            </div>
+                    <a class="btn btn-outline-secondary public-btn"
+                       asp-controller="Catalog"
+                       asp-action="Index">
 
-                            <div>
-                                <div class="fs-3 fw-bold text-primary">
-                                    02
-                                </div>
-                                <div class="small text-muted">
-                                    اختر
-                                </div>
-                            </div>
+                        <span>عرض الكل</span>
+                        <i class="bi bi-arrow-left"></i>
 
-                            <div>
-                                <div class="fs-3 fw-bold text-primary">
-                                    03
+                    </a>
+
+                </div>
+
+
+                <div class="row g-4">
+
+                    @foreach (var product in Model.FeaturedProducts)
+                    {
+                        var productImage = product.Images.FirstOrDefault(i => i.IsPrimary)
+                            ?? product.Images.OrderBy(i => i.DisplayOrder).FirstOrDefault();
+
+                        <div class="col-md-6 col-lg-4">
+
+                            <article class="home-product-card public-card">
+
+                                <a class="home-product-image-wrapper"
+                                   asp-controller="Catalog"
+                                   asp-action="Details"
+                                   asp-route-id="@product.Id">
+
+                                    @if (productImage != null)
+                                    {
+                                        <img src="@productImage.ImagePath"
+                                             alt="@productImage.AltText"
+                                             class="home-product-image" />
+                                    }
+                                    else
+                                    {
+                                        <div class="home-product-no-image">
+                                            <i class="bi bi-image"></i>
+                                        </div>
+                                    }
+
+                                </a>
+
+
+                                <div class="public-card-body">
+
+                                    <div class="home-product-meta">
+
+                                        @if (product.Category != null)
+                                        {
+                                            <span class="home-product-category">
+                                                @product.Category.Name
+                                            </span>
+                                        }
+
+                                        @if (!string.IsNullOrWhiteSpace(product.SKU))
+                                        {
+                                            <span class="home-product-sku">
+                                                @product.SKU
+                                            </span>
+                                        }
+
+                                    </div>
+
+
+                                    <h3 class="home-product-title">
+                                        @product.Name
+                                    </h3>
+
+
+                                    @if (!string.IsNullOrWhiteSpace(product.Description))
+                                    {
+                                        <p class="home-product-description">
+                                            @product.Description
+                                        </p>
+                                    }
+
+
+                                    <div class="home-product-footer">
+
+                                        @if (product.Price.HasValue)
+                                        {
+                                            <div class="home-product-price">
+
+                                                <span class="home-product-price-label">
+                                                    السعر
+                                                </span>
+
+                                                <span class="home-product-price-value">
+                                                    @product.Price.Value.ToString("N2")
+                                                </span>
+
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <span class="home-product-price-placeholder">
+                                                اطلب عرض سعر
+                                            </span>
+                                        }
+
+
+                                        <a class="btn btn-primary public-btn public-btn-primary"
+                                           asp-controller="Catalog"
+                                           asp-action="Details"
+                                           asp-route-id="@product.Id">
+
+                                            <span>التفاصيل</span>
+                                            <i class="bi bi-arrow-left"></i>
+
+                                        </a>
+
+                                    </div>
+
                                 </div>
-                                <div class="small text-muted">
-                                    اطلب
-                                </div>
-                            </div>
+
+                            </article>
 
                         </div>
-
-                    </div>
+                    }
 
                 </div>
 
             </div>
 
-        </div>
+        </section>
+    }
 
-    </section>
 
-    <!-- Main Features -->
-    <section class="py-5">
+    <!-- Value Section -->
+    <section class="public-section home-value-section">
 
-        <div class="text-center mb-5">
+        <div class="container">
 
-            <h2 class="fw-bold mb-3">
-                كل ما تحتاجه في مكان واحد
-            </h2>
+            <div class="row align-items-center g-5">
 
-            <p class="text-muted mb-0">
-                طريقة بسيطة لاستكشاف المنتجات وطلب عروض الأسعار.
-            </p>
+                <div class="col-lg-5">
 
-        </div>
+                    <span class="public-page-label">
+                        <i class="bi bi-layout-text-window-reverse"></i>
+                        لماذا المنصة؟
+                    </span>
 
-        <div class="row g-4">
-
-            <div class="col-md-4">
-
-                <div class="card h-100 border-0 shadow-sm">
-
-                    <div class="card-body p-4">
-
-                        <div class="fs-1 mb-3">
-                            📋
-                        </div>
-
-                        <h3 class="h5 fw-bold mb-3">
-                            كتالوج المنتجات
-                        </h3>
-
-                        <p class="text-muted mb-0">
-                            تصفح المنتجات المتاحة واعثر بسرعة
-                            على ما تحتاجه باستخدام البحث وتصنيف الفئات.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="card h-100 border-0 shadow-sm">
-
-                    <div class="card-body p-4">
-
-                        <div class="fs-1 mb-3">
-                            ⚙️
-                        </div>
-
-                        <h3 class="h5 fw-bold mb-3">
-                            مواصفات المنتجات
-                        </h3>
-
-                        <p class="text-muted mb-0">
-                            راجع التفاصيل المهمة مثل المادة،
-                            وفئة التحميل، والقطر، والشكل،
-                            وغيرها من المواصفات المتاحة.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="card h-100 border-0 shadow-sm">
-
-                    <div class="card-body p-4">
-
-                        <div class="fs-1 mb-3">
-                            💬
-                        </div>
-
-                        <h3 class="h5 fw-bold mb-3">
-                            طلب عرض سعر
-                        </h3>
-
-                        <p class="text-muted mb-0">
-                            أرسل متطلباتك من خلال طلب عرض سعر بسيط،
-                            وسيتابع فريقنا معك.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- How It Works -->
-    <section class="py-5">
-
-        <div class="card border-0 shadow-sm">
-
-            <div class="card-body p-4 p-lg-5">
-
-                <div class="text-center mb-5">
-
-                    <h2 class="fw-bold mb-3">
-                        كيف يعمل الموقع؟
+                    <h2 class="home-section-title">
+                        كل ما تحتاجه لعرض منتجاتك
                     </h2>
 
-                    <p class="text-muted mb-0">
-                        انتقل من اكتشاف المنتج إلى طلب عرض السعر في خطوات بسيطة.
+                    <p class="home-section-description">
+                        واجهة واضحة تساعد العملاء على الوصول إلى المنتجات
+                        والمواصفات وإرسال طلبات عروض الأسعار بسهولة.
                     </p>
 
                 </div>
 
-                <div class="row g-4 text-center">
 
-                    <div class="col-md-4">
+                <div class="col-lg-7">
 
-                        <div class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center mb-3"
-                             style="width: 64px; height: 64px;">
+                    <div class="row g-3">
 
-                            <span class="fs-4 fw-bold text-primary">
-                                1
-                            </span>
+                        <div class="col-md-6">
 
-                        </div>
+                            <div class="public-card home-value-card">
 
-                        <h3 class="h5 fw-bold">
-                            تصفح
-                        </h3>
+                                <div class="public-card-body">
 
-                        <p class="text-muted mb-0">
-                            استكشف الكتالوج واعثر على المنتج
-                            الذي يناسب متطلباتك.
-                        </p>
+                                    <div class="public-card-icon">
+                                        <i class="bi bi-grid-3x3-gap"></i>
+                                    </div>
 
-                    </div>
+                                    <h3 class="h5 fw-bold mt-3 mb-2">
+                                        كتالوج منظم
+                                    </h3>
 
-                    <div class="col-md-4">
+                                    <p class="text-muted mb-0">
+                                        عرض المنتجات بطريقة واضحة وسهلة التصفح.
+                                    </p>
 
-                        <div class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center mb-3"
-                             style="width: 64px; height: 64px;">
+                                </div>
 
-                            <span class="fs-4 fw-bold text-primary">
-                                2
-                            </span>
+                            </div>
 
                         </div>
 
-                        <h3 class="h5 fw-bold">
-                            راجع
-                        </h3>
 
-                        <p class="text-muted mb-0">
-                            راجع مواصفات المنتج والمعلومات المتاحة
-                            قبل إرسال طلبك.
-                        </p>
+                        <div class="col-md-6">
 
-                    </div>
+                            <div class="public-card home-value-card">
 
-                    <div class="col-md-4">
+                                <div class="public-card-body">
 
-                        <div class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center mb-3"
-                             style="width: 64px; height: 64px;">
+                                    <div class="public-card-icon">
+                                        <i class="bi bi-card-checklist"></i>
+                                    </div>
 
-                            <span class="fs-4 fw-bold text-primary">
-                                3
-                            </span>
+                                    <h3 class="h5 fw-bold mt-3 mb-2">
+                                        مواصفات واضحة
+                                    </h3>
+
+                                    <p class="text-muted mb-0">
+                                        عرض تفاصيل ومواصفات كل منتج في مكان واحد.
+                                    </p>
+
+                                </div>
+
+                            </div>
 
                         </div>
 
-                        <h3 class="h5 fw-bold">
-                            اطلب
-                        </h3>
 
-                        <p class="text-muted mb-0">
-                            أرسل طلب عرض السعر مع بيانات التواصل
-                            والكمية المطلوبة.
-                        </p>
+                        <div class="col-md-6">
+
+                            <div class="public-card home-value-card">
+
+                                <div class="public-card-body">
+
+                                    <div class="public-card-icon">
+                                        <i class="bi bi-file-earmark-text"></i>
+                                    </div>
+
+                                    <h3 class="h5 fw-bold mt-3 mb-2">
+                                        طلبات عروض الأسعار
+                                    </h3>
+
+                                    <p class="text-muted mb-0">
+                                        استقبال طلبات الأسعار بطريقة منظمة.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <div class="public-card home-value-card">
+
+                                <div class="public-card-body">
+
+                                    <div class="public-card-icon">
+                                        <i class="bi bi-phone"></i>
+                                    </div>
+
+                                    <h3 class="h5 fw-bold mt-3 mb-2">
+                                        تجربة متجاوبة
+                                    </h3>
+
+                                    <p class="text-muted mb-0">
+                                        تجربة مناسبة للكمبيوتر والهاتف والأجهزة اللوحية.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -299,27 +450,186 @@
 
     </section>
 
-    <!-- Call to Action -->
-    <section class="py-5 mb-4">
 
-        <div class="card border-0 shadow-sm bg-light">
+    <!-- How It Works -->
+    <section class="public-section home-process-section">
 
-            <div class="card-body text-center p-5">
+        <div class="container">
 
-                <h2 class="fw-bold mb-3">
-                    هل أنت مستعد للعثور على المنتج المناسب؟
-                </h2>
+            <div class="home-section-heading home-section-heading-centered">
 
-                <p class="text-muted mb-4">
-                    استكشف الكتالوج واطلب عرض سعر
-                    للمنتجات التي تحتاجها.
-                </p>
+                <div>
 
-                <a asp-controller="Catalog"
-                   asp-action="Index"
-                   class="btn btn-primary btn-lg px-4">
-                    استكشف الكتالوج
-                </a>
+                    <span class="public-page-label mb-2">
+                        <i class="bi bi-arrow-repeat"></i>
+                        كيف تعمل؟
+                    </span>
+
+                    <h2 class="home-section-title">
+                        من المنتج إلى طلب السعر
+                    </h2>
+
+                    <p class="home-section-description">
+                        خطوات بسيطة للوصول إلى المنتج وإرسال طلب عرض سعر.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="row g-4">
+
+                <div class="col-md-4">
+
+                    <div class="public-card home-process-card">
+
+                        <div class="public-card-body">
+
+                            <span class="home-process-number">
+                                01
+                            </span>
+
+                            <div class="public-card-icon mt-3">
+                                <i class="bi bi-search"></i>
+                            </div>
+
+                            <h3 class="h5 fw-bold mt-3 mb-2">
+                                استعرض المنتجات
+                            </h3>
+
+                            <p class="text-muted mb-0">
+                                تصفح الكتالوج وابحث عن المنتج المناسب.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="public-card home-process-card">
+
+                        <div class="public-card-body">
+
+                            <span class="home-process-number">
+                                02
+                            </span>
+
+                            <div class="public-card-icon mt-3">
+                                <i class="bi bi-info-circle"></i>
+                            </div>
+
+                            <h3 class="h5 fw-bold mt-3 mb-2">
+                                راجع المواصفات
+                            </h3>
+
+                            <p class="text-muted mb-0">
+                                اطلع على تفاصيل المنتج والمواصفات المتاحة.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="public-card home-process-card">
+
+                        <div class="public-card-body">
+
+                            <span class="home-process-number">
+                                03
+                            </span>
+
+                            <div class="public-card-icon mt-3">
+                                <i class="bi bi-send"></i>
+                            </div>
+
+                            <h3 class="h5 fw-bold mt-3 mb-2">
+                                اطلب عرض سعر
+                            </h3>
+
+                            <p class="text-muted mb-0">
+                                أرسل طلبك وسيتم التواصل معك بخصوص السعر.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+    <section class="public-section home-cta-section">
+
+        <div class="container">
+
+            <div class="public-card home-cta-card">
+
+                <div class="public-card-body">
+
+                    <div class="row align-items-center g-4">
+
+                        <div class="col-lg-8">
+
+                            <span class="public-page-label">
+                                <i class="bi bi-chat-square-text"></i>
+                                ابدأ الآن
+                            </span>
+
+                            <h2 class="home-cta-title">
+                                تبحث عن منتج معين؟
+                            </h2>
+
+                            <p class="home-cta-description mb-0">
+                                استعرض الكتالوج أو أرسل طلب عرض سعر وسنتواصل معك.
+                            </p>
+
+                        </div>
+
+
+                        <div class="col-lg-4">
+
+                            <div class="home-cta-actions">
+
+                                <a class="btn btn-primary public-btn public-btn-primary public-btn-lg"
+                                   asp-controller="Catalog"
+                                   asp-action="Index">
+
+                                    <span>استكشف الكتالوج</span>
+                                    <i class="bi bi-arrow-left"></i>
+
+                                </a>
+
+                                <a class="btn btn-outline-secondary public-btn public-btn-lg"
+                                   asp-controller="Contact"
+                                   asp-action="Index">
+
+                                    <span>تواصل معنا</span>
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -328,3 +638,9 @@
     </section>
 
 </div>
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/home.css"
+          asp-append-version="true" />
+}
