@@ -2,96 +2,206 @@
 
 @{
     ViewData["Title"] = "رسائل التواصل";
+
+    var messages = Model.ToList();
+    var totalMessages = messages.Count;
+    var unreadMessages = messages.Count(m => !m.IsRead);
+    var readMessages = messages.Count(m => m.IsRead);
 }
 
-<div class="container-fluid py-4">
+<div class="admin-page">
 
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+    <div class="admin-page-header">
 
-        <div>
-            <h1 class="h3 mb-1">
-                <i class="bi bi-envelope me-2"></i>
-                رسائل التواصل
-            </h1>
+        <div class="admin-page-header-row">
 
-            <p class="text-muted mb-0">
-                إدارة الرسائل الواردة من نموذج التواصل.
-            </p>
-        </div>
+            <div class="admin-page-header-main">
 
-        <div>
-            <span class="badge bg-primary fs-6 px-3 py-2">
-                @Model.Count() رسالة
-            </span>
-        </div>
+                <div class="admin-page-header-eyebrow">
+                    <i class="bi bi-envelope"></i>
+                    إدارة التواصل
+                </div>
 
-    </div>
+                <h1 class="admin-page-header-title">
+                    رسائل التواصل
+                </h1>
 
-    @if (TempData["SuccessMessage"] is string successMessage)
-    {
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <p class="admin-page-header-description">
+                    إدارة الرسائل الواردة من نموذج التواصل.
+                </p>
 
-            <i class="bi bi-check-circle me-2"></i>
+            </div>
 
-            @successMessage
+            <div class="admin-page-header-actions">
 
-            <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert"
-                    aria-label="إغلاق"></button>
-
-        </div>
-    }
-
-    <div class="card border-0 shadow-sm">
-
-        <div class="card-header bg-white py-3">
-
-            <div class="d-flex justify-content-between align-items-center">
-
-                <h5 class="mb-0">
-                    قائمة الرسائل
-                </h5>
-
-                <span class="text-muted small">
-                    مرتبة من الأحدث إلى الأقدم
+                <span class="admin-badge admin-badge-primary">
+                    <i class="bi bi-envelope"></i>
+                    @totalMessages رسالة
                 </span>
 
             </div>
 
         </div>
 
-        <div class="card-body p-0">
+    </div>
 
-            @if (!Model.Any())
-            {
-                <div class="text-center py-5">
 
-                    <div class="mb-3">
-                        <i class="bi bi-envelope-open display-4 text-muted"></i>
+    @if (TempData["SuccessMessage"] is string successMessage)
+    {
+        <div class="admin-alert admin-alert-success"
+             role="alert">
+
+            <i class="bi bi-check-circle"></i>
+
+            <div>
+                @successMessage
+            </div>
+
+        </div>
+    }
+
+
+    <div class="admin-stats-grid mb-4">
+
+        <div class="admin-stat-card">
+
+            <div class="admin-stat-card-top">
+
+                <div class="admin-stat-label">
+                    إجمالي الرسائل
+                </div>
+
+                <div class="admin-stat-icon admin-stat-icon-primary">
+                    <i class="bi bi-envelope"></i>
+                </div>
+
+            </div>
+
+            <div class="admin-stat-value">
+                @totalMessages
+            </div>
+
+            <div class="admin-stat-note">
+                جميع الرسائل الواردة
+            </div>
+
+        </div>
+
+
+        <div class="admin-stat-card">
+
+            <div class="admin-stat-card-top">
+
+                <div class="admin-stat-label">
+                    الرسائل الجديدة
+                </div>
+
+                <div class="admin-stat-icon admin-stat-icon-warning">
+                    <i class="bi bi-envelope-fill"></i>
+                </div>
+
+            </div>
+
+            <div class="admin-stat-value">
+                @unreadMessages
+            </div>
+
+            <div class="admin-stat-note">
+                تحتاج إلى المراجعة
+            </div>
+
+        </div>
+
+
+        <div class="admin-stat-card">
+
+            <div class="admin-stat-card-top">
+
+                <div class="admin-stat-label">
+                    الرسائل المقروءة
+                </div>
+
+                <div class="admin-stat-icon admin-stat-icon-secondary">
+                    <i class="bi bi-envelope-open"></i>
+                </div>
+
+            </div>
+
+            <div class="admin-stat-value">
+                @readMessages
+            </div>
+
+            <div class="admin-stat-note">
+                تمت مراجعتها
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="admin-card">
+
+        <div class="admin-card-header">
+
+            <div class="admin-card-header-row">
+
+                <div class="admin-card-header-content">
+
+                    <div class="admin-card-icon">
+                        <i class="bi bi-inbox"></i>
                     </div>
 
-                    <h5 class="mb-2">
-                        لا توجد رسائل حتى الآن
-                    </h5>
+                    <div>
 
-                    <p class="text-muted mb-0">
+                        <h2 class="admin-card-title">
+                            قائمة الرسائل
+                        </h2>
+
+                        <p class="admin-card-description">
+                            مرتبة من الأحدث إلى الأقدم.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="admin-card-body p-0">
+
+            @if (!messages.Any())
+            {
+                <div class="admin-empty-state contact-messages-empty-state">
+
+                    <div class="admin-empty-icon">
+                        <i class="bi bi-envelope-open"></i>
+                    </div>
+
+                    <div class="admin-empty-title">
+                        لا توجد رسائل حتى الآن
+                    </div>
+
+                    <div class="admin-empty-description">
                         ستظهر رسائل العملاء هنا عند إرسال نموذج التواصل.
-                    </p>
+                    </div>
 
                 </div>
             }
             else
             {
-                <div class="table-responsive">
+                <div class="admin-table-wrapper">
 
-                    <table class="table table-hover align-middle mb-0">
+                    <table class="table admin-table contact-messages-table align-middle mb-0">
 
-                        <thead class="table-light">
+                        <thead>
 
                             <tr>
 
-                                <th class="px-4">
+                                <th>
                                     الحالة
                                 </th>
 
@@ -115,7 +225,7 @@
                                     تاريخ الإرسال
                                 </th>
 
-                                <th class="text-end px-4">
+                                <th>
                                     الإجراءات
                                 </th>
 
@@ -123,123 +233,152 @@
 
                         </thead>
 
+
                         <tbody>
 
-                            @foreach (var message in Model)
+                            @foreach (var message in messages)
                             {
-                                <tr class="@(message.IsRead ? "" : "table-primary")">
+                                <tr class="@(message.IsRead ? "" : "contact-message-unread")">
 
-                                    <td class="px-4">
+                                    <td>
 
                                         @if (message.IsRead)
                                         {
-                                            <span class="badge bg-secondary">
-                                                <i class="bi bi-envelope-open me-1"></i>
+                                            <span class="admin-badge admin-badge-neutral">
+
+                                                <i class="bi bi-envelope-open"></i>
+
                                                 مقروءة
+
                                             </span>
                                         }
                                         else
                                         {
-                                            <span class="badge bg-primary">
-                                                <i class="bi bi-envelope-fill me-1"></i>
+                                            <span class="admin-badge admin-badge-primary">
+
+                                                <i class="bi bi-envelope-fill"></i>
+
                                                 جديدة
+
                                             </span>
                                         }
 
                                     </td>
 
+
                                     <td>
 
-                                        <div class="fw-semibold">
+                                        <div class="admin-table-primary">
                                             @message.Name
                                         </div>
 
                                         @if (!string.IsNullOrWhiteSpace(message.PhoneNumber))
                                         {
-                                            <div class="small text-muted">
+                                            <div class="admin-table-secondary">
                                                 @message.PhoneNumber
                                             </div>
                                         }
 
                                     </td>
 
+
                                     <td>
 
                                         @if (!string.IsNullOrWhiteSpace(message.CompanyName))
                                         {
-                                            @message.CompanyName
+                                            <span class="contact-message-company">
+                                                @message.CompanyName
+                                            </span>
                                         }
                                         else
                                         {
-                                            <span class="text-muted">
+                                            <span class="contact-message-empty">
                                                 —
                                             </span>
                                         }
 
                                     </td>
 
+
                                     <td>
 
-                                        <div class="fw-semibold">
+                                        <div class="admin-table-primary">
                                             @message.Subject
                                         </div>
 
-                                        <div class="small text-muted text-truncate"
-                                             style="max-width: 260px;">
+                                        <div class="contact-message-preview">
                                             @message.Message
                                         </div>
 
                                     </td>
 
+
                                     <td>
+
                                         <a href="mailto:@message.Email"
-                                           class="text-decoration-none">
-                                            @message.Email
+                                           class="contact-message-email">
+
+                                            <i class="bi bi-envelope"></i>
+
+                                            <span>
+                                                @message.Email
+                                            </span>
+
                                         </a>
+
                                     </td>
+
 
                                     <td>
-                                        <span class="text-nowrap">
-                                            @message.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy")
-                                        </span>
 
-                                        <div class="small text-muted">
-                                            @message.CreatedAt.ToLocalTime().ToString("hh:mm tt")
+                                        <div class="contact-message-date">
+
+                                            <span>
+                                                @message.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy")
+                                            </span>
+
+                                            <span class="contact-message-time">
+                                                @message.CreatedAt.ToLocalTime().ToString("hh:mm tt")
+                                            </span>
+
                                         </div>
+
                                     </td>
 
-                                    <td class="text-end px-4">
 
-                                        <div class="d-flex justify-content-end gap-2">
+                                    <td>
+
+                                        <div class="admin-table-actions">
 
                                             <a asp-action="Details"
                                                asp-route-id="@message.Id"
-                                               class="btn btn-sm btn-outline-primary"
+                                               class="admin-btn admin-btn-secondary admin-btn-sm contact-message-action-button"
                                                title="عرض الرسالة">
 
                                                 <i class="bi bi-eye"></i>
 
-                                                <span class="d-none d-lg-inline ms-1">
+                                                <span class="d-none d-lg-inline">
                                                     عرض
                                                 </span>
 
                                             </a>
 
+
                                             <form asp-action="Delete"
                                                   asp-route-id="@message.Id"
                                                   method="post"
-                                                  class="d-inline"
+                                                  class="contact-message-delete-form"
                                                   onsubmit="return confirm('هل أنت متأكد من حذف هذه الرسالة؟');">
 
                                                 @Html.AntiForgeryToken()
 
                                                 <button type="submit"
-                                                        class="btn btn-sm btn-outline-danger"
+                                                        class="admin-btn admin-btn-outline-danger admin-btn-sm contact-message-action-button"
                                                         title="حذف الرسالة">
 
                                                     <i class="bi bi-trash"></i>
 
-                                                    <span class="d-none d-lg-inline ms-1">
+                                                    <span class="d-none d-lg-inline">
                                                         حذف
                                                     </span>
 
@@ -266,3 +405,9 @@
     </div>
 
 </div>
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/contact-messages.css"
+          asp-append-version="true" />
+}

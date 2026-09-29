@@ -1,0 +1,139 @@
+/* =========================================================
+   CATEGORIES PAGE
+   ========================================================= */
+
+.categories-table {
+    min-width: 900px;
+}
+
+.categories-table thead th {
+    white-space: nowrap;
+}
+
+.categories-table tbody td {
+    vertical-align: middle;
+}
+
+
+/* =========================================================
+   Statistics
+   ========================================================= */
+
+.admin-stat-description {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    color: var(--admin-muted);
+    font-size: 0.72rem;
+    line-height: 1.4;
+}
+
+.admin-stat-description i {
+    font-size: 0.78rem;
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   Category
+   ========================================================= */
+
+.category-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--admin-accent-soft);
+    color: var(--admin-accent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+}
+
+.category-description-cell {
+    min-width: 240px;
+    max-width: 380px;
+}
+
+.category-description {
+    max-width: 360px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--admin-muted);
+}
+
+.category-product-count {
+    min-width: 46px;
+    justify-content: center;
+}
+
+.category-date {
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   Actions
+   ========================================================= */
+
+.admin-actions-menu {
+    min-width: 180px;
+    padding: 6px;
+    border: 1px solid var(--admin-border-soft);
+    border-radius: var(--admin-radius-md);
+    box-shadow: var(--admin-shadow-md);
+}
+
+.admin-actions-menu .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 0.78rem;
+}
+
+.admin-actions-menu .dropdown-item i {
+    width: 17px;
+    text-align: center;
+}
+
+.admin-actions-menu .dropdown-item:hover {
+    background: var(--admin-surface-soft);
+}
+
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .category-description-cell {
+        min-width: 220px;
+    }
+
+}
+
+@media (max-width: 767.98px) {
+
+    .categories-table {
+        min-width: 900px;
+    }
+
+}
+
+@media (max-width: 575.98px) {
+
+    .admin-page-header-actions {
+        width: 100%;
+    }
+
+    .admin-page-header-actions .admin-btn {
+        width: 100%;
+    }
+
+}

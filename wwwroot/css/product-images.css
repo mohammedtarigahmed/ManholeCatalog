@@ -1,0 +1,120 @@
+/* =========================================================
+   PRODUCT IMAGES PAGE
+   ========================================================= */
+
+.product-image-file-input {
+    min-height: 42px;
+    padding: 8px 12px;
+}
+
+.product-upload-button {
+    min-height: 42px;
+    margin-bottom: 0;
+}
+
+@media (min-width: 992px) {
+    .product-upload-button {
+        transform: translateY(-25px);
+    }
+}
+
+
+/* =========================================================
+   Image Management Cards
+   ========================================================= */
+
+.admin-image-card {
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius-lg);
+    overflow: hidden;
+    background: var(--admin-surface);
+    transition:
+        transform var(--admin-transition),
+        box-shadow var(--admin-transition);
+}
+
+.admin-image-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--admin-shadow-md);
+}
+
+
+/* =========================================================
+   Image Preview
+   ========================================================= */
+
+.admin-image-preview {
+    position: relative;
+    height: 250px;
+    background: var(--admin-surface-soft);
+    border-bottom: 1px solid var(--admin-border-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.admin-image-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.admin-image-primary-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+}
+
+.admin-image-order-badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    min-width: 52px;
+    padding: 6px 10px;
+    border-radius: 9px;
+    background: rgba(17, 24, 39, 0.78);
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.admin-image-order-badge span {
+    font-size: 0.68rem;
+}
+
+.admin-image-order-badge strong {
+    font-size: 1rem;
+}
+
+
+/* =========================================================
+   Image Card Body
+   ========================================================= */
+
+.admin-image-card-body {
+    padding: 20px;
+}
+
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .admin-image-preview {
+        height: 230px;
+    }
+
+}
+
+@media (max-width: 575.98px) {
+
+    .admin-image-preview {
+        height: 220px;
+    }
+
+}

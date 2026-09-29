@@ -3,490 +3,539 @@
 @{
     ViewData["Title"] = "صور المنتج";
 
-    var orderedImages = Model.Images.OrderBy(i => i.DisplayOrder).ThenBy(i => i.Id).ToList();
+    var orderedImages = Model.Images
+        .OrderBy(i => i.DisplayOrder)
+        .ThenBy(i => i.Id)
+        .ToList();
 
     var primaryImage = orderedImages.FirstOrDefault(i => i.IsPrimary);
 }
 
-<!-- Page Header -->
-<div class="product-images-header mb-4">
+<div class="admin-page">
 
-    <div class="d-flex flex-column flex-xl-row justify-content-between align-items-xl-center gap-3">
+    <!-- Page Header -->
+    <div class="admin-page-header">
+        <div class="admin-page-header-row">
 
-        <div>
+            <div class="admin-page-header-main">
 
-            <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
-
-                <span class="badge rounded-pill text-bg-primary px-3 py-2">
-                    <i class="bi bi-images me-1"></i>
+                <div class="admin-page-header-eyebrow">
+                    <i class="bi bi-images"></i>
                     إدارة الصور
-                </span>
 
-                <span class="badge rounded-pill text-bg-light border px-3 py-2">
-                    #@Model.Id
-                </span>
+                    <span class="admin-badge admin-badge-neutral">
+                        #@Model.Id
+                    </span>
 
-                @if (Model.IsActive)
-                {
-                    <span class="badge rounded-pill text-bg-success px-3 py-2">
-                        <i class="bi bi-check-circle me-1"></i>
-                        نشط
-                    </span>
-                }
-                else
-                {
-                    <span class="badge rounded-pill text-bg-secondary px-3 py-2">
-                        <i class="bi bi-pause-circle me-1"></i>
-                        غير نشط
-                    </span>
-                }
+                    @if (Model.IsActive)
+                    {
+                        <span class="admin-badge admin-badge-success">
+                            <i class="bi bi-check-circle"></i>
+                            نشط
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="admin-badge admin-badge-neutral">
+                            <i class="bi bi-pause-circle"></i>
+                            غير نشط
+                        </span>
+                    }
+                </div>
+
+                <h1 class="admin-page-header-title">
+                    صور المنتج
+                </h1>
+
+                <p class="admin-page-header-description">
+                    إدارة صور المنتج وترتيب عرضها وتحديد الصورة الرئيسية.
+                </p>
 
             </div>
 
-            <h1 class="h3 fw-bold mb-1">
-                صور المنتج
-            </h1>
+            <div class="admin-page-header-actions">
 
-            <p class="text-muted mb-0">
-                إدارة صور المنتج وترتيب عرضها وتحديد الصورة الرئيسية.
-            </p>
+                <a asp-area="Admin"
+                   asp-controller="Products"
+                   asp-action="Details"
+                   asp-route-id="@Model.Id"
+                   class="admin-btn admin-btn-secondary">
+
+                    <i class="bi bi-eye"></i>
+                    <span>عرض المنتج</span>
+
+                </a>
+
+                <a asp-area="Admin"
+                   asp-controller="Products"
+                   asp-action="Index"
+                   class="admin-btn admin-btn-secondary">
+
+                    <i class="bi bi-arrow-right"></i>
+                    <span>العودة إلى المنتجات</span>
+
+                </a>
+
+            </div>
 
         </div>
+    </div>
 
 
-        <!-- Header Actions -->
-        <div class="d-flex flex-wrap gap-2">
+    <!-- Product Summary -->
+    <div class="admin-card mb-4">
 
-            <a asp-area="Admin"
-               asp-controller="Products"
-               asp-action="Details"
-               asp-route-id="@Model.Id"
-               class="btn btn-outline-primary">
+        <div class="admin-card-body">
 
-                <i class="bi bi-eye me-1"></i>
+            <div class="row g-4 align-items-center">
 
-                عرض المنتج
+                <div class="col-lg-8">
 
-            </a>
+                    <div class="d-flex align-items-start gap-3">
 
-            <a asp-area="Admin"
-               asp-controller="Products"
-               asp-action="Index"
-               class="btn btn-outline-secondary">
+                        <div class="admin-card-icon">
 
-                <i class="bi bi-arrow-right me-1"></i>
+                            <i class="bi bi-box-seam"></i>
 
-                العودة إلى المنتجات
+                        </div>
 
-            </a>
+                        <div class="min-w-0">
+
+                            <div class="admin-form-help mb-1">
+                                المنتج
+                            </div>
+
+                            <h2 class="admin-card-title mb-2">
+                                @Model.Name
+                            </h2>
+
+                            <div class="d-flex flex-wrap gap-2">
+
+                                @if (!string.IsNullOrWhiteSpace(Model.SKU))
+                                {
+                                    <span class="admin-badge admin-badge-neutral">
+                                        <i class="bi bi-upc-scan"></i>
+                                        @Model.SKU
+                                    </span>
+                                }
+
+                                @if (Model.Category != null)
+                                {
+                                    <span class="admin-badge admin-badge-neutral">
+                                        <i class="bi bi-folder2"></i>
+                                        @Model.Category.Name
+                                    </span>
+                                }
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4">
+
+                    <div class="row g-3">
+
+                        <div class="col-6">
+
+                            <div class="admin-stat-card">
+
+                                <div class="admin-stat-card-content">
+
+                                    <div class="admin-stat-card-top">
+
+                                        <div>
+
+                                            <div class="admin-stat-label">
+                                                الصور
+                                            </div>
+
+                                            <div class="admin-stat-value">
+                                                @orderedImages.Count
+                                            </div>
+
+                                        </div>
+
+                                        <div class="admin-stat-icon admin-stat-icon-primary">
+                                            <i class="bi bi-images"></i>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-6">
+
+                            <div class="admin-stat-card">
+
+                                <div class="admin-stat-card-content">
+
+                                    <div class="admin-stat-card-top">
+
+                                        <div>
+
+                                            <div class="admin-stat-label">
+                                                الرئيسية
+                                            </div>
+
+                                            <div class="admin-stat-value">
+                                                @(primaryImage != null ? "1" : "0")
+                                            </div>
+
+                                        </div>
+
+                                        <div class="admin-stat-icon admin-stat-icon-warning">
+                                            <i class="bi bi-star-fill"></i>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
+
+    <!-- Upload Error -->
+    @if (TempData["ImageError"] != null)
+    {
+        <div class="admin-alert admin-alert-danger mb-4"
+             role="alert">
+
+            <div class="admin-alert-icon">
+                <i class="bi bi-exclamation-triangle"></i>
+            </div>
+
+            <div>
+
+                <div class="fw-semibold mb-1">
+                    فشل رفع الصورة
+                </div>
+
+                <div>
+                    @TempData["ImageError"]
+                </div>
+
+            </div>
+
+        </div>
+    }
 
 
-<!-- Product Summary -->
-<div class="card border-0 shadow-sm product-images-card mb-4">
+    <!-- Upload Image -->
+    <div class="admin-card mb-4">
 
-    <div class="card-body p-4">
+        <div class="admin-card-header">
 
-        <div class="row g-4 align-items-center">
+            <div class="admin-card-header-content">
 
-            <div class="col-lg-8">
+                <div class="admin-card-icon">
+                    <i class="bi bi-cloud-arrow-up"></i>
+                </div>
 
-                <div class="d-flex align-items-start gap-3">
+                <div>
 
-                    <div class="product-image-product-icon bg-primary-subtle text-primary">
+                    <h2 class="admin-card-title">
+                        رفع صورة جديدة
+                    </h2>
 
-                        <i class="bi bi-box-seam"></i>
+                    <p class="admin-card-description">
+                        إضافة صورة جديدة إلى هذا المنتج.
+                    </p>
 
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="admin-card-body">
+
+            <form asp-area="Admin"
+                  asp-controller="Products"
+                  asp-action="UploadImage"
+                  asp-route-id="@Model.Id"
+                  method="post"
+                  enctype="multipart/form-data">
+
+                <div class="row g-4 align-items-end">
+
+                    <div class="col-lg-9">
+
+                        <div class="admin-form-group mb-0">
+
+                            <label for="image"
+                                   class="admin-form-label">
+                                اختيار الصورة
+                            </label>
+
+                            <input type="file"
+                                   id="image"
+                                   name="image"
+                                   class="form-control admin-form-control product-image-file-input"
+                                   accept=".jpg,.jpeg,.png,.webp,image/*" />
+
+                            <div class="admin-form-help">
+                                <i class="bi bi-info-circle"></i>
+                                الصيغ المسموح بها: JPG, JPEG, PNG, WebP.
+                                الحد الأقصى للحجم: 5 ميجابايت.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-3">
+
+                        <button type="submit"
+                                class="admin-btn admin-btn-primary w-100 product-upload-button">
+
+                            <i class="bi bi-cloud-arrow-up"></i>
+                            <span>رفع الصورة</span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- Product Images -->
+    <div class="admin-card">
+
+        <div class="admin-card-header">
+
+            <div class="admin-card-header-row">
+
+                <div class="admin-card-header-content">
+
+                    <div class="admin-card-icon">
+                        <i class="bi bi-grid"></i>
                     </div>
 
                     <div>
 
-                        <div class="small text-muted mb-1">
-                            المنتج
-                        </div>
-
-                        <h2 class="h5 fw-bold mb-2">
-                            @Model.Name
+                        <h2 class="admin-card-title">
+                            صور المنتج
                         </h2>
 
-                        <div class="d-flex flex-wrap gap-2">
-
-                            @if (!string.IsNullOrWhiteSpace(Model.SKU))
-                            {
-                                <span class="badge rounded-pill text-bg-light border px-3 py-2">
-                                    <i class="bi bi-upc me-1"></i>
-                                    @Model.SKU
-                                </span>
-                            }
-
-                            @if (Model.Category != null)
-                            {
-                                <span class="badge rounded-pill text-bg-light border px-3 py-2">
-                                    <i class="bi bi-folder2 me-1"></i>
-                                    @Model.Category.Name
-                                </span>
-                            }
-
-                        </div>
+                        <p class="admin-card-description">
+                            إعادة ترتيب الصور، وتحديد الصورة الرئيسية، أو حذف الصور.
+                        </p>
 
                     </div>
 
                 </div>
 
-            </div>
-
-
-            <div class="col-lg-4">
-
-                <div class="row g-3">
-
-                    <div class="col-6">
-
-                        <div class="product-image-stat">
-
-                            <div class="product-image-stat-icon bg-primary-subtle text-primary">
-
-                                <i class="bi bi-images"></i>
-
-                            </div>
-
-                            <div>
-
-                                <div class="h4 fw-bold mb-0">
-                                    @orderedImages.Count
-                                </div>
-
-                                <div class="small text-muted">
-                                    الصور
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="col-6">
-
-                        <div class="product-image-stat">
-
-                            <div class="product-image-stat-icon bg-warning-subtle text-warning">
-
-                                <i class="bi bi-star-fill"></i>
-
-                            </div>
-
-                            <div>
-
-                                <div class="h4 fw-bold mb-0">
-                                    @(primaryImage != null ? "1" : "0")
-                                </div>
-
-                                <div class="small text-muted">
-                                    الرئيسية
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- Upload Error -->
-@if (TempData["ImageError"] != null)
-{
-    <div class="alert alert-danger border-0 shadow-sm d-flex align-items-start gap-3 mb-4"
-         role="alert">
-
-        <div class="product-alert-icon bg-danger-subtle text-danger">
-
-            <i class="bi bi-exclamation-triangle"></i>
-
-        </div>
-
-        <div>
-
-            <div class="fw-semibold mb-1">
-                فشل رفع الصورة
-            </div>
-
-            <div>
-                @TempData["ImageError"]
-            </div>
-
-        </div>
-
-    </div>
-}
-
-
-<!-- Upload Image -->
-<div class="card border-0 shadow-sm product-images-card mb-4">
-
-    <div class="card-header bg-white border-0 p-4">
-
-        <div class="d-flex align-items-center gap-3">
-
-            <div class="product-image-section-icon bg-primary-subtle text-primary">
-
-                <i class="bi bi-cloud-arrow-up"></i>
-
-            </div>
-
-            <div>
-
-                <h2 class="h6 fw-bold mb-1">
-                    رفع صورة جديدة
-                </h2>
-
-                <p class="text-muted small mb-0">
-                    إضافة صورة جديدة إلى هذا المنتج.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="card-body p-4">
-
-        <form asp-area="Admin"
-              asp-controller="Products"
-              asp-action="UploadImage"
-              asp-route-id="@Model.Id"
-              method="post"
-              enctype="multipart/form-data">
-
-            <div class="row g-4">
-
-                <div class="col-lg-9">
-
-                    <label for="image"
-                           class="form-label fw-semibold">
-
-                        اختيار الصورة
-
-                    </label>
-
-                    <input type="file"
-                           id="image"
-                           name="image"
-                           class="form-control product-image-file-input"
-                           accept=".jpg,.jpeg,.png,.webp,image/*" />
-
-                    <div class="form-text mt-2">
-
-                        <i class="bi bi-info-circle me-1"></i>
-
-                        الصيغ المسموح بها: JPG, JPEG, PNG, WebP.
-                        الحد الأقصى للحجم: 5 ميجابايت.
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-lg-3 product-upload-action">
-
-                    <button type="submit"
-                            class="btn btn-primary w-100 product-upload-button">
-
-                        <i class="bi bi-cloud-arrow-up me-1"></i>
-
-                        رفع الصورة
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-
-<!-- Product Images -->
-<div class="card border-0 shadow-sm product-images-card">
-
-    <div class="card-header bg-white border-0 p-4">
-
-        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3">
-
-            <div>
-
-                <div class="d-flex align-items-center gap-2 mb-1">
-
-                    <div class="product-image-section-icon product-image-section-icon-sm bg-info-subtle text-info">
-
-                        <i class="bi bi-grid"></i>
-
-                    </div>
-
-                    <h2 class="h6 fw-bold mb-0">
-                        صور المنتج
-                    </h2>
-
-                </div>
-
-                <p class="text-muted small mb-0">
-                    إعادة ترتيب الصور، وتحديد الصورة الرئيسية، أو حذف الصور.
-                </p>
-
-            </div>
-
-
-            <span class="badge rounded-pill text-bg-light border px-3 py-2">
-
-                <i class="bi bi-images me-1"></i>
-
-                @orderedImages.Count صورة
-
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <div class="card-body p-4">
-
-        @if (!orderedImages.Any())
-        {
-            <div class="product-images-empty-state">
-
-                <div class="product-images-empty-icon">
-
+                <span class="admin-badge admin-badge-neutral">
                     <i class="bi bi-images"></i>
-
-                </div>
-
-                <h3 class="h6 fw-bold mb-2">
-                    لا توجد صور بعد
-                </h3>
-
-                <p class="text-muted mb-1">
-                    لم يتم رفع أي صور لهذا المنتج.
-                </p>
-
-                <p class="small text-muted mb-0">
-                    ارفع الصورة الأولى باستخدام النموذج أعلاه.
-                </p>
+                    @orderedImages.Count صورة
+                </span>
 
             </div>
-        }
-        else
-        {
-            <div class="row g-4">
 
-                @for (var index = 0; index < orderedImages.Count; index++)
-                {
-                    var image = orderedImages[index];
+        </div>
 
-                    <div class="col-md-6 col-xl-4">
+        <div class="admin-card-body">
 
-                        <div class="product-image-management-card h-100">
+            @if (!orderedImages.Any())
+            {
+                <div class="admin-empty-state">
 
-                            <!-- Image -->
-                            <div class="product-management-image">
+                    <div class="admin-empty-icon">
+                        <i class="bi bi-images"></i>
+                    </div>
 
-                                <img src="@image.ImagePath"
-                                     alt="@image.AltText"
-                                     class="product-management-image-img" />
+                    <h3 class="admin-empty-title">
+                        لا توجد صور بعد
+                    </h3>
 
-                                @if (image.IsPrimary)
-                                {
-                                    <span class="badge rounded-pill text-bg-primary position-absolute top-0 end-0 m-3">
+                    <p class="admin-empty-description">
+                        لم يتم رفع أي صور لهذا المنتج.
+                    </p>
 
-                                        <i class="bi bi-star-fill me-1"></i>
+                    <p class="small text-muted mb-0">
+                        ارفع الصورة الأولى باستخدام النموذج أعلاه.
+                    </p>
 
-                                        رئيسية
+                </div>
+            }
+            else
+            {
+                <div class="row g-4">
 
-                                    </span>
-                                }
+                    @for (var index = 0; index < orderedImages.Count; index++)
+                    {
+                        var image = orderedImages[index];
 
-                                <div class="product-image-order-badge">
+                        <div class="col-md-6 col-xl-4">
 
-                                    <span class="small">
-                                        الترتيب
-                                    </span>
+                            <div class="admin-image-card h-100">
 
-                                    <strong>
-                                        @(index + 1)
-                                    </strong>
+                                <!-- Image -->
+                                <div class="admin-image-preview">
+
+                                    <img src="@image.ImagePath"
+                                         alt="@image.AltText"
+                                         class="admin-image-preview-img" />
+
+                                    @if (image.IsPrimary)
+                                    {
+                                        <span class="admin-badge admin-badge-primary admin-image-primary-badge">
+                                            <i class="bi bi-star-fill"></i>
+                                            رئيسية
+                                        </span>
+                                    }
+
+                                    <div class="admin-image-order-badge">
+
+                                        <span>
+                                            الترتيب
+                                        </span>
+
+                                        <strong>
+                                            @(index + 1)
+                                        </strong>
+
+                                    </div>
 
                                 </div>
 
-                            </div>
 
+                                <!-- Controls -->
+                                <div class="admin-image-card-body">
 
-                            <!-- Controls -->
-                            <div class="p-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
 
-                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div>
 
-                                    <div>
+                                            <div class="admin-form-help mb-1">
+                                                ترتيب العرض
+                                            </div>
 
-                                        <div class="small text-muted mb-1">
-                                            ترتيب العرض
+                                            <div class="fw-bold fs-5">
+                                                @(index + 1)
+                                            </div>
+
                                         </div>
 
-                                        <div class="fw-bold fs-5">
-                                            @(index + 1)
-                                        </div>
+                                        @if (image.IsPrimary)
+                                        {
+                                            <span class="admin-badge admin-badge-primary">
+                                                الصورة الرئيسية
+                                            </span>
+                                        }
 
                                     </div>
 
 
-                                    @if (image.IsPrimary)
-                                    {
-                                        <span class="badge rounded-pill text-bg-primary px-3 py-2">
-                                            الصورة الرئيسية
-                                        </span>
-                                    }
+                                    <!-- Move Controls -->
+                                    <div class="d-flex gap-2 mb-3">
 
-                                </div>
+                                        @if (index > 0)
+                                        {
+                                            <form asp-area="Admin"
+                                                  asp-controller="Products"
+                                                  asp-action="MoveImageUp"
+                                                  asp-route-id="@image.Id"
+                                                  method="post"
+                                                  class="flex-fill">
+
+                                                <button type="submit"
+                                                        class="admin-btn admin-btn-secondary admin-btn-sm w-100">
+
+                                                    <i class="bi bi-arrow-up"></i>
+                                                    <span>نقل لأعلى</span>
+
+                                                </button>
+
+                                            </form>
+                                        }
+                                        else
+                                        {
+                                            <button type="button"
+                                                    class="admin-btn admin-btn-secondary admin-btn-sm w-100"
+                                                    disabled>
+
+                                                <i class="bi bi-arrow-up"></i>
+                                                <span>نقل لأعلى</span>
+
+                                            </button>
+                                        }
+
+                                        @if (index < orderedImages.Count - 1)
+                                        {
+                                            <form asp-area="Admin"
+                                                  asp-controller="Products"
+                                                  asp-action="MoveImageDown"
+                                                  asp-route-id="@image.Id"
+                                                  method="post"
+                                                  class="flex-fill">
+
+                                                <button type="submit"
+                                                        class="admin-btn admin-btn-secondary admin-btn-sm w-100">
+
+                                                    <i class="bi bi-arrow-down"></i>
+                                                    <span>نقل لأسفل</span>
+
+                                                </button>
+
+                                            </form>
+                                        }
+                                        else
+                                        {
+                                            <button type="button"
+                                                    class="admin-btn admin-btn-secondary admin-btn-sm w-100"
+                                                    disabled>
+
+                                                <i class="bi bi-arrow-down"></i>
+                                                <span>نقل لأسفل</span>
+
+                                            </button>
+                                        }
+
+                                    </div>
 
 
-                                <!-- Move Controls -->
-                                <div class="d-flex gap-2 mb-3">
-
-                                    @if (index > 0)
+                                    <!-- Primary Image -->
+                                    @if (!image.IsPrimary)
                                     {
                                         <form asp-area="Admin"
                                               asp-controller="Products"
-                                              asp-action="MoveImageUp"
+                                              asp-action="SetPrimaryImage"
                                               asp-route-id="@image.Id"
                                               method="post"
-                                              class="flex-fill">
+                                              class="mb-2">
 
                                             <button type="submit"
-                                                    class="btn btn-sm btn-outline-secondary w-100">
+                                                    class="admin-btn admin-btn-primary admin-btn-sm w-100">
 
-                                                <i class="bi bi-arrow-up me-1"></i>
-
-                                                نقل لأعلى
+                                                <i class="bi bi-star"></i>
+                                                <span>تعيين كصورة رئيسية</span>
 
                                             </button>
 
@@ -494,325 +543,64 @@
                                     }
                                     else
                                     {
-                                        <button type="button"
-                                                class="btn btn-sm btn-outline-secondary w-100"
-                                                disabled>
+                                        <div class="admin-alert admin-alert-info mb-2">
 
-                                            <i class="bi bi-arrow-up me-1"></i>
+                                            <div class="admin-alert-icon">
+                                                <i class="bi bi-star-fill"></i>
+                                            </div>
 
-                                            نقل لأعلى
+                                            <div class="small">
 
-                                        </button>
+                                                <div class="fw-semibold mb-1">
+                                                    الصورة الرئيسية
+                                                </div>
+
+                                                <div>
+                                                    هذه الصورة مستخدمة حاليًا كصورة المنتج الرئيسية.
+                                                </div>
+
+                                            </div>
+
+                                        </div>
                                     }
 
 
-                                    @if (index < orderedImages.Count - 1)
-                                    {
-                                        <form asp-area="Admin"
-                                              asp-controller="Products"
-                                              asp-action="MoveImageDown"
-                                              asp-route-id="@image.Id"
-                                              method="post"
-                                              class="flex-fill">
-
-                                            <button type="submit"
-                                                    class="btn btn-sm btn-outline-secondary w-100">
-
-                                                <i class="bi bi-arrow-down me-1"></i>
-
-                                                نقل لأسفل
-
-                                            </button>
-
-                                        </form>
-                                    }
-                                    else
-                                    {
-                                        <button type="button"
-                                                class="btn btn-sm btn-outline-secondary w-100"
-                                                disabled>
-
-                                            <i class="bi bi-arrow-down me-1"></i>
-
-                                            نقل لأسفل
-
-                                        </button>
-                                    }
-
-                                </div>
-
-
-                                <!-- Primary Image -->
-                                @if (!image.IsPrimary)
-                                {
+                                    <!-- Delete -->
                                     <form asp-area="Admin"
                                           asp-controller="Products"
-                                          asp-action="SetPrimaryImage"
+                                          asp-action="DeleteImage"
                                           asp-route-id="@image.Id"
                                           method="post"
-                                          class="mb-2">
+                                          onsubmit="return confirm('هل أنت متأكد من رغبتك في حذف هذه الصورة؟');">
 
                                         <button type="submit"
-                                                class="btn btn-sm btn-outline-primary w-100">
+                                                class="admin-btn admin-btn-outline-danger admin-btn-sm w-100">
 
-                                            <i class="bi bi-star me-1"></i>
-
-                                            تعيين كصورة رئيسية
+                                            <i class="bi bi-trash"></i>
+                                            <span>حذف الصورة</span>
 
                                         </button>
 
                                     </form>
-                                }
-                                else
-                                {
-                                    <div class="product-primary-alert mb-2">
 
-                                        <div class="fw-semibold mb-1">
-
-                                            <i class="bi bi-star-fill me-1"></i>
-
-                                            الصورة الرئيسية
-
-                                        </div>
-
-                                        <div class="small">
-                                            هذه الصورة مستخدمة حاليًا كصورة المنتج الرئيسية.
-                                        </div>
-
-                                    </div>
-                                }
-
-
-                                <!-- Delete -->
-                                <form asp-area="Admin"
-                                      asp-controller="Products"
-                                      asp-action="DeleteImage"
-                                      asp-route-id="@image.Id"
-                                      method="post"
-                                      onsubmit="return confirm('هل أنت متأكد من رغبتك في حذف هذه الصورة؟');">
-
-                                    <button type="submit"
-                                            class="btn btn-sm btn-outline-danger w-100">
-
-                                        <i class="bi bi-trash me-1"></i>
-
-                                        حذف الصورة
-
-                                    </button>
-
-                                </form>
+                                </div>
 
                             </div>
 
                         </div>
+                    }
 
-                    </div>
-                }
+                </div>
+            }
 
-            </div>
-        }
+        </div>
 
     </div>
 
 </div>
 
-
-<style>
-
-    .product-images-card {
-        border-radius: 16px;
-        overflow: hidden;
-    }
-
-    .product-images-header .btn {
-        border-radius: 10px;
-    }
-
-    .product-image-product-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 14px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        font-size: 1.2rem;
-    }
-
-    .product-image-section-icon {
-        width: 42px;
-        height: 42px;
-        border-radius: 12px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        font-size: 1.05rem;
-    }
-
-    .product-image-section-icon-sm {
-        width: 36px;
-        height: 36px;
-        border-radius: 10px;
-        font-size: 0.95rem;
-    }
-
-    .product-image-stat {
-        height: 100%;
-        min-height: 82px;
-        padding: 14px;
-        border-radius: 14px;
-        background: #f8fafc;
-        border: 1px solid #eef0f2;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .product-image-stat-icon {
-        width: 42px;
-        height: 42px;
-        border-radius: 12px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-    }
-
-    .product-alert-icon {
-        width: 42px;
-        height: 42px;
-        border-radius: 12px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-    }
-
-    .product-image-file-input {
-        border-radius: 10px;
-        padding: 10px 12px;
-        min-height: 44px;
-    }
-
-    .product-upload-action {
-        padding-top: 32px;
-    }
-
-    .product-upload-button {
-        min-height: 44px;
-        border-radius: 10px;
-    }
-
-    .product-image-management-card {
-        border: 1px solid #e5e7eb;
-        border-radius: 14px;
-        overflow: hidden;
-        background: #fff;
-        transition: transform 0.18s ease, box-shadow 0.18s ease;
-    }
-
-    .product-image-management-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 24px rgba(17, 24, 39, 0.08);
-    }
-
-    .product-management-image {
-        position: relative;
-        height: 250px;
-        background: #f8fafc;
-        border-bottom: 1px solid #eef0f2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    }
-
-    .product-management-image-img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
-
-    .product-image-order-badge {
-        position: absolute;
-        bottom: 12px;
-        right: 12px;
-        min-width: 52px;
-        padding: 6px 10px;
-        border-radius: 9px;
-        background: rgba(17, 24, 39, 0.78);
-        color: #fff;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        line-height: 1.2;
-    }
-
-    .product-image-order-badge strong {
-        font-size: 1rem;
-    }
-
-    .product-primary-alert {
-        padding: 10px 12px;
-        border-radius: 10px;
-        background: #eff6ff;
-        border: 1px solid #bfdbfe;
-        color: #1d4ed8;
-    }
-
-    .product-images-empty-state {
-        text-align: center;
-        padding: 56px 20px;
-    }
-
-    .product-images-empty-icon {
-        width: 72px;
-        height: 72px;
-        border-radius: 50%;
-        background: #f3f4f6;
-        color: #9ca3af;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 16px;
-        font-size: 1.6rem;
-    }
-
-    .product-images-card .btn {
-        border-radius: 9px;
-    }
-
-    @@media (max-width: 991.98px) {
-
-        .product-image-stat {
-            min-height: 74px;
-        }
-
-        .product-management-image {
-            height: 230px;
-        }
-
-        .product-upload-action {
-            padding-top: 0;
-        }
-
-    }
-
-    @@media (max-width: 575.98px) {
-
-        .product-images-header .btn {
-            width: 100%;
-        }
-
-        .product-management-image {
-            height: 220px;
-        }
-
-        .product-image-stat {
-            padding: 12px;
-        }
-
-    }
-
-</style>
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/product-images.css"
+          asp-append-version="true" />
+}

@@ -4,79 +4,119 @@
     ViewData["Title"] = "تفاصيل الرسالة";
 }
 
-<div class="container-fluid py-4">
+<div class="admin-page">
 
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+    <div class="admin-page-header">
 
-        <div>
-            <h1 class="h3 mb-1">
-                <i class="bi bi-envelope-open me-2"></i>
-                تفاصيل الرسالة
-            </h1>
+        <div class="admin-page-header-row">
 
-            <p class="text-muted mb-0">
-                عرض تفاصيل الرسالة الواردة من العميل.
-            </p>
+            <div class="admin-page-header-main">
+
+                <div class="admin-page-header-eyebrow">
+                    <i class="bi bi-envelope-open"></i>
+                    إدارة التواصل
+                </div>
+
+                <h1 class="admin-page-header-title">
+                    تفاصيل الرسالة
+                </h1>
+
+                <p class="admin-page-header-description">
+                    عرض تفاصيل الرسالة الواردة من العميل.
+                </p>
+
+            </div>
+
+            <div class="admin-page-header-actions">
+
+                <a asp-action="Index"
+                   class="admin-btn admin-btn-secondary">
+
+                    <i class="bi bi-arrow-right"></i>
+
+                    <span>العودة للرسائل</span>
+
+                </a>
+
+            </div>
+
         </div>
-
-        <a asp-action="Index"
-           class="btn btn-outline-secondary">
-            <i class="bi bi-arrow-right me-2"></i>
-            العودة للرسائل
-        </a>
 
     </div>
 
+
     <div class="row g-4">
+
+        <!-- Message -->
 
         <div class="col-lg-8">
 
-            <div class="card border-0 shadow-sm">
+            <div class="admin-card">
 
-                <div class="card-header bg-white py-3">
+                <div class="admin-card-header">
 
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="admin-card-header-row">
 
-                        <div>
-                            <h5 class="mb-1">
-                                @Model.Subject
-                            </h5>
+                        <div class="admin-card-header-content">
 
-                            <small class="text-muted">
-                                تم الإرسال في
-                                @Model.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy - hh:mm tt")
-                            </small>
+                            <div class="admin-card-icon">
+                                <i class="bi bi-envelope-open"></i>
+                            </div>
+
+                            <div>
+
+                                <h2 class="admin-card-title">
+                                    @Model.Subject
+                                </h2>
+
+                                <p class="admin-card-description">
+                                    تم الإرسال في @Model.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy - hh:mm tt")
+                                </p>
+
+                            </div>
+
                         </div>
 
-                        @if (Model.IsRead)
-                        {
-                            <span class="badge bg-secondary">
-                                <i class="bi bi-envelope-open me-1"></i>
-                                مقروءة
-                            </span>
-                        }
-                        else
-                        {
-                            <span class="badge bg-primary">
-                                <i class="bi bi-envelope-fill me-1"></i>
-                                جديدة
-                            </span>
-                        }
+
+                        <div>
+
+                            @if (Model.IsRead)
+                            {
+                                <span class="admin-badge admin-badge-neutral">
+
+                                    <i class="bi bi-envelope-open"></i>
+
+                                    مقروءة
+
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="admin-badge admin-badge-primary">
+
+                                    <i class="bi bi-envelope-fill"></i>
+
+                                    جديدة
+
+                                </span>
+                            }
+
+                        </div>
 
                     </div>
 
                 </div>
 
-                <div class="card-body">
 
-                    <div class="mb-4">
+                <div class="admin-card-body">
 
-                        <h6 class="fw-semibold mb-2">
+                    <div class="contact-message-details-content">
+
+                        <div class="contact-message-details-label">
                             نص الرسالة
-                        </h6>
+                        </div>
 
-                        <div class="bg-light rounded p-4"
-                             style="white-space: pre-line; min-height: 180px;">
+                        <div class="contact-message-details-message">
                             @Model.Message
                         </div>
 
@@ -88,84 +128,120 @@
 
         </div>
 
+
+        <!-- Sender Information -->
+
         <div class="col-lg-4">
 
-            <div class="card border-0 shadow-sm mb-4">
+            <div class="admin-card mb-4">
 
-                <div class="card-header bg-white py-3">
-                    <h5 class="mb-0">
-                        <i class="bi bi-person me-2"></i>
-                        بيانات المرسل
-                    </h5>
+                <div class="admin-card-header">
+
+                    <div class="admin-card-header-content">
+
+                        <div class="admin-card-icon">
+                            <i class="bi bi-person"></i>
+                        </div>
+
+                        <div>
+
+                            <h2 class="admin-card-title">
+                                بيانات المرسل
+                            </h2>
+
+                            <p class="admin-card-description">
+                                معلومات العميل المرسل للرسالة.
+                            </p>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <div class="card-body">
 
-                    <div class="mb-3">
+                <div class="admin-card-body">
 
-                        <div class="small text-muted mb-1">
-                            الاسم
-                        </div>
+                    <div class="contact-message-details-info-list">
 
-                        <div class="fw-semibold">
-                            @Model.Name
-                        </div>
+                        <div class="contact-message-details-info-item">
 
-                    </div>
-
-                    <div class="mb-3">
-
-                        <div class="small text-muted mb-1">
-                            الشركة
-                        </div>
-
-                        @if (!string.IsNullOrWhiteSpace(Model.CompanyName))
-                        {
-                            <div>
-                                @Model.CompanyName
+                            <div class="contact-message-details-info-label">
+                                الاسم
                             </div>
-                        }
-                        else
-                        {
-                            <div class="text-muted">
-                                غير محدد
+
+                            <div class="contact-message-details-info-value">
+                                @Model.Name
                             </div>
-                        }
 
-                    </div>
-
-                    <div class="mb-3">
-
-                        <div class="small text-muted mb-1">
-                            البريد الإلكتروني
                         </div>
 
-                        <a href="mailto:@Model.Email"
-                           class="text-decoration-none">
-                            @Model.Email
-                        </a>
 
-                    </div>
+                        <div class="contact-message-details-info-item">
 
-                    <div class="mb-0">
+                            <div class="contact-message-details-info-label">
+                                الشركة
+                            </div>
 
-                        <div class="small text-muted mb-1">
-                            رقم الهاتف
+                            @if (!string.IsNullOrWhiteSpace(Model.CompanyName))
+                            {
+                                <div class="contact-message-details-info-value">
+                                    @Model.CompanyName
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="contact-message-details-info-empty">
+                                    غير محدد
+                                </div>
+                            }
+
                         </div>
 
-                        @if (!string.IsNullOrWhiteSpace(Model.PhoneNumber))
-                        {
-                            <a href="tel:@Model.PhoneNumber"
-                               class="text-decoration-none">
-                                @Model.PhoneNumber
+
+                        <div class="contact-message-details-info-item">
+
+                            <div class="contact-message-details-info-label">
+                                البريد الإلكتروني
+                            </div>
+
+                            <a href="mailto:@Model.Email"
+                               class="contact-message-details-link">
+
+                                <i class="bi bi-envelope"></i>
+
+                                <span>@Model.Email</span>
+
                             </a>
-                        }
-                        else
-                        {
-                            <div class="text-muted">
-                                غير محدد
+
+                        </div>
+
+
+                        <div class="contact-message-details-info-item">
+
+                            <div class="contact-message-details-info-label">
+                                رقم الهاتف
                             </div>
-                        }
+
+                            @if (!string.IsNullOrWhiteSpace(Model.PhoneNumber))
+                            {
+                                <a href="tel:@Model.PhoneNumber"
+                                   class="contact-message-details-link">
+
+                                    <i class="bi bi-telephone"></i>
+
+                                    <span>@Model.PhoneNumber</span>
+
+                                </a>
+                            }
+                            else
+                            {
+                                <div class="contact-message-details-info-empty">
+                                    غير محدد
+                                </div>
+                            }
+
+                        </div>
 
                     </div>
 
@@ -173,57 +249,84 @@
 
             </div>
 
-            <div class="card border-0 shadow-sm">
 
-                <div class="card-header bg-white py-3">
-                    <h5 class="mb-0">
-                        <i class="bi bi-gear me-2"></i>
-                        إجراءات الرسالة
-                    </h5>
+            <!-- Actions -->
+
+            <div class="admin-card">
+
+                <div class="admin-card-header">
+
+                    <div class="admin-card-header-content">
+
+                        <div class="admin-card-icon">
+                            <i class="bi bi-gear"></i>
+                        </div>
+
+                        <div>
+
+                            <h2 class="admin-card-title">
+                                إجراءات الرسالة
+                            </h2>
+
+                            <p class="admin-card-description">
+                                إدارة حالة الرسالة والتواصل مع المرسل.
+                            </p>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <div class="card-body">
+
+                <div class="admin-card-body">
 
                     @if (Model.IsRead)
                     {
                         <form asp-action="MarkAsUnread"
                               asp-route-id="@Model.Id"
                               method="post"
-                              class="mb-3">
+                              class="contact-message-details-action-form">
 
                             @Html.AntiForgeryToken()
 
                             <button type="submit"
-                                    class="btn btn-outline-primary w-100">
+                                    class="admin-btn admin-btn-secondary admin-btn-block">
 
-                                <i class="bi bi-envelope me-2"></i>
-                                تحديد كغير مقروءة
+                                <i class="bi bi-envelope"></i>
+
+                                <span>تحديد كغير مقروءة</span>
 
                             </button>
 
                         </form>
                     }
 
-                    <a href="mailto:@Model.Email?subject=رد: @Uri.EscapeDataString(Model.Subject)"
-                       class="btn btn-outline-secondary w-100 mb-3">
 
-                        <i class="bi bi-reply me-2"></i>
-                        الرد عبر البريد
+                    <a href="mailto:@Model.Email?subject=رد: @Uri.EscapeDataString(Model.Subject)"
+                       class="admin-btn admin-btn-secondary admin-btn-block contact-message-details-action-button">
+
+                        <i class="bi bi-reply"></i>
+
+                        <span>الرد عبر البريد</span>
 
                     </a>
+
 
                     <form asp-action="Delete"
                           asp-route-id="@Model.Id"
                           method="post"
+                          class="contact-message-details-action-form"
                           onsubmit="return confirm('هل أنت متأكد من حذف هذه الرسالة؟');">
 
                         @Html.AntiForgeryToken()
 
                         <button type="submit"
-                                class="btn btn-outline-danger w-100">
+                                class="admin-btn admin-btn-outline-danger admin-btn-block">
 
-                            <i class="bi bi-trash me-2"></i>
-                            حذف الرسالة
+                            <i class="bi bi-trash"></i>
+
+                            <span>حذف الرسالة</span>
 
                         </button>
 
@@ -238,3 +341,9 @@
     </div>
 
 </div>
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/contact-message-details.css"
+          asp-append-version="true" />
+}

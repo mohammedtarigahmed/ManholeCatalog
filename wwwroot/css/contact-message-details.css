@@ -1,0 +1,129 @@
+/* =========================================================
+   CONTACT MESSAGE DETAILS
+   ========================================================= */
+
+
+/* =========================================================
+   Message Content
+   ========================================================= */
+
+.contact-message-details-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-message-details-label {
+    color: var(--admin-muted);
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.contact-message-details-message {
+    min-height: 180px;
+    padding: 18px;
+    background: var(--admin-surface-soft);
+    border: 1px solid var(--admin-border-soft);
+    border-radius: var(--admin-radius-md);
+    color: var(--admin-text);
+    font-size: 0.82rem;
+    line-height: 1.8;
+    white-space: pre-line;
+}
+
+
+/* =========================================================
+   Sender Information
+   ========================================================= */
+
+.contact-message-details-info-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-message-details-info-item {
+    padding: 0 0 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--admin-border-soft);
+}
+
+.contact-message-details-info-item:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: 0;
+}
+
+.contact-message-details-info-label {
+    margin-bottom: 5px;
+    color: var(--admin-muted);
+    font-size: 0.68rem;
+    font-weight: 700;
+}
+
+.contact-message-details-info-value {
+    color: var(--admin-text);
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.contact-message-details-info-empty {
+    color: var(--admin-muted-light);
+    font-size: 0.78rem;
+}
+
+.contact-message-details-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    max-width: 100%;
+    color: var(--admin-primary);
+    font-size: 0.78rem;
+    text-decoration: none;
+    word-break: break-word;
+}
+
+.contact-message-details-link i {
+    flex-shrink: 0;
+    font-size: 0.8rem;
+}
+
+.contact-message-details-link:hover {
+    color: var(--admin-primary-dark);
+}
+
+
+/* =========================================================
+   Actions
+   ========================================================= */
+
+.contact-message-details-action-form {
+    margin: 0 0 10px;
+}
+
+.contact-message-details-action-form:last-child {
+    margin-bottom: 0;
+}
+
+.contact-message-details-action-button {
+    margin-bottom: 10px;
+}
+
+.admin-btn-block {
+    width: 100%;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .contact-message-details-message {
+        min-height: 150px;
+        padding: 15px;
+    }
+
+}

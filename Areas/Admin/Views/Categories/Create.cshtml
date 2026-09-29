@@ -4,249 +4,240 @@
     ViewData["Title"] = "إضافة فئة";
 }
 
-<!-- Page Header -->
-<div class="category-create-header mb-4">
+<div class="admin-page">
 
-    <div class="d-flex flex-column flex-xl-row justify-content-between align-items-xl-center gap-3">
+    <!-- Page Header -->
+    <div class="admin-page-header">
 
-        <div>
+        <div class="admin-page-header-row">
 
-            <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="admin-page-header-main">
 
-                <span class="badge rounded-pill text-bg-primary px-3 py-2">
-                    <i class="bi bi-tags me-1"></i>
+                <div class="admin-page-header-eyebrow">
+
+                    <i class="bi bi-tags"></i>
                     إدارة الفئات
-                </span>
 
-                <span class="badge rounded-pill text-bg-light border px-3 py-2">
-                    فئة جديدة
-                </span>
+                    <span class="admin-badge admin-badge-neutral">
+                        فئة جديدة
+                    </span>
+
+                </div>
+
+                <h1 class="admin-page-header-title">
+                    إضافة فئة
+                </h1>
+
+                <p class="admin-page-header-description">
+                    إنشاء فئة جديدة لتنظيم منتجات الكتالوج.
+                </p>
 
             </div>
 
-            <h1 class="h3 fw-bold mb-1">
-                إضافة فئة
-            </h1>
+            <div class="admin-page-header-actions">
 
-            <p class="text-muted mb-0">
-                إنشاء فئة جديدة لتنظيم منتجات الكتالوج.
-            </p>
+                <a asp-area="Admin"
+                   asp-controller="Categories"
+                   asp-action="Index"
+                   class="admin-btn admin-btn-secondary">
 
-        </div>
+                    <i class="bi bi-arrow-right"></i>
+                    <span>العودة إلى الفئات</span>
 
-        <div>
+                </a>
 
-            <a asp-area="Admin"
-               asp-controller="Categories"
-               asp-action="Index"
-               class="btn btn-outline-secondary category-back-button">
-
-                <i class="bi bi-arrow-right me-1"></i>
-
-                العودة إلى الفئات
-
-            </a>
+            </div>
 
         </div>
 
     </div>
 
-</div>
 
+    <form asp-area="Admin"
+          asp-controller="Categories"
+          asp-action="Create"
+          method="post">
 
-<form asp-area="Admin"
-      asp-controller="Categories"
-      asp-action="Create"
-      method="post">
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="admin-alert admin-alert-danger mb-4"
+                 role="alert">
 
-    @if (!ViewData.ModelState.IsValid)
-    {
-        <div asp-validation-summary="All"
-             class="alert alert-danger border-0 shadow-sm category-validation-alert"
-             role="alert">
-
-            <div class="d-flex align-items-start gap-2">
-
-                <i class="bi bi-exclamation-triangle-fill fs-5"></i>
+                <div class="admin-alert-icon">
+                    <i class="bi bi-exclamation-triangle"></i>
+                </div>
 
                 <div>
-                    يرجى مراجعة البيانات المدخلة.
+                    <div class="fw-semibold mb-1">
+                        يرجى مراجعة البيانات المدخلة.
+                    </div>
+
+                    <div asp-validation-summary="All"></div>
                 </div>
 
             </div>
-
-        </div>
-    }
+        }
 
 
-    <div class="row g-4">
+        <div class="row g-4">
 
-        <!-- Category Information -->
+            <!-- Category Information -->
+            <div class="col-lg-8">
 
-        <div class="col-lg-8">
+                <div class="admin-card h-100">
 
-            <div class="card border-0 shadow-sm category-form-card h-100">
+                    <div class="admin-card-header">
 
-                <div class="card-header bg-white border-0 p-4">
+                        <div class="admin-card-header-content">
 
-                    <div class="d-flex align-items-center gap-3">
+                            <div class="admin-card-icon">
 
-                        <div class="category-section-icon bg-primary-subtle text-primary">
+                                <i class="bi bi-tag"></i>
 
-                            <i class="bi bi-tag"></i>
+                            </div>
 
-                        </div>
+                            <div>
 
-                        <div>
+                                <h2 class="admin-card-title">
+                                    معلومات الفئة
+                                </h2>
 
-                            <h2 class="h6 fw-bold mb-1">
-                                معلومات الفئة
-                            </h2>
+                                <p class="admin-card-description">
+                                    أدخل اسم الفئة ووصفها.
+                                </p>
 
-                            <p class="text-muted small mb-0">
-                                أدخل اسم الفئة ووصفها.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="card-body p-4">
-
-                    <!-- Name -->
-
-                    <div class="mb-4">
-
-                        <label asp-for="Name"
-                               class="form-label fw-semibold">
-                        </label>
-
-                        <input asp-for="Name"
-                               class="form-control category-form-control"
-                               placeholder="مثال: أغطية المناهل"
-                               autocomplete="off" />
-
-                        <span asp-validation-for="Name"
-                              class="text-danger small">
-                        </span>
-
-                        <div class="form-text mt-2">
-
-                            <i class="bi bi-info-circle me-1"></i>
-
-                            استخدم اسمًا واضحًا يسهل على العملاء فهمه.
+                            </div>
 
                         </div>
 
                     </div>
 
 
-                    <!-- Description -->
+                    <div class="admin-card-body">
 
-                    <div>
+                        <!-- Name -->
+                        <div class="admin-form-group">
 
-                        <label asp-for="Description"
-                               class="form-label fw-semibold">
-                        </label>
-
-                        <textarea asp-for="Description"
-                                  class="form-control category-form-control"
-                                  rows="6"
-                                  placeholder="اكتب وصفًا للمنتجات التي تندرج ضمن هذه الفئة."></textarea>
-
-                        <span asp-validation-for="Description"
-                              class="text-danger small">
-                        </span>
-
-                        <div class="form-text mt-2">
-
-                            <i class="bi bi-info-circle me-1"></i>
-
-                            اختياري. يمكن أن يساعد هذا الوصف في توضيح الغرض من الفئة.
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- Category Status -->
-
-        <div class="col-lg-4">
-
-            <div class="card border-0 shadow-sm category-form-card h-100">
-
-                <div class="card-header bg-white border-0 p-4">
-
-                    <div class="d-flex align-items-center gap-3">
-
-                        <div class="category-section-icon bg-success-subtle text-success">
-
-                            <i class="bi bi-toggle-on"></i>
-
-                        </div>
-
-                        <div>
-
-                            <h2 class="h6 fw-bold mb-1">
-                                حالة الفئة
-                            </h2>
-
-                            <p class="text-muted small mb-0">
-                                تحديد ما إذا كانت الفئة متاحة للاستخدام.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="card-body p-4">
-
-                    <div class="category-status-box">
-
-                        <div class="form-check form-switch">
-
-                            <input asp-for="IsActive"
-                                   class="form-check-input category-status-switch"
-                                   role="switch" />
-
-                            <label asp-for="IsActive"
-                                   class="form-check-label fw-semibold">
+                            <label asp-for="Name"
+                                   class="admin-form-label admin-form-label-required">
                             </label>
 
+                            <input asp-for="Name"
+                                   class="form-control admin-form-control"
+                                   placeholder="مثال: أغطية المناهل"
+                                   autocomplete="off" />
+
+                            <span asp-validation-for="Name"
+                                  class="admin-form-validation">
+                            </span>
+
+                            <div class="admin-form-help">
+                                <i class="bi bi-info-circle"></i>
+                                استخدم اسمًا واضحًا يسهل على العملاء فهمه.
+                            </div>
+
                         </div>
 
-                        <div class="form-text mt-2">
 
-                            يمكن استخدام الفئات النشطة لتنظيم المنتجات في الكتالوج.
+                        <!-- Description -->
+                        <div class="admin-form-group mb-0">
+
+                            <label asp-for="Description"
+                                   class="admin-form-label">
+                            </label>
+
+                            <textarea asp-for="Description"
+                                      class="form-control admin-form-control category-description-input"
+                                      rows="6"
+                                      placeholder="اكتب وصفًا للمنتجات التي تندرج ضمن هذه الفئة.">
+                            </textarea>
+
+                            <span asp-validation-for="Description"
+                                  class="admin-form-validation">
+                            </span>
+
+                            <div class="admin-form-help">
+                                <i class="bi bi-info-circle"></i>
+                                اختياري. يمكن أن يساعد هذا الوصف في توضيح الغرض من الفئة.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Category Status -->
+            <div class="col-lg-4">
+
+                <div class="admin-card h-100">
+
+                    <div class="admin-card-header">
+
+                        <div class="admin-card-header-content">
+
+                            <div class="admin-card-icon">
+
+                                <i class="bi bi-toggle-on"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h2 class="admin-card-title">
+                                    حالة الفئة
+                                </h2>
+
+                                <p class="admin-card-description">
+                                    تحديد ما إذا كانت الفئة متاحة للاستخدام.
+                                </p>
+
+                            </div>
 
                         </div>
 
                     </div>
 
 
-                    <div class="alert alert-light border category-tip mt-4 mb-0">
+                    <div class="admin-card-body">
 
-                        <div class="d-flex align-items-start gap-2">
+                        <div class="category-status-box">
 
-                            <i class="bi bi-lightbulb text-warning fs-5"></i>
+                            <div class="form-check form-switch">
+
+                                <input asp-for="IsActive"
+                                       class="form-check-input category-status-switch"
+                                       role="switch" />
+
+                                <label asp-for="IsActive"
+                                       class="form-check-label fw-semibold">
+                                </label>
+
+                            </div>
+
+                            <div class="admin-form-help mt-2">
+                                يمكن استخدام الفئات النشطة لتنظيم المنتجات في الكتالوج.
+                            </div>
+
+                        </div>
+
+
+                        <div class="admin-alert admin-alert-info mt-4 mb-0">
+
+                            <div class="admin-alert-icon">
+                                <i class="bi bi-lightbulb"></i>
+                            </div>
 
                             <div class="small">
 
-                                <strong>نصيحة:</strong>
+                                <div class="fw-semibold mb-1">
+                                    نصيحة
+                                </div>
 
-                                <div class="text-muted mt-1">
+                                <div>
                                     يمكنك تعطيل هذه الفئة لاحقًا دون حذفها.
                                 </div>
 
@@ -260,47 +251,44 @@
 
             </div>
 
-        </div>
+
+            <!-- Actions -->
+            <div class="col-12">
+
+                <div class="admin-card">
+
+                    <div class="admin-card-body">
+
+                        <div class="admin-form-actions">
+
+                            <div class="admin-form-help">
+
+                                <i class="bi bi-shield-check"></i>
+                                يمكنك تعديل بيانات الفئة لاحقًا.
+
+                            </div>
 
 
-        <!-- Actions -->
+                            <div class="d-flex flex-column flex-sm-row gap-2">
 
-        <div class="col-12">
+                                <a asp-area="Admin"
+                                   asp-controller="Categories"
+                                   asp-action="Index"
+                                   class="admin-btn admin-btn-secondary category-action-button">
 
-            <div class="card border-0 shadow-sm category-actions-card">
+                                    <span>إلغاء</span>
 
-                <div class="card-body p-4">
+                                </a>
 
-                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3">
+                                <button type="submit"
+                                        class="admin-btn admin-btn-primary category-action-button">
 
-                        <div class="text-muted small">
+                                    <i class="bi bi-check-lg"></i>
+                                    <span>إنشاء الفئة</span>
 
-                            <i class="bi bi-shield-check me-1"></i>
+                                </button>
 
-                            يمكنك تعديل بيانات الفئة لاحقًا.
-
-                        </div>
-
-
-                        <div class="d-flex flex-column flex-sm-row gap-2">
-
-                            <a asp-area="Admin"
-                               asp-controller="Categories"
-                               asp-action="Index"
-                               class="btn btn-outline-secondary category-action-button">
-
-                                إلغاء
-
-                            </a>
-
-                            <button type="submit"
-                                    class="btn btn-primary category-action-button">
-
-                                <i class="bi bi-check-lg me-1"></i>
-
-                                إنشاء الفئة
-
-                            </button>
+                            </div>
 
                         </div>
 
@@ -312,102 +300,16 @@
 
         </div>
 
-    </div>
+    </form>
 
-</form>
+</div>
 
-
-<style>
-
-    .category-form-card,
-    .category-actions-card {
-        border-radius: 16px;
-        overflow: hidden;
-    }
-
-    .category-section-icon {
-        width: 42px;
-        height: 42px;
-        border-radius: 12px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        font-size: 1.05rem;
-    }
-
-    .category-back-button {
-        min-height: 42px;
-        border-radius: 10px;
-        padding-left: 16px;
-        padding-right: 16px;
-    }
-
-    .category-form-control {
-        border-radius: 10px;
-        min-height: 44px;
-        border-color: #dfe3e8;
-    }
-
-    textarea.category-form-control {
-        min-height: 140px;
-        resize: vertical;
-    }
-
-    .category-form-control:focus {
-        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.1);
-    }
-
-    .category-status-box {
-        background: #f8fafc;
-        border: 1px solid #e9ecef;
-        border-radius: 12px;
-        padding: 16px;
-    }
-
-    .category-status-switch {
-        width: 2.5em !important;
-        height: 1.35em;
-        cursor: pointer;
-    }
-
-    .category-status-box .form-check-label {
-        cursor: pointer;
-        margin-right: 8px;
-    }
-
-    .category-tip {
-        border-radius: 12px;
-    }
-
-    .category-validation-alert {
-        border-radius: 12px;
-    }
-
-    .category-action-button {
-        min-height: 42px;
-        border-radius: 10px;
-        padding-left: 18px;
-        padding-right: 18px;
-    }
-
-    @@media (max-width: 575.98px) {
-
-        .category-back-button {
-            width: 100%;
-        }
-
-        .category-action-button {
-            width: 100%;
-        }
-
-    }
-
-</style>
-
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/categories-create.css"
+          asp-append-version="true" />
+}
 
 @section Scripts {
-
     <partial name="_ValidationScriptsPartial" />
-
 }

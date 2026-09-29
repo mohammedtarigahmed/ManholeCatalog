@@ -1,0 +1,131 @@
+/* =========================================================
+   CONTACT MESSAGES
+   ========================================================= */
+
+
+/* =========================================================
+   Table
+   ========================================================= */
+
+.contact-messages-table {
+    min-width: 1100px;
+}
+
+.contact-messages-table thead th {
+    white-space: nowrap;
+}
+
+.contact-messages-table tbody td {
+    vertical-align: middle;
+}
+
+
+/* =========================================================
+   Unread Message
+   ========================================================= */
+
+.contact-message-unread td {
+    background: var(--admin-primary-soft);
+}
+
+.contact-message-unread:hover td {
+    background: #e8f1ff !important;
+}
+
+
+/* =========================================================
+   Message Content
+   ========================================================= */
+
+.contact-message-company {
+    color: var(--admin-text);
+    font-size: 0.78rem;
+}
+
+.contact-message-empty {
+    color: var(--admin-muted-light);
+}
+
+.contact-message-preview {
+    max-width: 260px;
+    margin-top: 3px;
+    overflow: hidden;
+    color: var(--admin-muted);
+    font-size: 0.66rem;
+    line-height: 1.5;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   Email
+   ========================================================= */
+
+.contact-message-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    max-width: 220px;
+    color: var(--admin-text);
+    font-size: 0.76rem;
+    text-decoration: none;
+}
+
+.contact-message-email i {
+    color: var(--admin-muted);
+    flex-shrink: 0;
+}
+
+.contact-message-email span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.contact-message-email:hover {
+    color: var(--admin-primary);
+}
+
+
+/* =========================================================
+   Date
+   ========================================================= */
+
+.contact-message-date {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    color: var(--admin-text);
+    font-size: 0.76rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.contact-message-time {
+    color: var(--admin-muted);
+    font-size: 0.66rem;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   Actions
+   ========================================================= */
+
+.contact-message-delete-form {
+    margin: 0;
+}
+
+.contact-message-action-button {
+    min-width: 36px;
+}
+
+
+/* =========================================================
+   Empty State
+   ========================================================= */
+
+.contact-messages-empty-state {
+    padding: 56px 20px;
+}

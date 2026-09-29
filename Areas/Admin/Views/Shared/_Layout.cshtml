@@ -1,5 +1,8 @@
-<!DOCTYPE html>
+@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+}
 
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
@@ -21,328 +24,37 @@
           asp-append-version="true" />
 
     <link rel="stylesheet"
+          href="~/css/admin.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
           href="~/ManholeCatalog.styles.css"
           asp-append-version="true" />
 
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 
-    <style>
-
-        body {
-            background-color: #f5f7fa;
-        }
-
-        .admin-wrapper {
-            min-height: 100vh;
-        }
-
-        /* Sidebar */
-        .admin-sidebar {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 270px;
-            height: 100vh;
-            background: #111827;
-            color: #fff;
-            z-index: 1040;
-            display: flex;
-            flex-direction: column;
-            box-shadow: -4px 0 18px rgba(0, 0, 0, 0.08);
-        }
-
-        .admin-brand {
-            min-height: 72px;
-            padding: 0 22px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .admin-brand-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.1);
-            margin-left: 12px;
-            font-size: 1.2rem;
-        }
-
-        .admin-brand-title {
-            font-size: 1rem;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        .admin-brand-subtitle {
-            display: block;
-            margin-top: 3px;
-            font-size: 0.72rem;
-            color: rgba(255, 255, 255, 0.5);
-            font-weight: 400;
-        }
-
-        .admin-sidebar-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 22px 14px;
-        }
-
-        .admin-section-title {
-            padding: 0 12px;
-            margin-bottom: 8px;
-            color: rgba(255, 255, 255, 0.38);
-            font-size: 0.68rem;
-            font-weight: 600;
-            letter-spacing: 0.04em;
-        }
-
-        .admin-nav {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .admin-nav-item {
-            margin-bottom: 5px;
-        }
-
-        .admin-nav-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            min-height: 46px;
-            padding: 0 13px;
-            border-radius: 10px;
-            color: rgba(255, 255, 255, 0.68);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.18s ease;
-        }
-
-        .admin-nav-link i {
-            width: 22px;
-            text-align: center;
-            font-size: 1rem;
-        }
-
-        .admin-nav-link:hover {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.07);
-        }
-
-        .admin-nav-link.active {
-            color: #fff;
-            background: rgba(13, 110, 253, 0.9);
-            box-shadow: 0 5px 14px rgba(13, 110, 253, 0.18);
-        }
-
-        .admin-sidebar-bottom {
-            padding: 14px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .admin-user-card {
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .admin-user-label {
-            display: block;
-            margin-bottom: 4px;
-            color: rgba(255, 255, 255, 0.42);
-            font-size: 0.7rem;
-        }
-
-        .admin-user-name {
-            display: block;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.78rem;
-            word-break: break-word;
-        }
-
-        .admin-bottom-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-            min-height: 42px;
-            padding: 0 12px;
-            margin-bottom: 5px;
-            border-radius: 9px;
-            color: rgba(255, 255, 255, 0.65);
-            text-decoration: none;
-            font-size: 0.84rem;
-            background: transparent;
-            border: 0;
-            transition: all 0.18s ease;
-        }
-
-        .admin-bottom-link:hover {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.07);
-        }
-
-        .admin-bottom-link i {
-            width: 20px;
-            text-align: center;
-        }
-
-        /* Main */
-        .admin-main {
-            margin-right: 270px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .admin-topbar {
-            min-height: 72px;
-            background: #fff;
-            border-bottom: 1px solid #e5e7eb;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 28px;
-            position: sticky;
-            top: 0;
-            z-index: 1020;
-        }
-
-        .admin-page-title {
-            margin: 0;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #111827;
-        }
-
-        .admin-topbar-subtitle {
-            margin-top: 3px;
-            font-size: 0.72rem;
-            color: #6b7280;
-        }
-
-        .admin-content {
-            flex: 1;
-            padding: 28px;
-        }
-
-        .admin-footer {
-            background: #fff;
-            border-top: 1px solid #e5e7eb;
-            padding: 15px 28px;
-            color: #6b7280;
-            font-size: 0.75rem;
-        }
-
-        /* Mobile */
-        .admin-mobile-header {
-            display: none;
-            min-height: 64px;
-            background: #111827;
-            color: #fff;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 16px;
-            position: sticky;
-            top: 0;
-            z-index: 1030;
-        }
-
-        .admin-mobile-brand {
-            font-size: 0.95rem;
-            font-weight: 700;
-        }
-
-        .admin-mobile-toggle {
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            background: rgba(255, 255, 255, 0.06);
-            color: #fff;
-            border-radius: 9px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .admin-sidebar-overlay {
-            display: none;
-        }
-
-        @@media (max-width: 991.98px) {
-
-            .admin-sidebar {
-                transform: translateX(100%);
-                transition: transform 0.22s ease;
-            }
-
-            .admin-sidebar.show {
-                transform: translateX(0);
-            }
-
-            .admin-main {
-                margin-right: 0;
-            }
-
-            .admin-mobile-header {
-                display: flex;
-            }
-
-            .admin-topbar {
-                position: static;
-                min-height: 64px;
-                padding: 0 18px;
-            }
-
-            .admin-content {
-                padding: 20px 16px;
-            }
-
-            .admin-footer {
-                padding: 14px 16px;
-            }
-
-            .admin-sidebar-overlay.show {
-                display: block;
-                position: fixed;
-                inset: 0;
-                background: rgba(0, 0, 0, 0.45);
-                z-index: 1035;
-            }
-        }
-
-        @@media (max-width: 575.98px) {
-
-            .admin-page-title {
-                font-size: 0.92rem;
-            }
-
-            .admin-topbar-subtitle {
-                display: none;
-            }
-        }
-
-    </style>
+    @await RenderSectionAsync("Styles", required: false)
 
 </head>
 
 <body>
 
-    <div class="admin-wrapper">
+    <div class="admin-shell">
 
         <!-- Mobile Header -->
         <header class="admin-mobile-header">
 
             <div class="admin-mobile-brand">
-                سما كتالوج
+
+                <span class="admin-mobile-brand-icon">
+                    <i class="bi bi-grid-1x2-fill"></i>
+                </span>
+
+                <span>
+                    سما كتالوج
+                </span>
+
             </div>
 
             <button type="button"
@@ -358,10 +70,12 @@
 
         </header>
 
+
         <!-- Sidebar Overlay -->
         <div class="admin-sidebar-overlay"
              id="adminSidebarOverlay">
         </div>
+
 
         <!-- Sidebar -->
         <aside class="admin-sidebar"
@@ -370,220 +84,316 @@
             <!-- Brand -->
             <div class="admin-brand">
 
-                <div class="admin-brand-icon">
-                    <i class="bi bi-grid-1x2-fill"></i>
-                </div>
-
-                <div>
-
-                    <div class="admin-brand-title">
-                        سما كتالوج
-                    </div>
-
-                    <span class="admin-brand-subtitle">
-                        لوحة الإدارة
-                    </span>
-
-                </div>
-
-            </div>
-
-            <!-- Navigation -->
-            <div class="admin-sidebar-content">
-
-                <div class="admin-section-title">
-                    الإدارة
-                </div>
-
-                <ul class="admin-nav">
-
-                    <li class="admin-nav-item">
-
-                        <a asp-area="Admin"
-                           asp-controller="Home"
-                           asp-action="Index"
-                           class="admin-nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")">
-
-                            <i class="bi bi-speedometer2"></i>
-
-                            <span>
-                                لوحة التحكم
-                            </span>
-
-                        </a>
-
-                    </li>
-
-                    <li class="admin-nav-item">
-
-                        <a asp-area="Admin"
-                           asp-controller="Products"
-                           asp-action="Index"
-                           class="admin-nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Products" ? "active" : "")">
-
-                            <i class="bi bi-box-seam"></i>
-
-                            <span>
-                                المنتجات
-                            </span>
-
-                        </a>
-
-                    </li>
-
-                    <li class="admin-nav-item">
-
-                        <a asp-area="Admin"
-                           asp-controller="Categories"
-                           asp-action="Index"
-                           class="admin-nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Categories" ? "active" : "")">
-
-                            <i class="bi bi-tags"></i>
-
-                            <span>
-                                الفئات
-                            </span>
-
-                        </a>
-
-                    </li>
-
-                    <li class="admin-nav-item">
-
-                        <a asp-area="Admin"
-                           asp-controller="Quotations"
-                           asp-action="Index"
-                           class="admin-nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Quotations" ? "active" : "")">
-
-                            <i class="bi bi-file-earmark-text"></i>
-
-                            <span>
-                                عروض الأسعار
-                            </span>
-
-                        </a>
-
-                    </li>
-
-                    <li class="admin-nav-item">
-
-                        <a asp-area="Admin"
-                           asp-controller="Contact"
-                           asp-action="Edit"
-                           class="admin-nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Contact" ? "active" : "")">
-
-                            <i class="bi bi-telephone"></i>
-
-                            <span>
-                                تواصل معنا
-                            </span>
-
-                        </a>
-
-                    </li>
-
-                    <li class="admin-nav-item">
-
-                        <a asp-area="Admin"
-                           asp-controller="ContactMessages"
-                           asp-action="Index"
-                           class="admin-nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "ContactMessages" ? "active" : "")">
-
-                            <i class="bi bi-envelope"></i>
-
-                            <span>
-                                رسائل التواصل
-                            </span>
-
-                        </a>
-
-                    </li>
-
-                </ul>
-
-            </div>
-
-            <!-- Sidebar Bottom -->
-            <div class="admin-sidebar-bottom">
-
-                <div class="admin-user-card">
-
-                    <span class="admin-user-label">
-                        تسجيل الدخول باسم
-                    </span>
-
-                    <span class="admin-user-name">
-                        @User.Identity?.Name
-                    </span>
-
-                </div>
-
-                <a asp-area=""
-                   asp-controller="Catalog"
+                <a asp-area="Admin"
+                   asp-controller="Home"
                    asp-action="Index"
-                   class="admin-bottom-link">
+                   class="admin-brand-link">
 
-                    <i class="bi bi-shop"></i>
+                    <span class="admin-brand-icon">
+                        <i class="bi bi-grid-1x2-fill"></i>
+                    </span>
 
-                    <span>
-                        عرض الكتالوج
+                    <span class="admin-brand-content">
+
+                        <span class="admin-brand-title">
+                            سما كتالوج
+                        </span>
+
+                        <span class="admin-brand-subtitle">
+                            لوحة الإدارة
+                        </span>
+
                     </span>
 
                 </a>
 
-                <form asp-area=""
-                      asp-controller="Account"
-                      asp-action="Logout"
-                      method="post">
+            </div>
 
-                    <button type="submit"
-                            class="admin-bottom-link">
 
-                        <i class="bi bi-box-arrow-right"></i>
+            <!-- Navigation -->
+            <div class="admin-sidebar-content">
 
-                        <span>
-                            تسجيل الخروج
+
+                <!-- الإدارة -->
+                <div class="admin-nav-group">
+
+                    <div class="admin-section-title">
+                        الإدارة
+                    </div>
+
+                    <ul class="admin-nav">
+
+                        <li class="admin-nav-item">
+
+                            <a asp-area="Admin"
+                               asp-controller="Home"
+                               asp-action="Index"
+                               class="admin-nav-link @(currentController == "Home" ? "active" : "")">
+
+                                <span class="admin-nav-icon">
+                                    <i class="bi bi-speedometer2"></i>
+                                </span>
+
+                                <span class="admin-nav-text">
+                                    لوحة التحكم
+                                </span>
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="admin-nav-item">
+
+                            <a asp-area="Admin"
+                               asp-controller="Products"
+                               asp-action="Index"
+                               class="admin-nav-link @(currentController == "Products" ? "active" : "")">
+
+                                <span class="admin-nav-icon">
+                                    <i class="bi bi-box-seam"></i>
+                                </span>
+
+                                <span class="admin-nav-text">
+                                    المنتجات
+                                </span>
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="admin-nav-item">
+
+                            <a asp-area="Admin"
+                               asp-controller="Categories"
+                               asp-action="Index"
+                               class="admin-nav-link @(currentController == "Categories" ? "active" : "")">
+
+                                <span class="admin-nav-icon">
+                                    <i class="bi bi-tags"></i>
+                                </span>
+
+                                <span class="admin-nav-text">
+                                    الفئات
+                                </span>
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- الطلبات -->
+                <div class="admin-nav-group">
+
+                    <div class="admin-section-title">
+                        الطلبات
+                    </div>
+
+                    <ul class="admin-nav">
+
+                        <li class="admin-nav-item">
+
+                            <a asp-area="Admin"
+                               asp-controller="Quotations"
+                               asp-action="Index"
+                               class="admin-nav-link @(currentController == "Quotations" ? "active" : "")">
+
+                                <span class="admin-nav-icon">
+                                    <i class="bi bi-file-earmark-text"></i>
+                                </span>
+
+                                <span class="admin-nav-text">
+                                    عروض الأسعار
+                                </span>
+
+                            </a>
+
+                        </li>
+
+
+                        <li class="admin-nav-item">
+
+                            <a asp-area="Admin"
+                               asp-controller="ContactMessages"
+                               asp-action="Index"
+                               class="admin-nav-link @(currentController == "ContactMessages" ? "active" : "")">
+
+                                <span class="admin-nav-icon">
+                                    <i class="bi bi-envelope"></i>
+                                </span>
+
+                                <span class="admin-nav-text">
+                                    رسائل التواصل
+                                </span>
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- الإعدادات -->
+                <div class="admin-nav-group">
+
+                    <div class="admin-section-title">
+                        الإعدادات
+                    </div>
+
+                    <ul class="admin-nav">
+
+                        <li class="admin-nav-item">
+
+                            <a asp-area="Admin"
+                               asp-controller="Contact"
+                               asp-action="Edit"
+                               class="admin-nav-link @(currentController == "Contact" ? "active" : "")">
+
+                                <span class="admin-nav-icon">
+                                    <i class="bi bi-telephone"></i>
+                                </span>
+
+                                <span class="admin-nav-text">
+                                    تواصل معنا
+                                </span>
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <!-- Sidebar Footer -->
+            <div class="admin-sidebar-footer">
+
+                <div class="admin-user-card">
+
+                    <span class="admin-user-avatar">
+                        <i class="bi bi-person"></i>
+                    </span>
+
+                    <span class="admin-user-info">
+
+                        <span class="admin-user-label">
+                            تسجيل الدخول باسم
                         </span>
 
-                    </button>
+                        <span class="admin-user-name">
+                            @User.Identity?.Name
+                        </span>
 
-                </form>
+                    </span>
+
+                </div>
+
+
+                <div class="admin-sidebar-actions">
+
+                    <a asp-area=""
+                       asp-controller="Catalog"
+                       asp-action="Index"
+                       class="admin-sidebar-action">
+
+                        <i class="bi bi-shop"></i>
+
+                        <span>
+                            عرض الكتالوج
+                        </span>
+
+                    </a>
+
+
+                    <form asp-area=""
+                          asp-controller="Account"
+                          asp-action="Logout"
+                          method="post">
+
+                        <button type="submit"
+                                class="admin-sidebar-action admin-sidebar-action-danger">
+
+                            <i class="bi bi-box-arrow-right"></i>
+
+                            <span>
+                                تسجيل الخروج
+                            </span>
+
+                        </button>
+
+                    </form>
+
+                </div>
 
             </div>
 
         </aside>
 
+
         <!-- Main -->
         <div class="admin-main">
 
-            <!-- Top Bar -->
-            <div class="admin-topbar">
+            <!-- Topbar -->
+            <header class="admin-topbar">
 
-                <div>
+                <div class="admin-topbar-inner">
 
-                    <h1 class="admin-page-title">
-                        @ViewData["Title"]
-                    </h1>
+                    <div class="admin-page-heading">
 
-                    <div class="admin-topbar-subtitle">
-                        إدارة سما كتالوج
+                        <span class="admin-page-heading-label">
+                            لوحة الإدارة
+                        </span>
+
+                        <h1 class="admin-page-title">
+                            @ViewData["Title"]
+                        </h1>
+
+                    </div>
+
+
+                    <div class="admin-topbar-user">
+
+                        <span class="admin-topbar-user-icon">
+                            <i class="bi bi-person"></i>
+                        </span>
+
+                        <span class="admin-topbar-user-name">
+                            @User.Identity?.Name
+                        </span>
+
                     </div>
 
                 </div>
 
-            </div>
+            </header>
+
 
             <!-- Content -->
             <main class="admin-content">
 
-                @RenderBody()
+                <div class="admin-content-container">
+
+                    @RenderBody()
+
+                </div>
 
             </main>
+
 
             <!-- Footer -->
             <footer class="admin-footer">
 
-                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
+                <div class="admin-footer-inner">
 
                     <div>
                         &copy; @DateTime.Now.Year - سما كتالوج
@@ -601,12 +411,14 @@
 
     </div>
 
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="~/js/site.js"
             asp-append-version="true"></script>
+
 
     <script>
 
@@ -624,6 +436,8 @@
 
                 sidebar.classList.add("show");
                 overlay.classList.add("show");
+                document.body.classList.add("admin-sidebar-open");
+
                 toggle.setAttribute("aria-expanded", "true");
 
             }
@@ -632,6 +446,8 @@
 
                 sidebar.classList.remove("show");
                 overlay.classList.remove("show");
+                document.body.classList.remove("admin-sidebar-open");
+
                 toggle.setAttribute("aria-expanded", "false");
 
             }
@@ -650,11 +466,13 @@
 
             });
 
+
             overlay.addEventListener("click", function () {
 
                 closeSidebar();
 
             });
+
 
             document.querySelectorAll(".admin-nav-link").forEach(function (link) {
 
@@ -670,6 +488,7 @@
 
             });
 
+
             window.addEventListener("resize", function () {
 
                 if (window.innerWidth > 991) {
@@ -684,7 +503,6 @@
 
     </script>
 
-    @await RenderSectionAsync("Styles", required: false)
 
     @await RenderSectionAsync("Scripts", required: false)
 

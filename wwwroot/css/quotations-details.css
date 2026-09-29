@@ -1,0 +1,202 @@
+/* =========================================================
+   QUOTATIONS DETAILS
+   ========================================================= */
+
+
+/* =========================================================
+   Information Items
+   ========================================================= */
+
+.quotation-info-item {
+    position: relative;
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--admin-border-soft);
+}
+
+.quotation-info-item-last {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: 0;
+}
+
+.quotation-info-label {
+    margin-top: 0;
+    margin-bottom: 6px;
+}
+
+.quotation-info-value {
+    color: var(--admin-heading);
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.quotation-info-value-lg {
+    font-size: 1rem;
+}
+
+.quotation-info-empty {
+    color: var(--admin-muted-light);
+    font-size: 0.76rem;
+}
+
+
+/* =========================================================
+   Customer Contact
+   ========================================================= */
+
+.quotation-contact-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.quotation-contact-value {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--admin-heading);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.quotation-contact-value:hover {
+    color: var(--admin-primary);
+}
+
+.quotation-contact-value i {
+    color: var(--admin-muted);
+    font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   Product
+   ========================================================= */
+
+.quotation-product-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.quotation-product-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--admin-heading);
+    font-size: 0.82rem;
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.quotation-product-link:hover {
+    color: var(--admin-primary);
+}
+
+
+/* =========================================================
+   Quantity
+   ========================================================= */
+
+.quotation-quantity {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.quotation-quantity-icon {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: var(--admin-surface-soft);
+    border: 1px solid var(--admin-border-soft);
+    color: var(--admin-muted);
+    font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   Date
+   ========================================================= */
+
+.quotation-date-value {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--admin-heading);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.quotation-date-value i {
+    color: var(--admin-muted);
+    font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   Message
+   ========================================================= */
+
+.quotation-message-box {
+    padding: 16px;
+    border: 1px solid var(--admin-border-soft);
+    border-radius: var(--admin-radius-md);
+    background: var(--admin-surface-soft);
+    color: var(--admin-text);
+    font-size: 0.8rem;
+    line-height: 1.8;
+    white-space: pre-line;
+}
+
+.quotation-empty-message {
+    padding: 35px 20px;
+    border: 1px dashed var(--admin-border);
+    border-radius: var(--admin-radius-md);
+    background: var(--admin-surface-soft);
+}
+
+.quotation-empty-message .admin-empty-icon {
+    margin-bottom: 12px;
+}
+
+
+/* =========================================================
+   Update Status
+   ========================================================= */
+
+.quotation-update-button {
+    width: 100%;
+}
+
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 575.98px) {
+
+    .quotation-contact-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .quotation-contact-row .admin-btn {
+        width: 100%;
+    }
+
+    .quotation-product-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}

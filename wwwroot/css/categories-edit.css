@@ -1,0 +1,53 @@
+/* =========================================================
+   CATEGORIES EDIT PAGE
+   ========================================================= */
+
+.category-description-input {
+    min-height: 140px;
+    resize: vertical;
+}
+
+
+/* =========================================================
+   Category Status
+   ========================================================= */
+
+.category-status-box {
+    padding: 16px;
+    border: 1px solid var(--admin-border-soft);
+    border-radius: var(--admin-radius-md);
+    background: var(--admin-surface-soft);
+}
+
+.category-status-switch {
+    width: 2.5em !important;
+    height: 1.35em;
+    cursor: pointer;
+}
+
+.category-status-box .form-check-label {
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+
+/* =========================================================
+   Actions
+   ========================================================= */
+
+.category-action-button {
+    min-width: 120px;
+}
+
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 575.98px) {
+
+    .category-action-button {
+        width: 100%;
+    }
+
+}
